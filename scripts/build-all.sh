@@ -20,4 +20,4 @@ ng build --prod --base-href .
 echo ==================================================================================================
 echo Duplicate index.html to 404.html
 echo ==================================================================================================
-cp dist/hhagular/index.html dist/hhagular/404.html
+cp dist/hhangular/index.html dist/hhangular/404.html
