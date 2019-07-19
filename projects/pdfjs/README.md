@@ -1,12 +1,14 @@
 # pdfjs [![Build Status](https://travis-ci.org/hhangular/hhangular.svg?branch=master)](https://travis-ci.org/hhangular/hhangular)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0.
+This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0.
 
-It's a collection of components for angular 8x
+You can read how [here](https://angular.io/guide/creating-libraries)
 
-###pdfjs
+This library contains an angular module PdfjsModule that contains a collection of components.
 
-pdfjs is implementation of mozilla pdfjs for angular x. It contains some components for use easily the [mozilla pdf viewer pdfjs](https://github.com/mozilla/pdf.js).
+Components of PdfjsModule are implementation of mozilla pdfjs for angular 8x. 
+
+It contains some components for use easily the [mozilla pdf viewer pdfjs](https://github.com/mozilla/pdf.js).
 
 ### dependencies
   - pdfjs-dist
@@ -49,6 +51,7 @@ Add assets pdfworker in angular.json
 ...
 imports: [
     BrowserModule,
+    SharedModule,
     PdfjsBoxModule.forRoot({workerSrc: 'assets/pdf.worker.js'})
   ],
 ...
@@ -57,6 +60,24 @@ imports: [
 export class AppModule {
 }
 ```
+
+If you import and configure in SharedModule, don't forget to export it
+
+```typescript
+@NgModule({
+  imports: [
+    CommonModule,
+    PdfjsModule.forRoot({workerSrc: 'assets/pdf.worker.js'}),
+  ],
+  exports: [
+    PdfjsModule,
+  ],
+  declarations: [],
+})
+export class SharedModule {
+}
+```
+
 
 ### Components
 
