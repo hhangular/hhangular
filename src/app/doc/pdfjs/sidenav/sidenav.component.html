@@ -1,4 +1,6 @@
 <mat-list routerLinkActive="active">
+  <mat-list-item disabled="true">Version : {{version}}</mat-list-item>
+  <mat-divider></mat-divider>
   <mat-list-item disabled="true">Get start</mat-list-item>
   <a mat-list-item routerLink="install" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faDownload"></fa-icon>&nbsp;Installation
@@ -6,7 +8,7 @@
   <a mat-list-item routerLink="configuration" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faCogs"></fa-icon>&nbsp;Configuration
   </a>
-
+  <mat-divider></mat-divider>
   <mat-list-item disabled="true">Components</mat-list-item>
   <a mat-list-item routerLink="pdfjsthumbnails" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="fasFilePdf"></fa-icon><fa-icon [icon]="farFilePdf"></fa-icon><fa-icon [icon]="fasFilePdf"></fa-icon>&nbsp;PdfjsThumbnails
@@ -14,7 +16,7 @@
   <a mat-list-item routerLink="pdfjsview" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="fasFilePdf"></fa-icon>&nbsp;PdfjsView
   </a>
-
+  <mat-divider></mat-divider>
   <mat-list-item disabled="true">Classes</mat-list-item>
   <a mat-list-item routerLink="pdfjscommand" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faGamepad"></fa-icon>&nbsp;PdfjsCommand
@@ -28,7 +30,7 @@
   <a mat-list-item routerLink="pdfpage" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faListUl"></fa-icon>&nbsp;PdfPage
   </a>
-
+  <mat-divider></mat-divider>
   <mat-list-item disabled="true">Enums</mat-list-item>
   <a mat-list-item routerLink="thumbnaillayout" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faBorderNone"></fa-icon>&nbsp;ThumbnailLayout
@@ -39,4 +41,10 @@
   <a mat-list-item routerLink="viewfit" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faExpandArrowsAlt"></fa-icon>&nbsp;ViewFit
   </a>
+  <mat-divider></mat-divider>
+  <a mat-list-item routerLink="demo" [routerLinkActive]="['active']">
+    <fa-icon [icon]="faDesktop"></fa-icon>&nbsp;Demo
+  </a>
+  <mat-divider></mat-divider>
+  <br>
 </mat-list>

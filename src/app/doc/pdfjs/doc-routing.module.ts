@@ -1,16 +1,17 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
-import {DocComponent} from './doc.component';
+import {DocPdfjsComponent} from './doc-pdfjs.component';
 import {
   PdfjsConfigComponent, ConfigComponent, PdfjsThumbnailsComponent, InstallComponent,
   PdfjsControlComponent,
   ThumbnailDragModeComponent, ThumbnailLayoutComponent, ViewFitComponent,
   PdfjsViewComponent, PdfjsGroupControlComponent, PdfjsCommandComponent, PdfPageComponent
 } from './sections';
+import {DemoPdfjsComponent} from "./demo/demo-pdfjs.component";
 
 const docRoutes: Routes = [
   {
-    path: '', component: DocComponent, children: [
+    path: '', component: DocPdfjsComponent, children: [
       {path: '', redirectTo: 'install', pathMatch: 'full'},
       {path: 'install', component: InstallComponent},
       {path: 'configuration', component: ConfigComponent},
@@ -25,6 +26,7 @@ const docRoutes: Routes = [
       {path: 'thumbnaildragmode', component: ThumbnailDragModeComponent},
       {path: 'thumbnaillayout', component: ThumbnailLayoutComponent},
       {path: 'viewfit', component: ViewFitComponent},
+      {path: 'demo', component: DemoPdfjsComponent},
     ]
   }
 ];

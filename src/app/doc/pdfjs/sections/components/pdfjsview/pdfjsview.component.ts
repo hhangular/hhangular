@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {PdfjsControl} from '../../../../../../projects/pdfjs/src/lib/classes/pdfjs-control';
-import {RenderQuality, ViewFit} from '../../../../../../projects/pdfjs/src/lib/classes/pdfjs-objects';
+import {PdfjsControl} from '../../../../../../../projects/pdfjs/src/lib/classes/pdfjs-control';
+import {RenderQuality, ViewFit} from '../../../../../../../projects/pdfjs/src/lib/classes/pdfjs-objects';
 
 @Component({
   templateUrl: './pdfjsview.component.html',
@@ -25,7 +25,7 @@ export class PdfjsViewComponent implements OnInit {
   scale = 1;
 
   ngOnInit() {
-    this.conditionCtrl.load('../assets/pdfs/conditions.pdf', true);
+    this.conditionCtrl.load('/assets/pdfs/conditions.pdf', true);
   }
 
 }

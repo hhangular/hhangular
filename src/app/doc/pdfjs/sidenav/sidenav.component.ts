@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {
   faArrowsAlt, faBorderNone,
-  faCogs,
+  faCogs, faDesktop,
   faDharmachakra,
   faDownload,
   faExpandArrowsAlt,
@@ -9,6 +9,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import {faFilePdf as farFilePdf} from '@fortawesome/free-regular-svg-icons';
 import {faBuromobelexperte} from '@fortawesome/free-brands-svg-icons';
+import {GithubService} from "../../../core/github.service";
 
 @Component({
   selector: 'app-sidenav',
@@ -30,10 +31,15 @@ export class SidenavComponent implements OnInit {
   faGamepad = faGamepad;
   faWrench = faWrench;
   faListUl = faListUl;
+  faDesktop = faDesktop;
+  public version = '';
 
-  constructor() {
+  constructor(private githubService: GithubService) {
   }
 
-  ngOnInit(): void {
+  public ngOnInit(): void {
+    this.githubService.getPackageJson('/projects/pdfjs').subscribe(json => {
+      this.version = json.version;
+    });
   }
 }

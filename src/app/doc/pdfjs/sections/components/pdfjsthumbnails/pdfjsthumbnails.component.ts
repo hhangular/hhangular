@@ -1,11 +1,11 @@
 import {Component, OnInit} from '@angular/core';
-import {PdfjsControl} from '../../../../../../projects/pdfjs/src/lib/classes/pdfjs-control';
+import {PdfjsControl} from '../../../../../../../projects/pdfjs/src/lib/classes/pdfjs-control';
 import {
   RenderEvent,
   RenderQuality,
   ThumbnailDragMode,
   ThumbnailLayout
-} from '../../../../../../projects/pdfjs/src/lib/classes/pdfjs-objects';
+} from '../../../../../../../projects/pdfjs/src/lib/classes/pdfjs-objects';
 
 @Component({
   templateUrl: './pdfjsthumbnails.component.html',
@@ -37,12 +37,12 @@ export class PdfjsThumbnailsComponent implements OnInit {
   renderEndEvent: RenderEvent;
 
   ngOnInit() {
-    this.guideCtrl1.load('../assets/pdfs/guide.pdf', true);
-    this.conditionCtrl1.load('../assets/pdfs/conditions.pdf', true);
-    this.conditionCtrl2.load('../assets/pdfs/conditions.pdf', true);
-    this.conditionCtrl3.load('../assets/pdfs/conditions.pdf', true);
-    this.conditionCtrl4.load('../assets/pdfs/conditions.pdf', true);
-    this.conditionCtrl5.load('../assets/pdfs/conditions.pdf', true);
+    this.guideCtrl1.load('/assets/pdfs/guide.pdf', true);
+    this.conditionCtrl1.load('/assets/pdfs/conditions.pdf', true);
+    this.conditionCtrl2.load('/assets/pdfs/conditions.pdf', true);
+    this.conditionCtrl3.load('/assets/pdfs/conditions.pdf', true);
+    this.conditionCtrl4.load('/assets/pdfs/conditions.pdf', true);
+    this.conditionCtrl5.load('/assets/pdfs/conditions.pdf', true);
   }
 
   renderEvent($event: RenderEvent) {
