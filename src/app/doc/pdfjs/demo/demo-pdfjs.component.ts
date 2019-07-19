@@ -27,9 +27,9 @@ export class DemoPdfjsComponent implements OnInit {
   quality: RenderQuality = 2;
   textEnable = false;
   pdfs: any[] = [
-    {fn: 'condition.pdf', url: '/assets/pdfs/conditions.pdf'},
-    {fn: 'guide.pdf', url: '/assets/pdfs/guide.pdf'},
-    {fn: 'UnicodeStandard.pdf', url: '/assets/pdfs/UnicodeStandard.pdf'}
+    {fn: 'condition.pdf', url: '../assets/pdfs/conditions.pdf'},
+    {fn: 'guide.pdf', url: '../assets/pdfs/guide.pdf'},
+    {fn: 'UnicodeStandard.pdf', url: '../assets/pdfs/UnicodeStandard.pdf'}
   ];
   pdfjsGroupControl: PdfjsGroupControl = new PdfjsGroupControl();
   pdfjsControl: PdfjsControl = new PdfjsControl();
@@ -46,7 +46,7 @@ export class DemoPdfjsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.pdfjsControl.load('/assets/pdfs/guide.pdf', true);
+    this.pdfjsControl.load('../assets/pdfs/guide.pdf', true);
     this.pdfjsGroupControl.selectControl(this.pdfjsControl);
   }
 

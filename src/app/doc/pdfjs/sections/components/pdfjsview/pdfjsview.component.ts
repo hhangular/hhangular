@@ -25,7 +25,7 @@ export class PdfjsViewComponent implements OnInit {
   scale = 1;
 
   ngOnInit() {
-    this.conditionCtrl.load('/assets/pdfs/conditions.pdf', true);
+    this.conditionCtrl.load('../assets/pdfs/conditions.pdf', true);
   }
 
 }

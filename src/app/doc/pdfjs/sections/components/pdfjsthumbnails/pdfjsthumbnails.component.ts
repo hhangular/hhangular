@@ -37,12 +37,12 @@ export class PdfjsThumbnailsComponent implements OnInit {
   renderEndEvent: RenderEvent;
 
   ngOnInit() {
-    this.guideCtrl1.load('/assets/pdfs/guide.pdf', true);
-    this.conditionCtrl1.load('/assets/pdfs/conditions.pdf', true);
-    this.conditionCtrl2.load('/assets/pdfs/conditions.pdf', true);
-    this.conditionCtrl3.load('/assets/pdfs/conditions.pdf', true);
-    this.conditionCtrl4.load('/assets/pdfs/conditions.pdf', true);
-    this.conditionCtrl5.load('/assets/pdfs/conditions.pdf', true);
+    this.guideCtrl1.load('../assets/pdfs/guide.pdf', true);
+    this.conditionCtrl1.load('../assets/pdfs/conditions.pdf', true);
+    this.conditionCtrl2.load('../assets/pdfs/conditions.pdf', true);
+    this.conditionCtrl3.load('../assets/pdfs/conditions.pdf', true);
+    this.conditionCtrl4.load('../assets/pdfs/conditions.pdf', true);
+    this.conditionCtrl5.load('../assets/pdfs/conditions.pdf', true);
   }
 
   renderEvent($event: RenderEvent) {
