@@ -8,17 +8,18 @@ branches:
   except:
     - master
 before_script:
-  - npm install
   - git checkout $TRAVIS_BRANCH
-  - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+  - npm install
 script:
+  - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
   - bash scripts/build-all.sh
 deploy:
   - provider: script
-    script: bash scripts/deploy-on-npm.sh pdfjs
+    script: bash scripts/deploy-on-npm.sh $TRAVIS_BRANCH
     skip_cleanup: true
     on:
-      branch: pdfjs
+      - pdfjs
+      - config
   - provider: script
     script: git commit -m "[ci skip]" package-lock.json; npm version patch -m "[ci skip]"
     skip_cleanup: true
