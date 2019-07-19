@@ -16,7 +16,7 @@ import {GithubService} from "../../../core/github.service";
   templateUrl: './sidenav.component.html',
   styleUrls: ['./sidenav.component.css'],
 })
-export class SidenavComponent implements OnInit {
+export class SidenavComponent {
 
   faDownload = faDownload;
   faCogs = faCogs;
@@ -32,14 +32,5 @@ export class SidenavComponent implements OnInit {
   faWrench = faWrench;
   faListUl = faListUl;
   faDesktop = faDesktop;
-  public version = '';
 
-  constructor(private githubService: GithubService) {
-  }
-
-  public ngOnInit(): void {
-    this.githubService.getPackageJson('/projects/pdfjs').subscribe(json => {
-      this.version = json.version;
-    });
-  }
 }
