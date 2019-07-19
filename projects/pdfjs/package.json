@@ -1,0 +1,27 @@
+{
+  "name": "@hhangular/pdfjs",
+  "version": "2.0.15",
+  "author": "Achache francois",
+  "license": "MIT",
+  "description": "pdfjs for angular 8x by hhfrancois",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hhangular/hhangular.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "angular",
+    "component",
+    "mozilla",
+    "pdfjs",
+    "pdf"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^8.0.3",
+    "@angular/core": "^8.0.3",
+    "@types/pdfjs-dist": "^2.0.0",
+    "pdfjs-dist": "2.1.266"
+  }
+}

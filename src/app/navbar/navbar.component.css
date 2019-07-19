@@ -1,0 +1,25 @@
+:host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 2;
+}
+.docs-angular-logo {
+  height: 26px;
+  margin: 0 4px 3px 0;
+}
+.flex-spacer {
+  flex-grow: 1;
+}
+@media (max-width: 599px) {
+  .main {
+    display: none;
+  }
+  .github {
+    display: none;
+  }
+  .travis {
+    display: none;
+  }
+}

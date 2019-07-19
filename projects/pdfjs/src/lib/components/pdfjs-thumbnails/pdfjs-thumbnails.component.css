@@ -1,0 +1,25 @@
+:host {
+  display: block;
+  overflow-y: hidden;
+  overflow-x: hidden;
+}
+
+:host:hover {
+  overflow-y: hidden;
+  overflow-x: auto;
+}
+
+:host.vertical:hover {
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+:host /deep/ pdfjs-thumbnail {
+  display: table-cell;
+  height: 100%;
+}
+
+:host.vertical /deep/ pdfjs-thumbnail {
+  display: block;
+  height: auto;
+}

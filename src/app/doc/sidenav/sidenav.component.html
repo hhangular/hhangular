@@ -1,0 +1,42 @@
+<mat-list routerLinkActive="active">
+  <mat-list-item disabled="true">Get start</mat-list-item>
+  <a mat-list-item routerLink="install" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faDownload"></fa-icon>&nbsp;Installation
+  </a>
+  <a mat-list-item routerLink="configuration" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faCogs"></fa-icon>&nbsp;Configuration
+  </a>
+
+  <mat-list-item disabled="true">Components</mat-list-item>
+  <a mat-list-item routerLink="pdfjsthumbnails" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="fasFilePdf"></fa-icon><fa-icon [icon]="farFilePdf"></fa-icon><fa-icon [icon]="fasFilePdf"></fa-icon>&nbsp;PdfjsThumbnails
+  </a>
+  <a mat-list-item routerLink="pdfjsview" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="fasFilePdf"></fa-icon>&nbsp;PdfjsView
+  </a>
+
+  <mat-list-item disabled="true">Classes</mat-list-item>
+  <a mat-list-item routerLink="pdfjscommand" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faGamepad"></fa-icon>&nbsp;PdfjsCommand
+  </a>
+  <a mat-list-item routerLink="pdfjscontrol" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faDharmachakra"></fa-icon>&nbsp;PdfjsControl
+  </a>
+  <a mat-list-item routerLink="pdfjsgroupcontrol" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faProjectDiagram"></fa-icon>&nbsp;PdfjsGroupControl
+  </a>
+  <a mat-list-item routerLink="pdfpage" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faListUl"></fa-icon>&nbsp;PdfPage
+  </a>
+
+  <mat-list-item disabled="true">Enums</mat-list-item>
+  <a mat-list-item routerLink="thumbnaillayout" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faBorderNone"></fa-icon>&nbsp;ThumbnailLayout
+  </a>
+  <a mat-list-item routerLink="thumbnaildragmode" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faArrowsAlt"></fa-icon>&nbsp;ThumbnailDragMode
+  </a>
+  <a mat-list-item routerLink="viewfit" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faExpandArrowsAlt"></fa-icon>&nbsp;ViewFit
+  </a>
+</mat-list>

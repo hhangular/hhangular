@@ -1,0 +1,57 @@
+language: node_js
+node_js:
+  - "10"
+cache:
+  directories:
+    - "node_modules"
+branches:
+  except:
+    - master
+before_script:
+  - npm install
+  - git checkout $TRAVIS_BRANCH
+  - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+script:
+  - bash scripts/build-all.sh
+deploy:
+  - provider: script
+    script: bash scripts/deploy-on-npm.sh pdfjs
+    skip_cleanup: true
+    on:
+      branch: pdfjs
+  - provider: script
+    script: git commit -m "[ci skip]" package-lock.json; npm version patch -m "[ci skip]"
+    skip_cleanup: true
+    on:
+      branch:
+        - pdfjs
+        - config
+        - website
+  - provider: script
+    script: bash scripts/push-on-master.sh
+    on:
+      branch:
+        - pdfjs
+        - config
+        - website
+  - provider: releases
+    user: "$GITHUB_USER"
+    api_key: "$GITHUB_TOKEN"
+    file_glob: true
+    file: dist/*
+    skip_cleanup: true
+    on:
+      tags: true
+      branch:
+        - pdfjs
+        - config
+        - website
+  - provider: pages
+    skip-cleanup: true
+    github-token: "$GITHUB_TOKEN"
+    local-dir: "dist/pdfjs"
+    on:
+      branch:
+        - pdfjs
+        - config
+        - website
