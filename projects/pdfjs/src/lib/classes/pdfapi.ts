@@ -1,4 +1,5 @@
-import {PDFDocumentProxy, PDFLoadingTask, PDFPageProxy, PDFProgressData, PDFPromise, TextContent} from 'pdfjs-dist';
+import {PDFDocumentProxy, PDFLoadingTask, PDFProgressData, TextContent} from 'pdfjs-dist';
+
 export declare class PdfAPI {
   public apiCompatibilityParams: any;
   public build: string;
@@ -33,7 +34,7 @@ export declare class PdfAPI {
   public createValidAbsoluteUrl(url: string, baseUrl: string): string;
 
   public getDocument(src: string | PDFDataRangeTransport | Uint8Array |
-    { data: Uint8Array } | { range: PDFDataRangeTransport } | { url: string },
+                       { data: Uint8Array } | { range: PDFDataRangeTransport } | { url: string },
                      pdfDataRangeTransport?: any,
                      passwordCallback?: (fn: (password: string) => void, reason: string) => string,
                      progressCallback?: (progressData: PDFProgressData) => void
@@ -65,12 +66,13 @@ export declare class RenderParameters {
 }
 
 export declare class AnnotationLayer {
-  public static render(parameters: {annotations: any[], div: HTMLDivElement,
+  public static render(parameters: {
+    annotations: any[], div: HTMLDivElement,
     page: any, viewport: any, linkService: any, downloadManager: any, imageResourcesPath: string,
     renderInteractiveForms: boolean,
   }): void;
 
-  public static update(parameters: {annotations: any[], div: HTMLDivElement, viewport: any}): void;
+  public static update(parameters: { annotations: any[], div: HTMLDivElement, viewport: any }): void;
 }
 
 export interface GlobalWorkerOptions {
@@ -92,6 +94,7 @@ export enum LinkTarget {
 export declare class LoopbackPort {
 
   constructor(defer: any);
+
   public addEventListener(name: string, listener: any);
 
   public postMessage(obj: any, transfers: any): any;
@@ -370,20 +373,35 @@ export declare class UnexpectedResponseException {
 
 export declare class Util {
   public appendToArray(arr1: any, arr2: any);
+
   public apply3dTransform(m: any, v: any);
+
   public applyInverseTransform(p: any, m: any);
+
   public applyTransform(p: any, m: any);
+
   public extendObj(obj1: any, obj2: any);
+
   public getAxialAlignedBoundingBox(r: any, m: any);
+
   public inherit(sub: any, base: any, prototype: any);
+
   public intersect(rect1: any, rect2: any);
+
   public inverseTransform(m: any);
+
   public loadScript(src: any, callback: any);
+
   public makeCssRgb(r: any, g: any, b: any);
+
   public normalizeRect(rect: any);
+
   public prependToArray(arr1: any, arr2: any);
+
   public singularValueDecompose2dScale(m: any);
+
   public toRoman(num: any, lowerCase: any);
+
   public transform(m1: any, m2: any);
 }
 
