@@ -45,7 +45,7 @@ The best way is use SharedModule and export PdfjsModule. Like this you have just
 @NgModule({
   imports: [
     CommonModule,
-    PdfjsModule.forRoot({workerSrc: 'assets/pdf.worker.js'}),
+    PdfjsModule.config({workerSrc: 'assets/pdf.worker.js'}),
   ],
   exports: [
     PdfjsModule,
