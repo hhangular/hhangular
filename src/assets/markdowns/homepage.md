@@ -1,80 +1,27 @@
-# pdfjs 
+# Hhangular
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0.
+This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1.
 
-It's a collection of modules for angular 8x
+## Development server
 
-## Modules
-  - pdfjs : pdf viewer
+Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-### pdfjs
+## Code scaffolding
 
-pdfjs is implementation of pdfjs for angular 8x. It contains some components for use easily the [mozilla pdf viewer pdfjs](https://github.com/mozilla/pdf.js).
+Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
 
-### dependencies
+## Build
 
-Peer dependencies will be imported with @hhangular/pdfjs
+Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-  - pdfjs-dist
-  - @types/pdfjs-dist
+## Running unit tests
 
-## installation
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
 
-```javascript
-npm install @hhangular/pdfjs --save
-```
+## Running end-to-end tests
 
-## use
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
 
-Add assets pdfworker in angular.json
+## Further help
 
-```javascript
-{
-  ...
-  "projects": {
-    "YOUR PROJECT": {
-      ...
-      "architect": {
-        "build": {
-          ...
-          "options": {
-            ...
-            "assets": [
-              { 
-                "glob": "pdf.worker.js", 
-                "input": "./node_modules/pdfjs-dist/build", 
-                "output": "/assets" 
-              },
-              ...
-```
-
-### In application module add PdfjsBoxModule and configure worker
-
-```javascript
-@NgModule({
-...
-imports: [
-    BrowserModule,
-    PdfjsModule.forRoot({workerSrc: 'assets/pdf.worker.js'})
-  ],
-...
-  bootstrap: [AppComponent]
-})
-export class AppModule {
-}
-```
-
-### Components
-  - pdfjs-thumbnails
-  - pdfjs-view
-
-### Control
-  - pdfjsControl
-  - pdfjsGroupControl
-
-### objects
-
-  - pdfjsItem
-
-
-
+To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).

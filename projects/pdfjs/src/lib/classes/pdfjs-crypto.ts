@@ -1,3 +1,4 @@
+/* tslint:disable:no-bitwise */
 export const Crypto = {
   /**
    * Generate uuid

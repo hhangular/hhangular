@@ -43,7 +43,6 @@ deploy:
     file: dist/*
     skip_cleanup: true
     on:
-      tags: true
       branch:
         - pdfjs
         - config

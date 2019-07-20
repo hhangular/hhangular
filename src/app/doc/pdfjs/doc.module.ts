@@ -6,7 +6,7 @@ import {DocPdfjsComponent} from './doc-pdfjs.component';
 import {SharedModule} from '../../shared/shared.module';
 import {SidenavComponent} from './sidenav/sidenav.component';
 import {SECTIONS} from './sections';
-import {DemoPdfjsComponent} from "./demo/demo-pdfjs.component";
+import {DemoPdfjsComponent} from './demo/demo-pdfjs.component'
 
 @NgModule({
   imports: [
@@ -21,7 +21,7 @@ import {DemoPdfjsComponent} from "./demo/demo-pdfjs.component";
     DocPdfjsComponent,
     DemoPdfjsComponent,
     SECTIONS,
-    SidenavComponent
+    SidenavComponent,
   ],
   providers: [  ]
 })

@@ -4,13 +4,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "lib",
+      "pdfjs",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "lib",
+      "pdfjs",
       "kebab-case"
     ]
   }

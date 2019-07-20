@@ -1,17 +1,5 @@
 import {CommonModule} from '@angular/common';
-import {
-  ApplicationRef,
-  ComponentFactoryResolver,
-  ComponentRef,
-  CUSTOM_ELEMENTS_SCHEMA,
-  EmbeddedViewRef,
-  Injector,
-  ModuleWithProviders,
-  NgModule,
-  Optional,
-  SkipSelf
-} from '@angular/core';
-import {PdfjsControl} from './classes/pdfjs-control';
+import {ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Inject, Injector, ModuleWithProviders, NgModule} from '@angular/core';
 import {PdfjsConfig} from './classes/pdfjs-objects';
 import {PdfjsCommonComponent} from './components/pdfjs-common.component';
 import {PdfjsRemoveButtonComponent} from './components/pdfjs-thumbnail/pdfjs-remove.button/pdfjs-remove-button.component';
@@ -20,8 +8,10 @@ import {PdfjsThumbnailsComponent} from './components/pdfjs-thumbnails/pdfjs-thum
 import {PdfjsPreviewComponent} from './components/pdfjs-thumbnails/preview/pdfjs-preview.component';
 import {PdfjsViewComponent} from './components/pdfjs-view/pdfjs-view.component';
 import {KeysService} from './services/keys.service';
-import {Pdfjs} from './services/pdfjs.service';
+import {PdfjsService} from './services/pdfjs.service';
 import {ThumbnailDragService} from './services/thumbnail-drag.service';
+import {PdfApi} from './classes/pdfapi';
+import {pdfApiFactory} from './classes/pdfapi-factory';
 
 @NgModule({
   imports: [
@@ -44,18 +34,17 @@ import {ThumbnailDragService} from './services/thumbnail-drag.service';
     PdfjsPreviewComponent,
   ],
   providers: [
-    Pdfjs,
+    PdfjsService,
     ThumbnailDragService,
     KeysService,
+    {provide: 'PdfApi', useFactory: pdfApiFactory}
   ],
   entryComponents: [
     PdfjsCommonComponent, PdfjsThumbnailComponent, // dynamic component
-  ], schemas: [
-    CUSTOM_ELEMENTS_SCHEMA,
-  ],
+  ]
 })
 export class PdfjsModule {
-  public static forRoot(config: PdfjsConfig): ModuleWithProviders {
+  public static config(config: PdfjsConfig): ModuleWithProviders {
     return {
       ngModule: PdfjsModule,
       providers: [
@@ -65,20 +54,16 @@ export class PdfjsModule {
   }
 
   /**
-   * Constructor, prevent circular injection
+   * Constructor
    */
-  constructor(@Optional() @SkipSelf() parentModule: PdfjsModule,
-              private cfr: ComponentFactoryResolver,
+  constructor(private cfr: ComponentFactoryResolver,
               private defaultInjector: Injector,
               private appRef: ApplicationRef,
-              config: PdfjsConfig,
+              private config: PdfjsConfig = {workerSrc: 'assets/pdf.worker.js'},
+              @Inject('PdfApi') private API: PdfApi
   ) {
-    if (parentModule) {
-//      throw new Error(
-//        'PdfjsBoxModule is already loaded. Import it in the AppModule only');
-    }
-    if (!PdfjsControl.API.GlobalWorkerOptions.workerSrc) {
-      PdfjsControl.API.GlobalWorkerOptions.workerSrc = config.workerSrc;
+    if (!this.API.GlobalWorkerOptions.workerSrc) {
+      this.API.GlobalWorkerOptions.workerSrc = config.workerSrc;
     }
     this.addPdfjsCommonComponentToDom();
   }

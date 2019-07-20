@@ -18,7 +18,7 @@ export class NavBarComponent implements OnInit {
 
   public ngOnInit(): void {
     this.githubService.getPackageJson('').subscribe(json => {
-      this.url = json.repositry.url;
+      this.url = json.repository.url;
     });
   }
 

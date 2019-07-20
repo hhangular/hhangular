@@ -1,21 +1,17 @@
-import {Injectable} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
 import {PDFPageProxy, PDFPageViewport, PDFPromise, PDFRenderTask} from 'pdfjs-dist';
-import * as api from 'pdfjs-dist/build/pdf';
-import {PdfAPI, RenderingCancelledException, RenderParameters, TextLayerRenderTask} from '../classes/pdfapi';
+import {PdfApi, RenderingCancelledException, RenderParameters, TextLayerRenderTask} from '../classes/pdfapi';
 import {RenderObjects, RenderQuality, ViewFit} from '../classes/pdfjs-objects';
 import {PdfjsItem} from '../classes/pdfjs-item';
 
 type GetScaleForFit = (size: number, viewport: PDFPageViewport) => number;
 
 @Injectable()
-export class Pdfjs {
-  public API: PdfAPI;
-
-  constructor() {
-    this.API = api as PdfAPI;
+export class PdfjsService {
+  constructor(@Inject('PdfApi') private API: PdfApi) {
   }
 
-  public getApi(): PdfAPI {
+  public getApi(): PdfApi {
     return this.API;
   }
 
@@ -81,6 +77,13 @@ export class Pdfjs {
   }
 
   /**
+   * Render Text Layer
+   */
+  public renderTextLayer(renderParameters: RenderParameters): TextLayerRenderTask {
+    return this.API.renderTextLayer(renderParameters);
+  }
+
+  /**
    * Render page in canvas
    */
   protected renderItemInCanvasFitted(item: PdfjsItem, canvas: HTMLCanvasElement,
@@ -123,9 +126,4 @@ export class Pdfjs {
       width: src.width * factor // 707.098039856611
     } as any as PDFPageViewport;
   }
-
-  public renderTextLayer(renderParameters: RenderParameters): TextLayerRenderTask {
-    return this.getApi().renderTextLayer(renderParameters);
-  }
-
 }

@@ -1,4 +1,8 @@
 <mat-list routerLinkActive="active">
+  <a mat-list-item routerLink="overview" [routerLinkActive]="['active']">
+    <fa-icon [icon]="farFilePdf"></fa-icon>&nbsp;Overview
+  </a>
+  <mat-divider></mat-divider>
   <mat-list-item disabled="true">Get start</mat-list-item>
   <a mat-list-item routerLink="install" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faDownload"></fa-icon>&nbsp;Installation

@@ -14,13 +14,13 @@ It contains some components for use easily the [mozilla pdf viewer pdfjs](https:
   - pdfjs-dist
   - @types/pdfjs-dist
 
-## installation
+## Installation
 
 ```
 npm install @hhangular/pdfjs --save
 ```
 
-## use
+## Configuration
 
 Add assets pdfworker in angular.json
 
@@ -44,7 +44,7 @@ Add assets pdfworker in angular.json
               ...
 ```
 
-### In application module add PdfjsModule and configure worker
+### In modules using pdfModule, import PdfjsModule and configure worker
 
 ```typescript
 @NgModule({
@@ -52,7 +52,7 @@ Add assets pdfworker in angular.json
 imports: [
     BrowserModule,
     SharedModule,
-    PdfjsBoxModule.forRoot({workerSrc: 'assets/pdf.worker.js'})
+    PdfjsBoxModule.config({workerSrc: 'assets/pdf.worker.js'})
   ],
 ...
   bootstrap: [AppComponent]
@@ -61,7 +61,7 @@ export class AppModule {
 }
 ```
 
-If you import and configure in SharedModule, don't forget to export it
+The best way is use SharedModule and export PdfjsModule. Like this you have just to import SharedModule in others modules.
 
 ```typescript
 @NgModule({

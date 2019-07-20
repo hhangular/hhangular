@@ -1,68 +1,68 @@
-import {PDFDocumentProxy, PDFLoadingTask, PDFProgressData, TextContent} from 'pdfjs-dist';
+import {PDFDocumentProxy, PDFLoadingTask, PDFProgressData, PDFPromise, TextContent} from 'pdfjs-dist';
 
-export declare class PdfAPI {
-  public apiCompatibilityParams: any;
-  public build: string;
-  public version: string;
+export declare class PdfApi {
+  apiCompatibilityParams: any;
+  build: string;
+  version: string;
 
-  public AnnotationLayer: AnnotationLayer;
-  public GlobalWorkerOptions: GlobalWorkerOptions;
-  public InvalidPDFException: InvalidPDFException;
-  public LinkTarget: LinkTarget;
-  public LoopbackPort: LoopbackPort;
-  public MissingPDFException: MissingPDFException;
-  public NativeImageDecoding: NativeImageDecoding;
-  public OPS: OPS;
-  public PDFDataRangeTransport: PDFDataRangeTransport;
-  public PDFWorker: PDFWorker;
-  public PasswordResponses: PasswordResponses;
-  public RenderingCancelledException: RenderingCancelledException;
-  public SVGGraphics: SVGGraphics;
-  public UNSUPPORTED_FEATURES: any;
-  public UnexpectedResponseException: UnexpectedResponseException;
-  public Util: Util;
-  public VerbosityLevel: VerbosityLevel;
+  AnnotationLayer: AnnotationLayer;
+  GlobalWorkerOptions: GlobalWorkerOptions;
+  InvalidPDFException: InvalidPDFException;
+  LinkTarget: LinkTarget;
+  LoopbackPort: LoopbackPort;
+  MissingPDFException: MissingPDFException;
+  NativeImageDecoding: NativeImageDecoding;
+  OPS: OPS;
+  PDFDataRangeTransport: PDFDataRangeTransport;
+  PDFWorker: PDFWorker;
+  PasswordResponses: PasswordResponses;
+  RenderingCancelledException: RenderingCancelledException;
+  SVGGraphics: SVGGraphics;
+  UNSUPPORTED_FEATURES: any;
+  UnexpectedResponseException: UnexpectedResponseException;
+  Util: Util;
+  VerbosityLevel: VerbosityLevel;
 
-  public addLinkAttributes();
+  addLinkAttributes();
 
-  public createBlob(data: any, contentType: any): any;
+  createBlob(data: any, contentType: any): any;
 
-  public createObjectURL(data: any, contentType: any);
+  createObjectURL(data: any, contentType: any);
 
-  public createPromiseCapability(): any;
+  createPromiseCapability(): any;
 
-  public createValidAbsoluteUrl(url: string, baseUrl: string): string;
+  createValidAbsoluteUrl(url: string, baseUrl: string): string;
 
-  public getDocument(src: string | PDFDataRangeTransport | Uint8Array |
-                       { data: Uint8Array } | { range: PDFDataRangeTransport } | { url: string },
-                     pdfDataRangeTransport?: any,
-                     passwordCallback?: (fn: (password: string) => void, reason: string) => string,
-                     progressCallback?: (progressData: PDFProgressData) => void
+  getDocument(src: string | PDFDataRangeTransport | Uint8Array |
+                { data: Uint8Array } | { range: PDFDataRangeTransport } | { url: string },
+              pdfDataRangeTransport?: any,
+              passwordCallback?: (fn: (password: string) => void, reason: string) => string,
+              progressCallback?: (progressData: PDFProgressData) => void
   ): PDFLoadingTask<PDFDocumentProxy>;
 
-  public getFilenameFromUrl(url): string;
+  getFilenameFromUrl(url): string;
 
-  public removeNullCharacters(str: string);
+  removeNullCharacters(str: string);
 
-  public renderTextLayer(renderParameters: RenderParameters): TextLayerRenderTask;
+  renderTextLayer(renderParameters: RenderParameters): TextLayerRenderTask;
 
-  public shadow(obj: any, prop: any, value: any): any;
-
+  shadow(obj: any, prop: any, value: any): any;
 }
 
-export interface TextLayerRenderTask extends PDFLoadingTask<TextContent> {
+export declare class TextLayerRenderTask implements PDFLoadingTask<TextContent> {
+  promise: PDFPromise<TextContent>;
   cancel();
 }
 
 export declare class RenderParameters {
-  public textContent?: any;
-  public textContentStream?: any;
-  public container?: any;
-  public viewport?: any;
-  public textDivs?: any;
-  public textContentItemsStr?: any;
-  public enhanceTextSelection?: any;
-  public timeout?: any;
+  textContent?: any;
+  textContentStream?: any;
+  container?: any;
+  viewport?: any;
+  textDivs?: any;
+  textContentItemsStr?: any;
+  enhanceTextSelection?: any;
+  timeout?: any;
 }
 
 export declare class AnnotationLayer {
@@ -75,7 +75,7 @@ export declare class AnnotationLayer {
   public static update(parameters: { annotations: any[], div: HTMLDivElement, viewport: any }): void;
 }
 
-export interface GlobalWorkerOptions {
+export declare class GlobalWorkerOptions {
   workerPort: string;
   workerSrc: string;
 }
@@ -83,12 +83,12 @@ export interface GlobalWorkerOptions {
 export declare class InvalidPDFException {
 }
 
-export enum LinkTarget {
-  NONE = 0,
-  SELF = 1,
-  BLANK = 2,
-  PARENT = 3,
-  TOP = 4,
+export declare class LinkTarget {
+  static NONE: number;
+  static SELF: number;
+  static BLANK: number;
+  static PARENT: number;
+  static TOP: number;
 }
 
 export declare class LoopbackPort {
@@ -107,104 +107,104 @@ export declare class LoopbackPort {
 export declare class MissingPDFException {
 }
 
-export interface NativeImageDecoding {
-  NONE: 'none';
-  DECODE: 'decode';
-  DISPLAY: 'display';
+export declare class NativeImageDecoding {
+  static NONE: string;
+  static DECODE: string;
+  static DISPLAY: string;
 }
 
-export interface OPS {
-  beginAnnotation: 80;
-  beginAnnotations: 78;
-  beginCompat: 72;
-  beginGroup: 76;
-  beginImageData: 64;
-  beginInlineImage: 63;
-  beginMarkedContent: 69;
-  beginMarkedContentProps: 70;
-  beginText: 31;
-  clip: 29;
-  closeEOFillStroke: 27;
-  closeFillStroke: 26;
-  closePath: 18;
-  closeStroke: 21;
-  constructPath: 91;
-  curveTo: 15;
-  curveTo2: 16;
-  curveTo3: 17;
-  dependency: 1;
-  endAnnotation: 81;
-  endAnnotations: 79;
-  endCompat: 73;
-  endGroup: 77;
-  endInlineImage: 65;
-  endMarkedContent: 71;
-  endPath: 28;
-  endText: 32;
-  eoClip: 30;
-  eoFill: 23;
-  eoFillStroke: 25;
-  fill: 22;
-  fillStroke: 24;
-  lineTo: 14;
-  markPoint: 67;
-  markPointProps: 68;
-  moveText: 40;
-  moveTo: 13;
-  nextLine: 43;
-  nextLineSetSpacingShowText: 47;
-  nextLineShowText: 46;
-  paintFormXObjectBegin: 74;
-  paintFormXObjectEnd: 75;
-  paintImageMaskXObject: 83;
-  paintImageMaskXObjectGroup: 84;
-  paintImageMaskXObjectRepeat: 89;
-  paintImageXObject: 85;
-  paintImageXObjectRepeat: 88;
-  paintInlineImageXObject: 86;
-  paintInlineImageXObjectGroup: 87;
-  paintJpegXObject: 82;
-  paintSolidColorImageMask: 90;
-  paintXObject: 66;
-  rectangle: 19;
-  restore: 11;
-  save: 10;
-  setCharSpacing: 33;
-  setCharWidth: 48;
-  setCharWidthAndBounds: 49;
-  setDash: 6;
-  setFillCMYKColor: 61;
-  setFillColor: 54;
-  setFillColorN: 55;
-  setFillColorSpace: 51;
-  setFillGray: 57;
-  setFillRGBColor: 59;
-  setFlatness: 8;
-  setFont: 37;
-  setGState: 9;
-  setHScale: 35;
-  setLeading: 36;
-  setLeadingMoveText: 41;
-  setLineCap: 3;
-  setLineJoin: 4;
-  setLineWidth: 2;
-  setMiterLimit: 5;
-  setRenderingIntent: 7;
-  setStrokeCMYKColor: 60;
-  setStrokeColor: 52;
-  setStrokeColorN: 53;
-  setStrokeColorSpace: 50;
-  setStrokeGray: 56;
-  setStrokeRGBColor: 58;
-  setTextMatrix: 42;
-  setTextRenderingMode: 38;
-  setTextRise: 39;
-  setWordSpacing: 34;
-  shadingFill: 62;
-  showSpacedText: 45;
-  showText: 44;
-  stroke: 20;
-  transform: 12;
+export declare class OPS {
+  static beginAnnotation: number;
+  static beginAnnotations: number;
+  static beginCompat: number;
+  static beginGroup: number;
+  static beginImageData: number;
+  static beginInlineImage: number;
+  static beginMarkedContent: number;
+  static beginMarkedContentProps: number;
+  static beginText: number;
+  static clip: number;
+  static closeEOFillStroke: number;
+  static closeFillStroke: number;
+  static closePath: number;
+  static closeStroke: number;
+  static constructPath: number;
+  static curveTo: number;
+  static curveTo2: number;
+  static curveTo3: number;
+  static dependency: number;
+  static endAnnotation: number;
+  static endAnnotations: number;
+  static endCompat: number;
+  static endGroup: number;
+  static endInlineImage: number;
+  static endMarkedContent: number;
+  static endPath: number;
+  static endText: number;
+  static eoClip: number;
+  static eoFill: number;
+  static eoFillStroke: number;
+  static fill: number;
+  static fillStroke: number;
+  static lineTo: number;
+  static markPoint: number;
+  static markPointProps: number;
+  static moveText: number;
+  static moveTo: number;
+  static nextLine: number;
+  static nextLineSetSpacingShowText: number;
+  static nextLineShowText: number;
+  static paintFormXObjectBegin: number;
+  static paintFormXObjectEnd: number;
+  static paintImageMaskXObject: number;
+  static paintImageMaskXObjectGroup: number;
+  static paintImageMaskXObjectRepeat: number;
+  static paintImageXObject: number;
+  static paintImageXObjectRepeat: number;
+  static paintInlineImageXObject: number;
+  static paintInlineImageXObjectGroup: number;
+  static paintJpegXObject: number;
+  static paintSolidColorImageMask: number;
+  static paintXObject: number;
+  static rectangle: number;
+  static restore: number;
+  static save: number;
+  static setCharSpacing: number;
+  static setCharWidth: number;
+  static setCharWidthAndBounds: number;
+  static setDash: number;
+  static setFillCMYKColor: number;
+  static setFillColor: number;
+  static setFillColorN: number;
+  static setFillColorSpace: number;
+  static setFillGray: number;
+  static setFillRGBColor: number;
+  static setFlatness: number;
+  static setFont: number;
+  static setGState: number;
+  static setHScale: number;
+  static setLeading: number;
+  static setLeadingMoveText: number;
+  static setLineCap: number;
+  static setLineJoin: number;
+  static setLineWidth: number;
+  static setMiterLimit: number;
+  static setRenderingIntent: number;
+  static setStrokeCMYKColor: number;
+  static setStrokeColor: number;
+  static setStrokeColorN: number;
+  static setStrokeColorSpace: number;
+  static setStrokeGray: number;
+  static setStrokeRGBColor: number;
+  static setTextMatrix: number;
+  static setTextRenderingMode: number;
+  static setTextRise: number;
+  static setWordSpacing: number;
+  static shadingFill: number;
+  static showSpacedText: number;
+  static showText: number;
+  static stroke: number;
+  static transform: number;
 }
 
 export declare class PDFDataRangeTransport {
@@ -229,7 +229,7 @@ export declare class PDFDataRangeTransport {
   public transportReady();
 }
 
-export declare class PDFWorker {
+declare class PDFWorker {
   public messageHandler: any;
 
   public port: any;
@@ -248,9 +248,9 @@ export declare class PDFWorker {
 
 }
 
-export interface PasswordResponses {
-  NEED_PASSWORD: 1;
-  INCORRECT_PASSWORD: 2;
+export declare class PasswordResponses {
+  static NEED_PASSWORD: number;
+  static INCORRECT_PASSWORD: number;
 }
 
 export declare class RenderingCancelledException {
@@ -405,8 +405,8 @@ export declare class Util {
   public transform(m1: any, m2: any);
 }
 
-export interface VerbosityLevel {
-  ERRORS: 0;
-  WARNINGS: 1;
-  INFOS: 5;
+export declare class VerbosityLevel {
+  static ERRORS: number;
+  static WARNINGS: number;
+  static INFOS: number;
 }

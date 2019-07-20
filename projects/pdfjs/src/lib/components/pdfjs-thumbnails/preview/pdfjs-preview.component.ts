@@ -1,11 +1,12 @@
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {Component, ElementRef, HostBinding, Input, OnInit} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 import {InnerItem, RenderQuality, ThumbnailLayout} from '../../../classes/pdfjs-objects';
 import {PdfjsItem} from '../../../classes/pdfjs-item';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Default,
   selector: 'pdfjs-preview',
   templateUrl: './pdfjs-preview.component.html',
   styleUrls: ['./pdfjs-preview.component.css'],

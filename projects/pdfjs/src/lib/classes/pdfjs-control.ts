@@ -1,15 +1,15 @@
 import {PDFDocumentProxy, PDFPromise} from 'pdfjs-dist';
-import * as api from 'pdfjs-dist/build/pdf';
 import {BehaviorSubject, Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
-import {PdfAPI} from './pdfapi';
+import {PdfApi} from './pdfapi';
 import {PdfjsCommand} from './pdfjs-command';
 import {PdfjsItemEvent, PDFPromiseResolved, PdfSource} from './pdfjs-objects';
 import {PdfjsItem, PdfPage} from './pdfjs-item';
 import {Crypto} from './pdfjs-crypto';
+import {pdfApiFactory} from './pdfapi-factory';
 
 export class PdfjsControl implements PdfjsCommand {
-  public static API: PdfAPI = api as PdfAPI;
+  private API: PdfApi = pdfApiFactory();
   public id: string;
   public pdfId: string;
   public itemEvent$: BehaviorSubject<PdfjsItemEvent> = new BehaviorSubject(null);
@@ -299,7 +299,7 @@ export class PdfjsControl implements PdfjsCommand {
     }
     this.items = [];
     this.itemEvent$.next({item: null, event: 'init'});
-    return PdfjsControl.API.getDocument(source).promise.then((pdfDocumentProxy: PDFDocumentProxy) => {
+    return this.API.getDocument(source).promise.then((pdfDocumentProxy: PDFDocumentProxy) => {
       [].push.apply(this.items, Array.apply(null, {length: pdfDocumentProxy.numPages})
         .map((e: any, i: number) => {
           const item: PdfjsItem = new PdfjsItem(pdfDocumentProxy, this.pdfId, source, i + 1, 0);

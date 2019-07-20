@@ -7,7 +7,7 @@ import {PdfjsControl} from '../../classes/pdfjs-control';
 import {PdfjsGroupControl} from '../../classes/pdfjs-group-control';
 import {RenderQuality, ThumbnailLayout, ViewFit} from '../../classes/pdfjs-objects';
 import {PdfjsItem} from '../../classes/pdfjs-item';
-import {Pdfjs} from '../../services/pdfjs.service';
+import {PdfjsService} from '../../services/pdfjs.service';
 
 @Component({
   selector: 'pdfjs-thumbnail',
@@ -184,7 +184,7 @@ export class PdfjsThumbnailComponent implements OnInit, OnDestroy {
 
   constructor(
     private elementRef: ElementRef,
-    private pdfjs: Pdfjs) {
+    private pdfjs: PdfjsService) {
   }
 
   @HostListener('@thumbnailState.done', ['$event.toState'])

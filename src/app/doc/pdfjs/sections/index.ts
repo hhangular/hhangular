@@ -10,8 +10,10 @@ import {PdfjsViewComponent} from './components/pdfjsview/pdfjsview.component';
 import {PdfjsGroupControlComponent} from './classes/pdfjsgroupcontrol/pdfjsgroupcontrol.component';
 import {PdfjsCommandComponent} from './classes/pdfjscommand/pdfjscommand.component';
 import {PdfPageComponent} from './classes/pdfpage/pdfpage.component';
+import {OverviewComponent} from './overview/overview.component';
 
 export const SECTIONS: any[] = [
+  OverviewComponent,
   InstallComponent,
   ConfigComponent,
   PdfjsThumbnailsComponent,
@@ -26,6 +28,7 @@ export const SECTIONS: any[] = [
   ViewFitComponent
 ];
 
+export {OverviewComponent} from './overview/overview.component';
 export {ConfigComponent} from './getstart/config/config.component';
 export {InstallComponent} from './getstart/install/install.component';
 export {ThumbnailDragModeComponent} from './enum/thumbnaildragmode/thumbnaildragmode.component';

@@ -5,14 +5,15 @@ import {
   PdfjsConfigComponent, ConfigComponent, PdfjsThumbnailsComponent, InstallComponent,
   PdfjsControlComponent,
   ThumbnailDragModeComponent, ThumbnailLayoutComponent, ViewFitComponent,
-  PdfjsViewComponent, PdfjsGroupControlComponent, PdfjsCommandComponent, PdfPageComponent
+  PdfjsViewComponent, PdfjsGroupControlComponent, PdfjsCommandComponent, PdfPageComponent, OverviewComponent
 } from './sections';
-import {DemoPdfjsComponent} from "./demo/demo-pdfjs.component";
+import {DemoPdfjsComponent} from './demo/demo-pdfjs.component';
 
 const docRoutes: Routes = [
   {
     path: '', component: DocPdfjsComponent, children: [
-      {path: '', redirectTo: 'install', pathMatch: 'full'},
+      {path: '', redirectTo: 'overview', pathMatch: 'full'},
+      {path: 'overview', component: OverviewComponent},
       {path: 'install', component: InstallComponent},
       {path: 'configuration', component: ConfigComponent},
       {path: 'pdfjsview', component: PdfjsViewComponent},

@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, HostListener, Inject, Input, OnDestroy, ViewChild} from '@angular/core';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, Inject, Input, OnDestroy, ViewChild} from '@angular/core';
 import {PDFPageProxy, PDFPageViewport, PDFRenderTask, TextContent} from 'pdfjs-dist';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {distinctUntilChanged, filter, flatMap, tap} from 'rxjs/operators';
@@ -6,11 +6,12 @@ import {PdfjsControl} from '../../classes/pdfjs-control';
 import {PdfjsGroupControl} from '../../classes/pdfjs-group-control';
 import {RenderQuality, ViewFit} from '../../classes/pdfjs-objects';
 import {KeysService} from '../../services/keys.service';
-import {Pdfjs} from '../../services/pdfjs.service';
+import {PdfjsService} from '../../services/pdfjs.service';
 import {DOCUMENT} from '@angular/common';
 import {PdfjsItem} from '../../classes/pdfjs-item';
 
 @Component({
+  changeDetection: ChangeDetectionStrategy.Default,
   selector: 'pdfjs-view',
   templateUrl: './pdfjs-view.component.html',
   styleUrls: ['./pdfjs-view.component.css'],
@@ -125,7 +126,7 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
   constructor(
     @Inject(DOCUMENT) private document: Document,
     private elementRef: ElementRef,
-    private pdfjs: Pdfjs,
+    private pdfjs: PdfjsService,
     private keysService: KeysService) {
   }
 

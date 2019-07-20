@@ -10,6 +10,7 @@ import {HomepageComponent} from './main/homepage.component';
 import {NavBarComponent} from './navbar/navbar.component';
 import {SharedModule} from './shared/shared.module';
 import {CoreModule} from './core/core.module';
+import {PdfjsModule} from "../../projects/pdfjs/src/lib/pdfjs.module";
 
 @NgModule({
   declarations: [
@@ -19,11 +20,11 @@ import {CoreModule} from './core/core.module';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     CommonModule,
+    HttpClientModule,
     SharedModule,
     CoreModule,
-    HttpClientModule,
-    BrowserAnimationsModule,
     AppRoutingModule,
   ],
   bootstrap: [AppComponent],

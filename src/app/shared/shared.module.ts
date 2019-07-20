@@ -3,25 +3,26 @@ import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {
-  MatCheckboxModule,
-  MatSliderModule,
-  MatRadioModule,
   MatButtonModule,
+  MatCheckboxModule,
   MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatRadioModule,
   MatSidenavModule,
+  MatSliderModule,
+  MatTableModule,
   MatTabsModule,
   MatToolbarModule,
-  MatTreeModule,
-  MatTableModule
+  MatTreeModule
 } from '@angular/material';
 import {NgxMdModule} from 'ngx-md';
+import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {PdfjsModule} from '../../../projects/pdfjs/src/lib/pdfjs.module';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 const MODULES: any[] = [
   FlexLayoutModule,
   MatTableModule,
@@ -48,7 +49,7 @@ const MODULES: any[] = [
     CommonModule,
     MODULES,
     NgxMdModule.forRoot(),
-    PdfjsModule.forRoot({workerSrc: 'assets/pdf.worker.js'}),
+    PdfjsModule.config({workerSrc: 'assets/pdf.worker.js'}),
   ],
   exports: [
     MODULES,

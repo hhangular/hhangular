@@ -1,15 +1,17 @@
 import {
-  ApplicationRef,
+  ApplicationRef, ChangeDetectionStrategy,
   Component,
   ComponentFactoryResolver,
   ComponentRef,
-  ElementRef, EventEmitter,
+  ElementRef,
+  EventEmitter,
   HostBinding,
   HostListener,
   Injector,
   Input,
   OnDestroy,
-  OnInit, Output,
+  OnInit,
+  Output,
   Type,
   ViewChild,
   ViewContainerRef,
@@ -19,12 +21,7 @@ import {filter} from 'rxjs/operators';
 import {PdfjsControl} from '../../classes/pdfjs-control';
 import {PdfjsGroupControl} from '../../classes/pdfjs-group-control';
 import {PdfjsItem} from '../../classes/pdfjs-item';
-import {
-  PdfjsItemEvent, RenderEvent,
-  RenderQuality,
-  ThumbnailDragMode,
-  ThumbnailLayout
-} from '../../classes/pdfjs-objects';
+import {PdfjsItemEvent, RenderEvent, RenderQuality, ThumbnailDragMode, ThumbnailLayout} from '../../classes/pdfjs-objects';
 import {ThumbnailDragService} from '../../services/thumbnail-drag.service';
 import {PdfjsThumbnailComponent} from '../pdfjs-thumbnail/pdfjs-thumbnail.component';
 
@@ -61,6 +58,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
     });
     this.computeSizes();
   }
+
   get layout(): ThumbnailLayout {
     return this.vertical ? ThumbnailLayout.VERTICAL : ThumbnailLayout.HORIZONTAL;
   }
@@ -96,6 +94,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   get pdfjsControl(): PdfjsControl {
     return this._pdfjsControl;
   }
@@ -124,6 +123,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   get previewDelay(): number {
     return this._previewDelay;
   }
@@ -153,6 +153,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   get quality(): RenderQuality {
     return this._quality;
   }
@@ -168,7 +169,8 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
         componentRef.instance.removable = allow;
       });
     }
- }
+  }
+
   get allowRemove(): boolean {
     return this._allowRemove;
   }
@@ -184,6 +186,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
       this.thumbnailDragService.registerDropThumbnails(this);
     }
   }
+
   get allowDrop(): boolean {
     return this._allowDrop;
   }
@@ -201,6 +204,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   get fitSize(): number {
     return this._fitSize;
   }
@@ -217,6 +221,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
       });
     }
   }
+
   get dragMode(): ThumbnailDragMode.NONE | ThumbnailDragMode.MOVE | ThumbnailDragMode.DUPLICATE {
     return this._dragMode;
   }
@@ -225,6 +230,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
   get borderWidth(): number {
     return this._borderWidth;
   }
+
   set borderWidth(value: number) {
     if (this._borderWidth !== value) {
       this._borderWidth = value;
