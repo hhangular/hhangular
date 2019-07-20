@@ -1,6 +1,6 @@
-import {PDFDocumentProxy, PDFLoadingTask, PDFProgressData, PDFPromise, TextContent} from 'pdfjs-dist';
+import {PDFDocumentProxy, PDFLoadingTask, PDFProgressData, TextContent} from 'pdfjs-dist';
 
-export declare class PdfApi {
+export interface PdfApi {
   apiCompatibilityParams: any;
   build: string;
   version: string;
@@ -49,12 +49,11 @@ export declare class PdfApi {
   shadow(obj: any, prop: any, value: any): any;
 }
 
-export declare class TextLayerRenderTask implements PDFLoadingTask<TextContent> {
-  promise: PDFPromise<TextContent>;
+export interface TextLayerRenderTask extends PDFLoadingTask<TextContent> {
   cancel();
 }
 
-export declare class RenderParameters {
+export interface RenderParameters {
   textContent?: any;
   textContentStream?: any;
   container?: any;
@@ -66,21 +65,23 @@ export declare class RenderParameters {
 }
 
 export declare class AnnotationLayer {
-  public static render(parameters: {
+  static render(parameters: {
     annotations: any[], div: HTMLDivElement,
     page: any, viewport: any, linkService: any, downloadManager: any, imageResourcesPath: string,
     renderInteractiveForms: boolean,
   }): void;
 
-  public static update(parameters: { annotations: any[], div: HTMLDivElement, viewport: any }): void;
+  static update(parameters: { annotations: any[], div: HTMLDivElement, viewport: any }): void;
 }
 
-export declare class GlobalWorkerOptions {
+export interface GlobalWorkerOptions {
   workerPort: string;
   workerSrc: string;
 }
 
-export declare class InvalidPDFException {
+export interface InvalidPDFException {
+  name: string;
+  message: string;
 }
 
 export declare class LinkTarget {
@@ -91,20 +92,20 @@ export declare class LinkTarget {
   static TOP: number;
 }
 
-export declare class LoopbackPort {
+export interface LoopbackPort {
 
-  constructor(defer: any);
+  addEventListener(name: string, listener: any);
 
-  public addEventListener(name: string, listener: any);
+  postMessage(obj: any, transfers: any): any;
 
-  public postMessage(obj: any, transfers: any): any;
+  removeEventListener(name: any, listener: any): any;
 
-  public removeEventListener(name: any, listener: any): any;
-
-  public terminate(): any;
+  terminate(): any;
 }
 
-export declare class MissingPDFException {
+export interface MissingPDFException {
+  name: string;
+  message: string;
 }
 
 export declare class NativeImageDecoding {
@@ -210,41 +211,41 @@ export declare class OPS {
 export declare class PDFDataRangeTransport {
   constructor(length: number, initialData: any);
 
-  public abort();
+  abort();
 
-  public addProgressListener(listener: any);
+  addProgressListener(listener: any);
 
-  public addProgressiveReadListener(listener: any);
+  addProgressiveReadListener(listener: any);
 
-  public addRangeListener(listener: any);
+  addRangeListener(listener: any);
 
-  public onDataProgress(loaded: any);
+  onDataProgress(loaded: any);
 
-  public onDataProgressiveRead(chunk: any);
+  onDataProgressiveRead(chunk: any);
 
-  public onDataRange(begin: number, chunk: any);
+  onDataRange(begin: number, chunk: any);
 
-  public requestDataRange(begin: number, end: number);
+  requestDataRange(begin: number, end: number);
 
-  public transportReady();
+  transportReady();
 }
 
-declare class PDFWorker {
-  public messageHandler: any;
+export declare class PDFWorker {
+  messageHandler: any;
 
-  public port: any;
+  port: any;
 
-  public promise: any;
+  promise: any;
 
-  public static fromPort(params);
+  static fromPort(params);
 
-  public static getWorkerSrc();
+  static getWorkerSrc();
 
-  public destroy();
+  destroy();
 
-  public _initializeFromPort(port);
+  _initializeFromPort(port);
 
-  public _setupFakeWorker();
+  _setupFakeWorker();
 
 }
 
@@ -260,149 +261,149 @@ export declare class RenderingCancelledException {
 export declare class SVGGraphics {
   constructor(commonObjs: any, objs: any, forceDataSchema: any);
 
-  public addFontStyle(fontObj: any);
+  addFontStyle(fontObj: any);
 
-  public beginText();
+  beginText();
 
-  public clip(type: any);
+  clip(type: any);
 
-  public closeEOFillStroke();
+  closeEOFillStroke();
 
-  public closeFillStroke();
+  closeFillStroke();
 
-  public closePath();
+  closePath();
 
-  public closeStroke();
+  closeStroke();
 
-  public constructPath(ops: any, args: any);
+  constructPath(ops: any, args: any);
 
-  public convertOpList(operatorList: any);
+  convertOpList(operatorList: any);
 
-  public endPath();
+  endPath();
 
-  public endText();
+  endText();
 
-  public eoFill();
+  eoFill();
 
-  public eoFillStroke();
+  eoFillStroke();
 
-  public executeOpTree(opTree: any);
+  executeOpTree(opTree: any);
 
-  public fill();
+  fill();
 
-  public fillStroke();
+  fillStroke();
 
-  public getSVG(operatorList: any, viewport: any);
+  getSVG(operatorList: any, viewport: any);
 
-  public group(items: any);
+  group(items: any);
 
-  public loadDependencies(operatorList: any);
+  loadDependencies(operatorList: any);
 
-  public moveText(x: any, y: any);
+  moveText(x: any, y: any);
 
-  public nextLine();
+  nextLine();
 
-  public paintFormXObjectBegin(matrix: any, bbox: any);
+  paintFormXObjectBegin(matrix: any, bbox: any);
 
-  public paintFormXObjectEnd();
+  paintFormXObjectEnd();
 
-  public paintImageMaskXObject(imgData: any);
+  paintImageMaskXObject(imgData: any);
 
-  public paintImageXObject(objId: any);
+  paintImageXObject(objId: any);
 
-  public paintInlineImageXObject(imgData: any, mask: any);
+  paintInlineImageXObject(imgData: any, mask: any);
 
-  public paintJpegXObject(objId: any, w: any, h: any);
+  paintJpegXObject(objId: any, w: any, h: any);
 
-  public paintSolidColorImageMask();
+  paintSolidColorImageMask();
 
-  public restore();
+  restore();
 
-  public save();
+  save();
 
-  public setCharSpacing(charSpacing: any);
+  setCharSpacing(charSpacing: any);
 
-  public setDash(dashArray: any, dashPhase: any);
+  setDash(dashArray: any, dashPhase: any);
 
-  public setFillAlpha(fillAlpha: any);
+  setFillAlpha(fillAlpha: any);
 
-  public setFillRGBColor(r: number, g: number, b: number);
+  setFillRGBColor(r: number, g: number, b: number);
 
-  public setFont(details: any);
+  setFont(details: any);
 
-  public setGState(states: any);
+  setGState(states: any);
 
-  public setHScale(scale: any);
+  setHScale(scale: any);
 
-  public setLeading(leading: any);
+  setLeading(leading: any);
 
-  public setLeadingMoveText(x: number, y: number);
+  setLeadingMoveText(x: number, y: number);
 
-  public setLineCap(style: any);
+  setLineCap(style: any);
 
-  public setLineJoin(style: any);
+  setLineJoin(style: any);
 
-  public setLineWidth(width: number);
+  setLineWidth(width: number);
 
-  public setMiterLimit(limit: any);
+  setMiterLimit(limit: any);
 
-  public setStrokeAlpha(strokeAlpha: number);
+  setStrokeAlpha(strokeAlpha: number);
 
-  public setStrokeRGBColor(r: number, g: number, b: number);
+  setStrokeRGBColor(r: number, g: number, b: number);
 
-  public setTextMatrix(a: any, b: any, c: any, d: any, e: any, f: any);
+  setTextMatrix(a: any, b: any, c: any, d: any, e: any, f: any);
 
-  public setTextRise(textRise: any);
+  setTextRise(textRise: any);
 
-  public setWordSpacing(wordSpacing: any);
+  setWordSpacing(wordSpacing: any);
 
-  public showText(glyphs: any);
+  showText(glyphs: any);
 
-  public stroke();
+  stroke();
 
-  public transform(a: any, b: any, c: any, d: any, e: any, f: any);
+  transform(a: any, b: any, c: any, d: any, e: any, f: any);
 
-  public _ensureClipGroup();
+  _ensureClipGroup();
 
-  public _ensureTransformGroup();
+  _ensureTransformGroup();
 }
 
 export declare class UnexpectedResponseException {
   constructor(msg: string, status: any);
 }
 
-export declare class Util {
-  public appendToArray(arr1: any, arr2: any);
+export interface Util {
+  appendToArray(arr1: any, arr2: any);
 
-  public apply3dTransform(m: any, v: any);
+  apply3dTransform(m: any, v: any);
 
-  public applyInverseTransform(p: any, m: any);
+  applyInverseTransform(p: any, m: any);
 
-  public applyTransform(p: any, m: any);
+  applyTransform(p: any, m: any);
 
-  public extendObj(obj1: any, obj2: any);
+  extendObj(obj1: any, obj2: any);
 
-  public getAxialAlignedBoundingBox(r: any, m: any);
+  getAxialAlignedBoundingBox(r: any, m: any);
 
-  public inherit(sub: any, base: any, prototype: any);
+  inherit(sub: any, base: any, prototype: any);
 
-  public intersect(rect1: any, rect2: any);
+  intersect(rect1: any, rect2: any);
 
-  public inverseTransform(m: any);
+  inverseTransform(m: any);
 
-  public loadScript(src: any, callback: any);
+  loadScript(src: any, callback: any);
 
-  public makeCssRgb(r: any, g: any, b: any);
+  makeCssRgb(r: any, g: any, b: any);
 
-  public normalizeRect(rect: any);
+  normalizeRect(rect: any);
 
-  public prependToArray(arr1: any, arr2: any);
+  prependToArray(arr1: any, arr2: any);
 
-  public singularValueDecompose2dScale(m: any);
+  singularValueDecompose2dScale(m: any);
 
-  public toRoman(num: any, lowerCase: any);
+  toRoman(num: any, lowerCase: any);
 
-  public transform(m1: any, m2: any);
+  transform(m1: any, m2: any);
 }
 
 export declare class VerbosityLevel {
