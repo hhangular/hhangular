@@ -30,7 +30,7 @@ export class PdfjsService {
   }
 
   public getRenderFittedInCanvas(fit: ViewFit): (item: PdfjsItem, canvas: HTMLCanvasElement, size: number, quality?: RenderQuality, scale?: number) => PDFPromise<RenderObjects> {
-    return (fit === ViewFit.VERTICAL) ? this.renderItemInCanvasVerticalFitted : this.renderItemInCanvasHorizontalFitted;
+    return (fit === ViewFit.VERTICAL) ? this.renderItemInCanvasVerticalFitted.bind(this) : this.renderItemInCanvasHorizontalFitted.bind(this);
   }
 
   /**

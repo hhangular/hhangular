@@ -5,7 +5,7 @@ import {BehaviorSubject, combineLatest, of, Subscription} from 'rxjs';
 import {distinctUntilChanged, flatMap, map} from 'rxjs/operators';
 import {PdfjsControl} from '../../classes/pdfjs-control';
 import {PdfjsGroupControl} from '../../classes/pdfjs-group-control';
-import {RenderQuality, ThumbnailLayout, ViewFit} from '../../classes/pdfjs-objects';
+import {RenderObjects, RenderQuality, ThumbnailLayout, ViewFit} from '../../classes/pdfjs-objects';
 import {PdfjsItem} from '../../classes/pdfjs-item';
 import {PdfjsService} from '../../services/pdfjs.service';
 
@@ -322,11 +322,11 @@ export class PdfjsThumbnailComponent implements OnInit, OnDestroy {
       // fixed size used for fitSelected
       const canvasSize = this._fitSize - this._borderWidth * 2;
       const fit: ViewFit = this._layout === ThumbnailLayout.HORIZONTAL ? ViewFit.VERTICAL : ViewFit.HORIZONTAL;
-      this.pdfjs.getRenderFittedInCanvas(fit).call(this.pdfjs, pdfjsItem, canvas, canvasSize, this._quality)
-        .then((pdfRenderTask: PDFRenderTask) => {
+      this.pdfjs.getRenderFittedInCanvas(fit)(pdfjsItem, canvas, canvasSize, this._quality)
+        .then((renderObjects: RenderObjects) => {
           this.notRendered = false;
           this.rendered.emit(pdfjsItem);
-          this.pdfRenderTask = pdfRenderTask;
+          this.pdfRenderTask = renderObjects.pdfRenderTask;
         });
     } else {
       this.pdfjs.cleanCanvas(canvas);

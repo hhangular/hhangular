@@ -4,7 +4,7 @@ import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {distinctUntilChanged, filter, flatMap, tap} from 'rxjs/operators';
 import {PdfjsControl} from '../../classes/pdfjs-control';
 import {PdfjsGroupControl} from '../../classes/pdfjs-group-control';
-import {RenderQuality, ViewFit} from '../../classes/pdfjs-objects';
+import {RenderObjects, RenderQuality, ViewFit} from '../../classes/pdfjs-objects';
 import {KeysService} from '../../services/keys.service';
 import {PdfjsService} from '../../services/pdfjs.service';
 import {DOCUMENT} from '@angular/common';
@@ -285,9 +285,8 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
       this.pdfjs.destroyCanvas(canvas);
     }
     canvas = wrapper.appendChild(document.createElement('canvas'));
-    this.pdfjs.getRenderFittedInCanvas(this.fit)
-      .call(this.pdfjs, this.item, canvas, this.size, this.quality, this.scale)
-      .then((obj: {pdfRenderTask: PDFRenderTask, viewport: PDFPageViewport, pdfPageProxy: PDFPageProxy}) => {
+    this.pdfjs.getRenderFittedInCanvas(this.fit)(this.item, canvas, this.size, this.quality, this.scale)
+      .then((obj: RenderObjects) => {
         this.defineSizesFromCanvasSizes(canvas, this.quality);
         this.pdfRenderTask = obj.pdfRenderTask;
         if (this.textLayer) {

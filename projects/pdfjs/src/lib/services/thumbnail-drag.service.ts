@@ -147,9 +147,7 @@ export class ThumbnailDragService {
   }
 
   public getIndexOfThumbnailInThumbnails(thumbnail: HTMLElement, thumbnails: HTMLElement) {
-    return [].findIndex.call(thumbnails.children, (child: HTMLElement, idx: number) => {
-      return child === thumbnail;
-    });
+    return [].findIndex.bind(thumbnails.children)(child => child === thumbnail);
   }
 
   private isBeforeThumbnailOver(layout: ThumbnailLayout, thumbnailOver: HTMLElement, event: DragEvent) {
