@@ -1,5 +1,5 @@
 import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, Inject, Input, OnDestroy, ViewChild} from '@angular/core';
-import {PDFPageProxy, PDFPageViewport, PDFRenderTask, TextContent} from 'pdfjs-dist';
+import {PDFRenderTask, TextContent} from 'pdfjs-dist';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {distinctUntilChanged, filter, flatMap, tap} from 'rxjs/operators';
 import {PdfjsControl} from '../../classes/pdfjs-control';
@@ -77,6 +77,7 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
       this.updateRenderForCurrentItem();
     }
   }
+
   get fit(): ViewFit {
     return this._fit;
   }
@@ -91,6 +92,7 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
       this.updateRenderForCurrentItem();
     }
   }
+
   get scale(): number {
     return this._scale;
   }
@@ -105,6 +107,7 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
       this.updateRenderForCurrentItem();
     }
   }
+
   get quality(): RenderQuality {
     return this._quality;
   }
@@ -119,6 +122,7 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
       this.updateRenderForCurrentItem();
     }
   }
+
   get textLayer(): boolean {
     return this._textLayer;
   }
@@ -271,6 +275,7 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
     this.item = item;
     this.updateRenderForCurrentItem();
   }
+
   private updateRenderForCurrentItem() {
     if (!this.item) {
       return;
@@ -302,7 +307,7 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
             return textLayerRenderTask;
           });
         }
-    });
+      });
   }
 
   private cancelRenderTask() {
