@@ -1,7 +1,7 @@
 export const LocalStored = (version: number, id?: string) => {
   return (target, key: string) => {
     const value = {data: undefined};
-    const ident = id || `${target.constructor.name}.${key}`;
+    const ident = StoreService.getId(target, key, id);
     Object.defineProperty(target, key, {
       set: (val: any) => {
         value.data = new StoreService(localStorage).loadCfg({...val, id: ident, version});
@@ -16,7 +16,7 @@ export const LocalStored = (version: number, id?: string) => {
 export const SessionStored = (id?: string) => {
   return (target, key: string) => {
     const value = {data: undefined};
-    const ident = id || `${target.constructor.name}.${key}`;
+    const ident = StoreService.getId(target, key, id);
     Object.defineProperty(target, key, {
       set: (val: any) => {
         value.data = new StoreService(sessionStorage).loadCfg({...val, id: ident, version: NaN});
@@ -29,6 +29,10 @@ export const SessionStored = (id?: string) => {
 };
 
 export class StoreService {
+  public static getId(target: {constructor: {name: string}}, key: string, id?: string) {
+    return id || `${target.constructor.name}.${key}`;
+  }
+
   constructor(private storage: Storage) {
   }
 
