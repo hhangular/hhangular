@@ -24,6 +24,12 @@
       ],
       "pdfjs/*": [
         "dist/pdfjs/*"
+      ],
+      "store": [
+        "dist/store"
+      ],
+      "store/*": [
+        "dist/store/*"
       ]
     }
   }

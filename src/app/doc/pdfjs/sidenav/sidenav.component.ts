@@ -1,15 +1,18 @@
-import {Component, OnInit} from '@angular/core';
+import {Component} from '@angular/core';
 import {
-  faArrowsAlt, faBorderNone,
-  faCogs, faDesktop,
+  faArrowsAlt,
+  faBorderNone,
+  faCogs,
+  faDesktop,
   faDharmachakra,
   faDownload,
   faExpandArrowsAlt,
-  faFilePdf as fasFilePdf, faGamepad, faListUl, faProjectDiagram, faWrench
+  faFilePdf as fasFilePdf,
+  faGamepad,
+  faListUl,
+  faProjectDiagram
 } from '@fortawesome/free-solid-svg-icons';
 import {faFilePdf as farFilePdf} from '@fortawesome/free-regular-svg-icons';
-import {faBuromobelexperte} from '@fortawesome/free-brands-svg-icons';
-import {GithubService} from "../../../core/github.service";
 
 @Component({
   selector: 'app-sidenav',
@@ -23,13 +26,11 @@ export class SidenavComponent {
   fasFilePdf = fasFilePdf;
   farFilePdf = farFilePdf;
   faDharmachakra = faDharmachakra;
-  faProjectDiagram = faProjectDiagram
-  faBuromobelexperte = faBuromobelexperte;
+  faProjectDiagram = faProjectDiagram;
   faArrowsAlt = faArrowsAlt;
   faExpandArrowsAlt = faExpandArrowsAlt;
   faBorderNone = faBorderNone;
   faGamepad = faGamepad;
-  faWrench = faWrench;
   faListUl = faListUl;
   faDesktop = faDesktop;
 

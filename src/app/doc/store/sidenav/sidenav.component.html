@@ -1,0 +1,27 @@
+<mat-list routerLinkActive="active">
+  <a mat-list-item routerLink="overview" [routerLinkActive]="['active']">
+    <fa-icon [icon]="farFilePdf"></fa-icon>&nbsp;Overview
+  </a>
+  <mat-divider></mat-divider>
+  <mat-list-item disabled="true">Get start</mat-list-item>
+  <a mat-list-item routerLink="install" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faDownload"></fa-icon>&nbsp;Installation
+  </a>
+  <a mat-list-item routerLink="configuration" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faCogs"></fa-icon>&nbsp;Configuration
+  </a>
+  <mat-divider></mat-divider>
+  <mat-list-item disabled="true">Decorators</mat-list-item>
+  <a mat-list-item routerLink="localstored" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="fasFilePdf"></fa-icon>&nbsp;LocalStored
+  </a>
+  <a mat-list-item routerLink="sessionstored" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="fasFilePdf"></fa-icon>&nbsp;SessionStored
+  </a>
+  <mat-divider></mat-divider>
+  <a mat-list-item routerLink="demo" [routerLinkActive]="['active']">
+    <fa-icon [icon]="faDesktop"></fa-icon>&nbsp;Demo
+  </a>
+  <mat-divider></mat-divider>
+  <br>
+</mat-list>

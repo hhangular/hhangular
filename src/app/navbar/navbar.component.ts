@@ -21,5 +21,4 @@ export class NavBarComponent implements OnInit {
       this.url = json.repository.url;
     });
   }
-
 }

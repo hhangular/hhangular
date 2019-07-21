@@ -1,0 +1,22 @@
+{
+  "name": "@hhangular/store",
+  "version": "1.0.0",
+  "author": "Achache francois",
+  "license": "MIT",
+  "description": "store access for angular 8x by hhfrancois",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hhangular/hhangular.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "angular",
+    "service"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^8.0.3",
+    "@angular/core": "^8.0.3"
+  }
+}

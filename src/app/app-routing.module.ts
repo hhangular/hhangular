@@ -6,7 +6,8 @@ import {HomepageComponent} from './main/homepage.component';
 const routes: Routes = [
   {path: '', redirectTo: '/main', pathMatch: 'full'},
   {path: 'main', component: HomepageComponent},
-  {path: 'pdfjs', loadChildren: './doc/pdfjs/doc.module#DocModule'},
+  {path: 'pdfjs', loadChildren: './doc/pdfjs/doc-pdfjs.module#DocPdfjsModule'},
+  {path: 'store', loadChildren: './doc/store/doc-store.module#DocStoreModule'}
 ];
 
 @NgModule({

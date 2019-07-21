@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 echo ==================================================================================================
 echo Build all lib in projects directory

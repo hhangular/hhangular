@@ -1,6 +1,12 @@
 language: node_js
 node_js:
   - "10"
+addons:
+  apt:
+    sources:
+      - google-chrome
+    packages:
+      - google-chrome-stable
 cache:
   directories:
     - "node_modules"
@@ -11,6 +17,7 @@ before_script:
   - git checkout $TRAVIS_BRANCH
   - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
   - npm install
+  - bash scripts/test-libs.sh
 script:
   - bash scripts/build-all.sh
 deploy:
@@ -20,21 +27,21 @@ deploy:
     on:
       branch:
         - pdfjs
-        - config
+        - store
   - provider: script
     script: git commit -m "[ci skip]" package-lock.json; npm version patch -m "[ci skip]"
     skip_cleanup: true
     on:
       branch:
         - pdfjs
-        - config
+        - store
         - website
   - provider: script
     script: bash scripts/push-on-master.sh
     on:
       branch:
         - pdfjs
-        - config
+        - store
         - website
   - provider: releases
     user: "$GITHUB_USER"
@@ -45,7 +52,7 @@ deploy:
     on:
       branch:
         - pdfjs
-        - config
+        - store
         - website
   - provider: pages
     skip-cleanup: true
@@ -54,5 +61,5 @@ deploy:
     on:
       branch:
         - pdfjs
-        - config
+        - store
         - website

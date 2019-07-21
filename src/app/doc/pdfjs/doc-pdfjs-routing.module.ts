@@ -40,5 +40,5 @@ const docRoutes: Routes = [
     RouterModule
   ]
 })
-export class DocRoutingModule {
+export class DocPdfjsRoutingModule {
 }
