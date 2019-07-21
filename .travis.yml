@@ -10,9 +10,6 @@ addons:
 cache:
   directories:
     - "node_modules"
-branches:
-  except:
-    - master
 before_script:
   - git checkout $TRAVIS_BRANCH
   - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
