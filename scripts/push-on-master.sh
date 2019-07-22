@@ -33,4 +33,4 @@ git push https://$GITHUB_TOKEN:x-oauth-basic@github.com/$TRAVIS_REPO_SLUG.git ma
 echo ==================================================================================================
 echo Remove branch $TRAVIS_BRANCH
 echo ==================================================================================================
-git push https://$GITHUB_TOKEN:x-oauth-basic@github.com/$TRAVIS_REPO_SLUG.git --delete $TRAVIS_BRANCH
+// git push https://$GITHUB_TOKEN:x-oauth-basic@github.com/$TRAVIS_REPO_SLUG.git --delete $TRAVIS_BRANCH

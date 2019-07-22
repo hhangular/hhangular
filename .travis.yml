@@ -14,7 +14,7 @@ before_script:
   - git checkout $TRAVIS_BRANCH
   - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
   - npm install
-  - bash scripts/test-libs.sh
+  - bash scripts/test-lib.sh $TRAVIS_BRANCH
 script:
   - bash scripts/build-all.sh
 deploy:
