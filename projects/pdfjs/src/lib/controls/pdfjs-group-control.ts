@@ -1,7 +1,7 @@
 import {BehaviorSubject} from 'rxjs';
 import {PdfjsCommand} from './pdfjs-command';
 import {PdfjsControl} from './pdfjs-control';
-import {PDFPromiseResolved} from './pdfjs-objects';
+import {PDFPromiseResolved} from '../classes/pdfjs-objects';
 import {PDFPromise} from 'pdfjs-dist';
 
 export class PdfjsGroupControl implements PdfjsCommand {

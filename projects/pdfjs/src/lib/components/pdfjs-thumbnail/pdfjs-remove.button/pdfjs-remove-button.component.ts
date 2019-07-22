@@ -4,7 +4,7 @@ import {PdfjsItem} from '../../../classes/pdfjs-item';
 /** @ignore */
 @Component({
   selector: 'pdfjs-remove-button',
-  template: `<span class="remove-button">&nbsp;</span>`,
+  template: ``,
   styleUrls: ['./pdfjs-remove-button.component.css'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -19,7 +19,7 @@ export class PdfjsRemoveButtonComponent {
   }
 
   @HostListener('click', ['$event'])
-  public onClick(event: MouseEvent) {
+  public onClick() {
     this.removeItem.emit(this.item);
   }
 

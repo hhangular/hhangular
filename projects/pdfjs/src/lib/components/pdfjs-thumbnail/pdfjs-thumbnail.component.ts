@@ -3,8 +3,8 @@ import {Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, O
 import {PDFRenderTask} from 'pdfjs-dist';
 import {BehaviorSubject, combineLatest, of, Subscription} from 'rxjs';
 import {distinctUntilChanged, flatMap, map} from 'rxjs/operators';
-import {PdfjsControl} from '../../classes/pdfjs-control';
-import {PdfjsGroupControl} from '../../classes/pdfjs-group-control';
+import {PdfjsControl} from '../../controls/pdfjs-control';
+import {PdfjsGroupControl} from '../../controls/pdfjs-group-control';
 import {RenderObjects, RenderQuality, ThumbnailLayout, ViewFit} from '../../classes/pdfjs-objects';
 import {PdfjsItem} from '../../classes/pdfjs-item';
 import {PdfjsService} from '../../services/pdfjs.service';

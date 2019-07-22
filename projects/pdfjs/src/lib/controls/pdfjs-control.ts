@@ -1,12 +1,12 @@
 import {PDFDocumentProxy, PDFPromise} from 'pdfjs-dist';
 import {BehaviorSubject, Subscription} from 'rxjs';
 import {filter} from 'rxjs/operators';
-import {PdfApi} from './pdfapi';
+import {PdfApi} from '../classes/pdfapi';
 import {PdfjsCommand} from './pdfjs-command';
-import {PdfjsItemEvent, PDFPromiseResolved, PdfSource} from './pdfjs-objects';
-import {PdfjsItem, PdfPage} from './pdfjs-item';
-import {Crypto} from './pdfjs-crypto';
-import {pdfApiFactory} from './pdfapi-factory';
+import {PdfjsItemEvent, PDFPromiseResolved, PdfSource} from '../classes/pdfjs-objects';
+import {PdfjsItem, PdfPage} from '../classes/pdfjs-item';
+import {Crypto} from '../classes/pdfjs-crypto';
+import {pdfApiFactory} from '../classes/pdfapi-factory';
 
 export class PdfjsControl implements PdfjsCommand {
   private API: PdfApi = pdfApiFactory();

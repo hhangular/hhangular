@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PdfjsControl} from '../../../../../../../projects/pdfjs/src/lib/classes/pdfjs-control';
+import {PdfjsControl} from '../../../../../../../projects/pdfjs/src/lib/controls/pdfjs-control';
 import {RenderQuality, ViewFit} from '../../../../../../../projects/pdfjs/src/lib/classes/pdfjs-objects';
 
 @Component({

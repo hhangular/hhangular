@@ -18,8 +18,8 @@ import {
 } from '@angular/core';
 import {Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
-import {PdfjsControl} from '../../classes/pdfjs-control';
-import {PdfjsGroupControl} from '../../classes/pdfjs-group-control';
+import {PdfjsControl} from '../../controls/pdfjs-control';
+import {PdfjsGroupControl} from '../../controls/pdfjs-group-control';
 import {PdfjsItem} from '../../classes/pdfjs-item';
 import {PdfjsItemEvent, RenderEvent, RenderQuality, ThumbnailDragMode, ThumbnailLayout} from '../../classes/pdfjs-objects';
 import {ThumbnailDragService} from '../../services/thumbnail-drag.service';

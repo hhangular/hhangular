@@ -17,10 +17,11 @@ describe('GithubService', () => {
     expect(service).toBeTruthy();
   });
 
-  it('packageJson is available', () => {
+  it('packageJson is available', (done: DoneFn) => {
     const service: GithubService = TestBed.get(GithubService);
     service.getPackageJson('').subscribe(json => {
       expect(json).toBeTruthy();
+      done();
     });
   });
 });

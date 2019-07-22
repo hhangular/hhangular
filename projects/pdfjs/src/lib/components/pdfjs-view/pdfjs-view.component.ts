@@ -2,8 +2,8 @@ import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListe
 import {PDFRenderTask, TextContent} from 'pdfjs-dist';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {distinctUntilChanged, filter, flatMap, tap} from 'rxjs/operators';
-import {PdfjsControl} from '../../classes/pdfjs-control';
-import {PdfjsGroupControl} from '../../classes/pdfjs-group-control';
+import {PdfjsControl} from '../../controls/pdfjs-control';
+import {PdfjsGroupControl} from '../../controls/pdfjs-group-control';
 import {RenderObjects, RenderQuality, ViewFit} from '../../classes/pdfjs-objects';
 import {KeysService} from '../../services/keys.service';
 import {PdfjsService} from '../../services/pdfjs.service';
