@@ -5,6 +5,9 @@ import {PdfjsThumbnailComponent} from '../../pdfjs-thumbnail/pdfjs-thumbnail.com
 import {PdfjsRemoveButtonComponent} from '../../pdfjs-thumbnail/pdfjs-remove.button/pdfjs-remove-button.component';
 import {PdfjsService} from '../../../services/pdfjs.service';
 import {pdfApiFactory} from '../../../classes/pdfapi-factory';
+import {PdfjsItem} from '../../../classes/pdfjs-item';
+import {PDFDocumentProxy} from 'pdfjs-dist';
+import {PdfSource} from '../../../classes/pdfjs-objects';
 
 describe('PdfjsPreviewComponent', () => {
   let component: PdfjsPreviewComponent;
@@ -33,6 +36,23 @@ describe('PdfjsPreviewComponent', () => {
   });
 
   it('should create', () => {
+    expect(component).toBeTruthy();
+  });
+
+  it('should create', () => {
+    const source: PdfSource = 'assets/pdfs/guide.pdf';
+  }
+    this.API.getDocument(source).promise.then((pdfDocumentProxy: PDFDocumentProxy) => {
+      [].push.apply(this.items, Array.apply(null, {length: pdfDocumentProxy.numPages})
+        .map((e: any, i: number) => {
+          const item: PdfjsItem = new PdfjsItem(pdfDocumentProxy, this.pdfId, source, i + 1, 0);
+          this.itemEvent$.next({item, event: 'add', to: i});
+          return item;
+        }, Number));
+      this.itemEvent$.next({item: null, event: 'endInit'});
+      if (this.autoSelect) {
+        this.selectFirst();
+      }
     expect(component).toBeTruthy();
   });
 
