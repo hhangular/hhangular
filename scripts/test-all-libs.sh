@@ -9,7 +9,7 @@ do
   dir="${dir##*/}"
   echo Test lib : ${dir}
   echo ===========
-  npm run test ${dir} --no-watch --no-progress --code-coverage --browsers=ChromeHeadless
-#  npm run e2e ${dir} --protractor-config=e2e/protractor-ci.conf.js
+  npm run test:ci:$1
+#  npm run e2e:ci:$1
   codecov -f coverage/${dir}/lcov.info --disable=gcov -t $CODECOV_TOKEN
 done
