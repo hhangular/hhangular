@@ -1,6 +1,5 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {PdfjsThumbnailComponent} from './pdfjs-thumbnail.component';
-import {CommonModule} from '@angular/common';
 import {PdfjsRemoveButtonComponent} from './pdfjs-remove.button/pdfjs-remove-button.component';
 import {PdfjsService} from '../../services/pdfjs.service';
 import {pdfApiFactory} from '../../classes/pdfapi-factory';

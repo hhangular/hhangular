@@ -1,7 +1,6 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, HostListener, Input, Output} from '@angular/core';
 import {PdfjsItem} from '../../../classes/pdfjs-item';
 
-/** @ignore */
 @Component({
   selector: 'pdfjs-remove-button',
   template: ``,
@@ -15,10 +14,7 @@ export class PdfjsRemoveButtonComponent {
   @Input()
   public item: PdfjsItem;
 
-  constructor() {
-  }
-
-  @HostListener('click', ['$event'])
+  @HostListener('click', [])
   public onClick() {
     this.removeItem.emit(this.item);
   }

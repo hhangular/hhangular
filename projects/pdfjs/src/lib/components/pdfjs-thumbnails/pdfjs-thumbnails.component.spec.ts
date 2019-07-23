@@ -1,9 +1,7 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {PdfjsThumbnailsComponent} from './pdfjs-thumbnails.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {PdfjsViewComponent} from '../pdfjs-view/pdfjs-view.component';
 import {PdfjsService} from '../../services/pdfjs.service';
-import {KeysService} from '../../services/keys.service';
 import {pdfApiFactory} from '../../classes/pdfapi-factory';
 import {PdfjsPreviewComponent} from './preview/pdfjs-preview.component';
 import {PdfjsRemoveButtonComponent} from '../pdfjs-thumbnail/pdfjs-remove.button/pdfjs-remove-button.component';
