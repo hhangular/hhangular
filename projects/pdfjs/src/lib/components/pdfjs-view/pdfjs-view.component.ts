@@ -136,7 +136,7 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
 
   public ngOnDestroy() {
     this.cancelRenderTask();
-    const wrapper: HTMLCanvasElement = this.canvasWrapperRef.nativeElement;
+    const wrapper: HTMLDivElement = this.canvasWrapperRef.nativeElement;
     let canvas: HTMLCanvasElement;
     if (wrapper.children.length) {
       canvas = wrapper.children.item(0) as HTMLCanvasElement;
@@ -283,7 +283,7 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
     this.cancelRenderTask();
     this.clearTextLayer();
     this.computeSize();
-    const wrapper: HTMLCanvasElement = this.canvasWrapperRef.nativeElement;
+    const wrapper: HTMLDivElement = this.canvasWrapperRef.nativeElement;
     let canvas: HTMLCanvasElement;
     if (wrapper.children.length) {
       canvas = wrapper.children.item(0) as HTMLCanvasElement;
