@@ -9,6 +9,14 @@ export class PdfjsItemEvent {
   public to?: number;
 }
 
+export class PdfjsItemAddEvent extends PdfjsItemEvent {
+  public event: 'add';
+}
+
+export class PdfjsItemRemoveEvent extends PdfjsItemEvent {
+  public event: 'remove';
+}
+
 export class RenderObjects {
   pdfRenderTask: PDFRenderTask;
   viewport: PDFPageViewport;
