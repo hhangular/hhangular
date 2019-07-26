@@ -2,9 +2,10 @@ export const LocalStored = (version: number, id?: string) => {
   return (target, key: string) => {
     const value = {data: undefined};
     const ident = StoreService.getId(target, key, id);
+    const svc = new StoreService(localStorage);
     Object.defineProperty(target, key, {
       set: (val: any) => {
-        value.data = new StoreService(localStorage).loadCfg({...val, id: ident, version});
+        value.data = svc.loadCfg({...val, id: ident, version});
       },
       get: () => {
         return value.data;
@@ -17,9 +18,10 @@ export const SessionStored = (id?: string) => {
   return (target, key: string) => {
     const value = {data: undefined};
     const ident = StoreService.getId(target, key, id);
+    const svc = new StoreService(sessionStorage);
     Object.defineProperty(target, key, {
       set: (val: any) => {
-        value.data = new StoreService(sessionStorage).loadCfg({...val, id: ident, version: NaN});
+        value.data = svc.loadCfg({...val, id: ident, version: NaN});
       },
       get: () => {
         return value.data;
@@ -143,7 +145,7 @@ export class StoreService {
     return res;
   }
 
-  addJson(obj: any, key: string, value: any) {
+  private addJson(obj: any, key: string, value: any) {
     obj[key] = this.toJson(value);
     return obj;
   }

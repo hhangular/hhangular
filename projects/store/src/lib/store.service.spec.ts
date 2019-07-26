@@ -22,7 +22,7 @@ describe('StoreService', () => {
     expect(cfg.toJson().version).toBeUndefined();
   });
 
-  it('Update primitive value on deep 0', () => {
+  it('Update primitive value on deep 1', () => {
     const res = service.loadCfg({version: 1, id: 'test', foo: 5});
     res.foo = 6;
     const stored = JSON.parse(localStorage.getItem('test'));
@@ -36,14 +36,14 @@ describe('StoreService', () => {
     expect(stored.foo.bar).toEqual(6);
   });
 
-  it('Update object value on deep 0', () => {
+  it('Update object value on deep 1', () => {
     const res = service.loadCfg({version: 1, id: 'test', foo: {bar: 5}});
     res.foo = {bar: 6};
     const stored = JSON.parse(localStorage.getItem('test'));
     expect(stored.foo.bar).toEqual(6);
   });
 
-  it('Update array by set value on deep 0', () => {
+  it('Update array by set value on deep 1', () => {
     const res = service.loadCfg({version: 1, id: 'test', foo: []});
     res.foo = [10];
     const stored = JSON.parse(localStorage.getItem('test'));
@@ -139,7 +139,7 @@ describe('StoreService', () => {
     const target: any = {attr: undefined};
     LocalStored(1, 'test')(target, 'attr');
     target.attr = {foo: 5};
-    target.attr.foo = 6
+    target.attr.foo = 6;
     const stored = JSON.parse(localStorage.getItem('test'));
     expect(target.attr.foo).toEqual(6);
     expect(stored.foo).toEqual(6);
@@ -149,7 +149,7 @@ describe('StoreService', () => {
     const target: any = {attr: undefined};
     SessionStored('test')(target, 'attr');
     target.attr = {foo: 5};
-    target.attr.foo = 6
+    target.attr.foo = 6;
     const stored = JSON.parse(sessionStorage.getItem('test'));
     expect(target.attr.foo).toEqual(6);
     expect(stored.foo).toEqual(6);
