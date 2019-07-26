@@ -8,10 +8,12 @@ import {PdfjsThumbnailsComponent} from './components/pdfjs-thumbnails/pdfjs-thum
 import {PdfjsPreviewComponent} from './components/pdfjs-thumbnails/preview/pdfjs-preview.component';
 import {PdfjsViewComponent} from './components/pdfjs-view/pdfjs-view.component';
 import {KeysService} from './services/keys.service';
-import {PdfjsService} from './services/pdfjs.service';
 import {ThumbnailDragService} from './services/thumbnail-drag.service';
 import {PdfApi} from './classes/pdfapi';
 import {pdfApiFactory} from './classes/pdfapi-factory';
+import { PdfjsCanvasWrapperComponent } from './components/pdfjs-canvas-wrapper/pdfjs-canvas-wrapper.component';
+import { PdfjsTextLayerComponent } from './components/pdfjs-text-layer/pdfjs-text-layer.component';
+import { PdfjsAnnotationLayerComponent } from './components/pdfjs-annotation-layer/pdfjs-annotation-layer.component';
 
 @NgModule({
   imports: [
@@ -32,9 +34,11 @@ import {pdfApiFactory} from './classes/pdfapi-factory';
     PdfjsRemoveButtonComponent,
     PdfjsViewComponent,
     PdfjsPreviewComponent,
+    PdfjsCanvasWrapperComponent,
+    PdfjsTextLayerComponent,
+    PdfjsAnnotationLayerComponent,
   ],
   providers: [
-    PdfjsService,
     ThumbnailDragService,
     KeysService,
     {provide: 'PdfApi', useFactory: pdfApiFactory}
