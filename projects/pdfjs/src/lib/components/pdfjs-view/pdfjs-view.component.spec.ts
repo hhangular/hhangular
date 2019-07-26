@@ -1,12 +1,13 @@
 import {async, ComponentFixture, inject, TestBed} from '@angular/core/testing';
 import {PdfjsViewComponent} from './pdfjs-view.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {PdfjsService} from '../../services/pdfjs.service';
 import {pdfApiFactory} from '../../classes/pdfapi-factory';
 import {KeysService} from '../../services/keys.service';
 import {PdfSource} from '../../classes/pdfjs-objects';
 import {PdfApi} from '../../classes/pdfapi';
 import {PdfjsControl} from '../../controls/pdfjs-control';
+import {PdfjsCanvasWrapperComponent} from '../pdfjs-canvas-wrapper/pdfjs-canvas-wrapper.component';
+import {PdfjsTextLayerComponent} from '../pdfjs-text-layer/pdfjs-text-layer.component';
 
 describe('PdfjsViewComponent', () => {
   let component: PdfjsViewComponent;
@@ -23,9 +24,10 @@ describe('PdfjsViewComponent', () => {
       ],
       declarations: [
         PdfjsViewComponent,
+        PdfjsCanvasWrapperComponent,
+        PdfjsTextLayerComponent
       ],
       providers: [
-        PdfjsService,
         KeysService,
         {provide: 'PdfApi', useFactory: pdfApiFactory}
       ]}).compileComponents();

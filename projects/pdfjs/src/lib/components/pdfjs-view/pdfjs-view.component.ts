@@ -1,13 +1,11 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, Inject, Input, OnDestroy, ViewChild} from '@angular/core';
-import {PDFRenderTask, TextContent} from 'pdfjs-dist';
+import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, OnDestroy, ViewChild} from '@angular/core';
+import {PDFPageProxy, PDFPageViewport} from 'pdfjs-dist';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {distinctUntilChanged, filter, flatMap, tap} from 'rxjs/operators';
 import {PdfjsControl} from '../../controls/pdfjs-control';
 import {PdfjsGroupControl} from '../../controls/pdfjs-group-control';
-import {RenderObjects, RenderQuality, ViewFit} from '../../classes/pdfjs-objects';
+import {CanvasWrapperRenderEvent, RenderQuality, ViewFit} from '../../classes/pdfjs-objects';
 import {KeysService} from '../../services/keys.service';
-import {PdfjsService} from '../../services/pdfjs.service';
-import {DOCUMENT} from '@angular/common';
 import {PdfjsItem} from '../../classes/pdfjs-item';
 
 @Component({
@@ -18,27 +16,22 @@ import {PdfjsItem} from '../../classes/pdfjs-item';
 })
 export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
 
-  @ViewChild('textLayer', {static: true})
-  private textLayerRef: ElementRef;
-  @ViewChild('canvasWrapper', {static: true})
-  private canvasWrapperRef: ElementRef;
+  size = 100;
+  item: PdfjsItem = null;
+
   @ViewChild('page', {static: true})
   private pageRef: ElementRef;
 
-  private pdfRenderTask: PDFRenderTask;
-  private size = 100;
+  private timeStart = 0;
   private subscription: Subscription;
   private observer: BehaviorSubject<[PdfjsItem, number]> = new BehaviorSubject<[PdfjsItem, number]>([null, 0]);
   private canvasWidth: number;
   private canvasHeight: number;
   private width: number;
   private height: number;
-  private item: PdfjsItem = null;
   private _pdfjsControl: PdfjsControl;
-  private _scale = 1;
-  private _textLayer = false;
-  private _quality: RenderQuality = 2;
   private _fit: ViewFit = ViewFit.VERTICAL;
+  private _scale: number;
 
   @Input()
   mouseWheelNav = true;
@@ -51,10 +44,10 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
    */
   @Input()
   set control(control: PdfjsControl | PdfjsGroupControl) {
+    this.item = null;
     if (!!this.subscription) {
       this.subscription.unsubscribe();
     }
-    this.cancelRenderTask();
     this.keysService.clearPdfjsControl();
     if (control) {
       if (control instanceof PdfjsControl) {
@@ -74,7 +67,7 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
   set fit(fit: ViewFit) {
     if (this._fit !== fit) {
       this._fit = fit;
-      this.updateRenderForCurrentItem();
+      this.computeSize();
     }
   }
 
@@ -83,13 +76,13 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Fit direction
+   * Scale of page
    */
   @Input()
   set scale(scale: number) {
     if (this._scale !== scale) {
       this._scale = scale;
-      this.updateRenderForCurrentItem();
+      this.computeSize();
     }
   }
 
@@ -101,47 +94,22 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
    * Render quality
    */
   @Input()
-  set quality(quality: RenderQuality) {
-    if (this._quality !== quality) {
-      this._quality = quality;
-      this.updateRenderForCurrentItem();
-    }
-  }
-
-  get quality(): RenderQuality {
-    return this._quality;
-  }
+  quality: RenderQuality = 2;
 
   /**
    * Render quality
    */
   @Input()
-  set textLayer(textLayer: boolean) {
-    if (this._textLayer !== textLayer) {
-      this._textLayer = textLayer;
-      this.updateRenderForCurrentItem();
-    }
-  }
-
-  get textLayer(): boolean {
-    return this._textLayer;
-  }
+  textLayer: boolean;
+  pdfPageProxy: PDFPageProxy;
+  viewport: PDFPageViewport;
 
   constructor(
-    @Inject(DOCUMENT) private document: Document,
     private elementRef: ElementRef,
-    private pdfjs: PdfjsService,
     private keysService: KeysService) {
   }
 
   public ngOnDestroy() {
-    this.cancelRenderTask();
-    const wrapper: HTMLDivElement = this.canvasWrapperRef.nativeElement;
-    let canvas: HTMLCanvasElement;
-    if (wrapper.children.length) {
-      canvas = wrapper.children.item(0) as HTMLCanvasElement;
-      this.pdfjs.destroyCanvas(canvas);
-    }
   }
 
   public ngAfterViewInit(): void {
@@ -154,7 +122,9 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
           || x[1] !== y[1]);
       }),
     ).subscribe((data: [PdfjsItem, number]) => {
-      this.updateRender(data[0]);
+      this.timeStart = new Date().getTime();
+      this.item = data[0];
+      this.computeSize();
     });
   }
 
@@ -163,39 +133,34 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
   }
 
   /**
-   * Reset text layout
-   */
-  private clearTextLayer() {
-    this.textLayerRef.nativeElement.innerHTML = '<div class="endOfContent"></div>';
-  }
-
-  /**
    * Compute size function of fitSelected
    */
   private computeSize() {
-    const view: HTMLElement = this.elementRef.nativeElement;
-    const clientRect: ClientRect = view.getBoundingClientRect();
-    this.height = clientRect.height;
-    this.width = clientRect.width;
-    if (this.fit === ViewFit.HORIZONTAL) {
-      this.size = this.width - 20;
-    } else {
-      this.size = this.height - 6;
+    if (!!this.item) {
+      const view: HTMLElement = this.elementRef.nativeElement;
+      const clientRect: ClientRect = view.getBoundingClientRect();
+      this.height = clientRect.height;
+      this.width = clientRect.width;
+      if (this.fit === ViewFit.HORIZONTAL) {
+        this.size = this.width - 20;
+      } else {
+        this.size = this.height - 6;
+      }
     }
   }
 
-  private defineSizesFromCanvasSizes(canvas: HTMLCanvasElement, quality: number) {
-    this.canvasWidth = canvas.width / quality;
-    this.canvasHeight = canvas.height / quality;
-    const height = `${this.canvasHeight}px`;
-    const width = `${this.canvasWidth}px`;
-    this.textLayerRef.nativeElement.style.height = height;
-    this.canvasWrapperRef.nativeElement.style.height = height;
-    this.pageRef.nativeElement.style.height = height;
+  private defineSizesFromCanvasSizes(width: number, height: number, quality: RenderQuality) {
+    this.canvasWidth = width / quality;
+    this.canvasHeight = height / quality;
+    const heightPx = `${this.canvasHeight}px`;
+    const widthPx = `${this.canvasWidth}px`;
+    this.pageRef.nativeElement.style.height = heightPx;
+    this.pageRef.nativeElement.style.width = widthPx;
+  }
 
-    this.textLayerRef.nativeElement.style.width = width;
-    this.canvasWrapperRef.nativeElement.style.width = width;
-    this.pageRef.nativeElement.style.width = width;
+  @HostListener('style.height', ['$event'])
+  onResize(event: Event) {
+    console.log(event);
   }
 
   /**
@@ -239,11 +204,6 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
     }
   }
 
-  // @HostListener('window:resize', ['$event'])
-  public onResize(evt) {
-    console.log(evt);
-  }
-
   private setPdfjsGroupControl(pdfjsGroupControl: PdfjsGroupControl) {
     pdfjsGroupControl.selectedPdfjsControl$.pipe(
       tap((pdfjsControl: PdfjsControl) => {
@@ -271,49 +231,13 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
     });
   }
 
-  private updateRender(item: PdfjsItem) {
-    this.item = item;
-    this.updateRenderForCurrentItem();
-  }
-
-  private updateRenderForCurrentItem() {
-    if (!this.item) {
-      return;
-    }
-    this.cancelRenderTask();
-    this.clearTextLayer();
-    this.computeSize();
-    const wrapper: HTMLDivElement = this.canvasWrapperRef.nativeElement;
-    let canvas: HTMLCanvasElement;
-    if (wrapper.children.length) {
-      canvas = wrapper.children.item(0) as HTMLCanvasElement;
-      this.pdfjs.destroyCanvas(canvas);
-    }
-    canvas = wrapper.appendChild(document.createElement('canvas'));
-    this.pdfjs.getRenderFittedInCanvas(this.fit)(this.item, canvas, this.size, this.quality, this.scale)
-      .then((obj: RenderObjects) => {
-        this.defineSizesFromCanvasSizes(canvas, this.quality);
-        this.pdfRenderTask = obj.pdfRenderTask;
-        if (this.textLayer) {
-          const container = this.document.createDocumentFragment();
-          obj.pdfPageProxy.getTextContent().then((textContent: TextContent) => {
-            const textLayerRenderTask = this.pdfjs.renderTextLayer({
-              textContent,
-              container,
-              viewport: obj.viewport
-            }).promise.then(() => {
-              this.textLayerRef.nativeElement.insertBefore(container, this.textLayerRef.nativeElement.firstChild);
-            });
-            return textLayerRenderTask;
-          });
-        }
-      });
-  }
-
-  private cancelRenderTask() {
-    if (!!this.pdfRenderTask && this.pdfRenderTask.cancel) {
-      this.pdfRenderTask.cancel();
-    }
+  onCanvasRender(obj: CanvasWrapperRenderEvent) {
+    this.defineSizesFromCanvasSizes(obj.width, obj.height, this.quality);
+    this.pdfPageProxy = obj.pdfPageProxy;
+    this.viewport = obj.viewport;
+    const time = new Date().getTime() - this.timeStart;
+    const s = Math.trunc(time / 1000);
+    const ms = time - s * 1000;
   }
 
   private bothNull(x, y) {

@@ -1,11 +1,11 @@
 import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 import {PdfjsThumbnailsComponent} from './pdfjs-thumbnails.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
-import {PdfjsService} from '../../services/pdfjs.service';
 import {pdfApiFactory} from '../../classes/pdfapi-factory';
 import {PdfjsPreviewComponent} from './preview/pdfjs-preview.component';
 import {PdfjsRemoveButtonComponent} from '../pdfjs-thumbnail/pdfjs-remove.button/pdfjs-remove-button.component';
 import {PdfjsThumbnailComponent} from '../pdfjs-thumbnail/pdfjs-thumbnail.component';
+import {PdfjsCanvasWrapperComponent} from '../pdfjs-canvas-wrapper/pdfjs-canvas-wrapper.component';
 
 describe('PdfjsThumbnailsComponent', () => {
   let component: PdfjsThumbnailsComponent;
@@ -20,10 +20,10 @@ describe('PdfjsThumbnailsComponent', () => {
         PdfjsThumbnailsComponent,
         PdfjsPreviewComponent,
         PdfjsRemoveButtonComponent,
-        PdfjsThumbnailComponent
+        PdfjsThumbnailComponent,
+        PdfjsCanvasWrapperComponent
       ],
       providers: [
-        PdfjsService,
         {provide: 'PdfApi', useFactory: pdfApiFactory}
       ]}).compileComponents();
   }));

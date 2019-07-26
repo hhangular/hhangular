@@ -2,8 +2,10 @@ import {animate, state, style, transition, trigger} from '@angular/animations';
 import {ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
-import {InnerItem, RenderQuality, ThumbnailLayout} from '../../../classes/pdfjs-objects';
+import {RenderQuality, ThumbnailLayout} from '../../../classes/pdfjs-objects';
 import {PdfjsItem} from '../../../classes/pdfjs-item';
+
+type InnerItem = PdfjsItem & DOMRect & { atLeft: boolean, atTop: boolean };
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
@@ -27,6 +29,9 @@ import {PdfjsItem} from '../../../classes/pdfjs-item';
 })
 export class PdfjsPreviewComponent implements OnInit {
 
+  private item$: BehaviorSubject<InnerItem> = new BehaviorSubject<InnerItem>(null);
+  private _item: InnerItem = null;
+
   @Input()
   set item(item: InnerItem) {
     if (!item) {
@@ -36,33 +41,33 @@ export class PdfjsPreviewComponent implements OnInit {
     this.item$.next(item);
   }
 
-  @HostBinding('@previewState')
-  public state = 'inactive';
+  get item(): InnerItem {
+    return this._item;
+  }
 
-  public _item: InnerItem = null;
+  @HostBinding('@previewState')
+  state = 'inactive';
 
   @Input()
-  public layout: ThumbnailLayout = ThumbnailLayout.HORIZONTAL;
+  layout: ThumbnailLayout = ThumbnailLayout.HORIZONTAL;
 
   /**
    * Delay for show preview. 0 => disable preview
    */
   @Input()
-  public delay = 0;
+  delay = 0;
 
   /**
    * Height of preview
    */
   @Input()
-  public height = 300;
+  height = 300;
 
   /**
    * Quality of preview
    */
   @Input()
-  public quality: RenderQuality = 2;
-
-  private item$: BehaviorSubject<InnerItem> = new BehaviorSubject<InnerItem>(null);
+  quality: RenderQuality = 2;
 
   constructor(private elementRef: ElementRef) {
   }
@@ -86,7 +91,7 @@ export class PdfjsPreviewComponent implements OnInit {
   }
 
   /**
-   * The thumbnail is rendered, position it and show it
+   * The thumbnail is endRender, position it and show it
    */
   public rendered(item: PdfjsItem) {
     const previewThumbnail: HTMLElement = this.elementRef.nativeElement;

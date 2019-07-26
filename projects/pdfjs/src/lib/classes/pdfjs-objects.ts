@@ -17,6 +17,13 @@ export class PdfjsItemRemoveEvent extends PdfjsItemEvent {
   public event: 'remove';
 }
 
+export class CanvasWrapperRenderEvent {
+  viewport: PDFPageViewport;
+  pdfPageProxy: PDFPageProxy;
+  width: number;
+  height: number;
+}
+
 export class RenderObjects {
   pdfRenderTask: PDFRenderTask;
   viewport: PDFPageViewport;
@@ -47,6 +54,7 @@ export enum ThumbnailDragMode {
 }
 
 export type ThumbnailOver = ThumbnailOverValues.RIGHT | ThumbnailOverValues.LEFT | ThumbnailOverValues.BOTTOM | ThumbnailOverValues.TOP;
+
 export enum ThumbnailOverValues {
   RIGHT = 'right',
   LEFT = 'left',
@@ -63,8 +71,6 @@ export class PdfjsConfig {
   constructor(public workerSrc: string) {
   }
 }
-
-export type InnerItem = PdfjsItem & DOMRect & { atLeft: boolean, atTop: boolean };
 
 export class PDFPromiseResolved<T> implements PDFPromise<T> {
   public constructor(private res: T) {

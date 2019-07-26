@@ -3,12 +3,12 @@ import {PdfjsPreviewComponent} from './pdfjs-preview.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {PdfjsThumbnailComponent} from '../../pdfjs-thumbnail/pdfjs-thumbnail.component';
 import {PdfjsRemoveButtonComponent} from '../../pdfjs-thumbnail/pdfjs-remove.button/pdfjs-remove-button.component';
-import {PdfjsService} from '../../../services/pdfjs.service';
 import {pdfApiFactory} from '../../../classes/pdfapi-factory';
 import {PdfjsItem} from '../../../classes/pdfjs-item';
 import {PDFDocumentProxy} from 'pdfjs-dist';
 import {PdfSource} from '../../../classes/pdfjs-objects';
 import {PdfApi} from '../../../classes/pdfapi';
+import {PdfjsCanvasWrapperComponent} from '../../pdfjs-canvas-wrapper/pdfjs-canvas-wrapper.component';
 
 describe('PdfjsPreviewComponent', () => {
   let component: PdfjsPreviewComponent;
@@ -26,10 +26,10 @@ describe('PdfjsPreviewComponent', () => {
       declarations: [
         PdfjsPreviewComponent,
         PdfjsRemoveButtonComponent,
-        PdfjsThumbnailComponent
+        PdfjsThumbnailComponent,
+        PdfjsCanvasWrapperComponent
       ],
       providers: [
-        PdfjsService,
         {provide: 'PdfApi', useFactory: pdfApiFactory}
       ]
     }).compileComponents();
