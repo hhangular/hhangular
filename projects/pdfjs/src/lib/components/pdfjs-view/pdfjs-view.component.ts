@@ -31,7 +31,7 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
   private height: number;
   private _pdfjsControl: PdfjsControl;
   private _fit: ViewFit = ViewFit.VERTICAL;
-  private _scale: number;
+  private _scale: number = 1;
 
   @Input()
   mouseWheelNav = true;
@@ -158,11 +158,6 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
     this.pageRef.nativeElement.style.width = widthPx;
   }
 
-  @HostListener('style.height', ['$event'])
-  onResize(event: Event) {
-    console.log(event);
-  }
-
   /**
    * mousewheel
    */
@@ -235,9 +230,14 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
     this.defineSizesFromCanvasSizes(obj.width, obj.height, this.quality);
     this.pdfPageProxy = obj.pdfPageProxy;
     this.viewport = obj.viewport;
+//    this.logRenderTime();
+  }
+
+  private logRenderTime() {
     const time = new Date().getTime() - this.timeStart;
     const s = Math.trunc(time / 1000);
     const ms = time - s * 1000;
+    console.log(`Render page ${this.item.pageIdx}  in ${s}s ${ms}ms`);
   }
 
   private bothNull(x, y) {
