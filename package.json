@@ -1,6 +1,6 @@
 {
   "name": "@hhangular/hhangular",
-  "version": "1.0.20",
+  "version": "1.0.21",
   "author": "Achache francois",
   "license": "MIT",
   "description": "components for angular 8x by hhfrancois",
@@ -18,11 +18,11 @@
   "scripts": {
     "ng": "ng",
     "start:fr-FR": "ng serve --base-href /fr-FR/",
-    "start:en-us": "ng serve --port 4201 --configuration=en-us --base-href /en-US/",
+    "start:en-US": "ng serve --port 4201 --configuration=en-us --base-href /en-US/",
     "build:fr-FR": "ng build --outputPath dist/website/fr-FR/ --base-href /fr-FR/",
-    "build:en-us": "ng build --outputPath dist/website/en-US/ --i18n-file src/locale/messages.en-us.xlf --i18n-format xlf --i18n-locale en-us --base-href /en-US/",
+    "build:en-US": "ng build --outputPath dist/website/en-US/ --i18n-file src/locale/messages.en-us.xlf --i18n-format xlf --i18n-locale en-us --base-href /en-US/",
     "build:prod:fr-FR": "ng build --outputPath dist/website/fr-FR/ --prod --base-href /fr-FR/",
-    "build:prod:en-us": "ng build --outputPath dist/website/en-US/ --prod --i18n-file src/locale/messages.en-us.xlf --i18n-format xlf --i18n-locale en-us --base-href /en-US/",
+    "build:prod:en-US": "ng build --outputPath dist/website/en-US/ --prod --i18n-file src/locale/messages.en-us.xlf --i18n-format xlf --i18n-locale en-us --base-href /en-US/",
     "test": "ng test hhangular",
     "test:ci": "ng test hhangular --no-watch --no-progress --code-coverage --browsers=ChromeHeadless",
     "build:pdfjs": "ng build pdfjs",
