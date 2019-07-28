@@ -28,7 +28,7 @@ echo ===========================================================================
 cp scripts/index.html dist/website/index.html
 
 echo ==================================================================================================
-echo Duplicate index.html to 404.html
+echo Copy 404.html to website root
 echo ==================================================================================================
-cp scripts/index.html dist/website/404.html
+cp scripts/404.html dist/website/404.html
 
