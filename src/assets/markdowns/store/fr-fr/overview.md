@@ -17,6 +17,6 @@ Aucune dépendance
 Cette annotation lui indique que l'objet stocké dans cette variable sera à la moindre modification stocker dans le `localStorage` du navigateur.
 Au prochain accès de lecture, même après un rechargement de la page, c'est la valeur dans le `LocalStorage` qui sera servi.
 
- - **SessionStored** est aussi `decorator` avec le même fonctionnement que `LocalStored`, mais la valeur ne sara persistée que le temps de la session.
+ - **SessionStored** est aussi un `decorator` avec le même fonctionnement que `LocalStored`, mais la valeur ne sara persistée que le temps de la session.
 Au prochain accès de lecture, tant que la session sera active, c'est la valeur dans le `SessionStorage` qui sera donc servi.
 
