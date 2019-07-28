@@ -11,6 +11,7 @@ import {
   MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatPaginatorModule,
   MatRadioModule,
   MatSidenavModule,
   MatSliderModule,
@@ -22,8 +23,7 @@ import {
 import {NgxMdModule} from 'ngx-md';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
 import {PdfjsModule} from '../../../projects/pdfjs/src/lib/pdfjs.module';
-import {BehaviorSubject} from 'rxjs';
-import {StoreModule, USER_ID} from '../../../projects/store/src/public-api';
+import {StoreModule} from '../../../projects/store/src/public-api';
 
 const MODULES: any[] = [
   FlexLayoutModule,
@@ -44,6 +44,7 @@ const MODULES: any[] = [
   MatIconModule,
   MatInputModule,
   FontAwesomeModule,
+  MatPaginatorModule,
 ];
 
 @NgModule({
