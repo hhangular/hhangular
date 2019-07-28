@@ -25,10 +25,14 @@ npm run build:prod:en-US
 echo ==================================================================================================
 echo Copy index.html to website root
 echo ==================================================================================================
-cp scripts/index.html dist/website/index.html
+cp resources/index.html dist/website/index.html
 
 echo ==================================================================================================
 echo Copy 404.html to website root
 echo ==================================================================================================
-cp scripts/404.html dist/website/404.html
+cp resources/404.html dist/website/404.html
 
+echo ==================================================================================================
+echo Copy CNAME to website root
+echo ==================================================================================================
+cp resources/CNAME dist/website/CNAME
