@@ -25,21 +25,17 @@
     "build:prod:en-us": "ng build --outputPath dist/website/en-US/ --prod --i18n-file src/locale/messages.en-us.xlf --i18n-format xlf --i18n-locale en-us --base-href /en-US/",
     "test": "ng test hhangular",
     "test:ci": "ng test hhangular --no-watch --no-progress --code-coverage --browsers=ChromeHeadless",
-
     "build:pdfjs": "ng build pdfjs",
     "build:pdfjs:prod": "ng build pdfjs --prod",
     "test:pdfjs": "ng test pdfjs",
     "test:ci:pdfjs": "ng test pdfjs --no-watch --no-progress --code-coverage --browsers=ChromeHeadless",
-
     "build:store": "ng build store",
     "build:store:prod": "ng build store --prod",
     "test:store": "ng test store",
     "test:ci:store": "ng test store --no-watch --no-progress --code-coverage --browsers=ChromeHeadless",
-
     "lint": "ng lint",
     "e2e": "ng e2e",
     "e2e:ci": "ng e2e --protractor-config=e2e/protractor-ci.conf.js",
-
     "extract-i18n": "ng xi18n --i18n-locale fr-fr --output-path dist/locale"
   },
   "dependencies": {
