@@ -1,0 +1,10 @@
+<button mat-icon-button [matMenuTriggerFor]="locale_menu">
+  <fa-icon [icon]="faGlobe"></fa-icon>
+</button>
+<mat-menu #locale_menu>
+  <button mat-menu-item
+          *ngFor="let locale of locales" (click)="switchLocaleTo(locale.path)">
+    <fa-icon [icon]="getIcon(locale.path)" size="lg"></fa-icon>&nbsp;
+    {{locale.label}}
+  </button>
+</mat-menu>

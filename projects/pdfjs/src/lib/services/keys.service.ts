@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {PdfjsControl} from '../classes/pdfjs-control';
+import {PdfjsControl} from '../controls/pdfjs-control';
 
 @Injectable()
 export class KeysService {

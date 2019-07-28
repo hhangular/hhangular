@@ -4,6 +4,11 @@
     "outDir": "./out-tsc/app",
     "types": []
   },
+/*
+  "angularCompilerOptions": {
+    "enableIvy": true
+  },
+*/
   "include": [
     "src/**/*.ts"
   ],

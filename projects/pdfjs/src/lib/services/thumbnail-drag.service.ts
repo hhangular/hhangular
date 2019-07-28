@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {PdfjsControl} from '../classes/pdfjs-control';
+import {PdfjsControl} from '../controls/pdfjs-control';
 import {ThumbnailDragMode, ThumbnailLayout} from '../classes/pdfjs-objects';
 import {PdfjsThumbnailsComponent} from '../components/pdfjs-thumbnails/pdfjs-thumbnails.component';
 import {PdfjsItem} from '../classes/pdfjs-item';

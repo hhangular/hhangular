@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
-import {PdfjsControl} from '../../../../../projects/pdfjs/src/lib/classes/pdfjs-control';
+import {PdfjsControl} from '../../../../../projects/pdfjs/src/lib/controls/pdfjs-control';
 import {RenderQuality, ThumbnailDragMode, ThumbnailLayout, ViewFit} from '../../../../../projects/pdfjs/src/lib/classes/pdfjs-objects';
-import {PdfjsGroupControl} from '../../../../../projects/pdfjs/src/lib/classes/pdfjs-group-control';
+import {PdfjsGroupControl} from '../../../../../projects/pdfjs/src/lib/controls/pdfjs-group-control';
 import {faArrowLeft, faArrowRight, faEdit, faExpandArrowsAlt, faFilePdf, faMinus, faPlus, faSearchMinus, faSearchPlus, faSyncAlt, faUndo} from '@fortawesome/free-solid-svg-icons';
 import {faCopy, faFile} from '@fortawesome/free-regular-svg-icons';
 

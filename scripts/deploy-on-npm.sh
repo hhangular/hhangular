@@ -1,5 +1,5 @@
 #!/bin/bash
-# $1 is set with the name of the library that you want to build : pdfjs, autoconf...
+# $1 is set with the name of the library that you want to build : pdfjs, store...
 echo ==================================================================================================
 echo publish on npm $1, use authToken in .npmrc
 echo ==================================================================================================

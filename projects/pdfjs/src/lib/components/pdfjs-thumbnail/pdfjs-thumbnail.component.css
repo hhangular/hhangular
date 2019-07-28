@@ -1,8 +1,3 @@
-/*
-:host:hover {
-  background-color: #ccc;
-}
-*/
 :host.hover-left {
   background: linear-gradient(90deg, black 50%, #eee 50%);
 }
@@ -55,4 +50,9 @@ pdfjs-remove-button {
   top: 7px;
   right: 7px;
   z-index: 1;
+}
+
+:host.vertical pdfjs-remove-button {
+  top: 7px;
+  left: 7px;
 }

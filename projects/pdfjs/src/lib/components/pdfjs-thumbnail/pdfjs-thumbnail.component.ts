@@ -1,13 +1,11 @@
 import {animate, state, style, transition, trigger} from '@angular/animations';
-import {Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output, ViewChild} from '@angular/core';
-import {PDFRenderTask} from 'pdfjs-dist';
+import {Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, OnDestroy, OnInit, Output} from '@angular/core';
 import {BehaviorSubject, combineLatest, of, Subscription} from 'rxjs';
-import {distinctUntilChanged, flatMap, map} from 'rxjs/operators';
-import {PdfjsControl} from '../../classes/pdfjs-control';
-import {PdfjsGroupControl} from '../../classes/pdfjs-group-control';
-import {RenderObjects, RenderQuality, ThumbnailLayout, ViewFit} from '../../classes/pdfjs-objects';
+import {distinctUntilChanged, filter, flatMap, map} from 'rxjs/operators';
+import {PdfjsControl} from '../../controls/pdfjs-control';
+import {PdfjsGroupControl} from '../../controls/pdfjs-group-control';
+import {RenderQuality, ThumbnailLayout, ViewFit} from '../../classes/pdfjs-objects';
 import {PdfjsItem} from '../../classes/pdfjs-item';
-import {PdfjsService} from '../../services/pdfjs.service';
 
 @Component({
   selector: 'pdfjs-thumbnail',
@@ -27,6 +25,10 @@ import {PdfjsService} from '../../services/pdfjs.service';
 
 })
 export class PdfjsThumbnailComponent implements OnInit, OnDestroy {
+
+  ThumbnailLayout = ThumbnailLayout;
+  ViewFit = ViewFit;
+
   get item(): PdfjsItem {
     return this._item;
   }
@@ -34,7 +36,6 @@ export class PdfjsThumbnailComponent implements OnInit, OnDestroy {
   @Input()
   set item(item: PdfjsItem) {
     this.item$.next(item);
-    this._item = item;
   }
 
   /**
@@ -66,10 +67,11 @@ export class PdfjsThumbnailComponent implements OnInit, OnDestroy {
       this.subOnPdfjsControl.unsubscribe();
     }
     if (!!pdfjsControl) {
-      this.subOnPdfjsControl = pdfjsControl.selectedItem$.pipe(
-        map((item: PdfjsItem) => {
-          return !!item && item === this.item;
-        }),
+      this.subOnPdfjsControl = combineLatest(pdfjsControl.selectedItem$, this.item$).pipe(
+        filter((items: PdfjsItem[]) => items.every(item => !!item)),
+        map((items: PdfjsItem[]) => {
+          return items[0] === items[1];
+        })
       ).subscribe((itemIsSelected: boolean) => {
         this.itemIsSelected$.next(itemIsSelected);
       });
@@ -78,126 +80,92 @@ export class PdfjsThumbnailComponent implements OnInit, OnDestroy {
 
   @HostBinding('@thumbnailState')
   public state;
+  @HostBinding('style.width')
+  width = '10px';
+  @HostBinding('style.height')
+  height = '10px';
+  @HostBinding('class.vertical')
+  vertical = false;
+
   /**
-   * The Thumbnail is rendered
+   * The Thumbnail end to render
    */
   @Output()
-  public rendered: EventEmitter<PdfjsItem> = new EventEmitter<PdfjsItem>();
+  endRender: EventEmitter<PdfjsItem> = new EventEmitter<PdfjsItem>();
+  /**
+   * The Thumbnail start to render
+   */
+  @Output()
+  startRender: EventEmitter<PdfjsItem> = new EventEmitter<PdfjsItem>();
   /**
    * The Thumbnail has been over
    */
   @Output()
-  public showPreview: EventEmitter<PdfjsItem & DOMRect> = new EventEmitter<PdfjsItem & DOMRect>();
+  showPreview: EventEmitter<PdfjsItem & DOMRect> = new EventEmitter<PdfjsItem & DOMRect>();
   /**
    * The button remove has been clicked
    */
   @Output()
-  public removeButtonClick: EventEmitter<PdfjsItem> = new EventEmitter<PdfjsItem>();
+  removeButtonClick: EventEmitter<PdfjsItem> = new EventEmitter<PdfjsItem>();
   /**
    * Select Item
    */
   @Output()
-  public selectItem: EventEmitter<PdfjsItem> = new EventEmitter<PdfjsItem>();
-  /**
-   *
-   */
-  private _layout: ThumbnailLayout = ThumbnailLayout.HORIZONTAL;
-  private _borderWidth = 5;
-  private _quality: RenderQuality = 1;
-  private _fitSize = 100;
+  selectItem: EventEmitter<PdfjsItem> = new EventEmitter<PdfjsItem>();
 
   @Input()
-  public previewEnabled = false;
+  quality: RenderQuality = 1;
+  @Input()
+  previewEnabled = false;
   @HostBinding('attr.draggable')
   @Input()
-  public draggable = false;
+  draggable = false;
   @Input()
-  public removable = false;
+  removable = false;
+  @HostBinding('style.padding')
   @Input()
-  get borderWidth(): number {
-    return this._borderWidth;
-  }
-  set borderWidth(value: number) {
-    if (this._borderWidth !== value) {
-      this._borderWidth = value;
-      const canvas: HTMLCanvasElement = this.canvasRef.nativeElement;
-      canvas.style.padding = `${value}px`;
-      if (this._item) {
-        this.renderPdfjsItem(this._item);
-      }
-    }
-  }
-
+  borderWidth = 5;
   @Input()
-  get layout(): ThumbnailLayout {
-    return this._layout;
-  }
-  set layout(value: ThumbnailLayout) {
-    if (this._layout !== value) {
-      this._layout = value;
-      if (this._item) {
-        this.renderPdfjsItem(this._item);
-      }
-    }
-  }
-
+  fitSize = 90;
   @Input()
-  get fitSize(): number {
-    return this._fitSize;
-  }
-  set fitSize(value: number) {
-    if (this._fitSize !== value) {
-      this._fitSize = value;
-      if (this._item) {
-        this.renderPdfjsItem(this._item);
-      }
-    }
-  }
+  layout = ThumbnailLayout.HORIZONTAL;
 
-  @Input()
-  get quality(): RenderQuality {
-    return this._quality;
-  }
-  set quality(value: RenderQuality) {
-    if (this._quality !== value) {
-      this._quality = value;
-      if (this._item) {
-        this.renderPdfjsItem(this._item);
-      }
-    }
-  }
-
-
-  @HostBinding('class.not_rendered')
-  public notRendered = true;
-  @ViewChild('canvas', {static: true})
-  private canvasRef: ElementRef;
-  private item$: BehaviorSubject<PdfjsItem> = new BehaviorSubject<PdfjsItem>(null);
-  private pdfRenderTask: PDFRenderTask;
   private _pdfjsControl: PdfjsControl;
+  private _item: PdfjsItem;
+
+  private item$: BehaviorSubject<PdfjsItem> = new BehaviorSubject<PdfjsItem>(null);
   private subOnPdfjsControl: Subscription;
   private itemIsSelected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   private subOnPdfjsGroupControl: Subscription;
   private containerIsSelected$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(true);
 
-  private _item: PdfjsItem;
-
   constructor(
-    private elementRef: ElementRef,
-    private pdfjs: PdfjsService) {
+    private elementRef: ElementRef) {
   }
 
   @HostListener('@thumbnailState.done', ['$event.toState'])
   removeAnimationDone(toState: string) {
     if (toState === 'removed') {
-      const canvas: HTMLCanvasElement = this.canvasRef.nativeElement;
-      this.cancelRenderTask();
-      this.pdfjs.cleanCanvas(canvas);
-      this.removeButtonClick.emit(this._item);
+      this.removeButtonClick.emit(this.item);
     }
   }
 
-  public mouseOver($event: MouseEvent) {
+  getPadding() {
+    return `${this.borderWidth}px`;
+  }
+
+  private computeSize() {
+    if (this.layout === ThumbnailLayout.VERTICAL) {
+      this.height = undefined;
+      this.width = `${this.fitSize}px`;
+    } else {
+      this.height = `${this.fitSize}px`;
+      this.width = undefined;
+    }
+  }
+
+//  @HostListener('mouseover', ['$event'])
+  mouseOver($event: MouseEvent) {
     if (this.previewEnabled) {
       const thumbnail: HTMLElement = this.elementRef.nativeElement;
       const rectList: DOMRectList = thumbnail.getClientRects() as DOMRectList;
@@ -212,12 +180,12 @@ export class PdfjsThumbnailComponent implements OnInit, OnDestroy {
       if ((top * 2) + r.height > window.innerHeight) {
         atTop = true;
       }
-      // fix the problem with the collapsible scrollbar, the rect don't include scrollbar size
-      const width = this._layout === ThumbnailLayout.VERTICAL ? this._fitSize : r.width;
-      const height = this._layout === ThumbnailLayout.HORIZONTAL ? this._fitSize : r.height;
+      // fix the problem with the collapsible scrollbar, the rect doesn't include scrollbar size
+      // const width = this.layout === ThumbnailLayout.VERTICAL ? this.fitSize : r.width;
+      // const height = this.layout === ThumbnailLayout.HORIZONTAL ? this.fitSize : r.height;
       const rect = {
-        bottom: r.bottom, height, left: r.left, right: r.right,
-        top: r.top, width, x: left, y: top,
+        bottom: r.bottom, height: r.height, left: r.left, right: r.right,
+        top: r.top, width: r.width, x: left, y: top,
         atLeft, atTop,
         toJSON: () => DOMRectReadOnly.prototype.toJSON.apply(this),
       };
@@ -235,16 +203,16 @@ export class PdfjsThumbnailComponent implements OnInit, OnDestroy {
     thumbnail.classList.remove('hover-top');
   }
 
-  public onClick(event: MouseEvent) {
+  onClick(event: MouseEvent) {
     this.showPreview.emit(null);
     this.selectItem.emit(this.item);
   }
 
-  public removeIt($event) {
+  removeIt($event) {
     this.state = 'removed';
   }
 
-  public ngOnInit() {
+  ngOnInit() {
     this.item$.pipe(
       flatMap((item: PdfjsItem) => {
         return combineLatest([this.item$, item ? item.rotation$ : of(0)]);
@@ -256,7 +224,7 @@ export class PdfjsThumbnailComponent implements OnInit, OnDestroy {
         return !this.isItemToRenderChanged(x, y);
       }),
     ).subscribe((next: { item: PdfjsItem, rotation: number }) => {
-      this.renderPdfjsItem(next.item);
+      this._item = next.item;
     });
     /**
      * Observe selection
@@ -287,16 +255,13 @@ export class PdfjsThumbnailComponent implements OnInit, OnDestroy {
     return inViewPort;
   }
 
-  public ngOnDestroy() {
+  ngOnDestroy() {
     if (this.subOnPdfjsControl) {
       this.subOnPdfjsControl.unsubscribe();
     }
     if (this.subOnPdfjsGroupControl) {
       this.subOnPdfjsGroupControl.unsubscribe();
     }
-    this.notRendered = false;
-    this.cancelRenderTask();
-    this.pdfjs.destroyCanvas(this.canvasRef.nativeElement);
   }
 
   private isItemToRenderChanged(x: { item: PdfjsItem, rotation: number }, y: { item: PdfjsItem, rotation: number }) {
@@ -314,28 +279,13 @@ export class PdfjsThumbnailComponent implements OnInit, OnDestroy {
     return isChanged;
   }
 
-  private renderPdfjsItem(pdfjsItem: PdfjsItem) {
-    this.cancelRenderTask();
-    const canvas: HTMLCanvasElement = this.canvasRef.nativeElement;
-    if (!!pdfjsItem) {
-      this.notRendered = true;
-      // fixed size used for fitSelected
-      const canvasSize = this._fitSize - this._borderWidth * 2;
-      const fit: ViewFit = this._layout === ThumbnailLayout.HORIZONTAL ? ViewFit.VERTICAL : ViewFit.HORIZONTAL;
-      this.pdfjs.getRenderFittedInCanvas(fit)(pdfjsItem, canvas, canvasSize, this._quality)
-        .then((renderObjects: RenderObjects) => {
-          this.notRendered = false;
-          this.rendered.emit(pdfjsItem);
-          this.pdfRenderTask = renderObjects.pdfRenderTask;
-        });
-    } else {
-      this.pdfjs.cleanCanvas(canvas);
-    }
+  renderStart() {
+    this.startRender.emit(this.item);
   }
 
-  private cancelRenderTask() {
-    if (!!this.pdfRenderTask && this.pdfRenderTask.cancel) {
-      this.pdfRenderTask.cancel();
-    }
+  renderEnd() {
+    this.vertical = this.layout !== ThumbnailLayout.HORIZONTAL;
+    this.computeSize();
+    this.endRender.emit(this.item);
   }
 }

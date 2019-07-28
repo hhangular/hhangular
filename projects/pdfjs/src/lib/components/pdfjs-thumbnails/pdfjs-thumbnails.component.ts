@@ -1,5 +1,5 @@
 import {
-  ApplicationRef, ChangeDetectionStrategy,
+  ApplicationRef,
   Component,
   ComponentFactoryResolver,
   ComponentRef,
@@ -12,14 +12,13 @@ import {
   OnDestroy,
   OnInit,
   Output,
-  Type,
   ViewChild,
   ViewContainerRef,
 } from '@angular/core';
 import {Subject} from 'rxjs';
 import {filter} from 'rxjs/operators';
-import {PdfjsControl} from '../../classes/pdfjs-control';
-import {PdfjsGroupControl} from '../../classes/pdfjs-group-control';
+import {PdfjsControl} from '../../controls/pdfjs-control';
+import {PdfjsGroupControl} from '../../controls/pdfjs-group-control';
 import {PdfjsItem} from '../../classes/pdfjs-item';
 import {PdfjsItemEvent, RenderEvent, RenderQuality, ThumbnailDragMode, ThumbnailLayout} from '../../classes/pdfjs-objects';
 import {ThumbnailDragService} from '../../services/thumbnail-drag.service';
@@ -42,6 +41,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
   private _pdfjsControl: PdfjsControl;
   private init = false;
   private items: PdfjsItem[] = [];
+  private itemToRenderCount = 0;
   private timeStart = 0;
 
   @Output()
@@ -53,6 +53,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
   @Input()
   set layout(layout: ThumbnailLayout) {
     this.vertical = layout !== ThumbnailLayout.HORIZONTAL;
+    this.timeStart = new Date().getTime();
     this.thumbnailComponentRefs.forEach((componentRef: ComponentRef<PdfjsThumbnailComponent>) => {
       componentRef.instance.layout = layout;
     });
@@ -199,6 +200,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
     if (this._fitSize !== size) {
       this._fitSize = size;
       this.computeSizes();
+      this.timeStart = new Date().getTime();
       this.thumbnailComponentRefs.forEach((componentRef: ComponentRef<PdfjsThumbnailComponent>) => {
         componentRef.instance.fitSize = size;
       });
@@ -234,6 +236,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
   set borderWidth(value: number) {
     if (this._borderWidth !== value) {
       this._borderWidth = value;
+      this.timeStart = new Date().getTime();
       this.thumbnailComponentRefs.forEach((componentRef: ComponentRef<PdfjsThumbnailComponent>) => {
         componentRef.instance.borderWidth = value;
       });
@@ -319,18 +322,6 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
     this.itemToPreview = null;
   }
 
-  public removeComponent(componentClass: Type<any>) {
-    // Find the component
-    /*    const component = this.components.find((component) => component.instance instanceof componentClass);
-        const componentIndex = this.components.indexOf(component);
-
-        if (componentIndex !== -1) {
-          // Remove component from both view and array
-          this.container.remove(this.container.indexOf(component));
-          this.components.splice(componentIndex, 1);
-        } */
-  }
-
   private removeThumbnail(item: PdfjsItem) {
     this.itemToPreview = null;
     this.pdfjsControl.removeItem(item);
@@ -347,7 +338,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
     if (!!this.items) {
       if (!!this.items.length) {
         this.itemEvent$.next({event: 'add', item: this.items.shift()});
-      } else {
+      } else if (!this.itemToRenderCount) {
         const time = new Date().getTime() - this.timeStart;
         const s = Math.trunc(time / 1000);
         const ms = time - s * 1000;
@@ -403,8 +394,12 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
         this.itemToPreview = $event;
       }
     });
-    instance.rendered.subscribe(($event: PdfjsItem) => {
+    instance.endRender.subscribe(($event: PdfjsItem) => {
+      this.itemToRenderCount--;
       this.nextThumbnail($event);
+    });
+    instance.startRender.subscribe(($event: PdfjsItem) => {
+      this.itemToRenderCount++;
     });
     instance.selectItem.subscribe(($event: PdfjsItem) => {
       this.selection($event);

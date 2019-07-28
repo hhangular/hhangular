@@ -1,8 +1,9 @@
   <div #page class="page" [class.hidden]="!hasPageSelected()">
-    <div #canvasWrapper class="canvasWrapper">
-      <canvas width="100" height="100"></canvas>
-    </div>
-    <div #textLayer class="textLayer">
-      <div class="endOfContent"></div>
-    </div>
+    <pdfjs-canvas-wrapper [fit]="fit" (endRender)="onCanvasRender($event)"
+                          [item]="item" [quality]="quality"
+                          [multiCanvas]="true"
+                          [scale]="scale" [size]="size"></pdfjs-canvas-wrapper>
+    <pdfjs-text-layer *ngIf="textLayer"
+                      [pdfPageProxy]="pdfPageProxy"
+                      [viewport]="viewport"></pdfjs-text-layer>
   </div>
