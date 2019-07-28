@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
+  <file source-language="fr-fr" datatype="plaintext" original="ng2.template">
+    <body>
+      <trans-unit id="STORE_OVERVIEW_MD" datatype="html">
+        <source>assets/markdowns/store/fr-fr/overview.md</source>
+        <target>assets/markdowns/store/en-us/overview.md</target>
+      </trans-unit>
+      <trans-unit id="STORE_INSTALLATION_MD" datatype="html">
+        <source>assets/markdowns/store/fr-fr/installation.md</source>
+        <target>assets/markdowns/store/en-us/installation.md</target>
+      </trans-unit>
+      <trans-unit id="STORE_USE_MD" datatype="html">
+        <source>assets/markdowns/store/fr-fr/use.md</source>
+        <target>assets/markdowns/store/fr-fr/use.md</target>
+      </trans-unit>
+      <trans-unit id="STORE_USER_MANAGEMENT_MD" datatype="html">
+        <source>assets/markdowns/store/fr-fr/user-management.md</source>
+        <target>assets/markdowns/store/fr-fr/user-management.md</target>
+      </trans-unit>
+      <trans-unit id="STORE_USER_DEMO_MD" datatype="html">
+        <source>assets/markdowns/store/fr-fr/demo.md</source>
+        <target>assets/markdowns/store/fr-fr/demo.md</target>
+      </trans-unit>
+    </body>
+  </file>
+</xliff>

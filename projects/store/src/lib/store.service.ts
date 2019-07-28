@@ -1,46 +1,28 @@
-export const LocalStored = (version: number, id?: string) => {
-  return (target, key: string) => {
-    const value = {data: undefined};
-    const ident = StoreService.getId(target, key, id);
-    const svc = new StoreService(localStorage);
-    Object.defineProperty(target, key, {
-      set: (val: any) => {
-        value.data = svc.loadCfg({...val, id: ident, version});
-      },
-      get: () => {
-        return value.data;
-      }
-    });
-  };
-};
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {filter, share} from 'rxjs/operators';
 
-export const SessionStored = (id?: string) => {
-  return (target, key: string) => {
-    const value = {data: undefined};
-    const ident = StoreService.getId(target, key, id);
-    const svc = new StoreService(sessionStorage);
-    Object.defineProperty(target, key, {
-      set: (val: any) => {
-        value.data = svc.loadCfg({...val, id: ident, version: NaN});
-      },
-      get: () => {
-        return value.data;
-      }
-    });
-  };
-};
+export abstract class StoreService {
 
-export class StoreService {
-  public static getId(target: {constructor: {name: string}}, key: string, id?: string) {
-    return id || `${target.constructor.name}.${key}`;
+  static userId$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+
+  static getId(userId: string, target: { constructor: { name: string } }, key: string, id?: string) {
+    const suffix = id || `${target.constructor.name}.${key}`;
+    if (!!userId && userId.length) {
+      return `${userId}_${suffix}`;
+    }
+    return suffix;
   }
 
-  constructor(private storage: Storage) {
+  abstract getStorage();
+
+  getUserId$(): Observable<string> {
+    return StoreService.userId$.pipe(share(), filter(u => u !== null));
   }
 
-  public loadCfg(cfg: any): any {
+  loadCfg(cfg: any): any {
     let currentCfg: any = cfg;
-    const entry: string = this.storage.getItem(`${cfg.id}`);
+    const entry: string = this.getStorage().getItem(`${cfg.id}`);
     if (entry) {
       const fromStore: any = JSON.parse(entry);
       if (currentCfg.version === fromStore.version) {
@@ -58,7 +40,7 @@ export class StoreService {
   }
 
   private transformObject(obj: any, root?: any) {
-    if (typeof obj !== 'object') {
+    if (!obj || typeof obj !== 'object') {
       return obj;
     }
     const res: any = {};
@@ -81,6 +63,7 @@ export class StoreService {
               this.saveCfg(root || res);
             }
           });
+/*
         } else if (typeof obj[key] === 'object') {
           innerObject[key] = this.transformObject(obj[key], root || res);
           Object.defineProperty(res, key, {
@@ -91,13 +74,18 @@ export class StoreService {
               this.saveCfg(root || res);
             }
           });
+*/
         } else {
           innerObject[key] = obj[key];
           Object.defineProperty(res, key, {
             enumerable: true,
             get: () => innerObject[key],
             set: (v: any) => {
-              innerObject[key] = v;
+              if (typeof v === 'object') {
+                innerObject[key] = this.transformObject(v, root || res);
+              } else {
+                innerObject[key] = v;
+              }
               this.saveCfg(root || res);
             }
           });
@@ -122,11 +110,11 @@ export class StoreService {
   }
 
   private saveCfg(root: any) {
-    this.storage.setItem(`${root.id}`, JSON.stringify(this.toJson(root)));
+    this.getStorage().setItem(`${root.id}`, JSON.stringify(this.toJson(root)));
   }
 
   private toJson(ori: any, ...excludes: string[]) {
-    if (typeof ori !== 'object') {
+    if (!ori || typeof ori !== 'object') {
       return ori;
     }
     const toJson = this.toJson.bind(this);
@@ -136,23 +124,33 @@ export class StoreService {
       ori.forEach((item: any) => {
         res.push(toJson(item));
       });
-    } else {
+    } else if (typeof ori === 'object') {
       res = Object.keys(ori)
-        .filter(this.log) // log
         .filter(key => excludes.indexOf(key) === -1) // excludes
         .reduce((r, key) => this.addJson(r, key, ori[key]), {}); // transform to json
+    } else {
     }
     return res;
   }
 
   private addJson(obj: any, key: string, value: any) {
-    obj[key] = this.toJson(value);
+    obj[key] = !!value ? this.toJson(value) : value;
     return obj;
   }
+}
 
-  log(value: any) {
-//    console.log(value);
-    return true;
+@Injectable()
+export class LocalStoreService extends StoreService {
+
+  getStorage() {
+    return localStorage;
   }
+}
 
+@Injectable()
+export class SessionStoreService extends StoreService {
+
+  getStorage() {
+    return sessionStorage;
+  }
 }

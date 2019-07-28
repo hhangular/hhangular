@@ -14,6 +14,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "outputPath": "dist/hhangular",
+            "aot": true,
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -30,14 +31,18 @@
             "styles": [
               "src/styles.scss"
             ],
-            "scripts": [
-              "node_modules/prismjs/prism.js",
-              "node_modules/prismjs/components/prism-typescript.js",
-              "node_modules/prismjs/components/prism-markup.js"
-            ]
+            "scripts": []
           },
           "configurations": {
+            "en-us": {
+              "outputPath": "dist/website/en-US/",
+              "i18nFile": "src/locale/messages.en-us.xlf",
+              "i18nFormat": "xlf",
+              "i18nLocale": "en-US",
+              "i18nMissingTranslation": "warning"
+            },
             "production": {
+              "outputPath": "dist/website/fr-FR",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
@@ -71,6 +76,9 @@
           "configurations": {
             "production": {
               "browserTarget": "hhangular:build:production"
+            },
+            "en-us": {
+              "browserTarget": "hhangular:build:en-us"
             }
           }
         },

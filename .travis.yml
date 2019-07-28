@@ -26,15 +26,8 @@ deploy:
         - pdfjs
         - store
   - provider: script
-    script: git commit -m "[ci skip]" package-lock.json; npm version patch -m "[ci skip]"
-    skip_cleanup: true
-    on:
-      branch:
-        - pdfjs
-        - store
-        - website
-  - provider: script
     script: bash scripts/push-on-master.sh
+    skip_cleanup: true
     on:
       branch:
         - pdfjs
@@ -54,7 +47,7 @@ deploy:
   - provider: pages
     skip-cleanup: true
     github-token: "$GITHUB_TOKEN"
-    local-dir: "dist/hhangular"
+    local-dir: "dist/website"
     on:
       branch:
         - pdfjs
