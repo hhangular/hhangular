@@ -11,7 +11,7 @@ export class DocStoreComponent implements OnInit {
   faBars = faBars;
   faNpm = faNpm;
 
-  url = 'https://www.npmjs.com/package/@hhangular/pdfjs';
+  url = 'https://www.npmjs.com/package/@hhangular/store';
 
   constructor() {
   }

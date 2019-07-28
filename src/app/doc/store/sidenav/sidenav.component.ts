@@ -1,6 +1,6 @@
 import {Component} from '@angular/core';
-import {faCogs, faDesktop, faDownload, faFilePdf as fasFilePdf} from '@fortawesome/free-solid-svg-icons';
-import {faFilePdf as farFilePdf} from '@fortawesome/free-regular-svg-icons';
+import {faArchive, faBox, faCogs, faDesktop, faDownload, faFilePdf as fasFilePdf} from '@fortawesome/free-solid-svg-icons';
+import {faFilePdf as farFilePdf, faUser} from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-sidenav',
@@ -14,5 +14,8 @@ export class SidenavComponent {
   fasFilePdf = fasFilePdf;
   farFilePdf = farFilePdf;
   faDesktop = faDesktop;
+  faArchive = faArchive;
+  faBox = faBox;
+  faUser = faUser;
 
 }

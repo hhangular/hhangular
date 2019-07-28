@@ -1,46 +1,28 @@
-export const LocalStored = (version: number, id?: string) => {
-  return (target, key: string) => {
-    const value = {data: undefined};
-    const ident = StoreService.getId(target, key, id);
-    const svc = new StoreService(localStorage);
-    Object.defineProperty(target, key, {
-      set: (val: any) => {
-        value.data = svc.loadCfg({...val, id: ident, version});
-      },
-      get: () => {
-        return value.data;
-      }
-    });
-  };
-};
+import {Injectable} from '@angular/core';
+import {BehaviorSubject, Observable} from 'rxjs';
+import {filter, share} from 'rxjs/operators';
 
-export const SessionStored = (id?: string) => {
-  return (target, key: string) => {
-    const value = {data: undefined};
-    const ident = StoreService.getId(target, key, id);
-    const svc = new StoreService(sessionStorage);
-    Object.defineProperty(target, key, {
-      set: (val: any) => {
-        value.data = svc.loadCfg({...val, id: ident, version: NaN});
-      },
-      get: () => {
-        return value.data;
-      }
-    });
-  };
-};
+export abstract class StoreService {
 
-export class StoreService {
-  public static getId(target: {constructor: {name: string}}, key: string, id?: string) {
-    return id || `${target.constructor.name}.${key}`;
+  static userId$: BehaviorSubject<string> = new BehaviorSubject<string>(null);
+
+  static getId(userId: string, target: { constructor: { name: string } }, key: string, id?: string) {
+    const suffix = id || `${target.constructor.name}.${key}`;
+    if (!!userId && userId.length) {
+      return `${userId}_${suffix}`;
+    }
+    return suffix;
   }
 
-  constructor(private storage: Storage) {
+  abstract getStorage();
+
+  getUserId$(): Observable<string> {
+    return StoreService.userId$.pipe(share(), filter(u => u !== null));
   }
 
-  public loadCfg(cfg: any): any {
+  loadCfg(cfg: any): any {
     let currentCfg: any = cfg;
-    const entry: string = this.storage.getItem(`${cfg.id}`);
+    const entry: string = this.getStorage().getItem(`${cfg.id}`);
     if (entry) {
       const fromStore: any = JSON.parse(entry);
       if (currentCfg.version === fromStore.version) {
@@ -122,7 +104,7 @@ export class StoreService {
   }
 
   private saveCfg(root: any) {
-    this.storage.setItem(`${root.id}`, JSON.stringify(this.toJson(root)));
+    this.getStorage().setItem(`${root.id}`, JSON.stringify(this.toJson(root)));
   }
 
   private toJson(ori: any, ...excludes: string[]) {
@@ -138,7 +120,6 @@ export class StoreService {
       });
     } else {
       res = Object.keys(ori)
-        .filter(this.log) // log
         .filter(key => excludes.indexOf(key) === -1) // excludes
         .reduce((r, key) => this.addJson(r, key, ori[key]), {}); // transform to json
     }
@@ -149,10 +130,20 @@ export class StoreService {
     obj[key] = this.toJson(value);
     return obj;
   }
+}
 
-  log(value: any) {
-//    console.log(value);
-    return true;
+@Injectable()
+export class LocalStoreService extends StoreService {
+
+  getStorage() {
+    return localStorage;
   }
+}
 
+@Injectable()
+export class SessionStoreService extends StoreService {
+
+  getStorage() {
+    return sessionStorage;
+  }
 }

@@ -54,7 +54,7 @@ deploy:
   - provider: pages
     skip-cleanup: true
     github-token: "$GITHUB_TOKEN"
-    local-dir: "dist/hhangular"
+    local-dir: "dist/website"
     on:
       branch:
         - pdfjs

@@ -1,9 +1,9 @@
-import {LocalStored, SessionStored, StoreService} from './store.service';
+import {LocalStoreService, StoreService} from './store.service';
 
 describe('StoreService', () => {
-  let service: StoreService;
+  let service: LocalStoreService;
 
-  beforeAll(() => service = new StoreService(localStorage));
+  beforeAll(() => service = new LocalStoreService());
 
   beforeEach(() => localStorage.clear());
 
@@ -18,7 +18,7 @@ describe('StoreService', () => {
   it('toJson function', () => {
     const cfg = service.loadCfg({version: 1, id: 'test', foo: 5});
     expect(cfg.toJson()).toBeTruthy();
-    expect(cfg.toJson().id).toBeUndefined()
+    expect(cfg.toJson().id).toBeUndefined();
     expect(cfg.toJson().version).toBeUndefined();
   });
 
@@ -135,34 +135,23 @@ describe('StoreService', () => {
     expect(stored.foo[1].length).toEqual(4);
   });
 
-  it('Test LocaleStored', () => {
-    const target: any = {attr: undefined};
-    LocalStored(1, 'test')(target, 'attr');
-    target.attr = {foo: 5};
-    target.attr.foo = 6;
-    const stored = JSON.parse(localStorage.getItem('test'));
-    expect(target.attr.foo).toEqual(6);
-    expect(stored.foo).toEqual(6);
-  });
-
-  it('Test SessionStored', () => {
-    const target: any = {attr: undefined};
-    SessionStored('test')(target, 'attr');
-    target.attr = {foo: 5};
-    target.attr.foo = 6;
-    const stored = JSON.parse(sessionStorage.getItem('test'));
-    expect(target.attr.foo).toEqual(6);
-    expect(stored.foo).toEqual(6);
-    sessionStorage.clear();
-  });
-
   it('getId with id', () => {
-    const id = StoreService.getId({constructor: {name: 'MyComponent'}}, 'cfg', 'test');
+    const id = StoreService.getId('', {constructor: {name: 'MyComponent'}}, 'cfg', 'test');
     expect(id).toEqual('test');
   });
 
   it('getId without id', () => {
-    const id = StoreService.getId({constructor: {name: 'MyComponent'}}, 'cfg');
+    const id = StoreService.getId('', {constructor: {name: 'MyComponent'}}, 'cfg');
     expect(id).toEqual('MyComponent.cfg');
+  });
+
+  it('getId with userId, with id', () => {
+    const id = StoreService.getId('foo', {constructor: {name: 'MyComponent'}}, 'cfg', 'test');
+    expect(id).toEqual('foo_test');
+  });
+
+  it('getId with userId, without id', () => {
+    const id = StoreService.getId('foo', {constructor: {name: 'MyComponent'}}, 'cfg');
+    expect(id).toEqual('foo_MyComponent.cfg');
   });
 });

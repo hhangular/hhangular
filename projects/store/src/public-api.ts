@@ -2,5 +2,7 @@
  * Public API Surface of store
  */
 
-export * from './lib/store.service';
-export * from './lib/store.module';
+export {LocalStored, SessionStored} from './lib/decorator';
+export {LocalStoreService, SessionStoreService, StoreService} from './lib/store.service';
+export {StoreModule} from './lib/store.module';
+export {USER_ID} from './lib/common';
