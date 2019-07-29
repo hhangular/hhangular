@@ -6,7 +6,7 @@ Pour les applications existantes, suivez les étapes suivantes pour commencer à
 
 ## Installer @hhangular/store
 
-Vous pouvez utiliser indifféremment les outils de ligne de commandes `npm` ou `yarn` pour installer le `package`.
+Vous pouvez utiliser indifféremment les outils de ligne de commandes `npm` ou `yarn` pour installer le `package`.   
 Utilisez celui qui est approprié pour votre projet comme ci dessous.
 
 ### NPM
@@ -25,8 +25,7 @@ yarn add @hhangular/store
 
 ## Configuration
 
-Il suffit d'importer le module StoreModule et vous pourrez utiliser les `decorator`.
-
+Il suffit d'importer le module StoreModule et vous pourrez utiliser les `decorator`.   
 Vous pouvez le faire dans votre `AppModule` ou dans votre `SharedModule` indifféremment.
 
 `AppModule.ts`

@@ -3,9 +3,8 @@ import {Router} from '@angular/router';
 import {LocalStored} from '../../../projects/store/src/public-api';
 
 @Component({
-  selector: 'app-redirect',
-  templateUrl: './redirect.component.html',
-  styleUrls: ['./redirect.component.scss']
+  template: '',
+  styles: []
 })
 export class RedirectComponent implements OnInit {
   @LocalStored(1, 'APP_CONFIG')

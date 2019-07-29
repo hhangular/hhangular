@@ -5,25 +5,16 @@ import {faColumns} from '@fortawesome/free-solid-svg-icons';
 import {faCheckSquare, faSquare} from '@fortawesome/free-regular-svg-icons';
 import {LocalStored} from '@hhangular/store';
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
-
-const ELEMENT_DATA: PeriodicElement[] = [
-  {position: 1, name: 'Hydrogen', weight: 1.0079, symbol: 'H'},
-  ...
-  {position: 20, name: 'Calcium', weight: 40.078, symbol: 'Ca'},
-];
-
 @Component({
-  selector: 'app-demo-store',
-  templateUrl: './demo-store.component.html',
-  styleUrls: ['../../section.scss', 'demo-store.component.scss']
+  selector: 'app-demo',
+  templateUrl: './demo.component.html',
+  styleUrls: ['demo.component.scss']
 })
-export class DemoStoreComponent implements OnInit {
+export class DemoComponent implements OnInit {
+
+  constructor(
+    private periodicElementService: PeriodicElementService
+  ) {}
 
   faColumns = faColumns;
   faCheck = faCheckSquare;
@@ -32,7 +23,7 @@ export class DemoStoreComponent implements OnInit {
   columns: string[] = ['position', 'name', 'weight', 'symbol'];
   dataSource = new MatTableDataSource(ELEMENT_DATA);
 
-  @LocalStored(7)
+  @LocalStored(1)
   config = {
     sort: {active: null, direction: 'asc'},
     displayedColumns: ['position', 'name', 'weight', 'symbol'],
@@ -47,6 +38,8 @@ export class DemoStoreComponent implements OnInit {
   sort: MatSort;
 
   ngOnInit() {
+    this.periodicElementService.getPeriodicElements()
+      .subscribe(periodicElements => this.dataSource.data = periodicElements);
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.dataSource.sort.active = this.config.sort.active;

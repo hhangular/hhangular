@@ -38,6 +38,8 @@ import {RedirectComponent} from './redirect/redirect.component';
     },
   ],
   entryComponents: [],
+  exports: [
+  ]
 })
 export class AppModule {
 }

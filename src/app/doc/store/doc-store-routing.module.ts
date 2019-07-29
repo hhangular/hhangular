@@ -1,7 +1,7 @@
 import {NgModule} from '@angular/core';
 import {RouterModule, Routes} from '@angular/router';
 import {DocStoreComponent} from './doc-store.component';
-import {InstallationComponent, UseComponent, OverviewComponent, UserManagementComponent} from './sections';
+import {InstallationComponent, UseComponent, OverviewComponent, UserMngmtComponent} from './sections';
 import {DemoStoreComponent} from './demo/demo-store.component';
 
 const docRoutes: Routes = [
@@ -10,7 +10,7 @@ const docRoutes: Routes = [
         {path: '', redirectTo: 'overview', pathMatch: 'full'},
         {path: 'overview', component: OverviewComponent},
         {path: 'install', component: InstallationComponent},
-        {path: 'user-management', component: UserManagementComponent},
+        {path: 'user-mngmt', component: UserMngmtComponent},
         {path: 'use', component: UseComponent},
         {path: 'demo', component: DemoStoreComponent}
       ]

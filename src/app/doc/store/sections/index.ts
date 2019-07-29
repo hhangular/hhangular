@@ -1,15 +1,15 @@
 import {OverviewComponent} from './overview/overview.component';
 import {InstallationComponent} from './installation/installation.component';
 import {UseComponent} from './use/use.component';
-import {UserManagementComponent} from './user-management/user-management.component';
+import {UserMngmtComponent} from './user-mngmt/user-mngmt.component';
 
 export const SECTIONS: any[] = [
   OverviewComponent,
   InstallationComponent,
   UseComponent,
-  UserManagementComponent
+  UserMngmtComponent
 ];
 export {OverviewComponent} from './overview/overview.component';
 export {InstallationComponent} from './installation/installation.component';
 export {UseComponent} from './use/use.component';
-export {UserManagementComponent} from './user-management/user-management.component';
+export {UserMngmtComponent} from './user-mngmt/user-mngmt.component';
