@@ -1,0 +1,16 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <ng-template ngFor let-item [ngForOf]="items" let-first="first" let-last="last" >
+      <div class="flex-spacer" *ngIf="first && align === 'right'"></div>
+      <div class="flex-spacer" *ngIf="items.length === 1 && align === 'justify'"></div>
+      <button mat-button (click)="onButtonClick(item)">
+        <fa-icon *ngIf="!!getIconFn" [icon]="getIconFn(item)" size="lg"></fa-icon>
+        <span *ngIf="!!getIconFn">&nbsp;&nbsp;</span>
+        {{getLabelFn(item)}}
+      </button>
+      <div class="flex-spacer" *ngIf="!last && align == 'justify'"></div>
+      <div class="flex-spacer" *ngIf="items.length === 1 && align === 'justify'"></div>
+      <div class="flex-spacer" *ngIf="last && align === 'left'"></div>
+    </ng-template>
+  </mat-toolbar-row>
+</mat-toolbar>
