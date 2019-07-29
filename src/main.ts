@@ -1,7 +1,6 @@
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 import 'hammerjs';
-import 'marked/lib/marked';
 import 'prismjs/prism';
 import 'prismjs/components/prism-typescript';
 import 'prismjs/components/prism-yaml';
