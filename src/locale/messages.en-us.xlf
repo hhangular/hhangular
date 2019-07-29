@@ -22,6 +22,22 @@
         <source>assets/markdowns/store/fr-fr/demo.md</source>
         <target>assets/markdowns/store/fr-fr/demo.md</target>
       </trans-unit>
+      <trans-unit id="STORE_DEMO_HTML_MD" datatype="html">
+        <source>assets/markdowns/store/fr-fr/demo/demo-html.md</source>
+        <target>assets/markdowns/store/fr-fr/demo/demo-html.md</target>
+      </trans-unit>
+      <trans-unit id="STORE_DEMO_TS_MD" datatype="html">
+        <source>assets/markdowns/store/fr-fr/demo/demo-ts.md</source>
+        <target>assets/markdowns/store/fr-fr/demo/demo-ts.md</target>
+      </trans-unit>
+      <trans-unit id="STORE_DEMO_CSS_MD" datatype="html">
+        <source>assets/markdowns/store/fr-fr/demo/demo-css.md</source>
+        <target>assets/markdowns/store/fr-fr/demo/demo-css.md</target>
+      </trans-unit>
+      <trans-unit id="STORE_DEMO_EXPLANATIONS_MD" datatype="html">
+        <source>assets/markdowns/store/fr-fr/demo/demo-explanations.md</source>
+        <target>assets/markdowns/store/fr-fr/demo/demo-explanations.md</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>
