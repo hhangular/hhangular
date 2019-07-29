@@ -1,0 +1,13 @@
+```css
+table {
+  width: 100%;
+}
+.container {
+  display: flex;
+}
+.mat-form-field {
+  padding-left: 20px;
+  font-size: 14px;
+  width: 100%;
+}
+```

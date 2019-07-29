@@ -40,7 +40,7 @@ export abstract class StoreService {
   }
 
   private transformObject(obj: any, root?: any) {
-    if (typeof obj !== 'object') {
+    if (!obj || typeof obj !== 'object') {
       return obj;
     }
     const res: any = {};
@@ -63,6 +63,7 @@ export abstract class StoreService {
               this.saveCfg(root || res);
             }
           });
+/*
         } else if (typeof obj[key] === 'object') {
           innerObject[key] = this.transformObject(obj[key], root || res);
           Object.defineProperty(res, key, {
@@ -73,13 +74,18 @@ export abstract class StoreService {
               this.saveCfg(root || res);
             }
           });
+*/
         } else {
           innerObject[key] = obj[key];
           Object.defineProperty(res, key, {
             enumerable: true,
             get: () => innerObject[key],
             set: (v: any) => {
-              innerObject[key] = v;
+              if (typeof v === 'object') {
+                innerObject[key] = this.transformObject(v, root || res);
+              } else {
+                innerObject[key] = v;
+              }
               this.saveCfg(root || res);
             }
           });
@@ -108,7 +114,7 @@ export abstract class StoreService {
   }
 
   private toJson(ori: any, ...excludes: string[]) {
-    if (typeof ori !== 'object') {
+    if (!ori || typeof ori !== 'object') {
       return ori;
     }
     const toJson = this.toJson.bind(this);
@@ -118,16 +124,17 @@ export abstract class StoreService {
       ori.forEach((item: any) => {
         res.push(toJson(item));
       });
-    } else {
+    } else if (typeof ori === 'object') {
       res = Object.keys(ori)
         .filter(key => excludes.indexOf(key) === -1) // excludes
         .reduce((r, key) => this.addJson(r, key, ori[key]), {}); // transform to json
+    } else {
     }
     return res;
   }
 
   private addJson(obj: any, key: string, value: any) {
-    obj[key] = this.toJson(value);
+    obj[key] = !!value ? this.toJson(value) : value;
     return obj;
   }
 }

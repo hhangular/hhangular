@@ -1,1 +1,6 @@
-<ngx-md i18n-path="@@STORE_INSTALLATION_MD" path="assets/markdowns/store/fr-fr/installation.md"></ngx-md>
+<div markdown i18n-src="@@STORE_INSTALLATION_MD" src="assets/markdowns/store/fr-fr/installation.md"></div>
+<app-section-toolbar routing="true" align="justify" [items]="[
+{label: 'Overview', url: '../overview'},
+{label: 'User Management', url: '../user-mngmt'}
+]"></app-section-toolbar>
+

@@ -6,9 +6,14 @@ export class KeysService {
 
   private static pdfjsControl: PdfjsControl = null;
 
+  static isEnabled() {
+    return KeysService.pdfjsControl !== null;
+  }
+
   public setPdfjsControl(pdfjsControl: PdfjsControl) {
     KeysService.pdfjsControl = pdfjsControl;
   }
+
 
   public clearPdfjsControl() {
     KeysService.pdfjsControl = null;

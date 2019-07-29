@@ -11,4 +11,7 @@ mat-drawer-container {
   mat-drawer-container {
     height: calc(100vh - 56px - 56px);
   }
+  .badge {
+    display: none;
+  }
 }
