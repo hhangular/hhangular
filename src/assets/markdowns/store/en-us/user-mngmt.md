@@ -1,18 +1,20 @@
-# Gestion des utilisateurs
+# User management
 
-Par défaut les objets de configuration stockés dans le navigateur, le sont pour tous les utilisateurs utilisant ce même navigateur.
+By default, configuration objects stored in the browser are stored for all users using the same browser.
 
-Si vous êtes dans un contexte ou plusieurs utilisateurs partagent le même poste, avec bien sûr un système d'authentification. 
-Vous pouvez fournir à la librairie un identifiant utilisateur en déclarant un provider qui servira à discriminer les entrées dans le store.
+If you are in a context where several users share the same post, with of course an authentication system.   
+You can provide to the library a user ID by declaring a provider that will be used to discriminate entry into the store.
 
 ## Configuration
 
-Dans le module qui déclare le `StoreModule` **!!IMPORTANT!!**, déclarez un `provider` qui retourne un `Observable<string>`.
-Cet `observable` retournera l'utilisateur courant. 
+In the module that declares the `StoreModule` **!!IMPORTANT!!** Declare a `provider` who returns an `Observable<string>`.
+This 'observable' will return the current user. 
 
-Ce `provider` sert un `Observable`, en effet le processus d'authentification est souvent lui même asynchrone. La `string` retournée identifie l'utilisateur.
+This `provider` serves as an `Observable`, in fact the authentication process is often itself asynchronous. The returned `string` identifies the user.
 
-Utilisez le `InjectionToken` `USER_ID`, de `@hhangular/store` pour définir le nouveau `provider`.
+Use the `InjectionToken` `USER-ID` from '@hhangular/store' to define the new `provider`.
+
+---
 
 `AppModule.ts`
 ```typescript

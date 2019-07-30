@@ -40,7 +40,7 @@ export class LocaleSelectorComponent {
     }
     this.currentLocale = path;
     let origin = document.location.origin;
-    if (origin.indexOf('localhost') !== -1) { // only for dev environment
+    if (origin.indexOf('localhost:420') !== -1) { // only for dev environment
       if (path === '/fr-FR/') {
         origin = 'http://localhost:4200';
       } else if (path === '/en-US/') {

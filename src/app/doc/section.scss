@@ -6,7 +6,7 @@
   display: block;
 }
 app-section-toolbar {
-  display: none;
+  display: initial;
 }
 @media (max-width: 599px) {
   :host {

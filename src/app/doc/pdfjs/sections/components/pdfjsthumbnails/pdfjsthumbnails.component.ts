@@ -1,15 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {PdfjsControl} from '../../../../../../../projects/pdfjs/src/lib/controls/pdfjs-control';
 import {
+  PdfjsControl,
   RenderEvent,
   RenderQuality,
   ThumbnailDragMode,
   ThumbnailLayout
-} from '../../../../../../../projects/pdfjs/src/lib/classes/pdfjs-objects';
+} from '../../../../../../../projects/pdfjs/src/public-api';
 
 @Component({
   templateUrl: './pdfjsthumbnails.component.html',
-  styleUrls: ['./pdfjsthumbnails.component.scss']
+  styleUrls: ['../../../../section.scss']
 })
 export class PdfjsThumbnailsComponent implements OnInit {
 

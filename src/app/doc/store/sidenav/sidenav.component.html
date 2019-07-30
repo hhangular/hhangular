@@ -1,20 +1,34 @@
 <mat-list routerLinkActive="active">
   <a mat-list-item routerLink="overview" [routerLinkActive]="['active']">
-    <fa-icon [icon]="farFilePdf"></fa-icon>&nbsp;Overview
+    <fa-icon [icon]="faArchive"></fa-icon>&nbsp;Overview
   </a>
   <mat-divider></mat-divider>
-  <mat-list-item disabled="true">Get start</mat-list-item>
-  <a mat-list-item routerLink="install" [routerLinkActive]="['active']">
+  <mat-list-item disabled="true">
+    <fa-icon [icon]="faFlagCheckered"></fa-icon>&nbsp;Get start
+  </mat-list-item>
+  <a mat-list-item routerLink="installation" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faDownload"></fa-icon>&nbsp;Installation
+  </a>
+  <mat-divider></mat-divider>
+  <mat-list-item disabled="true">
+    <fa-icon [icon]="faPuzzlePiece"></fa-icon>&nbsp;Use
+  </mat-list-item>
+  <a mat-list-item routerLink="decorators" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faAt"></fa-icon>&nbsp;Decorators
+  </a>
+  <a mat-list-item routerLink="version-mngmt" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faProjectDiagram"></fa-icon>&nbsp;Version Management
+  </a>
+  <a mat-list-item routerLink="id-mngmt" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faFingerprint"></fa-icon>&nbsp;Id Management
   </a>
   <a mat-list-item routerLink="user-mngmt" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faUser"></fa-icon>&nbsp;User Management
   </a>
-  <mat-divider></mat-divider>
-  <mat-list-item disabled="true">Decorators</mat-list-item>
-  <a mat-list-item routerLink="use" [routerLinkActive]="['active']">
-    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faArchive"></fa-icon>&nbsp;Use
+  <a mat-list-item routerLink="limitations" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faExclamationTriangle"></fa-icon>&nbsp;Limitations
   </a>
+  <mat-divider></mat-divider>
   <mat-divider></mat-divider>
   <a mat-list-item routerLink="demo" [routerLinkActive]="['active']">
     <fa-icon [icon]="faDesktop"></fa-icon>&nbsp;Demo

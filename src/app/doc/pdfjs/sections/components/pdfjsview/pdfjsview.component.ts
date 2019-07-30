@@ -1,10 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {PdfjsControl} from '../../../../../../../projects/pdfjs/src/lib/controls/pdfjs-control';
-import {RenderQuality, ViewFit} from '../../../../../../../projects/pdfjs/src/lib/classes/pdfjs-objects';
+import {PdfjsControl, RenderQuality, ViewFit} from '../../../../../../../projects/pdfjs/src/public-api';
 
 @Component({
   templateUrl: './pdfjsview.component.html',
-  styleUrls: ['./pdfjsview.component.css']
+  styleUrls: ['../../../../section.scss']
 })
 export class PdfjsViewComponent implements OnInit {
 

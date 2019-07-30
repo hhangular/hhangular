@@ -1,6 +1,6 @@
 ## Configuration
 
-Add assets pdfworker in angular.json
+Add assets `pdfworker` in file `angular.json` at the root of your `angular` project.
 
 ```json
 {
@@ -22,7 +22,9 @@ Add assets pdfworker in angular.json
               ...
 ```
 
-### In modules using pdfModule, import PdfjsModule and configure worker
+## PdfjsModule 
+
+In module using `PdfjsModule`, import the module `PdfjsModule` and configure the worker, previously added.
 
 ```typescript
 @NgModule({
@@ -30,6 +32,7 @@ Add assets pdfworker in angular.json
 imports: [
     BrowserModule,
     SharedModule,
+// =============== WORKER =============== 
     PdfjsBoxModule.config({workerSrc: 'assets/pdf.worker.js'})
   ],
 ...
@@ -39,15 +42,19 @@ export class AppModule {
 }
 ```
 
-The best way is use SharedModule and export PdfjsModule. Like this you have just to import SharedModule in others modules.
+The best way is use a `SharedModule` like is purposed in `angular` guide style.   
+Think to export `PdfjsModule` from the `SharedModule`.   
+Like this you have just to import `SharedModule` in others modules.
 
 ```typescript
 @NgModule({
   imports: [
     CommonModule,
+// =============== WORKER =============== 
     PdfjsModule.config({workerSrc: 'assets/pdf.worker.js'}),
   ],
   exports: [
+// =============== EXPORT IT =============== 
     PdfjsModule,
   ],
   declarations: [],
@@ -55,3 +62,5 @@ The best way is use SharedModule and export PdfjsModule. Like this you have just
 export class SharedModule {
 }
 ```
+
+That's all, you can use the components in your `angular` application.

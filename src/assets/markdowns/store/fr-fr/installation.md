@@ -25,7 +25,7 @@ yarn add @hhangular/store
 
 ## Configuration
 
-Il suffit d'importer le module StoreModule et vous pourrez utiliser les `decorator`.   
+Il suffit d'importer le module `StoreModule` et vous pourrez utiliser les `decorator`.   
 Vous pouvez le faire dans votre `AppModule` ou dans votre `SharedModule` indifféremment.
 
 `AppModule.ts`

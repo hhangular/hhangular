@@ -4,7 +4,8 @@ import {FlexLayoutModule} from '@angular/flex-layout';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {
   MatButtonModule,
-  MatCheckboxModule, MatChipsModule,
+  MatCheckboxModule,
+  MatChipsModule,
   MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
@@ -58,7 +59,7 @@ const MODULES: any[] = [
   imports: [
     CommonModule,
     MODULES,
-    MarkdownModule.forRoot({ loader: HttpClient }),
+    MarkdownModule.forRoot({loader: HttpClient}),
     PdfjsModule.config({workerSrc: 'assets/pdf.worker.js'}),
     StoreModule,
   ],

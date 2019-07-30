@@ -13,3 +13,17 @@ h1 {
 .docs-hhangular-logo {
   height: 128px;
 }
+.bottom {
+  font-size: small;
+  height: 48px;
+}
+.bottom a {
+  color: white;
+}
+
+.idea-logo {
+  height: 24px;
+}
+.angular-logo {
+  height: 28px;
+}

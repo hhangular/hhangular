@@ -22,7 +22,7 @@ import {MatSortModule} from '@angular/material';
     SECTIONS,
     SidenavComponent,
     DocStoreComponent,
-    DemoStoreComponent
+    DemoStoreComponent,
   ],
   providers: []
 })
