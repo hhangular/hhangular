@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 
 @Component({
-  templateUrl: './config.component.html',
+  templateUrl: './installation.component.html',
   styleUrls: ['../../../../section.scss']
 })
-export class ConfigComponent {
+export class InstallationComponent {
 }

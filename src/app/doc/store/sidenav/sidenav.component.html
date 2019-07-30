@@ -6,11 +6,15 @@
   <mat-list-item disabled="true">
     <fa-icon [icon]="faFlagCheckered"></fa-icon>&nbsp;Get start
   </mat-list-item>
-  <a mat-list-item routerLink="install" [routerLinkActive]="['active']">
+  <a mat-list-item routerLink="installation" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faDownload"></fa-icon>&nbsp;Installation
   </a>
-  <a mat-list-item routerLink="use" [routerLinkActive]="['active']">
-    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faPuzzlePiece"></fa-icon>&nbsp;Use
+  <mat-divider></mat-divider>
+  <mat-list-item disabled="true">
+    <fa-icon [icon]="faPuzzlePiece"></fa-icon>&nbsp;Use
+  </mat-list-item>
+  <a mat-list-item routerLink="decorators" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faAt"></fa-icon>&nbsp;Decorators
   </a>
   <a mat-list-item routerLink="version-mngmt" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faProjectDiagram"></fa-icon>&nbsp;Version Management

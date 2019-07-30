@@ -1,6 +1,8 @@
-## Configuration
+# Configuration
 
-Add assets `pdfworker` in file `angular.json` at the root of your `angular` project.
+## PdfWorker
+
+Ajoutez la dépendance `pdfworker` dans le fichier `angular.json` à la racine de votre projet `angular`.
 
 ```json
 {
@@ -24,7 +26,7 @@ Add assets `pdfworker` in file `angular.json` at the root of your `angular` proj
 
 ## PdfjsModule 
 
-In module using `PdfjsModule`, import the module `PdfjsModule` and configure the worker, previously added.
+Dans le module utilisant `PdfjsModule`, importez le module `PdfjsModule` et configurez le worker précédemment ajouté.
 
 ```typescript
 @NgModule({
@@ -42,9 +44,9 @@ export class AppModule {
 }
 ```
 
-The best way is use a `SharedModule` like is purposed in `angular` guide style.   
-Think to export `PdfjsModule` from the `SharedModule`.   
-Like this you have just to import `SharedModule` in others modules.
+Le mieux est d'utiliser un `SharedModule` comme préconisé dans le guide de style `angular`.   
+**Pensez bien à exporter le `PdfjsModule` dans celui ci.**   
+Comme cela il vous suffit d'importer le `SharedModule` dans les autres modules.
 
 ```typescript
 @NgModule({
@@ -63,4 +65,4 @@ export class SharedModule {
 }
 ```
 
-That's all, you can use the components in your `angular` application.
+C'est tout, vous pouvez utilisez les composants dans votre application `angular`.

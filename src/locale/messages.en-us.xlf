@@ -2,6 +2,24 @@
 <xliff version="1.2" xmlns="urn:oasis:names:tc:xliff:document:1.2">
   <file source-language="fr-fr" datatype="plaintext" original="ng2.template">
     <body>
+      <trans-unit id="HOMEPAGE" datatype="html">
+        <source>assets/markdowns/homepage.fr-fr.md</source>
+        <target>assets/markdowns/homepage.en-us.md</target>
+      </trans-unit>
+
+      <trans-unit id="PDFJS_OVERVIEW_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/overview.md</source>
+        <target>assets/markdowns/pdfjs/en-us/overview.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_INSTALLATION_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/installation.md</source>
+        <target>assets/markdowns/pdfjs/en-us/installation.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_CONFIGURATION_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/config.md</source>
+        <target>assets/markdowns/pdfjs/en-us/config.md</target>
+      </trans-unit>
+
       <trans-unit id="STORE_OVERVIEW_MD" datatype="html">
         <source>assets/markdowns/store/fr-fr/overview.md</source>
         <target>assets/markdowns/store/en-us/overview.md</target>
