@@ -1,11 +1,16 @@
 :host {
   height: calc(100vh - 64px - 64px);
   overflow-y: auto;
-  padding-left: 40px;
-  display: block;
 }
-.flex-spacer {
-  flex-grow: 1;
+a {
+  text-decoration: none;
+}
+a:hover,
+a:hover:active, a:hover.active {
+  color: darkorange;
+}
+a:active, a.active {
+  color: dodgerblue;
 }
 @media (max-width: 599px) {
   :host {

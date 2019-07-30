@@ -8,16 +8,20 @@ import {
   faDownload,
   faExpandArrowsAlt,
   faFilePdf as fasFilePdf,
+  faFlagCheckered,
   faGamepad,
+  faListOl,
   faListUl,
-  faProjectDiagram
+  faMicrochip,
+  faProjectDiagram,
+  faPuzzlePiece
 } from '@fortawesome/free-solid-svg-icons';
 import {faFilePdf as farFilePdf} from '@fortawesome/free-regular-svg-icons';
 
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
-  styleUrls: ['./sidenav.component.css'],
+  styleUrls: ['../../sidenav.scss'],
 })
 export class SidenavComponent {
 
@@ -33,5 +37,9 @@ export class SidenavComponent {
   faGamepad = faGamepad;
   faListUl = faListUl;
   faDesktop = faDesktop;
+  faFlagCheckered = faFlagCheckered;
+  faMicrochip = faMicrochip;
+  faListOl = faListOl;
+  faPuzzlePiece = faPuzzlePiece;
 
 }

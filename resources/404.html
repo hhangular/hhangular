@@ -9,9 +9,9 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script>
     if (navigator.language === 'fr-FR') {
-      document.location.href = document.location.href.replace('index.html', 'fr-FR/index.html');
+      document.location.href = `${document.location.origin}/fr-FR/index.html`;
     } else {
-      document.location.href = document.location.href.replace('index.html', 'en-US/index.html');
+      document.location.href = `${document.location.origin}/en-US/index.html`;
     }
   </script>
 </head>

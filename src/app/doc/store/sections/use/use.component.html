@@ -1,1 +1,5 @@
-<ngx-md i18n-path="@@STORE_USE_MD" path="assets/markdowns/store/fr-fr/use.md"></ngx-md>
+<div markdown i18n-src="@@STORE_USE_MD" src="assets/markdowns/store/fr-fr/use.md"></div>
+<app-section-toolbar routing="true" align="justify" [items]="[
+{label: 'Installation', url: '../install'},
+{label: 'Version Management', url: '../version-mngmt'}
+]"></app-section-toolbar>

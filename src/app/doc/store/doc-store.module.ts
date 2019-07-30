@@ -6,6 +6,8 @@ import {SidenavComponent} from './sidenav/sidenav.component';
 import {DocStoreRoutingModule} from './doc-store-routing.module';
 import {DocStoreComponent} from './doc-store.component';
 import {SECTIONS} from './sections';
+import {DemoStoreComponent} from './demo/demo-store.component';
+import {MatSortModule} from '@angular/material';
 
 @NgModule({
   imports: [
@@ -13,12 +15,14 @@ import {SECTIONS} from './sections';
     FormsModule,
     SharedModule,
     DocStoreRoutingModule,
+    MatSortModule,
   ],
   exports: [],
   declarations: [
     SECTIONS,
     SidenavComponent,
-    DocStoreComponent
+    DocStoreComponent,
+    DemoStoreComponent,
   ],
   providers: []
 })

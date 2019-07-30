@@ -23,18 +23,24 @@ export class PdfjsCommonComponent {
 
   @HostListener('document:keydown', ['$event'])
   public onKeyDown(event: KeyboardEvent) {
-    event.preventDefault();
+    if (!KeysService.isEnabled()) {
+      return;
+    }
     switch (event.code) {
       case 'ArrowLeft' :
+        event.preventDefault();
         event.ctrlKey ? this.keysService.selectFirst() : this.keysService.selectPrevious();
         break;
       case 'ArrowUp' :
+        event.preventDefault();
         event.ctrlKey ? this.keysService.selectFirst() : this.keysService.selectPrevious();
         break;
       case 'ArrowRight' :
+        event.preventDefault();
         event.ctrlKey ? this.keysService.selectLast() : this.keysService.selectNext();
         break;
       case 'ArrowDown' :
+        event.preventDefault();
         event.ctrlKey ? this.keysService.selectLast() : this.keysService.selectNext();
         break;
     }

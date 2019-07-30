@@ -2,10 +2,23 @@
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
 @import '~@angular/material/theming';
 @import '~prismjs/themes/prism-okaidia.css';
+@import '~prismjs/plugins/line-highlight/prism-line-highlight.css';
+@import '~prismjs/plugins/line-numbers/prism-line-numbers.css';
+
 
 body {
   font-family: Roboto,"Helvetica Neue Light","Helvetica Neue",Helvetica,Arial,"Lucida Grande",sans-serif;
   margin: 0;
+}
+
+.flex-spacer {
+  flex-grow: 1;
+}
+
+@media (max-width: 599px) {
+  .badge {
+    display: none;
+  }
 }
 
 .code-container {

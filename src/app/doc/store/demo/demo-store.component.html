@@ -1,0 +1,78 @@
+<div markdown i18n-src="@@STORE_DEMO_MD"
+     src="assets/markdowns/store/fr-fr/demo/demo.md"></div>
+<br>
+<div class="mat-elevation-z8">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Periodic elements</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-tab-group>
+    <mat-tab label="Result">
+      <div class="container">
+        <mat-form-field>
+          <input matInput [(ngModel)]="config.filter" (keyup)="applyFilter()" placeholder="Filter">
+        </mat-form-field>
+        <div class="flex-spacer"></div>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <fa-icon [icon]="faColumns" size="lg"></fa-icon>
+        </button>
+      </div>
+      <table mat-table [dataSource]="dataSource" matSort (matSortChange)="sortChange($event)">
+
+        <!-- Position Column -->
+        <ng-container matColumnDef="position">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> No.</th>
+          <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+        </ng-container>
+
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
+          <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+        </ng-container>
+
+        <!-- Weight Column -->
+        <ng-container matColumnDef="weight">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Weight</th>
+          <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
+        </ng-container>
+
+        <!-- Symbol Column -->
+        <ng-container matColumnDef="symbol">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> Symbol</th>
+          <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="config.displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: config.displayedColumns;"></tr>
+      </table>
+      <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons (page)="changePage($event)"></mat-paginator>
+    </mat-tab>
+    <mat-tab label="HTML">
+      <div markdown i18n-src="@@STORE_DEMO_HTML_MD" lineNumbers lineHighlight [line]="'3, 36-37, 43'"
+           src="assets/markdowns/store/fr-fr/demo/demo-html.md"></div>
+    </mat-tab>
+    <mat-tab label="TS">
+      <div markdown i18n-src="@@STORE_DEMO_TS_MD" lineNumbers
+           src="assets/markdowns/store/fr-fr/demo/demo-ts.md"></div>
+    </mat-tab>
+    <mat-tab label="CSS">
+      <div markdown i18n-src="@@STORE_DEMO_CSS_MD" lineNumbers
+           src="assets/markdowns/store/fr-fr/demo/demo-css.md"></div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+
+<mat-menu #menu="matMenu">
+  <button mat-menu-item *ngFor="let column of columns" (click)="switchColumn(column)">
+    <fa-icon [icon]="config.displayedColumns.includes(column)?faCheck:faUncheck" size="lg">
+    </fa-icon>&nbsp;&nbsp;{{column}}
+  </button>
+</mat-menu>
+
+<div markdown i18n-src="@@STORE_DEMO_EXPLANATIONS_MD"
+     src="assets/markdowns/store/fr-fr/demo/demo-explanations.md"></div>
+<app-section-toolbar routing="true" align="left" [items]="[
+{label: 'Limitations', url: '../limitations'}
+]"></app-section-toolbar>

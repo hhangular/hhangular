@@ -2,9 +2,7 @@
   overflow-y: scroll;
   height: 100%;
 }
-.flex-spacer {
-  flex-grow: 1;
-}
+
 h1 {
   font: 400 24px/32px Roboto,"Helvetica Neue",sans-serif;
   font-size: 56px;

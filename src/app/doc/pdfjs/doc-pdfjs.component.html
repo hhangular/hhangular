@@ -10,13 +10,10 @@
     <a mat-button href="https://travis-ci.org/hhangular/hhangular" target="_blank">
       <img alt="Travis (.org) branch" src="https://img.shields.io/travis/hhangular/hhangular/pdfjs.svg?style=for-the-badge">
     </a>
-    <a href="https://codecov.io/gh/hhangular/hhangular/branch/pdfjs">
-      <img src="https://codecov.io/gh/hhangular/hhangular/branch/pdfjs/graph/badge.svg" />
-    </a>
   </mat-toolbar-row>
 </mat-toolbar>
 <mat-drawer-container autosize>
-  <mat-drawer #drawer mode="side" opened="true">
+  <mat-drawer #drawer [mode]="mode" [opened]="open">
     <app-sidenav></app-sidenav>
   </mat-drawer>
 
