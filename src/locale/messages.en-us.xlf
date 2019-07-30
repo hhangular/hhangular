@@ -18,6 +18,18 @@
         <source>assets/markdowns/store/fr-fr/user-mngmt.md</source>
         <target>assets/markdowns/store/en-us/user-mngmt.md</target>
       </trans-unit>
+      <trans-unit id="STORE_ID_MNGMT_MD" datatype="html">
+        <source>assets/markdowns/store/fr-fr/id-mngmt.md</source>
+        <target>assets/markdowns/store/en-us/id-mngmt.md</target>
+      </trans-unit>
+      <trans-unit id="STORE_VERSION_MNGMT_MD" datatype="html">
+        <source>assets/markdowns/store/fr-fr/version-mngmt.md</source>
+        <target>assets/markdowns/store/en-us/version-mngmt.md</target>
+      </trans-unit>
+      <trans-unit id="STORE_LIMITATIONS_MD" datatype="html">
+        <source>assets/markdowns/store/fr-fr/limitations.md</source>
+        <target>assets/markdowns/store/en-us/limitations.md</target>
+      </trans-unit>
       <trans-unit id="STORE_DEMO_MD" datatype="html">
         <source>assets/markdowns/store/fr-fr/demo/demo.md</source>
         <target>assets/markdowns/store/en-us/demo/demo.md</target>
