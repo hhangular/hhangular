@@ -1,6 +1,6 @@
 # Use
 
-The use of 'Decorator': `LocalStored` and `SessionStored` is very simple.
+The use of decorators: `LocalStored` and `SessionStored` is very simple.
 
 ## Use cases
 In the following example, we'll set up a configuration object for a table, 

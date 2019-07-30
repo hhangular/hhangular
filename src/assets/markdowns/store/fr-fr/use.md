@@ -1,6 +1,6 @@
 # Utilisation
 
-L'utilisation des `Decorator` : `LocalStored` et `SessionStored` est très simple.
+L'utilisation des décorateurs : `LocalStored` et `SessionStored` est très simple.
 
 ## Cas d'utilisation
 Dans l'exemple suivant, nous allons configurer un objet de configuration pour un tableau, 

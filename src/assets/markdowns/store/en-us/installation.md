@@ -1,4 +1,4 @@
-## Installation
+# Installation
 
 For help getting started with a new Angular app, check out the [Angular CLI](https://cli.angular.io/).
 
