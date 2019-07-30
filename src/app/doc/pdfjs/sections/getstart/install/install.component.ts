@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   templateUrl: './install.component.html',
-  styleUrls: ['./install.component.css']
+  styleUrls: ['../../../../section.scss']
 })
 export class InstallComponent implements OnInit {
 

@@ -1,6 +1,6 @@
 Il n'y a pas grand chose à dire sur la partie HTML ou CSS, cela reprend quasiment l'exemple du site de `material`.
 
-Dans le fichier HTML ou peut constater le `binding` sur l'objet `config` aux lignes : `3, 36-37, 43`.
+Dans le fichier HTML on peut constater le `binding` sur l'objet `config` aux lignes : `3, 36-37, 43`.
 
 Sur la partie TS, pas de commentaire sur la partie inhérente à la librairie `material`, 
 ni à celle de [fontAwesome](https://fontawesome.com/icons?d=gallery&m=free) qui sert pour les `Icons`.
@@ -28,7 +28,6 @@ Aussi si vous ne voulez pas à chaque fois vider le store de votre navigateur. V
 
 À noter que cela n'a aucune importance si vous livrez avec une version autre que `1` alors que l'internaute n'a jamais persisté l'objet dans son store.
 
-
 ### Initialisation 
 
 ```typescript
@@ -44,7 +43,7 @@ Aussi si vous ne voulez pas à chaque fois vider le store de votre navigateur. V
 Dans la méthode `ngOnInit`, on initialise le composant, c'est le moment de définir aux objets `material` les valeurs issues de la configuration.   
 Comme vous pouvez le constater, il n'y a rien à faire de spécial pour aller lire les données issues du store.
 
-On peut noter le `cast` de l'attribut direction, l'objet `material` n'acceptant que `'asc'`, `'desc'` et `''`.
+On peut noter le `cast` de l'attribut `direction`, l'objet `material` n'acceptant que `'asc'`, `'desc'` et `''`.
 
 ### Choix des colonnes
 
@@ -75,7 +74,7 @@ Si la colonne est déjà visible, on la cache.
   }
 ```
 
-La methode `sortChange` est appelée à chaque fois que le tri est modifié.   
+La méthode `sortChange` est appelée à chaque fois que le tri est modifié.   
 L'objet de type `Sort` est directement définit sur l'objet `conf`.
 
 A noter que l'on aurait pu faire ceci : 
@@ -95,7 +94,7 @@ A noter que l'on aurait pu faire ceci :
   }
 ```
 
-Ici encore c'est vraiment très simple, à chaque événement de pagination, on affecte le nouvel index de page, ce qui va automatiquement le persiter dans le store du navigateur.
+Ici encore c'est vraiment très simple, à chaque événement de pagination, on affecte le nouvel index de page, ce qui va automatiquement le persister dans le store du navigateur.
 
 ### Filtre
 

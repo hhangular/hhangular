@@ -5,16 +5,13 @@ import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   templateUrl: './doc-store.component.html',
-  styleUrls: ['./doc-store.component.css']
+  styleUrls: ['../doc.scss']
 })
 export class DocStoreComponent implements OnInit {
 
   faBars = faBars;
-  faNpm = faNpm;
   open = true;
   mode = 'side';
-
-  url = 'https://www.npmjs.com/package/@hhangular/store';
 
   constructor(private breakpointObserver: BreakpointObserver) {
   }

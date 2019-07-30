@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 
 @Component({
-  templateUrl: './use.component.html',
+  templateUrl: './version-mngmt.component.html',
   styleUrls: ['../../../section.scss']
 })
-export class UseComponent {
+export class VersionMngmtComponent {
 }

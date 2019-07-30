@@ -3,7 +3,9 @@
     <fa-icon [icon]="farFilePdf"></fa-icon>&nbsp;Overview
   </a>
   <mat-divider></mat-divider>
-  <mat-list-item disabled="true">Get start</mat-list-item>
+  <mat-list-item disabled="true">
+    <fa-icon [icon]="faFlagCheckered"></fa-icon>&nbsp;Get start
+  </mat-list-item>
   <a mat-list-item routerLink="install" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faDownload"></fa-icon>&nbsp;Installation
   </a>
@@ -11,15 +13,23 @@
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faCogs"></fa-icon>&nbsp;Configuration
   </a>
   <mat-divider></mat-divider>
-  <mat-list-item disabled="true">Components</mat-list-item>
+  <mat-list-item disabled="true">
+    <fa-icon [icon]="faMicrochip"></fa-icon>&nbsp;Components
+  </mat-list-item>
   <a mat-list-item routerLink="pdfjsthumbnails" [routerLinkActive]="['active']">
-    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="fasFilePdf"></fa-icon><fa-icon [icon]="farFilePdf"></fa-icon><fa-icon [icon]="fasFilePdf"></fa-icon>&nbsp;PdfjsThumbnails
+    &nbsp;&nbsp;&nbsp;<fa-layers [fixedWidth]="true">
+      <fa-icon [icon]="fasFilePdf"></fa-icon>
+      <fa-icon [icon]="fasFilePdf" transform="right-4" [styles]="{'color': 'white'}"></fa-icon>
+    <fa-icon [icon]="fasFilePdf" transform="right-8"></fa-icon>
+    </fa-layers>&nbsp;&nbsp;PdfjsThumbnails
   </a>
   <a mat-list-item routerLink="pdfjsview" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="fasFilePdf"></fa-icon>&nbsp;PdfjsView
   </a>
   <mat-divider></mat-divider>
-  <mat-list-item disabled="true">Classes</mat-list-item>
+  <mat-list-item disabled="true">
+    <fa-icon [icon]="faPuzzlePiece"></fa-icon>&nbsp;Classes
+  </mat-list-item>
   <a mat-list-item routerLink="pdfjscommand" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faGamepad"></fa-icon>&nbsp;PdfjsCommand
   </a>
@@ -33,7 +43,9 @@
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faListUl"></fa-icon>&nbsp;PdfPage
   </a>
   <mat-divider></mat-divider>
-  <mat-list-item disabled="true">Enums</mat-list-item>
+  <mat-list-item disabled="true">
+    <fa-icon [icon]="faListOl"></fa-icon>&nbsp;Enums
+  </mat-list-item>
   <a mat-list-item routerLink="thumbnaillayout" [routerLinkActive]="['active']">
     &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faBorderNone"></fa-icon>&nbsp;ThumbnailLayout
   </a>

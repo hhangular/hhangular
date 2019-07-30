@@ -14,9 +14,10 @@
     }
 
     .app-loading .logo {
-      width: 120px;
-      height: 120px;
-      background: url(./assets/hhangular.png) center center no-repeat;
+      width: 250px;
+      height: 250px;
+      background-size: cover;
+      background: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNTAiIGhlaWdodD0iMjUwIj4KICA8cGF0aCBpZD0iY2FudmFzX2JhY2tncm91bmQiIGZpbGw9Im5vbmUiIGQ9Ik0tMS0xaDU4MnY0MDJILTF6Ii8+CiAgPGc+CiAgICA8ZyBpZD0ic3ZnXzEiPgogICAgICA8cGF0aCBpZD0ic3ZnXzIiIGZpbGw9IiNkZDAwMzEiIGQ9Ik0xMjUgMjkuNUwzMS45IDYyLjdsMTQuMiAxMjMuMSA3OC45IDQzLjcgNzguOS00My43IDE0LjItMTIzLjF6Ii8+CiAgICAgIDxwYXRoIGlkPSJzdmdfMyIgZmlsbD0iI2MzMDAyZiIgZD0iTTEyNSAyOS41djIyLjItLjFWMjI5LjVsNzguOS00My43IDE0LjItMTIzLjFMMTI1IDI5LjV6Ii8+CiAgICAgIDx0ZXh0IGlkPSJzdmdfNyIgeD0iMTIuODgiIHk9IjE4Mi42OSIgZmlsbD0iI2ZmZiIgc3Ryb2tlPSJudWxsIiBzdHJva2Utb3BhY2l0eT0ibnVsbCIgc3Ryb2tlLXdpZHRoPSIwIiBmb250LWZhbWlseT0iJ1RyZWJ1Y2hldCBNUycsIEdhZGdldCwgc2Fucy1zZXJpZiIgZm9udC1zaXplPSIxNzgiIGZvbnQtd2VpZ2h0PSJib2xkIiB0cmFuc2Zvcm09Im1hdHJpeCguNzUzNDcgMCAwIC45NTQ3IDMzLjg4IDEwLjE3KSI+CiAgICAgICAgSAogICAgICA8L3RleHQ+CiAgICAgIDx0ZXh0IGlkPSJzdmdfMTAiIHg9IjEwNy43NyIgeT0iMTgyLjY5IiBmaWxsPSIjZTU1MjZkIiBzdHJva2U9Im51bGwiIHN0cm9rZS13aWR0aD0iMCIgZm9udC1mYW1pbHk9IidUcmVidWNoZXQgTVMnLCBHYWRnZXQsIHNhbnMtc2VyaWYiIGZvbnQtc2l6ZT0iMTc4IiBmb250LXdlaWdodD0iYm9sZCIgdHJhbnNmb3JtPSJtYXRyaXgoLjc1MzQ3IDAgMCAuOTU0NyAzMy44OCAxMC4xNykiPgogICAgICAgIEgKICAgICAgPC90ZXh0PgogICAgPC9nPgogIDwvZz4KPC9zdmc+Cg==') center center no-repeat;
     }
 
     .app-loading {
@@ -26,11 +27,12 @@
       align-items: center;
       justify-content: center;
       height: 100%;
+      overflow: hidden;
     }
 
     .app-loading .spinner {
-      height: 200px;
-      width: 200px;
+      height: 300px;
+      width: 300px;
       animation: rotate 2s linear infinite;
       transform-origin: center center;
       position: absolute;
