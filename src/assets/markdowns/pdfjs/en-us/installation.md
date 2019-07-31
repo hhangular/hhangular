@@ -10,14 +10,14 @@ You can use either the npm or yarn command-line tool to install packages. Use wh
 
 ### NPM
 
-```jshelllanguage
+```bash
 # @hhangular/pdfjs
 npm install @hhangular/pdfjs --save 
 ```
 
 ### YARN
 
-```jshelllanguage
+```bash
 # @hhangular/pdfjs
 yarn add @hhangular/pdfjs
 ```
