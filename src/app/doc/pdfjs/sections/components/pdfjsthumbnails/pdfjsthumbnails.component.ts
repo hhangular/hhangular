@@ -1,15 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {PdfjsControl} from '../../../../../../../projects/pdfjs/src/lib/controls/pdfjs-control';
 import {
+  PdfjsControl,
   RenderEvent,
   RenderQuality,
   ThumbnailDragMode,
   ThumbnailLayout
-} from '../../../../../../../projects/pdfjs/src/lib/classes/pdfjs-objects';
+} from '../../../../../../../projects/pdfjs/src/public-api';
+import {LocalStored} from '../../../../../../../projects/store/src/public-api';
 
 @Component({
   templateUrl: './pdfjsthumbnails.component.html',
-  styleUrls: ['./pdfjsthumbnails.component.scss']
+  styleUrls: ['../../../../section.scss']
 })
 export class PdfjsThumbnailsComponent implements OnInit {
 
@@ -18,13 +19,17 @@ export class PdfjsThumbnailsComponent implements OnInit {
   conditionCtrl3: PdfjsControl = new PdfjsControl();
   conditionCtrl4: PdfjsControl = new PdfjsControl();
   conditionCtrl5: PdfjsControl = new PdfjsControl();
+  conditionCtrl6: PdfjsControl = new PdfjsControl();
   guideCtrl1: PdfjsControl = new PdfjsControl();
 
   ThumbnailLayout = ThumbnailLayout;
   ThumbnailDragMode = ThumbnailDragMode;
 
-  quality: RenderQuality = 1;
-  allowRemove = false;
+  @LocalStored(1)
+  config = {
+    quality: 1
+  };
+  allowRemove = true;
   allowDrop = true;
   dragMode = ThumbnailDragMode.DUPLICATE;
   fitSize = 100;
@@ -33,6 +38,8 @@ export class PdfjsThumbnailsComponent implements OnInit {
   previewQuality: RenderQuality = 2;
   layout = ThumbnailLayout.HORIZONTAL;
   borderWidth = 5;
+
+  consoleLog = '';
 
   renderEndEvent: RenderEvent;
 
@@ -43,11 +50,18 @@ export class PdfjsThumbnailsComponent implements OnInit {
     this.conditionCtrl3.load('../assets/pdfs/conditions.pdf', true);
     this.conditionCtrl4.load('../assets/pdfs/conditions.pdf', true);
     this.conditionCtrl5.load('../assets/pdfs/conditions.pdf', true);
+    this.conditionCtrl6.load('../assets/pdfs/conditions.pdf', true);
   }
 
   renderEvent($event: RenderEvent) {
     if ($event.type === 'END') {
       this.renderEndEvent = $event;
+    }
+  }
+
+  renderHandler($event: RenderEvent) {
+    if ($event.type === 'END') {
+      this.consoleLog += `${JSON.stringify($event)}   \n`;
     }
   }
 }

@@ -1,226 +1,110 @@
-<section class="mat-typography">
-  <h2>pdfjs-thumbnails</h2>
-  <h3>Simple thumbnails</h3>
-  A simple thumbnails container must have a defined pdfjsControl
-  <br>
-  pdfjsControl allow to control a pdfjsItem collection, the pdf
-  <div class="code-container mat-elevation-z8">
-    <span class="code-comment">&lt;!--In template--&gt;</span><br>
-    &lt;<span class="code-node-name">pdfjs-thumbnails</span>
-    &nbsp;<span class="code-attribute-name">[pdfjsControl]</span>="<span class="code-attribute-value">pdfjsControl</span>"&gt;
-    &lt;/<span class="code-node-name">pdfjs-thumbnails</span>&gt;
-  </div><br>
-  <div class="code-container mat-elevation-z8">
-    <span class="code-comment">// In controller</span><br>
-    <span class="code-field">pdfjsControl</span>:&nbsp;<span class="code-type">PdfjsControl</span>&nbsp;=&nbsp;<span class="code-keyword">new</span>&nbsp;<span class="code-class">PdfjsControl</span>();<br><br>
-    <span class="code-method">ngOnInit</span>():<span class="code-keyword">void</span> &#x7B;<br>
-    &nbsp;&nbsp;&nbsp;<span class="code-keyword">this</span>.<span class="code-field">pdfjsControl</span>.<span class="code-method">load</span>(<span class="code-string">'assets/pdfs/guide.pdf'</span>);<br>
-    &#x7D;<br>
-  </div>
-  <h3>Use most than one thumbnails for control many pdf with only one pdf viewer</h3>
-  You can use most of one thumbnails in one template, but il you want use only one pdf viewer and command for all of them, you have to use a GroupControl.
-  <div class="code-container mat-elevation-z8">
-    <span class="code-comment">&lt;!--In template--&gt;</span><br>
-    &lt;<span class="code-node-name">pdfjs-thumbnails</span>
-    &nbsp;<span class="code-attribute-name">[pdfjsControl]</span>="<span class="code-attribute-value">pdfjsControl</span>"
-    &nbsp;<span class="code-attribute-name">[pdfjsGroupControl]</span>="<span class="code-attribute-value">pdfjsGroupControl</span>"&gt;
-    &lt;/<span class="code-node-name">pdfjs-thumbnails</span>&gt;
-  </div><br>
-  <div class="code-container mat-elevation-z8">
-    <span class="code-comment">// In controller</span><br>
-    <span class="code-field">pdfjsGroupControl</span>:&nbsp;<span class="code-type">PdfjsGroupControl</span>&nbsp;=&nbsp;<span class="code-keyword">new</span>&nbsp;<span class="code-class">PdfjsGroupControl</span>();<br>
-    <span class="code-field">pdfjsControl1</span>:&nbsp;<span class="code-type">PdfjsControl</span>&nbsp;=&nbsp;<span class="code-keyword">new</span>&nbsp;<span class="code-class">PdfjsControl</span>();<br>
-    <span class="code-field">pdfjsControl2</span>:&nbsp;<span class="code-type">PdfjsControl</span>&nbsp;=&nbsp;<span class="code-keyword">new</span>&nbsp;<span class="code-class">PdfjsControl</span>();<br><br>
-    <span class="code-method">ngOnInit</span>():<span class="code-keyword">void</span> &#x7B;<br>
-    &nbsp;&nbsp;&nbsp;<span class="code-keyword">this</span>.<span class="code-field">pdfjsControl1</span>.<span class="code-method">load</span>(<span class="code-string">'assets/pdfs/guide.pdf'</span>);<br>
-    &nbsp;&nbsp;&nbsp;<span class="code-keyword">this</span>.<span class="code-field">pdfjsControl2</span>.<span class="code-method">load</span>(<span class="code-string">'https://mydomain.com/assets/pdfs/other.pdf'</span>);<br>
-    &nbsp;&nbsp;&nbsp;<span class="code-keyword">this</span>.<span class="code-field">pdfjsGroupControl</span>.<span class="code-method">select</span>(<span class="code-keyword">this</span>.<span class="code-field">pdfjsControl1</span>);<br>
-    &#x7D;<br>
-  </div><br><br>
-  <hr>
-  <h2>Attributes</h2>
-  <!-- Quality render -->
-  <h3>Quality render</h3>
-  Set thumbnails render quality<br><br>
-  <pdfjs-thumbnails [pdfjsControl]="conditionCtrl1" (render)="renderEvent($event)"
-                    [quality]="quality"></pdfjs-thumbnails><br>
-  <button mat-button color="primary">quality</button>
-  <mat-radio-group [value]="quality" (change)="quality=$event.value">
-    <mat-radio-button [value]="1">1</mat-radio-button>&nbsp;&nbsp;&nbsp;
-    <mat-radio-button [value]="2">2</mat-radio-button>&nbsp;&nbsp;&nbsp;
-    <mat-radio-button [value]="3">3</mat-radio-button>&nbsp;&nbsp;&nbsp;
-    <mat-radio-button [value]="4">4</mat-radio-button>&nbsp;&nbsp;&nbsp;
-    <mat-radio-button [value]="5">5</mat-radio-button>
-  </mat-radio-group>
-  <br><br>
-  Render {{renderEndEvent?.pages || 0}} pages in {{renderEndEvent?.time || 0  | date:'ss'}} seconds and {{renderEndEvent?.time || 0  | date:'SSS'}} milliseconds
-  <br><br>
-  Render pdf pages use a lot of cpu load. For limit the cpu loading, use the adequate quality.<br>
-  <div class="code-container mat-elevation-z8">
-    &lt;<span class="code-node-name">pdfjs-thumbnails</span>&nbsp;<span class="code-attribute-name">[quality]</span>="<span class="code-attribute-value">{{quality}}</span>"&gt;&lt;/<span class="code-node-name">pdfjs-thumbnails</span>&gt;
-  </div>
-  Values accepted are "1" to "5". "1" is the less quality. It's enough most of time.<br>
-  The library pdfjs use cache. So change quality after pdf loaded is not significant.<br>
-  Default value is 1.
-  <br><br>
-  <hr>
-  <!-- Allow thumbnails remove -->
-  <h3>Allow thumbnails remove</h3>
-  Allow to user to remove a thumbnail by use red times.<br><br>
-  <pdfjs-thumbnails [pdfjsControl]="conditionCtrl2"
-                    [allowRemove]="allowRemove"></pdfjs-thumbnails><br>
-  <button mat-button color="primary" (click)="conditionCtrl2.reload()">allowRemove</button>
-  <mat-radio-group [value]="allowRemove" (change)="allowRemove=$event.value">
-    <mat-radio-button [value]="false">false</mat-radio-button>&nbsp;&nbsp;&nbsp;
-    <mat-radio-button [value]="true">true</mat-radio-button>&nbsp;&nbsp;&nbsp;
-  </mat-radio-group>
-  <br><br>
-  <div class="code-container mat-elevation-z8">
-    &lt;<span class="code-node-name">pdfjs-thumbnails</span>&nbsp;<span class="code-attribute-name">[allowRemove]</span>="<span class="code-attribute-value">{{allowRemove}}</span>"&gt;&lt;/<span class="code-node-name">pdfjs-thumbnails</span>&gt;
-  </div>
-  Default value is false.<br><br>
-  <hr>
-  <!-- Drag & Drop -->
-  <h3>Drag & Drop</h3>
-  Allow to thumbnail container to receive/accept pdfjsItem from an other pdfjs-thumbnails.<br>
-  Note that control too if you allow to re-order thumbnail in container.<br>
-  For control drag and drop, you can use <b>dragMode</b> and <b>allowDrop</b>
-  <br><br>
-  <div style="width: 400px">
-    <pdfjs-thumbnails [pdfjsControl]="guideCtrl1"
-                      [quality]="1"
-                      [fitSize]="100"
-                      [previewDelay]="300"
-                      [previewHeight]="300"
-                      [allowDrop]="false"
-                      [allowRemove]="false"
-                      [dragMode]="dragMode"
-                      [layout]="ThumbnailLayout.HORIZONTAL"></pdfjs-thumbnails>
-  </div><br>
-  <button mat-button color="primary">dragMode (source)</button>
-  <mat-radio-group [value]="dragMode" (change)="dragMode=$event.value">
-    <mat-radio-button [value]="ThumbnailDragMode.NONE">ThumbnailDragMode.NONE</mat-radio-button>&nbsp;&nbsp;&nbsp;
-    <mat-radio-button [value]="ThumbnailDragMode.MOVE">ThumbnailDragMode.MOVE</mat-radio-button>&nbsp;&nbsp;&nbsp;
-    <mat-radio-button [value]="ThumbnailDragMode.DUPLICATE">ThumbnailDragMode.DUPLICATE</mat-radio-button>&nbsp;&nbsp;&nbsp;
-  </mat-radio-group>
-  <div class="code-container mat-elevation-z8">
-    &lt;<span class="code-node-name">pdfjs-thumbnails</span>
-    &nbsp;<span class="code-attribute-name">[dragMode]</span>="<span class="code-attribute-value">'{{dragMode}}'</span>"&gt;
-    &lt;/<span class="code-node-name">pdfjs-thumbnails</span>&gt;
-  </div>
-  Or
-  <div class="code-container mat-elevation-z8">
-    <span class="code-comment">// In controller</span><br>
-    <span class="code-field">ThumbnailDragMode</span>&nbsp;=&nbsp;<span class="code-field">ThumbnailDragMode</span>;
-  </div>
-  <div class="code-container mat-elevation-z8">
-    <span class="code-comment">&lt;!--In template--&gt;</span><br>
-    &lt;<span class="code-node-name">pdfjs-thumbnails</span>
-    &nbsp;<span class="code-attribute-name">[dragMode]</span>="<span class="code-attribute-value">ThumbnailDragMode.{{dragMode | uppercase}}</span>"&gt;
-    &lt;/<span class="code-node-name">pdfjs-thumbnails</span>&gt;
-  </div>
-  <br>
-  <pdfjs-thumbnails [pdfjsControl]="conditionCtrl3" [allowDrop]="allowDrop" [allowRemove]="true" [dragMode]="ThumbnailDragMode.NONE"></pdfjs-thumbnails><br>
-  <button mat-button color="primary">allowDrop</button>
-  <mat-radio-group [value]="allowDrop" (change)="allowDrop=$event.value">
-    <mat-radio-button [value]="false">false</mat-radio-button>&nbsp;&nbsp;&nbsp;
-    <mat-radio-button [value]="true">true</mat-radio-button>&nbsp;&nbsp;&nbsp;
-  </mat-radio-group>
-  <br><br>
-  <div class="code-container mat-elevation-z8">
-    &lt;<span class="code-node-name">pdfjs-thumbnails</span>&nbsp;<span class="code-attribute-name">[allowDrop]</span>="<span class="code-attribute-value">{{allowDrop}}</span>"&gt;&lt;/<span class="code-node-name">pdfjs-thumbnails</span>&gt;
-  </div><br>
-  Default value is false.<br><br>
-  <hr>
-  <!-- Layout and size -->
-  <h3>Layout width and height</h3>
-  One attribute allow to set size of height or width thumbnails. Depends of the layout defined<br><br>
-  <pdfjs-thumbnails [pdfjsControl]="conditionCtrl4"
-                    [fitSize]="fitSize" [layout]="layout"></pdfjs-thumbnails><br>
-  <button mat-button color="primary">fitSize</button><mat-slider min="50" max="300" step="10" [(ngModel)]="fitSize"></mat-slider> {{fitSize}}px<br>
-  <button mat-button color="primary">layout</button>
-  <mat-radio-group [value]="layout" (change)="layout=$event.value">
-    <mat-radio-button [value]="ThumbnailLayout.VERTICAL">ThumbnailLayout.VERTICAL</mat-radio-button>&nbsp;&nbsp;&nbsp;
-    <mat-radio-button [value]="ThumbnailLayout.HORIZONTAL">ThumbnailLayout.HORIZONTAL</mat-radio-button>&nbsp;&nbsp;&nbsp;
-  </mat-radio-group>
-  <br><br>
-  <div class="code-container mat-elevation-z8">
-    &lt;<span class="code-node-name">pdfjs-thumbnails</span>
-    &nbsp;<span class="code-attribute-name">[fitSize]</span>="<span class="code-attribute-value">{{fitSize}}</span>"
-    &nbsp;<span class="code-attribute-name">[layout]</span>="<span class="code-attribute-value">'{{layout}}'</span>"&gt;
-    &lt;/<span class="code-node-name">pdfjs-thumbnails</span>&gt;
-  </div>
-  Or
-  <div class="code-container mat-elevation-z8">
-    <span class="code-comment">// In controller</span><br>
-    <span class="code-field">ThumbnailLayout</span>&nbsp;=&nbsp;<span class="code-field">ThumbnailLayout</span>;
-  </div>
-  <div class="code-container mat-elevation-z8">
-    <span class="code-comment">&lt;!--In template--&gt;</span><br>
-    &lt;<span class="code-node-name">pdfjs-thumbnails</span>
-    &nbsp;<span class="code-attribute-name">[fitSize]</span>="<span class="code-attribute-value">{{fitSize}}</span>"
-    &nbsp;<span class="code-attribute-name">[layout]</span>="<span class="code-attribute-value">ThumbnailLayout.{{layout | uppercase}}</span>"&gt;
-    &lt;/<span class="code-node-name">pdfjs-thumbnails</span>&gt;
-  </div>
-  <b>fitSize</b> set height if <b>layout</b> is set to 'horizontal' (ThumbnailLayout.HORIZONTAL)<br>
-  <b>fitSize</b> set width if <b>layout</b> is set to 'vertical' (ThumbnailLayout.VERTICAL)<br>
-  Default value is 100 for fitSize and ThumbnailLayout.HORIZONTAL for layout.<br><br>
-  <hr>
-  <!-- borderWidth -->
-  <h3>Border width</h3>
-  Define width of border outside each thumbnail<br><br>
-  <pdfjs-thumbnails [pdfjsControl]="conditionCtrl4"
-                    [borderWidth]="borderWidth"></pdfjs-thumbnails><br>
-  <button mat-button color="primary">borderWidth</button><mat-slider min="0" max="20" step="1" [(ngModel)]="borderWidth"></mat-slider> {{borderWidth}}px<br>
-  <br>
-  <div class="code-container mat-elevation-z8">
-    <span class="code-comment">&lt;!--In template--&gt;</span><br>
-    &lt;<span class="code-node-name">pdfjs-thumbnails</span>
-    &nbsp;<span class="code-attribute-name">[borderWidth]</span>="<span class="code-attribute-value">{{borderWidth}}</span>"&gt;
-    &lt;/<span class="code-node-name">pdfjs-thumbnails</span>&gt;
-  </div>
-  Default value is 5.<br><br>
-  <hr>
-  <!-- Preview -->
-  <h3>Preview thumbnail</h3>
-  On over thumbnail a preview (biggest) appear. This feature is controlled by <b>previewDelay</b>&nbsp;<b>previewHeight</b> and <b>previewQuality</b>.<br>
-  <pdfjs-thumbnails [pdfjsControl]="conditionCtrl5" [previewQuality]="previewQuality"
-                    [previewDelay]="previewDelay" [previewHeight]="previewHeight"></pdfjs-thumbnails><br>
-  <button mat-button color="primary">previewDelay</button><mat-slider min="0" max="2000" step="100" [(ngModel)]="previewDelay"></mat-slider> {{previewDelay}} ms<br>
-  <button mat-button color="primary">previewHeight</button><mat-slider min="100" max="1000" step="100" [(ngModel)]="previewHeight"></mat-slider> {{previewHeight}} px<br>
-  <button mat-button color="primary">previewQuality</button>
-  <mat-radio-group [(ngModel)]="previewQuality">
-    <mat-radio-button [value]="1">1</mat-radio-button>&nbsp;&nbsp;&nbsp;
-    <mat-radio-button [value]="2">2</mat-radio-button>&nbsp;&nbsp;&nbsp;
-    <mat-radio-button [value]="3">3</mat-radio-button>&nbsp;&nbsp;&nbsp;
-    <mat-radio-button [value]="4">4</mat-radio-button>&nbsp;&nbsp;&nbsp;
-    <mat-radio-button [value]="5">5</mat-radio-button>
-  </mat-radio-group>
-  <br>
-  <div class="code-container mat-elevation-z8">
-    &lt;<span class="code-node-name">pdfjs-thumbnails</span>
-    &nbsp;<span class="code-attribute-name">[previewDelay]</span>="<span class="code-attribute-value">{{previewDelay}}</span>"
-    &nbsp;<span class="code-attribute-name">[previewQuality]</span>="<span class="code-attribute-value">{{previewQuality}}</span>"
-    &nbsp;<span class="code-attribute-name">[previewHeight]</span>="<span class="code-attribute-value">{{previewHeight}}</span>"&gt;
-    &lt;/<span class="code-node-name">pdfjs-thumbnails</span>&gt;
-  </div><br>
-  Default values are 100 for previewDelay, 300 for previewHeight and 2 for previewQuality.<br><br>
-  <hr>
-  <h2>Events</h2>
-  <h3>render</h3>
-  End of render all pages in thumbnails container.<br><br>
-  <div class="code-container mat-elevation-z8">
-    <span class="code-comment">&lt;!--In template--&gt;</span><br>
-    &lt;<span class="code-node-name">pdfjs-thumbnails</span>
-    &nbsp;<span class="code-attribute-name">(render)</span>="<span class="code-attribute-value">renderHandler($event)</span>"&gt;
-    &lt;/<span class="code-node-name">pdfjs-thumbnails</span>&gt;
-  </div>
-  <div class="code-container mat-elevation-z8">
-    <span class="code-comment">// In controller</span><br>
-    <span class="code-method">renderHandler</span>(<span class="code-field">$event</span>:&nbsp;<span class="code-class">RenderEvent</span>) &#x7B;<br>
-    &nbsp;&nbsp;&nbsp;<span class="code-keyword">if</span>&nbsp;(<span class="code-field">$event</span>.<span class="code-field">type</span>&nbsp;<span class="code-keyword">===</span>&nbsp;<span class="code-string">'END'</span>) &#x7B;<br>
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="code-field">console</span>.<span class="code-field">log</span>(<span class="code-string">`Render $&#x7B;$event.pages&#x7D; pages in $&#x7B;$event.time&#x7D; ms`</span>);<br>
-    &nbsp;&nbsp;&nbsp;&#x7D;<br>
-    &#x7D;<br>
-  </div>
-</section>
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_INTRO_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/intro.md"></div>
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_ABSTRACT_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/abstract.md"></div>
+<!-- QUALITY_RENDER -->
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_QUALITY_RENDER_BEGIN_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/quality_render_begin.md"></div>
+<br>
+<pdfjs-thumbnails [pdfjsControl]="guideCtrl1" (render)="renderEvent($event)"
+                  [quality]="config.quality"></pdfjs-thumbnails><br>
+<button mat-button color="primary">quality</button>
+<mat-radio-group [value]="config.quality" (change)="config.quality=$event.value">
+  <mat-radio-button [value]="1">1</mat-radio-button>&nbsp;&nbsp;&nbsp;
+  <mat-radio-button [value]="2">2</mat-radio-button>&nbsp;&nbsp;&nbsp;
+  <mat-radio-button [value]="3">3</mat-radio-button>&nbsp;&nbsp;&nbsp;
+  <mat-radio-button [value]="4">4</mat-radio-button>&nbsp;&nbsp;&nbsp;
+  <mat-radio-button [value]="5">5</mat-radio-button>
+</mat-radio-group>
+<br><br>
+Render {{renderEndEvent?.pages || 0}} pages in {{renderEndEvent?.time || 0  | date:'ss'}} seconds and {{renderEndEvent?.time || 0  | date:'SSS'}} millisecond<br>
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_QUALITY_RENDER_END_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/quality_render_end.md"></div>
+
+<!-- ALLOW_REMOVE -->
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_ALLOW_REMOVE_BEGIN_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/allow_remove_begin.md"></div>
+<pdfjs-thumbnails [pdfjsControl]="conditionCtrl2"
+                  [allowRemove]="allowRemove"></pdfjs-thumbnails><br>
+<button mat-button color="primary" (click)="conditionCtrl2.reload()">allowRemove</button>
+<mat-radio-group [value]="allowRemove" (change)="allowRemove=$event.value">
+  <mat-radio-button [value]="false">false</mat-radio-button>&nbsp;&nbsp;&nbsp;
+  <mat-radio-button [value]="true">true</mat-radio-button>&nbsp;&nbsp;&nbsp;
+</mat-radio-group>
+<br>
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_ALLOW_REMOVE_END_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/allow_remove_end.md"></div>
+
+<!-- DRAG_&_DROP -->
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_DRAG_N_DROP_BEGIN_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/drag_n_drop_begin.md"></div>
+<br>
+<div style="width: 400px">
+  <pdfjs-thumbnails [pdfjsControl]="guideCtrl1"
+                    [dragMode]="dragMode"
+                    [layout]="ThumbnailLayout.HORIZONTAL"></pdfjs-thumbnails>
+</div><br>
+<button mat-button color="primary">dragMode (source)</button>
+<mat-radio-group [value]="dragMode" (change)="dragMode=$event.value">
+  <mat-radio-button [value]="ThumbnailDragMode.NONE">ThumbnailDragMode.NONE</mat-radio-button>&nbsp;&nbsp;&nbsp;
+  <mat-radio-button [value]="ThumbnailDragMode.MOVE">ThumbnailDragMode.MOVE</mat-radio-button>&nbsp;&nbsp;&nbsp;
+  <mat-radio-button [value]="ThumbnailDragMode.DUPLICATE">ThumbnailDragMode.DUPLICATE</mat-radio-button>&nbsp;&nbsp;&nbsp;
+</mat-radio-group>
+<pdfjs-thumbnails [pdfjsControl]="conditionCtrl3" [allowDrop]="allowDrop" [allowRemove]="true" [dragMode]="ThumbnailDragMode.NONE"></pdfjs-thumbnails><br>
+<button mat-button color="primary">allowDrop</button>
+<mat-radio-group [value]="allowDrop" (change)="allowDrop=$event.value">
+  <mat-radio-button [value]="false">false</mat-radio-button>&nbsp;&nbsp;&nbsp;
+  <mat-radio-button [value]="true">true</mat-radio-button>&nbsp;&nbsp;&nbsp;
+</mat-radio-group>
+<br>
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_DRAG_N_DROP_END_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/drag_n_drop_end.md"></div>
+
+<!-- LAYOUT & FITSIZE -->
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_LAYOUT_N_FITSIZE_BEGIN_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/layout_n_fitsize_begin.md"></div>
+<br>
+<pdfjs-thumbnails [pdfjsControl]="conditionCtrl4"
+                  [fitSize]="fitSize" [layout]="layout"></pdfjs-thumbnails><br>
+<button mat-button color="primary">fitSize</button><mat-slider min="50" max="300" step="10" [(ngModel)]="fitSize"></mat-slider> {{fitSize}}px<br>
+<button mat-button color="primary">layout</button>
+<mat-radio-group [value]="layout" (change)="layout=$event.value">
+  <mat-radio-button [value]="ThumbnailLayout.VERTICAL">ThumbnailLayout.VERTICAL</mat-radio-button>&nbsp;&nbsp;&nbsp;
+  <mat-radio-button [value]="ThumbnailLayout.HORIZONTAL">ThumbnailLayout.HORIZONTAL</mat-radio-button>&nbsp;&nbsp;&nbsp;
+</mat-radio-group>
+<br>
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_LAYOUT_N_FITSIZE_END_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/layout_n_fitsize_end.md"></div>
+
+<!-- LAYOUT & FITSIZE -->
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_BORDER_WIDTH_BEGIN_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/border_width_begin.md"></div>
+<br>
+<pdfjs-thumbnails [pdfjsControl]="conditionCtrl4"
+                  [borderWidth]="borderWidth"></pdfjs-thumbnails><br>
+<button mat-button color="primary">borderWidth</button><mat-slider min="0" max="20" step="1" [(ngModel)]="borderWidth"></mat-slider> {{borderWidth}}px<br>
+<br>
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_BORDER_WIDTH_END_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/border_width_end.md"></div>
+
+<!-- PREVIEW -->
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_PREVIEW_BEGIN_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/preview_begin.md"></div>
+<br>
+<pdfjs-thumbnails [pdfjsControl]="conditionCtrl5" [previewQuality]="previewQuality"
+                  [previewDelay]="previewDelay" [previewHeight]="previewHeight"></pdfjs-thumbnails><br>
+<button mat-button color="primary">previewDelay</button><mat-slider min="0" max="2000" step="100" [(ngModel)]="previewDelay"></mat-slider> {{previewDelay}} ms<br>
+<button mat-button color="primary">previewHeight</button><mat-slider min="100" max="1000" step="100" [(ngModel)]="previewHeight"></mat-slider> {{previewHeight}} px<br>
+<button mat-button color="primary">previewQuality</button>
+<mat-radio-group [(ngModel)]="previewQuality">
+  <mat-radio-button [value]="1">1</mat-radio-button>&nbsp;&nbsp;&nbsp;
+  <mat-radio-button [value]="2">2</mat-radio-button>&nbsp;&nbsp;&nbsp;
+  <mat-radio-button [value]="3">3</mat-radio-button>&nbsp;&nbsp;&nbsp;
+  <mat-radio-button [value]="4">4</mat-radio-button>&nbsp;&nbsp;&nbsp;
+  <mat-radio-button [value]="5">5</mat-radio-button>
+</mat-radio-group>
+<br>
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_BORDER_WIDTH_END_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/preview_end.md"></div>
+
+<!-- PREVIEW -->
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_RENDER_BEGIN_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/render_begin.md"></div>
+<br>
+<pdfjs-thumbnails [pdfjsControl]="conditionCtrl6" (render)="renderHandler($event)"></pdfjs-thumbnails>
+<div markdown [data]="consoleLog | language : 'json'"></div>
+<mat-toolbar>
+  <button mat-button (click)="conditionCtrl6.reload()">Reload</button>
+  <button mat-button (click)="consoleLog = ''">Clear console</button>
+</mat-toolbar>
+<br>
+<div markdown i18n-src="@@PDFJS_THUMBNAILS_RENDER_END_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/render_end.md"></div>
+<app-section-toolbar routing="true" align="justify" [items]="[
+{label: 'Configuration', url: '../configuration'},
+{label: 'PdfjsView', url: '../pdfjsview'}
+]"></app-section-toolbar>

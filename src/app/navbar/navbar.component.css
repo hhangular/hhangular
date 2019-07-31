@@ -9,17 +9,9 @@
   height: 26px;
   margin: 0 4px 3px 0;
 }
-.flex-spacer {
-  flex-grow: 1;
-}
+
 @media (max-width: 599px) {
   .main {
-    display: none;
-  }
-  .github {
-    display: none;
-  }
-  .travis {
     display: none;
   }
 }

@@ -1,26 +1,46 @@
-<mat-toolbar color="primary">
-  <mat-toolbar-row style="height: 128px">
-    <div class="flex-spacer"></div>
-    <img class="docs-hhangular-logo" src="assets/hhangular.png" >
-    <div class="flex-spacer"></div>
-  </mat-toolbar-row>
-  <mat-toolbar-row>
-    <div class="flex-spacer"></div>
-    <h1 class="mat-h1">@hhangular</h1>
-    <div class="flex-spacer"></div>
-  </mat-toolbar-row>
-  <mat-toolbar-row>
-    <div class="flex-spacer"></div>
-    <h2>Addtional modules for angular 8X</h2>
-    <div class="flex-spacer"></div>
-  </mat-toolbar-row>
-
-  <mat-toolbar-row>
-    <div class="flex-spacer"></div>
-    <a mat-raised-button routerLink="/doc/install">Get start</a>
-    <div class="flex-spacer"></div>
-  </mat-toolbar-row>
-</mat-toolbar>
-<div style="padding-left: 40px">
-  <ngx-md [path]="'assets/markdowns/homepage.md'"></ngx-md>
+<div fxLayout="row">
+  <mat-toolbar color="primary">
+    <mat-toolbar-row style="height: 128px">
+      <div class="flex-spacer"></div>
+      <img class="docs-hhangular-logo" src="assets/logoh2.svg">
+      <div class="flex-spacer"></div>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <div class="flex-spacer"></div>
+      <h1 class="mat-h1">@hhangular</h1>
+      <div class="flex-spacer"></div>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <div class="flex-spacer"></div>
+      <h2>Addtional modules for angular 8X</h2>
+      <div class="flex-spacer"></div>
+    </mat-toolbar-row>
+    <mat-toolbar-row>
+      <div class="flex-spacer"></div>
+      <a mat-raised-button routerLink="/pdfjs">PDFJS</a>
+      <div class="flex-h20"></div>
+      <a mat-raised-button routerLink="/store">STORE</a>
+      <div class="flex-spacer"></div>
+    </mat-toolbar-row>
+  </mat-toolbar>
 </div>
+<div style="padding-left: 40px">
+  <div markdown i18n-src="@@HOMEPAGE" src="assets/markdowns/homepage.fr-fr.md"></div>
+</div>
+<mat-toolbar color="primary" class="bottom">
+  <span>Made by <a href="https://github.com/hhfrancois" target="_blank">hhfrancois</a></span>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <span>Website version :&nbsp;<img style="vertical-align: middle;"
+                                    src="https://img.shields.io/github/release/hhangular/hhangular.svg?label="></span>
+  <div class="flex-spacer"></div>
+  <span>Powered by</span>
+  <a mat-icon-button href="https://www.jetbrains.com/idea/?hhangular.hhdev.fr" target="_blank">
+    <img class="idea-logo" src="assets/idea.svg">
+  </a>
+  <a mat-icon-button href="https://fontawesome.com" target="_blank">
+    <fa-icon [icon]="faFontAwesome" size="lg"></fa-icon>
+  </a>
+  <a mat-icon-button href="https://angular.io" target="_blank">
+    <img class="angular-logo" src="assets/angular.svg">
+  </a>
+</mat-toolbar>

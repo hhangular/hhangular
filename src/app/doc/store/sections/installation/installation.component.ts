@@ -4,11 +4,5 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './installation.component.html',
   styleUrls: ['../../../section.scss']
 })
-export class InstallationComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class InstallationComponent {
 }
