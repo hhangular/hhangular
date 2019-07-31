@@ -7,6 +7,9 @@
         <target>assets/markdowns/homepage.en-us.md</target>
       </trans-unit>
 
+      <!-- ========== -->
+      <!--     PDF    -->
+      <!-- ========== -->
       <trans-unit id="PDFJS_OVERVIEW_MD" datatype="html">
         <source>assets/markdowns/pdfjs/fr-fr/overview.md</source>
         <target>assets/markdowns/pdfjs/en-us/overview.md</target>
@@ -19,7 +22,77 @@
         <source>assets/markdowns/pdfjs/fr-fr/config.md</source>
         <target>assets/markdowns/pdfjs/en-us/config.md</target>
       </trans-unit>
+      <!-- THUMBNAILS -->
+      <trans-unit id="PDFJS_THUMBNAILS_ABSTRACT_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/abstract.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/abstract.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_THUMBNAILS_ALLOW_REMOVE_BEGIN_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/allow_remove_begin.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/allow_remove_begin.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_THUMBNAILS_ALLOW_REMOVE_END_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/allow_remove_end.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/allow_remove_end.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_THUMBNAILS_BORDER_WIDTH_BEGIN_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/border_width_begin.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/border_width_begin.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_THUMBNAILS_BORDER_WIDTH_END_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/border_width_end.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/border_width_end.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_THUMBNAILS_DRAG_N_DROP_BEGIN_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/drag_n_drop_begin.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/drag_n_drop_begin.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_THUMBNAILS_DRAG_N_DROP_END_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/drag_n_drop_end.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/drag_n_drop_end.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_THUMBNAILS_INTRO_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/intro.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/intro.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_THUMBNAILS_LAYOUT_N_FITSIZE_BEGIN_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/layout_n_fitsize_begin.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/layout_n_fitsize_begin.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_THUMBNAILS_LAYOUT_N_FITSIZE_END_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/layout_n_fitsize_end.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/layout_n_fitsize_end.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_THUMBNAILS_PREVIEW_BEGIN_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/preview_begin.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/preview_begin.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_THUMBNAILS_PREVIEW_END_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/preview_end.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/preview_end.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_THUMBNAILS_QUALITY_RENDER_BEGIN_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/quality_render_begin.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/quality_render_begin.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_THUMBNAILS_QUALITY_RENDER_END_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/quality_render_end.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/quality_render_end.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_THUMBNAILS_RENDER_BEGIN_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/render_begin.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/render_begin.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_THUMBNAILS_RENDER_END_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/thumbnails/render_end.md</source>
+        <target>assets/markdowns/pdfjs/en-us/thumbnails/render_end.md</target>
+      </trans-unit>
+      <!-- VIEW -->
 
+
+      <!-- ========== -->
+      <!--    STORE   -->
+      <!-- ========== -->
       <trans-unit id="STORE_OVERVIEW_MD" datatype="html">
         <source>assets/markdowns/store/fr-fr/overview.md</source>
         <target>assets/markdowns/store/en-us/overview.md</target>

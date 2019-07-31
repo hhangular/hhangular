@@ -26,7 +26,7 @@ Le paramètre `1` de l'annotation définit que c'est la première version. Ce se
 En effet durant le développement, il est probable que vous ayez à modifier plusieurs fois la structure de l'objet que vous voulez persister.   
 Aussi si vous ne voulez pas à chaque fois vider le store de votre navigateur. Vous aurez à incrementer la version de l'objet et rendre obsolète celui du store.
 
-À noter que cela n'a aucune importance si vous livrez avec une version autre que `1` alors que l'internaute n'a jamais persisté l'objet dans son store.
+> À noter que cela n'a aucune importance si vous livrez avec une version autre que `1` alors que l'internaute n'a jamais persisté l'objet dans son store.
 
 ### Initialisation 
 
@@ -77,7 +77,7 @@ Si la colonne est déjà visible, on la cache.
 La méthode `sortChange` est appelée à chaque fois que le tri est modifié.   
 L'objet de type `Sort` est directement définit sur l'objet `conf`.
 
-A noter que l'on aurait pu faire ceci : 
+> A noter que l'on aurait pu faire ceci : 
 
 ```typescript
   sortChange($event: Sort) {

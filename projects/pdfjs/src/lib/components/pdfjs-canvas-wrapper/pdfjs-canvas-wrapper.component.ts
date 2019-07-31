@@ -4,7 +4,7 @@ import {PdfApi} from '../../classes/pdfapi';
 import {PdfjsItem} from '../../classes/pdfjs-item';
 import {PDFPageProxy, PDFPageViewport, PDFPromise, PDFRenderTask} from 'pdfjs-dist';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
-import {filter, tap} from 'rxjs/operators';
+import {filter} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';
 
 type GetScaleForFit = (size: number, viewport: PDFPageViewport) => number;

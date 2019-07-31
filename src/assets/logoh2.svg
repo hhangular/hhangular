@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="250" height="250">
+  <path id="canvas_background" fill="none" d="M-1-1h158.2v158.2H-1z"/>
+  <g>
+    <g id="svg_1">
+      <path id="svg_2" fill="#dd0031" d="M125 30L31.9 63.2l14.2 123.1L125 230l78.9-43.7 14.2-123.1z"/>
+      <path id="svg_3" fill="#c3002f" d="M125 30v22.2-.1V230l78.9-43.7 14.2-123.1L125 30z"/>
+      <text id="svg_5" x="60.5" y="191.8" fill="#fff" stroke="null" stroke-opacity="null" stroke-width="0" font-family="'Trebuchet MS', Gadget, sans-serif" font-size="155" font-weight="bold">
+        H
+      </text>
+      <text id="svg_7" x="161.6" y="98.8" fill="#fff" stroke="null" stroke-opacity="null" stroke-width="0" font-family="'Trebuchet MS', Gadget, sans-serif" font-size="45" font-weight="bold">
+        2
+      </text>
+      <path id="svg_8" fill="#c3002f" fill-opacity=".4" stroke="null" stroke-linecap="null" stroke-linejoin="null" stroke-opacity="null" stroke-width="null" d="M125 30v22.2-.1V230l78.9-43.7 14.2-123.1L125 30"/>
+    </g>
+  </g>
+</svg>
