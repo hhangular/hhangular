@@ -44,4 +44,5 @@ export class TestDecoratorComponent {
 ...
 }
 ```
-Voilà en gros tout marche excepté la modification de l'objet directement à la racine et la modification du contenu d'un `array` par son `index`
+
+>> Voilà en gros tout marche excepté la modification de l'objet directement à la racine et la modification du contenu d'un `array` par son `index`
