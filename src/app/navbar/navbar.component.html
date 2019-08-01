@@ -1,18 +1,22 @@
 <mat-toolbar color="primary">
-  <a mat-button routerLink="main" class="main">
+  <a class="small_screen" mat-icon-button routerLink="main">
     <fa-icon [icon]="faAngular" size="lg"></fa-icon>
-    &nbsp;HHANGULAR</a>
+  </a>
+  <a mat-button routerLink="main" class="wide_screen">
+    <fa-icon [icon]="faAngular" size="lg"></fa-icon>
+    &nbsp;HHANGULAR
+  </a>
   <a mat-button routerLink="pdfjs">PDFJS</a>
   <a mat-button routerLink="store">STORE</a>
   <div class="flex-spacer"></div>
-  <a class="badge" mat-button target="_blank" href="https://opensource.org/licenses/MIT">
-    <img src="https://img.shields.io/github/license/hhangular/hhangular.svg"/>
+  <a class="wide_screen" mat-button target="_blank" href="https://opensource.org/licenses/MIT">
+    <img alt="MIT" src="https://img.shields.io/github/license/hhangular/hhangular.svg"/>
   </a>
   <app-locale-selector></app-locale-selector>
-  <a class="github" mat-icon-button href="https://github.com/hhangular/hhangular" target="_blank">
+  <a mat-icon-button href="https://github.com/hhangular/hhangular" target="_blank">
     <fa-icon [icon]="faGithub" size="lg"></fa-icon>
   </a>
-  <a class="github" mat-icon-button href="https://www.linkedin.com/in/francois-achache" target="_blank">
+  <a class="wide_screen" mat-icon-button href="https://www.linkedin.com/in/francois-achache" target="_blank">
     <fa-icon [icon]="faLinkedin" size="lg"></fa-icon>
   </a>
 </mat-toolbar>
