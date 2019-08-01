@@ -13,8 +13,6 @@ export class LocaleSelectorComponent {
   faCheck = faCheckSquare;
   faUncheck = faSquare;
 
-  currentLocale = 'fr-FR';
-
   locales = [
     {path: '/en-US/', label: 'English US'},
     {path: '/fr-FR/', label: 'Français'}
@@ -38,7 +36,6 @@ export class LocaleSelectorComponent {
     if (path === this.baseHref) {
       return;
     }
-    this.currentLocale = path;
     let origin = document.location.origin;
     if (origin.indexOf('localhost:420') !== -1) { // only for dev environment
       if (path === '/fr-FR/') {

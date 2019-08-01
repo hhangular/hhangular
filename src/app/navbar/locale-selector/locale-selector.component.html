@@ -1,4 +1,8 @@
-<button mat-icon-button [matMenuTriggerFor]="locale_menu">
+<button class="small_screen" mat-icon-button [matMenuTriggerFor]="locale_menu">
+  <fa-icon [icon]="faGlobe"></fa-icon>
+</button>
+<button class="wide_screen" mat-button [matMenuTriggerFor]="locale_menu">
+  {{baseHref | localeToLanguage | uppercase}}
   <fa-icon [icon]="faGlobe"></fa-icon>
 </button>
 <mat-menu #locale_menu>

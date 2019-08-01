@@ -11,6 +11,7 @@ import {SharedModule} from './shared/shared.module';
 import {CoreModule} from './core/core.module';
 import {LocaleSelectorComponent} from './navbar/locale-selector/locale-selector.component';
 import {RedirectComponent} from './redirect/redirect.component';
+import {LocaleToLanguagePipe} from './shared/locale-to-language/locale-to-language.pipe';
 
 @NgModule({
   declarations: [
@@ -19,6 +20,7 @@ import {RedirectComponent} from './redirect/redirect.component';
     NavBarComponent,
     LocaleSelectorComponent,
     RedirectComponent,
+    LocaleToLanguagePipe,
   ],
   imports: [
     BrowserModule,
