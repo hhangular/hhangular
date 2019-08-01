@@ -19,9 +19,15 @@ body {
   width: 20px;
 }
 
+.small_screen {
+  display: none !important;
+}
 @media (max-width: 599px) {
-  .badge {
-    display: none;
+  .wide_screen {
+    display: none !important;
+  }
+  .small_screen {
+    display: initial !important;
   }
 }
 
@@ -64,7 +70,7 @@ div[markdown] code:not([class]) {
   font-size: 1.1em;
   background-color: #ccc;
   font-weight: bold;
-  padding: 0px 5px;
+  padding: 0 5px;
 }
 
 div[markdown] blockquote {

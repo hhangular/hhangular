@@ -9,9 +9,3 @@
   height: 26px;
   margin: 0 4px 3px 0;
 }
-
-@media (max-width: 599px) {
-  .main {
-    display: none;
-  }
-}

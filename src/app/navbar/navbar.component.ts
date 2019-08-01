@@ -11,4 +11,9 @@ export class NavBarComponent {
   faAngular = faAngular;
   faGithub = faGithub;
   faLinkedin = faLinkedin;
+
+  locales = [
+    {path: '/en-US/', label: 'English US', devPort: 4201},
+    {path: '/fr-FR/', label: 'Français', devPort: 4200}
+  ];
 }
