@@ -1,4 +1,4 @@
-import {Component, Inject} from '@angular/core';
+import {Component, Inject, Input} from '@angular/core';
 import {faGlobe} from '@fortawesome/free-solid-svg-icons';
 import {APP_BASE_HREF, DOCUMENT} from '@angular/common';
 import {faCheckSquare, faSquare} from '@fortawesome/free-regular-svg-icons';
@@ -6,21 +6,22 @@ import {faCheckSquare, faSquare} from '@fortawesome/free-regular-svg-icons';
 @Component({
   selector: 'app-locale-selector',
   templateUrl: './locale-selector.component.html',
-  styleUrls: ['./locale-selector.component.scss']
+  styles: []
 })
 export class LocaleSelectorComponent {
   faGlobe = faGlobe;
   faCheck = faCheckSquare;
   faUncheck = faSquare;
 
-  locales = [
-    {path: '/en-US/', label: 'English US'},
-    {path: '/fr-FR/', label: 'Français'}
+  @Input()
+  locales: Locale[] = [
+    {path: '/en-US/', label: 'English US', devPort: 4201},
+    {path: '/fr-FR/', label: 'Français', devPort: 4200}
   ];
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    @Inject(APP_BASE_HREF) private baseHref: string,
+    @Inject(APP_BASE_HREF) public baseHref: string,
   ) {
   }
 
@@ -32,18 +33,14 @@ export class LocaleSelectorComponent {
     }
   }
 
-  switchLocaleTo(path: string) {
-    if (path === this.baseHref) {
+  switchLocaleTo(locale: Locale) {
+    if (locale.path === this.baseHref) {
       return;
     }
     let origin = document.location.origin;
-    if (origin.indexOf('localhost:420') !== -1) { // only for dev environment
-      if (path === '/fr-FR/') {
-        origin = 'http://localhost:4200';
-      } else if (path === '/en-US/') {
-        origin = 'http://localhost:4201';
-      }
+    if (origin.indexOf('localhost:') !== -1) { // only for dev environment
+      origin = `http://localhost:${locale.devPort}`;
     }
-    document.location.href = `${origin}${path}`;
+    document.location.href = `${origin}${locale.path}`;
   }
 }

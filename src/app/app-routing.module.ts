@@ -3,8 +3,9 @@ import {NgModule} from '@angular/core';
 import {NavigationEnd, Router, RouterModule, Routes} from '@angular/router';
 import {HomepageComponent} from './main/homepage.component';
 import {filter} from 'rxjs/operators';
-import {RedirectComponent} from './redirect/redirect.component';
 import {LocalStored} from '../../projects/store/src/public-api';
+import {SharedModule} from './shared/shared.module';
+import {RedirectComponent} from './shared';
 
 const routes: Routes = [
   {path: 'main', component: HomepageComponent},
@@ -15,11 +16,12 @@ const routes: Routes = [
 
 @NgModule({
   exports: [
-    RouterModule,
+    RouterModule
   ],
   imports: [
     CommonModule,
     RouterModule.forRoot(routes),
+    SharedModule
   ],
   declarations: [],
 })
