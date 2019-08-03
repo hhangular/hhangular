@@ -21,6 +21,11 @@ Ajoutez la dépendance `pdfworker` dans le fichier `angular.json` à la racine d
                 "input": "./node_modules/pdfjs-dist/build", 
                 "output": "/assets" 
               },
+              { 
+                "glob": "*.*", 
+                "input": "./node_modules/pdfjs-dist/cmaps", 
+                "output": "/cmaps" 
+              },
               ...
 ```
 
@@ -35,7 +40,11 @@ imports: [
     BrowserModule,
     SharedModule,
 // =============== WORKER =============== 
-    PdfjsBoxModule.config({workerSrc: 'assets/pdf.worker.js'})
+    PdfjsBoxModule.config({
+      workerSrc: 'assets/pdf.worker.js',
+      cMapUrl: 'assets/cmaps/',
+      cMapPacked: true
+    })
   ],
 ...
   bootstrap: [AppComponent]
@@ -53,7 +62,11 @@ Comme cela il vous suffit d'importer le `SharedModule` dans les autres modules.
   imports: [
     CommonModule,
 // =============== WORKER =============== 
-    PdfjsModule.config({workerSrc: 'assets/pdf.worker.js'}),
+    PdfjsBoxModule.config({
+      workerSrc: 'assets/pdf.worker.js',
+      cMapUrl: 'assets/cmaps/',
+      cMapPacked: true
+    })
   ],
   exports: [
 // =============== EXPORT IT =============== 

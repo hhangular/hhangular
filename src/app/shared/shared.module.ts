@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+import {APP_BASE_HREF, CommonModule, PlatformLocation} from '@angular/common';
 import {NgModule} from '@angular/core';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {ScrollingModule} from '@angular/cdk/scrolling';
@@ -28,7 +28,7 @@ import {MarkdownModule} from 'ngx-markdown';
 import {HttpClient} from '@angular/common/http';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {LayoutModule} from '@angular/cdk/layout';
-import {SectionToolbarComponent} from './section-toolbar/section-toolbar.component';
+import {SHARED_COMPONENTS} from './index';
 
 const MODULES: any[] = [
   FlexLayoutModule,
@@ -60,7 +60,11 @@ const MODULES: any[] = [
     CommonModule,
     MODULES,
     MarkdownModule.forRoot({loader: HttpClient}),
-    PdfjsModule.config({workerSrc: 'assets/pdf.worker.js'}),
+    PdfjsModule.config({
+      workerSrc: 'assets/pdf.worker.js',
+      cMapUrl: 'assets/cmaps/',
+      cMapPacked: true
+    }),
     StoreModule,
   ],
   exports: [
@@ -68,12 +72,19 @@ const MODULES: any[] = [
     MarkdownModule,
     PdfjsModule,
     StoreModule,
-    SectionToolbarComponent
+    SHARED_COMPONENTS,
   ],
-  declarations: [SectionToolbarComponent],
+  declarations: [
+    SHARED_COMPONENTS,
+  ],
   providers: [
+    {
+      provide: APP_BASE_HREF,
+      useFactory: (platformLocation: PlatformLocation) => platformLocation.getBaseHrefFromDOM(),
+      deps: [PlatformLocation]
+    },
 //    {provide: USER_ID, useFactory: () => new BehaviorSubject<string>('ok')},
-  ]
+  ],
 })
 export class SharedModule {
 }

@@ -6,7 +6,7 @@ import {PdfjsRemoveButtonComponent} from '../../pdfjs-thumbnail/pdfjs-remove.but
 import {pdfApiFactory} from '../../../classes/pdfapi-factory';
 import {PdfjsItem} from '../../../classes/pdfjs-item';
 import {PDFDocumentProxy} from 'pdfjs-dist';
-import {PdfSource} from '../../../classes/pdfjs-objects';
+import {PDF_API, PdfSource} from '../../../classes/pdfjs-objects';
 import {PdfApi} from '../../../classes/pdfapi';
 import {PdfjsCanvasWrapperComponent} from '../../pdfjs-canvas-wrapper/pdfjs-canvas-wrapper.component';
 
@@ -30,7 +30,7 @@ describe('PdfjsPreviewComponent', () => {
         PdfjsCanvasWrapperComponent
       ],
       providers: [
-        {provide: 'PdfApi', useFactory: pdfApiFactory}
+        {provide: PDF_API, useFactory: pdfApiFactory}
       ]
     }).compileComponents();
   }));
@@ -41,7 +41,7 @@ describe('PdfjsPreviewComponent', () => {
     fixture.detectChanges();
   });
 
-  beforeEach(inject(['PdfApi'], (svc) => {
+  beforeEach(inject([PDF_API], (svc) => {
     API = svc;
     API.GlobalWorkerOptions.workerSrc = workerSrc;
   }));
@@ -51,7 +51,7 @@ describe('PdfjsPreviewComponent', () => {
     return API.getDocument(source).promise.then((pdfDocumentProxy: PDFDocumentProxy) => {
       return Array.apply(null, {length: pdfDocumentProxy.numPages})
         .map((e: any, i: number) => {
-          return new PdfjsItem(pdfDocumentProxy, source, source, i + 1, 0);
+          return new PdfjsItem({documentProxy: pdfDocumentProxy, pdfId: source, document: source as PdfSource, pageIdx: i + 1, rotation: 0});
         });
     }).then(pdfItems => {
       items = pdfItems;
@@ -63,7 +63,7 @@ describe('PdfjsPreviewComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('2 items', inject(['PdfApi'], (svc) => {
+  it('2 items', inject([PDF_API], (svc) => {
     expect(items.length).toEqual(2);
   }));
 });

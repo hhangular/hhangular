@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {LocalStored} from '../../../projects/store/src/public-api';
+import {LocalStored} from '../../../../projects/store/src/public-api';
 
 @Component({
   template: '',

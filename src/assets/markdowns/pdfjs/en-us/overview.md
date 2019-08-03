@@ -8,7 +8,7 @@ You can read how [here](https://angular.io/guide/creating-libraries)
 This library contains an `angular` module `PdfjsModule` that contains a collection of components.   
 These components allows to use the `Mozilla pdfjs` library in your `angular` application.   
 
-The [Mozilla PDF Library](http://mozilla.github.io/pdf.js/) allows to view pdf in your application __without plugin and iframe__. Only writes in `javascript`.
+The [Mozilla PDF Library](https://mozilla.github.io/pdf.js/) allows to view pdf in your application __without plugin and iframe__. Only writes in `javascript`.
 
 
 

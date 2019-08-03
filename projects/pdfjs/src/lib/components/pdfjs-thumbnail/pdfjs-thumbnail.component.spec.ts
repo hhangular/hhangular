@@ -4,6 +4,7 @@ import {PdfjsRemoveButtonComponent} from './pdfjs-remove.button/pdfjs-remove-but
 import {pdfApiFactory} from '../../classes/pdfapi-factory';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {PdfjsCanvasWrapperComponent} from '../pdfjs-canvas-wrapper/pdfjs-canvas-wrapper.component';
+import {PDF_API} from '../../classes/pdfjs-objects';
 
 describe('PdfjsThumbnailComponent', () => {
   let component: PdfjsThumbnailComponent;
@@ -20,7 +21,7 @@ describe('PdfjsThumbnailComponent', () => {
         PdfjsCanvasWrapperComponent
       ],
       providers: [
-        {provide: 'PdfApi', useFactory: pdfApiFactory}
+        {provide: PDF_API, useFactory: pdfApiFactory}
       ]}).compileComponents();
   }));
 

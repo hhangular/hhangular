@@ -8,7 +8,7 @@ Vous pouvez lire comment [ici](https://angular.io/guide/creating-libraries)
 Cette librairie contient un module angular `PdfjsModule` qui contient une collection de composants.   
 Ces composants permettent d'utiliser la librairie `Mozilla pdfjs` dans vos application `angular`.    
 
-La [Librairie Mozilla PDF](http://mozilla.github.io/pdf.js/) permet de visualiser, manipuler des documents `PDF` dans vos applications __sans plugin, ni iframe__. Seulement écrit en `javascript`.
+La [Librairie Mozilla PDF](https://mozilla.github.io/pdf.js/) permet de visualiser, manipuler des documents `PDF` dans vos applications __sans plugin, ni iframe__. Seulement écrit en `javascript`.
 
 
 

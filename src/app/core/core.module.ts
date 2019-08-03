@@ -1,6 +1,5 @@
 import {CommonModule} from '@angular/common';
 import {NgModule} from '@angular/core';
-import {GithubService} from './github.service';
 
 @NgModule({
   imports: [
@@ -8,7 +7,7 @@ import {GithubService} from './github.service';
   ],
   exports: [
   ],
-  providers: [GithubService],
+  providers: [],
   declarations: [],
 })
 export class CoreModule {

@@ -1,47 +1,41 @@
-import {BehaviorSubject} from 'rxjs';
 import {PDFDocumentProxy, PDFPageProxy, PDFPromise} from 'pdfjs-dist';
 import {PdfSource} from './pdfjs-objects';
 
 export class PdfjsItem {
+  readonly documentProxy: PDFDocumentProxy;
+  readonly pdfId: string;
+  readonly document: PdfSource;
+  readonly pageIdx: number;
+  readonly rotation: number;
 
-  set rotation(rotate: number) {
-    this._rotation = (rotate % 360);
-    this.rotation$.next(this._rotation);
+  constructor(item: { pdfId: string, document: PdfSource, pageIdx: number, rotation: number, documentProxy: PDFDocumentProxy }) {
+    this.pageIdx = item.pageIdx;
+    this.document = item.document;
+    this.documentProxy = item.documentProxy;
+    this.pdfId = item.pdfId;
+    this.rotation = item.rotation;
   }
 
-  get rotation(): number {
-    return this._rotation;
-  }
-  public rotation$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
-  private _rotation: number;
-
-  constructor(
-    private documentProxy: PDFDocumentProxy,
-    public pdfId: string,
-    public document: PdfSource,
-    public pageIdx: number,
-    rotation: number = 0,
-  ) {
-    this._rotation = rotation;
+  static areEqual(x: PdfjsItem, y: PdfjsItem) {
+    if (!x && !y) {
+      return true;
+    }
+    if (!!x) {
+      return x.equals(y);
+    }
+    return y.equals(x);
   }
 
-  public getPage(): PDFPromise<PDFPageProxy> {
+  getPage(): PDFPromise<PDFPageProxy> {
     return this.documentProxy.getPage(this.pageIdx);
   }
 
-  public clone() {
-    return new PdfjsItem(this.documentProxy, this.pdfId, this.document, this.pageIdx, this._rotation);
-  }
-  public equals(other: PdfjsItem) {
+  equals(other: PdfjsItem) {
+    if (!other) {
+      return false;
+    }
     return this.pdfId === other.pdfId && this.pageIdx === other.pageIdx;
   }
-}
 
-export class PdfPage {
-  constructor(
-    public pdfId: string,
-    public document: PdfSource,
-    public pageIdx: number,
-    public rotation: number = 0
-  ) {}
+
 }

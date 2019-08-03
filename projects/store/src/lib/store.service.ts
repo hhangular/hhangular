@@ -53,46 +53,28 @@ export abstract class StoreService {
           get: () => innerObject[key]
         });
       } else {
-        if (obj[key] instanceof Array) {
-          innerObject[key] = this.transformArray(obj[key], root || res);
-          Object.defineProperty(res, key, {
-            enumerable: true,
-            get: () => innerObject[key],
-            set: (v: any) => {
-              innerObject[key] = this.transformArray(v, root || res);
-              this.saveCfg(root || res);
-            }
-          });
-/*
-        } else if (typeof obj[key] === 'object') {
-          innerObject[key] = this.transformObject(obj[key], root || res);
-          Object.defineProperty(res, key, {
-            enumerable: true,
-            get: () => innerObject[key],
-            set: (v: any) => {
-              innerObject[key] = this.transformObject(v, root || res);
-              this.saveCfg(root || res);
-            }
-          });
-*/
-        } else {
-          innerObject[key] = obj[key];
-          Object.defineProperty(res, key, {
-            enumerable: true,
-            get: () => innerObject[key],
-            set: (v: any) => {
-              if (typeof v === 'object') {
-                innerObject[key] = this.transformObject(v, root || res);
-              } else {
-                innerObject[key] = v;
-              }
-              this.saveCfg(root || res);
-            }
-          });
-        }
+        innerObject[key] = this.transform(obj[key], root || res);
+        Object.defineProperty(res, key, {
+          enumerable: true,
+          get: () => innerObject[key],
+          set: (v: any) => {
+            innerObject[key] = this.transform(v, root || res);
+            this.saveCfg(root || res);
+          }
+        });
       }
     });
     return res;
+  }
+
+  private transform(value: any, root: any) {
+    if (value instanceof Array) {
+      return this.transformArray(value, root);
+    } else if (typeof value === 'object') {
+      return this.transformObject(value, root);
+    } else {
+      return value;
+    }
   }
 
   private transformArray(arr: any[], root: any): any[] {

@@ -4,9 +4,7 @@ import {ThumbnailDragMode, ThumbnailLayout} from '../classes/pdfjs-objects';
 import {PdfjsThumbnailsComponent} from '../components/pdfjs-thumbnails/pdfjs-thumbnails.component';
 import {PdfjsItem} from '../classes/pdfjs-item';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ThumbnailDragService {
   private static thumbnails: PdfjsThumbnailsComponent[] = [];
   private static mode: ThumbnailDragMode = ThumbnailDragMode.NONE;
@@ -18,7 +16,7 @@ export class ThumbnailDragService {
 
   public initDataTransfer(item: PdfjsItem, pdfjsControl: PdfjsControl, idx: number, mode: ThumbnailDragMode) {
     ThumbnailDragService.mode = mode;
-    ThumbnailDragService.sourceItem = item;
+    ThumbnailDragService.sourceItem = new PdfjsItem({...item});
     ThumbnailDragService.initialPosition = idx;
     ThumbnailDragService.sourcePdfjsControl = pdfjsControl;
     ThumbnailDragService.targetItem = null;
@@ -31,7 +29,10 @@ export class ThumbnailDragService {
 
   public applyItemToTargetPdfControl(pdfjsControl: PdfjsControl) {
     ThumbnailDragService.targetPdfjsControl = pdfjsControl;
-    ThumbnailDragService.targetItem = ThumbnailDragService.sourceItem.clone();
+    ThumbnailDragService.targetItem = null;
+    if (!!ThumbnailDragService.sourceItem) {
+      ThumbnailDragService.targetItem = new PdfjsItem({...ThumbnailDragService.sourceItem});
+    }
   }
 
   public getModeDataTransfer() {
@@ -135,37 +136,8 @@ export class ThumbnailDragService {
     return this.getFirstParentElementNamed(target, 'pdfjs-thumbnails');
   }
 
-  private getFirstParentElementNamed(target: HTMLElement, nodeName: string): HTMLElement {
-    if (!target) {
-      return null;
-    }
-    if (target.nodeName.toLowerCase() === nodeName) {
-      return target;
-    } else {
-      return this.getFirstParentElementNamed(target.parentElement, nodeName);
-    }
-  }
-
   public getIndexOfThumbnailInThumbnails(thumbnail: HTMLElement, thumbnails: HTMLElement) {
     return [].findIndex.bind(thumbnails.children)(child => child === thumbnail);
-  }
-
-  private isBeforeThumbnailOver(layout: ThumbnailLayout, thumbnailOver: HTMLElement, event: DragEvent) {
-    if (layout === ThumbnailLayout.HORIZONTAL) {
-      const median: number = this.getHMedian(thumbnailOver.getClientRects()[0]);
-      return event.clientX < median;
-    } else {
-      const median: number = this.getVMedian(thumbnailOver.getClientRects()[0]);
-      return event.clientY < median;
-    }
-  }
-
-  private getHMedian(clientRect: ClientRect) {
-    return ((clientRect.right - clientRect.left) / 2) + clientRect.left;
-  }
-
-  private getVMedian(clientRect: ClientRect) {
-    return ((clientRect.bottom - clientRect.top) / 2) + clientRect.top;
   }
 
   public registerDropThumbnails(thumbnails: PdfjsThumbnailsComponent) {
@@ -189,4 +161,34 @@ export class ThumbnailDragService {
       return comp.elementRef.nativeElement === thumbnails;
     });
   }
+
+  private getFirstParentElementNamed(target: HTMLElement, nodeName: string): HTMLElement {
+    if (!target) {
+      return null;
+    }
+    if (target.nodeName.toLowerCase() === nodeName) {
+      return target;
+    } else {
+      return this.getFirstParentElementNamed(target.parentElement, nodeName);
+    }
+  }
+
+  private isBeforeThumbnailOver(layout: ThumbnailLayout, thumbnailOver: HTMLElement, event: DragEvent) {
+    if (layout === ThumbnailLayout.HORIZONTAL) {
+      const median: number = getHMedian(thumbnailOver.getClientRects()[0]);
+      return event.clientX < median;
+    } else {
+      const median: number = getVMedian(thumbnailOver.getClientRects()[0]);
+      return event.clientY < median;
+    }
+  }
+
+}
+
+function getHMedian(clientRect: ClientRect) {
+  return ((clientRect.right - clientRect.left) / 2) + clientRect.left;
+}
+
+function getVMedian(clientRect: ClientRect) {
+  return ((clientRect.bottom - clientRect.top) / 2) + clientRect.top;
 }

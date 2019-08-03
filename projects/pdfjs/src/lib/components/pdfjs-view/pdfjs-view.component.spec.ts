@@ -3,7 +3,7 @@ import {PdfjsViewComponent} from './pdfjs-view.component';
 import {NoopAnimationsModule} from '@angular/platform-browser/animations';
 import {pdfApiFactory} from '../../classes/pdfapi-factory';
 import {KeysService} from '../../services/keys.service';
-import {PdfSource} from '../../classes/pdfjs-objects';
+import {PDF_API, PdfSource} from '../../classes/pdfjs-objects';
 import {PdfApi} from '../../classes/pdfapi';
 import {PdfjsControl} from '../../controls/pdfjs-control';
 import {PdfjsCanvasWrapperComponent} from '../pdfjs-canvas-wrapper/pdfjs-canvas-wrapper.component';
@@ -29,7 +29,7 @@ describe('PdfjsViewComponent', () => {
       ],
       providers: [
         KeysService,
-        {provide: 'PdfApi', useFactory: pdfApiFactory}
+        {provide: PDF_API, useFactory: pdfApiFactory}
       ]}).compileComponents();
   }));
 
@@ -39,7 +39,7 @@ describe('PdfjsViewComponent', () => {
     fixture.detectChanges();
   });
 
-  beforeEach(inject(['PdfApi'], (svc) => {
+  beforeEach(inject([PDF_API], (svc) => {
     API = svc;
     API.GlobalWorkerOptions.workerSrc = workerSrc;
   }));

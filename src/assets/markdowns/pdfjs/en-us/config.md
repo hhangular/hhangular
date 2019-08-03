@@ -19,6 +19,11 @@ Add assets `pdfworker` in file `angular.json` at the root of your `angular` proj
                 "input": "./node_modules/pdfjs-dist/build", 
                 "output": "/assets" 
               },
+              { 
+                "glob": "*.*", 
+                "input": "./node_modules/pdfjs-dist/cmaps", 
+                "output": "/cmaps" 
+              },
               ...
 ```
 
@@ -33,7 +38,11 @@ imports: [
     BrowserModule,
     SharedModule,
 // =============== WORKER =============== 
-    PdfjsBoxModule.config({workerSrc: 'assets/pdf.worker.js'})
+    PdfjsBoxModule.config({
+      workerSrc: 'assets/pdf.worker.js',
+      cMapUrl: 'assets/cmaps/',
+      cMapPacked: true
+    })
   ],
 ...
   bootstrap: [AppComponent]
@@ -51,7 +60,11 @@ Like this you have just to import `SharedModule` in others modules.
   imports: [
     CommonModule,
 // =============== WORKER =============== 
-    PdfjsModule.config({workerSrc: 'assets/pdf.worker.js'}),
+    PdfjsBoxModule.config({
+      workerSrc: 'assets/pdf.worker.js',
+      cMapUrl: 'assets/cmaps/',
+      cMapPacked: true
+    })
   ],
   exports: [
 // =============== EXPORT IT =============== 

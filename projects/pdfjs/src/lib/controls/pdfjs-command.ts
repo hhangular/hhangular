@@ -30,6 +30,11 @@ export interface PdfjsCommand {
   /**
    * Select the item number index
    */
+  selectPageIndex(index: number): number;
+
+  /**
+   * Select the item number index
+   */
   selectItemIndex(index: number): number;
 
   /**

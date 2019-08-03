@@ -7,8 +7,9 @@ The event, the object raised is:
 
 ```typescript
 {
-  "type": string, // The type of event. Currently only `'END'`
+  "type": string, // The type of event. 'START'`or 'PROGRESS' or 'END'
+  "page": number, // The page number concerned
   "pages": number, // The number of pages
-  "time": number // Execution time
+  "time": number // Execution time in milli-seconds
 }   
 ```
