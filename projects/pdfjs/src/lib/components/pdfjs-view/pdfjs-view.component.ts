@@ -1,7 +1,7 @@
-import {ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, OnDestroy, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy, ViewChild} from '@angular/core';
 import {PDFPageProxy, PDFPageViewport} from 'pdfjs-dist';
 import {Subscription} from 'rxjs';
-import {flatMap} from 'rxjs/operators';
+import {filter, flatMap, tap} from 'rxjs/operators';
 import {PdfjsControl} from '../../controls/pdfjs-control';
 import {PdfjsGroupControl} from '../../controls/pdfjs-group-control';
 import {CanvasWrapperRenderEvent, RenderQuality, ViewFit} from '../../classes/pdfjs-objects';
@@ -57,18 +57,11 @@ export class PdfjsViewComponent implements OnDestroy {
   @Input()
   set control(control: PdfjsControl | PdfjsGroupControl) {
     this.item = null;
-    if (!!this.subscription) {
-      this.subscription.unsubscribe();
-    }
     this.keysService.clearPdfjsControl();
-    if (control) {
-      if (control instanceof PdfjsControl) {
-        this.setPdfjsControl(control);
-      } else {
-        this.setPdfjsGroupControl(control);
-      }
+    if (control instanceof PdfjsControl) {
+      this.setPdfjsControl(control);
     } else {
-      this.pdfjsControl = null;
+      this.setPdfjsGroupControl(control);
     }
   }
 
@@ -107,7 +100,7 @@ export class PdfjsViewComponent implements OnDestroy {
   }
 
   public hasPageSelected(): boolean {
-    return !!this.pdfjsControl ? !isNaN(this.pdfjsControl.getSelectedPageIndex()) : false;
+    return !!this.item;
   }
 
   /**
@@ -168,9 +161,9 @@ export class PdfjsViewComponent implements OnDestroy {
       this.height = clientRect.height;
       this.width = clientRect.width;
       if (this.fit === ViewFit.HORIZONTAL) {
-        this.size = this.width - 20;
+        this.size = this.width - 6 - 18; // 6: border, 18: scrollbar
       } else {
-        this.size = this.height - 6;
+        this.size = this.height - 6 - 18;
       }
     }
   }
@@ -185,24 +178,22 @@ export class PdfjsViewComponent implements OnDestroy {
   }
 
   private setPdfjsGroupControl(pdfjsGroupControl: PdfjsGroupControl) {
+    this.pdfjsControl = null;
+    this.unsubscribe();
     if (pdfjsGroupControl) {
       this.subscription = pdfjsGroupControl.selectedPdfjsControl$.pipe(
-        flatMap((pdfjsControl: PdfjsControl) => {
-          this.pdfjsControl = pdfjsControl;
-          return pdfjsControl.selectedItem$;
-        })
+        tap((pdfjsControl: PdfjsControl) => this.pdfjsControl = pdfjsControl),
+        filter((pdfjsControl: PdfjsControl) => !!pdfjsControl),
+        flatMap((pdfjsControl: PdfjsControl) => pdfjsControl.selectedItem$)
       ).subscribe((item: PdfjsItem) => this.setItem(item));
-    } else {
-      this.unsubscribe();
     }
   }
 
   private setPdfjsControl(pdfjsControl: PdfjsControl) {
     this.pdfjsControl = pdfjsControl;
+    this.unsubscribe();
     if (!!pdfjsControl) {
       this.subscription = pdfjsControl.selectedItem$.subscribe((item: PdfjsItem) => this.setItem(item));
-    } else {
-      this.unsubscribe();
     }
   }
 
