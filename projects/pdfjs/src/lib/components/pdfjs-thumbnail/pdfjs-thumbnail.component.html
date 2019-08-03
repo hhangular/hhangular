@@ -1,9 +1,9 @@
-<pdfjs-remove-button *ngIf="removable" [item]="item" (removeItem)="removeIt($event)"></pdfjs-remove-button>
+<pdfjs-remove-button *ngIf="removable" [item]="item" (removeItem)="removeItemHandler()"></pdfjs-remove-button>
 <pdfjs-canvas-wrapper [item]="item" [size]="fitSize - borderWidth * 2"
                       [style.padding]="getPadding()"
                       [fit]="layout === ThumbnailLayout.HORIZONTAL ? ViewFit.VERTICAL : ViewFit.HORIZONTAL"
                       [quality]="quality" [scale]="1"
-                      (mouseover)="mouseOver($event)"
-                      (startRender)="renderStart()"
-                      (endRender)="renderEnd()"
-                      (click)="onClick($event)"></pdfjs-canvas-wrapper>
+                      (mouseover)="mouseoverHandler($event)"
+                      (startRender)="startRenderHandler()"
+                      (endRender)="endRenderHandler()"
+                      (click)="clickHandler()"></pdfjs-canvas-wrapper>

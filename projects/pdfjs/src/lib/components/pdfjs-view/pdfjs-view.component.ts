@@ -1,7 +1,7 @@
-import {AfterViewInit, ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, OnDestroy, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, OnDestroy, ViewChild} from '@angular/core';
 import {PDFPageProxy, PDFPageViewport} from 'pdfjs-dist';
-import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
-import {distinctUntilChanged, filter, flatMap, tap} from 'rxjs/operators';
+import {Subscription} from 'rxjs';
+import {flatMap} from 'rxjs/operators';
 import {PdfjsControl} from '../../controls/pdfjs-control';
 import {PdfjsGroupControl} from '../../controls/pdfjs-group-control';
 import {CanvasWrapperRenderEvent, RenderQuality, ViewFit} from '../../classes/pdfjs-objects';
@@ -14,30 +14,42 @@ import {PdfjsItem} from '../../classes/pdfjs-item';
   templateUrl: './pdfjs-view.component.html',
   styleUrls: ['./pdfjs-view.component.css'],
 })
-export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
+export class PdfjsViewComponent implements OnDestroy {
 
   size = 100;
   item: PdfjsItem = null;
-
+  @Input()
+  mouseWheelNav = true;
+  @Input()
+  keysNav = true;
+  /**
+   * Render quality
+   */
+  @Input()
+  quality: RenderQuality = 2;
+  /**
+   * Render quality
+   */
+  @Input()
+  textLayer: boolean;
+  pdfPageProxy: PDFPageProxy;
+  viewport: PDFPageViewport;
   @ViewChild('page', {static: true})
   private pageRef: ElementRef;
-
   private timeStart = 0;
   private subscription: Subscription;
-  private observer: BehaviorSubject<[PdfjsItem, number]> = new BehaviorSubject<[PdfjsItem, number]>([null, 0]);
   private canvasWidth: number;
   private canvasHeight: number;
   private width: number;
   private height: number;
-  private _pdfjsControl: PdfjsControl;
-  private _fit: ViewFit = ViewFit.VERTICAL;
-  private _scale: number = 1;
+  private pdfjsControl: PdfjsControl;
+  private innerFit: ViewFit = ViewFit.VERTICAL;
+  private innerScale = 1;
 
-  @Input()
-  mouseWheelNav = true;
-
-  @Input()
-  keysNav = true;
+  constructor(
+    private elementRef: ElementRef,
+    private keysService: KeysService) {
+  }
 
   /**
    * PdfjsControl ou PdfjsGroupControl
@@ -56,8 +68,12 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
         this.setPdfjsGroupControl(control);
       }
     } else {
-      this._pdfjsControl = null;
+      this.pdfjsControl = null;
     }
+  }
+
+  get fit(): ViewFit {
+    return this.innerFit;
   }
 
   /**
@@ -65,14 +81,14 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
    */
   @Input()
   set fit(fit: ViewFit) {
-    if (this._fit !== fit) {
-      this._fit = fit;
+    if (this.innerFit !== fit) {
+      this.innerFit = fit;
       this.computeSize();
     }
   }
 
-  get fit(): ViewFit {
-    return this._fit;
+  get scale(): number {
+    return this.innerScale;
   }
 
   /**
@@ -80,56 +96,66 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
    */
   @Input()
   set scale(scale: number) {
-    if (this._scale !== scale) {
-      this._scale = scale;
+    if (this.innerScale !== scale) {
+      this.innerScale = scale;
       this.computeSize();
     }
   }
 
-  get scale(): number {
-    return this._scale;
-  }
-
-  /**
-   * Render quality
-   */
-  @Input()
-  quality: RenderQuality = 2;
-
-  /**
-   * Render quality
-   */
-  @Input()
-  textLayer: boolean;
-  pdfPageProxy: PDFPageProxy;
-  viewport: PDFPageViewport;
-
-  constructor(
-    private elementRef: ElementRef,
-    private keysService: KeysService) {
-  }
-
   public ngOnDestroy() {
-  }
-
-  public ngAfterViewInit(): void {
-    this.observer.pipe(
-      distinctUntilChanged((x: [PdfjsItem, number], y: [PdfjsItem, number]) => {
-        return !(this.oneNull(x, y)
-          || this.oneNull(x[0], y[0])
-          || x[0].pdfId !== y[0].pdfId
-          || x[0].pageIdx !== y[0].pageIdx
-          || x[1] !== y[1]);
-      }),
-    ).subscribe((data: [PdfjsItem, number]) => {
-      this.timeStart = new Date().getTime();
-      this.item = data[0];
-      this.computeSize();
-    });
+    this.unsubscribe();
   }
 
   public hasPageSelected(): boolean {
-    return !!this._pdfjsControl ? !isNaN(this._pdfjsControl.getSelectedPageIndex()) : false;
+    return !!this.pdfjsControl ? !isNaN(this.pdfjsControl.getSelectedPageIndex()) : false;
+  }
+
+  /**
+   * mousewheel
+   */
+  @HostListener('mousewheel', ['$event'])
+  public onMouseWheel(event: WheelEvent) {
+    if (!this.mouseWheelNav) {
+      return;
+    }
+    if (this.pdfjsControl) {
+      if (this.canvasHeight <= this.height) {
+        if (event.deltaY > 0) { // next page
+          event.preventDefault();
+          this.pdfjsControl.selectNext();
+        } else if (event.deltaY < 0) {
+          event.preventDefault();
+          this.pdfjsControl.selectPrevious();
+        }
+      }
+      if (this.canvasWidth <= this.width) {
+        if (event.deltaX > 0) { // next page
+          event.preventDefault();
+          this.pdfjsControl.selectNext();
+        } else if (event.deltaX < 0) {
+          event.preventDefault();
+          this.pdfjsControl.selectPrevious();
+        }
+      }
+    }
+  }
+
+  /**
+   * set focus
+   */
+  @HostListener('click', ['$event'])
+  public onFocus(event: MouseEvent) {
+    if (this.keysNav && this.pdfjsControl) {
+      event.stopPropagation();
+      this.keysService.setPdfjsControl(this.pdfjsControl);
+    }
+  }
+
+  onCanvasRender(obj: CanvasWrapperRenderEvent) {
+    this.defineSizesFromCanvasSizes(obj.width, obj.height, this.quality);
+    this.pdfPageProxy = obj.pdfPageProxy;
+    this.viewport = obj.viewport;
+//    this.logRenderTime();
   }
 
   /**
@@ -158,79 +184,34 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
     this.pageRef.nativeElement.style.width = widthPx;
   }
 
-  /**
-   * mousewheel
-   */
-  @HostListener('mousewheel', ['$event'])
-  public onMouseWheel(event: WheelEvent) {
-    if (!this.mouseWheelNav) {
-      return;
-    }
-    if (this._pdfjsControl) {
-      if (this.canvasHeight <= this.height) {
-        if (event.deltaY > 0) { // next page
-          event.preventDefault();
-          this._pdfjsControl.selectNext();
-        } else if (event.deltaY < 0) {
-          event.preventDefault();
-          this._pdfjsControl.selectPrevious();
-        }
-      }
-      if (this.canvasWidth <= this.width) {
-        if (event.deltaX > 0) { // next page
-          event.preventDefault();
-          this._pdfjsControl.selectNext();
-        } else if (event.deltaX < 0) {
-          event.preventDefault();
-          this._pdfjsControl.selectPrevious();
-        }
-      }
-    }
-  }
-
-  /**
-   * set focus
-   */
-  @HostListener('click', ['$event'])
-  public onFocus(event: MouseEvent) {
-    if (this.keysNav && this._pdfjsControl) {
-      event.stopPropagation();
-      this.keysService.setPdfjsControl(this._pdfjsControl);
-    }
-  }
-
   private setPdfjsGroupControl(pdfjsGroupControl: PdfjsGroupControl) {
-    pdfjsGroupControl.selectedPdfjsControl$.pipe(
-      tap((pdfjsControl: PdfjsControl) => {
-        this._pdfjsControl = pdfjsControl;
-      }),
-      filter((pdfjsControl: PdfjsControl) => {
-        return !!pdfjsControl;
-      }),
-      flatMap((pdfjsControl: PdfjsControl) => {
-        return combineLatest([pdfjsControl.selectedItem$, pdfjsControl.rotation$]);
-      }),
-    ).subscribe((data: [PdfjsItem, number]) => {
-      this.observer.next(data);
-    });
+    if (pdfjsGroupControl) {
+      this.subscription = pdfjsGroupControl.selectedPdfjsControl$.pipe(
+        flatMap((pdfjsControl: PdfjsControl) => {
+          this.pdfjsControl = pdfjsControl;
+          return pdfjsControl.selectedItem$;
+        })
+      ).subscribe((item: PdfjsItem) => this.setItem(item));
+    } else {
+      this.unsubscribe();
+    }
   }
 
   private setPdfjsControl(pdfjsControl: PdfjsControl) {
-    this._pdfjsControl = pdfjsControl;
-    combineLatest([pdfjsControl.selectedItem$, pdfjsControl.rotation$]).pipe(
-      filter((data: [PdfjsItem, number]) => {
-        return !!data[0];
-      }),
-    ).subscribe((data: [PdfjsItem, number]) => {
-      this.observer.next(data);
-    });
+    this.pdfjsControl = pdfjsControl;
+    if (!!pdfjsControl) {
+      this.subscription = pdfjsControl.selectedItem$.subscribe((item: PdfjsItem) => this.setItem(item));
+    } else {
+      this.unsubscribe();
+    }
   }
 
-  onCanvasRender(obj: CanvasWrapperRenderEvent) {
-    this.defineSizesFromCanvasSizes(obj.width, obj.height, this.quality);
-    this.pdfPageProxy = obj.pdfPageProxy;
-    this.viewport = obj.viewport;
-//    this.logRenderTime();
+  private setItem(item: PdfjsItem) {
+    this.item = null;
+    if (!!item) {
+      this.item = new PdfjsItem({...item});
+    }
+    this.computeSize();
   }
 
   private logRenderTime() {
@@ -240,11 +221,9 @@ export class PdfjsViewComponent implements OnDestroy, AfterViewInit {
     console.log(`Render page ${this.item.pageIdx}  in ${s}s ${ms}ms`);
   }
 
-  private bothNull(x, y) {
-    return !x && !y;
-  }
-
-  private oneNull(x, y) {
-    return !x || !y;
+  private unsubscribe() {
+    if (!!this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 }

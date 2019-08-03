@@ -6,6 +6,8 @@ import {PdfjsPreviewComponent} from './preview/pdfjs-preview.component';
 import {PdfjsRemoveButtonComponent} from '../pdfjs-thumbnail/pdfjs-remove.button/pdfjs-remove-button.component';
 import {PdfjsThumbnailComponent} from '../pdfjs-thumbnail/pdfjs-thumbnail.component';
 import {PdfjsCanvasWrapperComponent} from '../pdfjs-canvas-wrapper/pdfjs-canvas-wrapper.component';
+import {PDF_API} from '../../classes/pdfjs-objects';
+import {ThumbnailDragService} from '../../services/thumbnail-drag.service';
 
 describe('PdfjsThumbnailsComponent', () => {
   let component: PdfjsThumbnailsComponent;
@@ -24,7 +26,8 @@ describe('PdfjsThumbnailsComponent', () => {
         PdfjsCanvasWrapperComponent
       ],
       providers: [
-        {provide: 'PdfApi', useFactory: pdfApiFactory}
+        ThumbnailDragService,
+        {provide: PDF_API, useFactory: pdfApiFactory}
       ]}).compileComponents();
   }));
 

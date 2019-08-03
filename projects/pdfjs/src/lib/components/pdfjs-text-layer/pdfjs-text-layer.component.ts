@@ -2,6 +2,7 @@ import {Component, ElementRef, Inject, Input, OnDestroy, OnInit} from '@angular/
 import {PDFPageProxy, PDFPageViewport, TextContent} from 'pdfjs-dist';
 import {DOCUMENT} from '@angular/common';
 import {PdfApi, TextLayerRenderTask} from '../../classes/pdfapi';
+import {PDF_API} from '../../classes/pdfjs-objects';
 
 @Component({
   selector: 'pdfjs-text-layer',
@@ -11,36 +12,36 @@ import {PdfApi, TextLayerRenderTask} from '../../classes/pdfapi';
 export class PdfjsTextLayerComponent implements OnInit, OnDestroy {
 
 
-  private _viewport: PDFPageViewport;
-  private _pdfPageProxy: PDFPageProxy;
+  private innerViewport: PDFPageViewport;
+  private innerPdfPageProxy: PDFPageProxy;
   private textLayerRenderTask: TextLayerRenderTask;
 
 
   constructor(@Inject(DOCUMENT) private document: Document,
-              @Inject('PdfApi') private API: PdfApi,
+              @Inject(PDF_API) private API: PdfApi,
               private elementRef: ElementRef) {
   }
 
   @Input()
   get viewport(): PDFPageViewport {
-    return this._viewport;
+    return this.innerViewport;
   }
 
   set viewport(viewport: PDFPageViewport) {
-    if (this._viewport !== viewport) {
-      this._viewport = viewport;
+    if (this.innerViewport !== viewport) {
+      this.innerViewport = viewport;
       this.writeTextLayer();
     }
   }
 
   @Input()
   get pdfPageProxy(): PDFPageProxy {
-    return this._pdfPageProxy;
+    return this.innerPdfPageProxy;
   }
 
   set pdfPageProxy(pdfPageProxy: PDFPageProxy) {
-    if (this._pdfPageProxy !== pdfPageProxy) {
-      this._pdfPageProxy = pdfPageProxy;
+    if (this.innerPdfPageProxy !== pdfPageProxy) {
+      this.innerPdfPageProxy = pdfPageProxy;
       this.writeTextLayer();
     }
   }

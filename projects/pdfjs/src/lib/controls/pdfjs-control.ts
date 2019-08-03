@@ -1,26 +1,24 @@
 import {PDFDocumentProxy, PDFPromise} from 'pdfjs-dist';
-import {BehaviorSubject, Subscription} from 'rxjs';
+import {BehaviorSubject} from 'rxjs';
 import {filter} from 'rxjs/operators';
 import {PdfApi} from '../classes/pdfapi';
 import {PdfjsCommand} from './pdfjs-command';
-import {PdfjsItemAddEvent, PdfjsItemEvent, PdfjsItemRemoveEvent, PDFPromiseResolved, PdfSource} from '../classes/pdfjs-objects';
-import {PdfjsItem, PdfPage} from '../classes/pdfjs-item';
+import {PdfjsItemAddEvent, PdfjsItemEvent, PdfjsItemEventType, PdfjsItemRemoveEvent, PdfPage, PDFPromiseResolved, PdfSource} from '../classes/pdfjs-objects';
+import {PdfjsItem} from '../classes/pdfjs-item';
 import {Crypto} from '../classes/pdfjs-crypto';
 import {pdfApiFactory} from '../classes/pdfapi-factory';
 
 export class PdfjsControl implements PdfjsCommand {
-  private API: PdfApi = pdfApiFactory();
   public id: string;
   public pdfId: string;
   public itemEvent$: BehaviorSubject<PdfjsItemEvent> = new BehaviorSubject(null);
   public selectedItem$: BehaviorSubject<PdfjsItem> = new BehaviorSubject<PdfjsItem>(null);
   public selectedIndex$: BehaviorSubject<number> = new BehaviorSubject<number>(NaN);
-  public rotation$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+  private API: PdfApi = pdfApiFactory();
   private source: PdfSource;
   private items: PdfjsItem[] = [];
   private autoSelect = false;
   private itemIndex = NaN; // item selected index
-  private rotationSubscription: Subscription;
   private addItemEvent: BehaviorSubject<PdfjsItemAddEvent> = new BehaviorSubject<PdfjsItemAddEvent>(null);
   private removeItemEvent: BehaviorSubject<PdfjsItemRemoveEvent> = new BehaviorSubject<PdfjsItemRemoveEvent>(null);
 
@@ -55,15 +53,15 @@ export class PdfjsControl implements PdfjsCommand {
   }
 
   public addItem(item: PdfjsItem, idx?: number): void {
-    this.addItemEvent.next({item, event: 'add', to: idx});
+    this.addItemEvent.next({item, event: PdfjsItemEventType.ADD, to: idx});
   }
 
   public removeItem(item: PdfjsItem): void {
-    this.removeItemEvent.next({item, event: 'remove'});
+    this.removeItemEvent.next({item, event: PdfjsItemEventType.REMOVE});
   }
 
   public load(source: PdfSource, autoSelect = false): PDFPromise<number> {
-    this.pdfId = this.getPdfId(source);
+    this.pdfId = getPdfId(source);
     this.source = source;
     this.autoSelect = autoSelect;
     this.selectedItem$.next(null);
@@ -85,22 +83,21 @@ export class PdfjsControl implements PdfjsCommand {
     return this.selectItemIndex(NaN);
   }
 
+  public selectPageIndex(index: number): number {
+    return this.selectItemIndex(index - 1);
+  }
+
   public selectItemIndex(index: number): number {
     const prev: number = this.itemIndex;
     if (isNaN(index)) {
       this.selectedItem$.next(null);
       this.selectedIndex$.next(NaN);
       this.itemIndex = NaN;
-      this.unsubscribeRotateSubject();
     } else if (this.isValidList() && index >= 0 && index < this.items.length) {
       this.itemIndex = index;
-      const item: PdfjsItem = this.items[this.itemIndex];
+      const item: PdfjsItem = new PdfjsItem({...this.items[this.itemIndex]});
       this.selectedItem$.next(item);
       this.selectedIndex$.next(index);
-      this.unsubscribeRotateSubject();
-      this.rotationSubscription = item.rotation$.subscribe((angle: number) => {
-        this.rotation$.next(angle);
-      });
     }
     return prev;
   }
@@ -142,14 +139,23 @@ export class PdfjsControl implements PdfjsCommand {
   }
 
   public rotate(angle: number): void {
-    this.items.forEach((item: PdfjsItem) => {
-      item.rotation += angle;
+    this.itemEvent$.next({item: null, event: PdfjsItemEventType.INIT});
+    this.items = this.items.map((item: PdfjsItem, i: number) => {
+      const clone = new PdfjsItem({...item, rotation: item.rotation + angle});
+      this.itemEvent$.next({item: clone, event: PdfjsItemEventType.ADD, to: i});
+      return clone;
     });
+    this.itemEvent$.next({item: null, event: PdfjsItemEventType.END_INIT});
+    this.selectItemIndex(this.itemIndex);
   }
 
   public rotateSelected(angle: number): void {
     if (!!this.items.length) {
-      this.items[this.itemIndex].rotation += angle;
+      const old: PdfjsItem = this.items[this.itemIndex];
+      const item: PdfjsItem = new PdfjsItem({...old, rotation: old.rotation + angle});
+      this.items.splice(this.itemIndex, 1, item);
+      this.itemEvent$.next({item, event: PdfjsItemEventType.UPDATE});
+      this.selectedItem$.next(item);
     }
   }
 
@@ -178,6 +184,13 @@ export class PdfjsControl implements PdfjsCommand {
     return isNaN(this.itemIndex) ? this.itemIndex : this.itemIndex + 1;
   }
 
+  public isEqual(other: PdfjsControl) {
+    if (!other) {
+      return false;
+    }
+    return this.id === other.id;
+  }
+
   private subscribeToAddItem() {
     this.addItemEvent.pipe(
       filter(itemEvent => !!itemEvent),
@@ -186,28 +199,28 @@ export class PdfjsControl implements PdfjsCommand {
 
   private processAddItemEvent(itemEvent: PdfjsItemAddEvent) {
     let idx = itemEvent.to;
-    const clone: PdfjsItem = itemEvent.item.clone();
+    const clone: PdfjsItem = new PdfjsItem({...itemEvent.item});
     let pos: number = this.indexOfItem(clone);
     if (idx === undefined) {
       if (pos !== -1 && pos !== this.items.length - 1) {
         this.items.splice(pos, 1);
-        this.itemEvent$.next({item: clone, event: 'remove'});
+        this.itemEvent$.next({item: clone, event: PdfjsItemEventType.REMOVE});
         pos = -1;
       }
       if (pos === -1) {
         this.items.push(clone);
-        this.itemEvent$.next({item: clone, event: 'add'});
+        this.itemEvent$.next({item: clone, event: PdfjsItemEventType.ADD});
       }
     } else {
       if (pos !== -1) {
         this.items.splice(pos, 1);
-        this.itemEvent$.next({item: clone, event: 'remove'});
+        this.itemEvent$.next({item: clone, event: PdfjsItemEventType.REMOVE});
         if (pos < idx) {
           idx--;
         }
       }
       this.items.splice(idx, 0, clone);
-      this.itemEvent$.next({item: clone, event: 'add', to: idx});
+      this.itemEvent$.next({item: clone, event: PdfjsItemEventType.ADD, to: idx});
       // in case where item add was before current selected index
       this.fixAfterAddItem();
     }
@@ -230,7 +243,7 @@ export class PdfjsControl implements PdfjsCommand {
         this.items.splice(idx, 0, removed);
         removed = null;
       }
-      this.itemEvent$.next({item, event: 'remove'});
+      this.itemEvent$.next({item, event: PdfjsItemEventType.REMOVE});
       // in case where item removed was before current selected index or it was removed item
       this.fixAfterRemoveItem(isSelected);
     }
@@ -260,41 +273,35 @@ export class PdfjsControl implements PdfjsCommand {
     }
   }
 
-  private getPdfId(source: PdfSource): string {
-    if (typeof source === 'string') {
-      return Crypto.md5(source as string);
-    } else if (!!(source as any).id) {
-      return (source as any).id;
-    } else if (!!(source as any).url) {
-      return Crypto.md5((source as any).url);
-    } else {
-      return Crypto.uuid();
-    }
-  }
-
   private isValidList() {
     return !!this.items;
   }
 
+  /*
+    private unsubscribeRotateSubject() {
+      if (this.rotationSubscription) {
+        this.rotationSubscription.unsubscribe();
+        this.rotationSubscription = null;
+      }
+    }
+  */
+
   private isValidIndex() {
     return !isNaN(this.itemIndex);
-  }
-
-  private unsubscribeRotateSubject() {
-    if (this.rotationSubscription) {
-      this.rotationSubscription.unsubscribe();
-      this.rotationSubscription = null;
-    }
   }
 
   /**
    * build items
    */
   private processDocument(source: PdfSource): PDFPromise<number> {
-    this.itemEvent$.next({item: null, event: 'init'});
-    return this.API.getDocument(source).promise.then((pdfDocumentProxy: PDFDocumentProxy) => {
+    let src: any = source;
+    if (typeof source === 'string') {
+      src = {url: source, ...this.API.GlobalCMapOptions};
+    }
+    this.itemEvent$.next({item: null, event: PdfjsItemEventType.INIT});
+    return this.API.getDocument(src).promise.then((pdfDocumentProxy: PDFDocumentProxy) => {
       this.buildPdfjsItems(source, pdfDocumentProxy);
-      this.itemEvent$.next({item: null, event: 'endInit'});
+      this.itemEvent$.next({item: null, event: PdfjsItemEventType.END_INIT});
       if (this.autoSelect) {
         this.selectFirst();
       }
@@ -306,8 +313,8 @@ export class PdfjsControl implements PdfjsCommand {
   private buildPdfjsItems(source: PdfSource, pdfDocumentProxy: PDFDocumentProxy): void {
     [].push.apply(this.items, Array.apply(null, {length: pdfDocumentProxy.numPages})
       .map((e: any, i: number) => {
-        const item: PdfjsItem = new PdfjsItem(pdfDocumentProxy, this.pdfId, source, i + 1, 0);
-        this.itemEvent$.next({item, event: 'add', to: i});
+        const item: PdfjsItem = new PdfjsItem({documentProxy: pdfDocumentProxy, pdfId: this.pdfId, document: source, pageIdx: i + 1, rotation: 0});
+        this.itemEvent$.next({item, event: PdfjsItemEventType.ADD, to: i});
         return item;
       }, this));
   }
@@ -315,9 +322,21 @@ export class PdfjsControl implements PdfjsCommand {
   private emptyItems() {
     if (this.items && this.items.length) {
       this.items
-        .map(item => ({item, event: 'remove'} as PdfjsItemEvent))
+        .map(item => ({item, event: PdfjsItemEventType.REMOVE} as PdfjsItemEvent))
         .forEach(event => this.itemEvent$.next(event));
     }
     this.items = [];
+  }
+}
+
+function getPdfId(source: PdfSource): string {
+  if (typeof source === 'string') {
+    return Crypto.md5(source as string);
+  } else if (!!(source as any).id) {
+    return (source as any).id;
+  } else if (!!(source as any).url) {
+    return Crypto.md5((source as any).url);
+  } else {
+    return Crypto.uuid();
   }
 }

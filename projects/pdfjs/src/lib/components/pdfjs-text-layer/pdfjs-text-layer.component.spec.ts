@@ -2,6 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PdfjsTextLayerComponent } from './pdfjs-text-layer.component';
 import {pdfApiFactory} from '../../classes/pdfapi-factory';
+import {PDF_API} from '../../classes/pdfjs-objects';
 
 describe('PdfjsTextLayerComponent', () => {
   let component: PdfjsTextLayerComponent;
@@ -11,7 +12,7 @@ describe('PdfjsTextLayerComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ PdfjsTextLayerComponent ],
       providers: [
-        {provide: 'PdfApi', useFactory: pdfApiFactory}
+        {provide: PDF_API, useFactory: pdfApiFactory}
       ]
     })
     .compileComponents();

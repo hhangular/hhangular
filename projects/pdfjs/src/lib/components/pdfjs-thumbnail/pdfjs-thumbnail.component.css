@@ -24,7 +24,7 @@
 }
 
 :host.active {
-  background-color: #337ab7;
+  background-color: #3f51b5;
 }
 
 :host.moving {
