@@ -28,7 +28,7 @@ import {MarkdownModule} from 'ngx-markdown';
 import {HttpClient} from '@angular/common/http';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {LayoutModule} from '@angular/cdk/layout';
-import {LocaleToLanguagePipe, SHARED_COMPONENTS} from './index';
+import {SHARED_COMPONENTS} from './index';
 
 const MODULES: any[] = [
   FlexLayoutModule,
@@ -76,7 +76,6 @@ const MODULES: any[] = [
   ],
   declarations: [
     SHARED_COMPONENTS,
-    LocaleToLanguagePipe
   ],
   providers: [
     {
