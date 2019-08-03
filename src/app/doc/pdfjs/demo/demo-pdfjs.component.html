@@ -7,7 +7,8 @@
                     [allowDrop]="false"
                     [allowRemove]="false"
                     [dragMode]="ThumbnailDragMode.DUPLICATE"
-                    [layout]="ThumbnailLayout.HORIZONTAL"></pdfjs-thumbnails>
+                    [layout]="ThumbnailLayout.HORIZONTAL" (render)="renderHandler($event)"></pdfjs-thumbnails>
+  <mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
   <div fxLayout="row" >
     <div fxFlex="100px">
       <pdfjs-thumbnails [pdfjsControl]="pdfjsControl2" [pdfjsGroupControl]="pdfjsGroupControl"
@@ -29,8 +30,11 @@
                 (click)="pdfjsGroupControl.selectPrevious()">
           <fa-icon size="lg" [icon]="faArrowLeft"></fa-icon>
         </button>
+        <mat-form-field class="page-number-input">
+          <input matInput [disabled]="isNaN(pdfjsGroupControl.getSelectedPageIndex())" type="number" min="1" [max]="pdfjsGroupControl.getPageNumber()" [value]="pdfjsGroupControl.getSelectedPageIndex()" (change)="changePageHandler($event)"/>
+        </mat-form-field>
         <button mat-icon-button [disabled]="true">
-          {{pdfjsGroupControl.getSelectedPageIndex()}}/{{pdfjsGroupControl.getPageNumber()}}
+          /{{pdfjsGroupControl.getPageNumber()}}
         </button>
         <button mat-icon-button [disabled]="!pdfjsGroupControl.nextIsSelectable()"
                 (click)="pdfjsGroupControl.selectNext()">

@@ -60,7 +60,11 @@ const MODULES: any[] = [
     CommonModule,
     MODULES,
     MarkdownModule.forRoot({loader: HttpClient}),
-    PdfjsModule.config({workerSrc: 'assets/pdf.worker.js'}),
+    PdfjsModule.config({
+      workerSrc: 'assets/pdf.worker.js',
+      cMapUrl: 'assets/cmaps/',
+      cMapPacked: true
+    }),
     StoreModule,
   ],
   exports: [

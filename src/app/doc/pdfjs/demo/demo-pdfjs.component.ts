@@ -1,9 +1,10 @@
 import {Component, OnInit} from '@angular/core';
 import {PdfjsControl} from '../../../../../projects/pdfjs/src/lib/controls/pdfjs-control';
-import {RenderQuality, ThumbnailDragMode, ThumbnailLayout, ViewFit} from '../../../../../projects/pdfjs/src/lib/classes/pdfjs-objects';
+import {RenderEvent, RenderEventType, RenderQuality, ThumbnailDragMode, ThumbnailLayout, ViewFit} from '../../../../../projects/pdfjs/src/lib/classes/pdfjs-objects';
 import {PdfjsGroupControl} from '../../../../../projects/pdfjs/src/lib/controls/pdfjs-group-control';
 import {faArrowLeft, faArrowRight, faEdit, faExpandArrowsAlt, faFilePdf, faMinus, faPlus, faSearchMinus, faSearchPlus, faSyncAlt, faUndo} from '@fortawesome/free-solid-svg-icons';
 import {faCopy, faFile} from '@fortawesome/free-regular-svg-icons';
+import {FormControl} from '@angular/forms';
 
 @Component({
   templateUrl: './demo-pdfjs.component.html',
@@ -38,8 +39,10 @@ export class DemoPdfjsComponent implements OnInit {
 
   ThumbnailDragMode = ThumbnailDragMode;
   ThumbnailLayout = ThumbnailLayout;
+  isNaN = isNaN;
   ViewFit = ViewFit;
-
+  progress = 0;
+  timeStart = 0;
   scale = 1;
 
   constructor() {
@@ -56,5 +59,21 @@ export class DemoPdfjsComponent implements OnInit {
 
   incQuality(by: number) {
     this.quality = (((this.quality + 4) + by) % 5) + 1 as RenderQuality;
+  }
+
+  renderHandler($event: RenderEvent) {
+    this.progress = ($event.page / $event.pages) * 100;
+    if ($event.type === RenderEventType.START) {
+      this.timeStart = $event.time;
+    } else if ($event.type === RenderEventType.END) {
+      const time = $event.time - this.timeStart;
+      const s = Math.trunc(time / 1000);
+      const ms = time - s * 1000;
+      console.log(`Render ${$event.pages} pages in ${s}s ${ms}ms`);
+    }
+  }
+
+  changePageHandler(event: Event) {
+    this.pdfjsGroupControl.selectPageIndex(parseInt((event.target as HTMLInputElement).value, 10));
   }
 }

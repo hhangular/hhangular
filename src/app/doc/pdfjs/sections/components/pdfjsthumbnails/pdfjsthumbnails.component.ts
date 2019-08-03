@@ -19,8 +19,8 @@ export class PdfjsThumbnailsComponent implements OnInit {
   conditionCtrl3: PdfjsControl = new PdfjsControl();
   conditionCtrl4: PdfjsControl = new PdfjsControl();
   conditionCtrl5: PdfjsControl = new PdfjsControl();
-  conditionCtrl6: PdfjsControl = new PdfjsControl();
   guideCtrl1: PdfjsControl = new PdfjsControl();
+  guideCtrl2: PdfjsControl = new PdfjsControl();
 
   ThumbnailLayout = ThumbnailLayout;
   ThumbnailDragMode = ThumbnailDragMode;
@@ -40,17 +40,19 @@ export class PdfjsThumbnailsComponent implements OnInit {
   borderWidth = 5;
 
   consoleLog = '';
+  progress = 0;
+  timeStart = 0;
 
   renderEndEvent: RenderEvent;
 
   ngOnInit() {
     this.guideCtrl1.load('../assets/pdfs/guide.pdf', true);
+    this.guideCtrl2.load('../assets/pdfs/guide.pdf', true);
     this.conditionCtrl1.load('../assets/pdfs/conditions.pdf', true);
     this.conditionCtrl2.load('../assets/pdfs/conditions.pdf', true);
     this.conditionCtrl3.load('../assets/pdfs/conditions.pdf', true);
     this.conditionCtrl4.load('../assets/pdfs/conditions.pdf', true);
     this.conditionCtrl5.load('../assets/pdfs/conditions.pdf', true);
-    this.conditionCtrl6.load('../assets/pdfs/conditions.pdf', true);
   }
 
   renderEvent($event: RenderEvent) {
@@ -60,8 +62,15 @@ export class PdfjsThumbnailsComponent implements OnInit {
   }
 
   renderHandler($event: RenderEvent) {
-    if ($event.type === 'END') {
-      this.consoleLog += `${JSON.stringify($event)}   \n`;
+    this.consoleLog += `${JSON.stringify($event)}   \n`;
+    this.progress = ($event.page / $event.pages) * 100;
+    if ($event.type === 'START') {
+      this.timeStart = $event.time;
+    } else if ($event.type === 'END') {
+      const time = $event.time - this.timeStart;
+      const s = Math.trunc(time / 1000);
+      const ms = time - s * 1000;
+      this.consoleLog += `Render ${$event.pages} pages in ${s}s ${ms}ms   \n`;
     }
   }
 }

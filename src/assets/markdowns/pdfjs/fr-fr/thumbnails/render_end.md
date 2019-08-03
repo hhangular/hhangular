@@ -6,8 +6,6 @@
 ```typescript
 // In controller
 renderHandler($event: RenderEvent) {
-   if ($event.type === 'END') {
-      console.log(`${JSON.stringify($event)}`;);
-   }
+   console.log(`${JSON.stringify($event)}`;);
 }
 ```
