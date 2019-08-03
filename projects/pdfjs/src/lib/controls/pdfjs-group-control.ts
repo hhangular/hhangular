@@ -81,6 +81,13 @@ export class PdfjsGroupControl implements PdfjsCommand {
     return NaN;
   }
 
+  public selectPageIndex(index: number): number {
+    if (!!this.selectedPdfjsControl) {
+      return this.selectedPdfjsControl.selectPageIndex(index);
+    }
+    return NaN;
+  }
+
   public selectFirst(): number {
     if (!!this.selectedPdfjsControl) {
       return this.selectedPdfjsControl.selectFirst();

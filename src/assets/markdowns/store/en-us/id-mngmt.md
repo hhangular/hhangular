@@ -2,7 +2,7 @@
 
 If in the previous example the table configuration is linked to the 'TestDecoratorComponent' component, we sometimes want to be able to share a configuration between several components.
 
-**!!Attention!!** this mechanism is not adapted to make components communicate with each other.
+>>> **!!Attention!!** this mechanism is not adapted to make components communicate with each other.
 
 In the application that presents the documentation, this mechanism is used to save the chosen page viewed by the user as he changes his language.
 
@@ -50,4 +50,4 @@ export class Test2DecoratorComponent {
 }
 ```
 
-Note that the initial values must be the same because the first component that writes in the store will be right.
+> Note that the initial values must be the same because the first component that writes in the store will be right.

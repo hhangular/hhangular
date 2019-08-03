@@ -7,6 +7,7 @@ export interface PdfApi {
 
   AnnotationLayer: AnnotationLayer;
   GlobalWorkerOptions: GlobalWorkerOptions;
+  GlobalCMapOptions: GlobalCMapOptions;
   InvalidPDFException: InvalidPDFException;
   LinkTarget: LinkTarget;
   LoopbackPort: LoopbackPort;
@@ -73,7 +74,10 @@ export declare class AnnotationLayer {
 
   static update(parameters: { annotations: any[], div: HTMLDivElement, viewport: any }): void;
 }
-
+export interface GlobalCMapOptions {
+  cMapUrl: string;
+  cMapPacked: boolean;
+}
 export interface GlobalWorkerOptions {
   workerPort: string;
   workerSrc: string;

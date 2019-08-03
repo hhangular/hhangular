@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {faBars} from '@fortawesome/free-solid-svg-icons';
-import {faNpm} from '@fortawesome/free-brands-svg-icons';
 import {BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
@@ -11,7 +10,7 @@ export class DocPdfjsComponent implements OnInit {
 
   faBars = faBars;
   open = true;
-  mode = 'side';
+  mode: 'over' | 'push' | 'side' = 'side';
 
   constructor(private breakpointObserver: BreakpointObserver) {
   }

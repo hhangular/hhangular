@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {faArchive, faDesktop, faDownload, faExclamationTriangle, faFingerprint, faFlagCheckered, faProjectDiagram, faPuzzlePiece, faUserAlt} from '@fortawesome/free-solid-svg-icons';
+import {faArchive, faAt, faDesktop, faDownload, faExclamationTriangle, faFingerprint, faFlagCheckered, faProjectDiagram, faPuzzlePiece, faUserAlt} from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-sidenav',
@@ -17,5 +17,6 @@ export class SidenavComponent {
   faProjectDiagram = faProjectDiagram;
   faFingerprint = faFingerprint;
   faPuzzlePiece = faPuzzlePiece;
+  faAt = faAt;
 
 }

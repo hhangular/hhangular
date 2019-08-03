@@ -1,15 +1,16 @@
 import {Component, OnInit} from '@angular/core';
-import {PdfjsControl} from '../../../../../../../projects/pdfjs/src/lib/controls/pdfjs-control';
 import {
+  PdfjsControl,
   RenderEvent,
   RenderQuality,
   ThumbnailDragMode,
   ThumbnailLayout
-} from '../../../../../../../projects/pdfjs/src/lib/classes/pdfjs-objects';
+} from '../../../../../../../projects/pdfjs/src/public-api';
+import {LocalStored} from '../../../../../../../projects/store/src/public-api';
 
 @Component({
   templateUrl: './pdfjsthumbnails.component.html',
-  styleUrls: ['./pdfjsthumbnails.component.scss']
+  styleUrls: ['../../../../section.scss']
 })
 export class PdfjsThumbnailsComponent implements OnInit {
 
@@ -19,12 +20,16 @@ export class PdfjsThumbnailsComponent implements OnInit {
   conditionCtrl4: PdfjsControl = new PdfjsControl();
   conditionCtrl5: PdfjsControl = new PdfjsControl();
   guideCtrl1: PdfjsControl = new PdfjsControl();
+  guideCtrl2: PdfjsControl = new PdfjsControl();
 
   ThumbnailLayout = ThumbnailLayout;
   ThumbnailDragMode = ThumbnailDragMode;
 
-  quality: RenderQuality = 1;
-  allowRemove = false;
+  @LocalStored(1)
+  config = {
+    quality: 1
+  };
+  allowRemove = true;
   allowDrop = true;
   dragMode = ThumbnailDragMode.DUPLICATE;
   fitSize = 100;
@@ -34,10 +39,15 @@ export class PdfjsThumbnailsComponent implements OnInit {
   layout = ThumbnailLayout.HORIZONTAL;
   borderWidth = 5;
 
+  consoleLog = '';
+  progress = 0;
+  timeStart = 0;
+
   renderEndEvent: RenderEvent;
 
   ngOnInit() {
     this.guideCtrl1.load('../assets/pdfs/guide.pdf', true);
+    this.guideCtrl2.load('../assets/pdfs/guide.pdf', true);
     this.conditionCtrl1.load('../assets/pdfs/conditions.pdf', true);
     this.conditionCtrl2.load('../assets/pdfs/conditions.pdf', true);
     this.conditionCtrl3.load('../assets/pdfs/conditions.pdf', true);
@@ -48,6 +58,19 @@ export class PdfjsThumbnailsComponent implements OnInit {
   renderEvent($event: RenderEvent) {
     if ($event.type === 'END') {
       this.renderEndEvent = $event;
+    }
+  }
+
+  renderHandler($event: RenderEvent) {
+    this.consoleLog += `${JSON.stringify($event)}   \n`;
+    this.progress = ($event.page / $event.pages) * 100;
+    if ($event.type === 'START') {
+      this.timeStart = $event.time;
+    } else if ($event.type === 'END') {
+      const time = $event.time - this.timeStart;
+      const s = Math.trunc(time / 1000);
+      const ms = time - s * 1000;
+      this.consoleLog += `Render ${$event.pages} pages in ${s}s ${ms}ms   \n`;
     }
   }
 }

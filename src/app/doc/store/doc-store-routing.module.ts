@@ -9,11 +9,11 @@ const docRoutes: Routes = [
       path: '', component: DocStoreComponent, children: [
         {path: '', redirectTo: 'overview', pathMatch: 'full'},
         {path: 'overview', component: OverviewComponent},
-        {path: 'install', component: InstallationComponent},
+        {path: 'installation', component: InstallationComponent},
         {path: 'version-mngmt', component: VersionMngmtComponent},
         {path: 'id-mngmt', component: IdMngmtComponent},
         {path: 'user-mngmt', component: UserMngmtComponent},
-        {path: 'use', component: UseComponent},
+        {path: 'decorators', component: UseComponent},
         {path: 'limitations', component: LimitationsComponent},
         {path: 'demo', component: DemoStoreComponent}
       ]

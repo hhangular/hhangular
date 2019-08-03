@@ -2,7 +2,7 @@
 
 Si dans l'exemple précédent la configuration du tableau est lié au composant `TestDecoratorComponent`, on veut pouvoir parfois partager une configuration entre plusieurs composants.
 
-**!!Attention!!** ce mécanisme n'est pas adapter pour faire communiquer des composant entres eux.
+>>> **!!Attention!!** ce mécanisme n'est pas adapté pour faire communiquer des composant entres eux.
 
 Dans l'application qui présente la documentation, on se sert de ce mécanisme pour sauvegarder la page choisie visualisée par l'utilisateur au moment ou il change de langue.
 
@@ -50,4 +50,4 @@ export class Test2DecoratorComponent {
 }
 ```
 
-Notez qu'il faut que les valeurs initiales soient les même car le premier composant qui écrira dans le store aura raison.
+> Notez qu'il faut que les valeurs initiales soient les même car le premier composant qui écrira dans le store aura raison.

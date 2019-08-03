@@ -1,10 +1,10 @@
 import {Component, ElementRef, EventEmitter, HostBinding, Inject, Input, OnDestroy, OnInit, Output} from '@angular/core';
-import {CanvasWrapperRenderEvent, RenderQuality, ViewFit} from '../../classes/pdfjs-objects';
+import {CanvasWrapperRenderEvent, PDF_API, RenderQuality, ViewFit} from '../../classes/pdfjs-objects';
 import {PdfApi} from '../../classes/pdfapi';
 import {PdfjsItem} from '../../classes/pdfjs-item';
 import {PDFPageProxy, PDFPageViewport, PDFPromise, PDFRenderTask} from 'pdfjs-dist';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
-import {filter, tap} from 'rxjs/operators';
+import {filter} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';
 
 type GetScaleForFit = (size: number, viewport: PDFPageViewport) => number;
@@ -16,6 +16,18 @@ type GetScaleForFit = (size: number, viewport: PDFPageViewport) => number;
 })
 export class PdfjsCanvasWrapperComponent implements OnInit, OnDestroy {
 
+  @Input()
+  multiCanvas = false;
+  @Output()
+  endRender = new EventEmitter<CanvasWrapperRenderEvent>();
+  @Output()
+  startRender = new EventEmitter<PdfjsItem>();
+  @HostBinding('style.width')
+  width: string;
+  @HostBinding('style.height')
+  height: string;
+  @HostBinding('class.not_rendered')
+  notRendered = true;
   private fit$: BehaviorSubject<ViewFit> = new BehaviorSubject<ViewFit>(ViewFit.VERTICAL);
   private size$: BehaviorSubject<number> = new BehaviorSubject<number>(90);
   private item$: BehaviorSubject<PdfjsItem> = new BehaviorSubject<PdfjsItem>(null);
@@ -25,7 +37,7 @@ export class PdfjsCanvasWrapperComponent implements OnInit, OnDestroy {
   private subRender: Subscription;
 
   constructor(@Inject(DOCUMENT) private document: Document,
-              @Inject('PdfApi') private API: PdfApi,
+              @Inject(PDF_API) private API: PdfApi,
               private elementRef: ElementRef) {
   }
 
@@ -54,33 +66,14 @@ export class PdfjsCanvasWrapperComponent implements OnInit, OnDestroy {
     this.scale$.next(scale);
   }
 
-  @Input()
-  multiCanvas = false;
-
-  @Output()
-  endRender = new EventEmitter<CanvasWrapperRenderEvent>();
-
-  @Output()
-  startRender = new EventEmitter<PdfjsItem>();
-
-  @HostBinding('style.width')
-  width: string;
-
-  @HostBinding('style.height')
-  height: string;
-
-  @HostBinding('class.not_rendered')
-  notRendered = true;
-
   ngOnInit() {
     this.subRender = combineLatest(this.fit$, this.item$, this.size$, this.quality$, this.scale$)
       .pipe(
-//        tap((arr: any[]) => console.log(arr.every(val => !!val), arr)),
         filter((arr: any[]) => arr.every(val => !!val)),
       )
       .subscribe((data: [ViewFit, PdfjsItem, number, RenderQuality, number]) => {
         this.notRendered = true;
-        this.startRender.emit(data[1]);
+        this.startRender.emit(new PdfjsItem({...data[1]}));
         this.renderPdfjsPageToCanvas(...data);
       });
   }
@@ -121,7 +114,7 @@ export class PdfjsCanvasWrapperComponent implements OnInit, OnDestroy {
       this.destroyCanvas();
     }
     const canvas: HTMLCanvasElement = this.getCanvas();
-    const canvasContext: CanvasRenderingContext2D = this.cleanCanvas(canvas);
+    const canvasContext: CanvasRenderingContext2D = cleanCanvas(canvas);
     let viewport: PDFPageViewport;
     let pdfPageProxy: PDFPageProxy;
     return item.getPage().then((pageProxy: PDFPageProxy) => {
@@ -130,7 +123,7 @@ export class PdfjsCanvasWrapperComponent implements OnInit, OnDestroy {
       viewport = pageProxy.getViewport({scale: 1, rotation: item.rotation, dontFlip: false});
       const scaleForFit = getScaleForFit(size, viewport); // method.call is useless here, cause getScale has no scope
       viewport = this.factorViewport(viewport, zoom * scaleForFit); // pdfPageProxy.getViewport(zoomSelected * scaleForFit, item.rotation);
-      this.setCanvasSizes(canvas, viewport, quality, zoom);
+      this.setCanvasSizes(canvas, viewport, quality);
       this.pdfRenderTask = pageProxy.render({
         canvasContext,
         viewport: this.factorViewport(viewport, quality) // pdfPageProxy.getViewport(scaleForFit * quality * zoomSelected, item.rotation)
@@ -154,14 +147,14 @@ export class PdfjsCanvasWrapperComponent implements OnInit, OnDestroy {
    * Render page in canvas
    */
   private renderItemInCanvasVerticalFitted(item: PdfjsItem, height: number, quality: RenderQuality = 1, scale: number = 1): PDFPromise<CanvasWrapperRenderEvent> {
-    return this.renderItemInCanvasFitted(item, height, quality, scale, this.getScaleForVerticalFit);
+    return this.renderItemInCanvasFitted(item, height, quality, scale, getScaleForVerticalFit);
   }
 
   /**
    * Render page in canvas
    */
   private renderItemInCanvasHorizontalFitted(item: PdfjsItem, width: number, quality: RenderQuality = 1, scale: number = 1): PDFPromise<CanvasWrapperRenderEvent> {
-    return this.renderItemInCanvasFitted(item, width, quality, scale, this.getScaleForHorizontalFit);
+    return this.renderItemInCanvasFitted(item, width, quality, scale, getScaleForHorizontalFit);
   }
 
   /**
@@ -169,20 +162,6 @@ export class PdfjsCanvasWrapperComponent implements OnInit, OnDestroy {
    */
   private getRenderFittedInCanvas(fit: ViewFit): (item: PdfjsItem, size: number, quality?: RenderQuality, scale?: number) => PDFPromise<CanvasWrapperRenderEvent> {
     return (fit === ViewFit.VERTICAL) ? this.renderItemInCanvasVerticalFitted.bind(this) : this.renderItemInCanvasHorizontalFitted.bind(this);
-  }
-
-  /**
-   * Compute scale for vertical fitSelected thumbnail container
-   */
-  private getScaleForVerticalFit(height: number, viewport: PDFPageViewport): number {
-    return height / viewport.height;
-  }
-
-  /**
-   * Compute scale for horizontal fitSelected thumbnail container
-   */
-  private getScaleForHorizontalFit(width: number, viewport: PDFPageViewport): number {
-    return width / viewport.width;
   }
 
   /**
@@ -208,7 +187,7 @@ export class PdfjsCanvasWrapperComponent implements OnInit, OnDestroy {
   /**
    * Define sizes of canvas
    */
-  private setCanvasSizes(canvas: HTMLCanvasElement, viewport: PDFPageViewport, quality: RenderQuality, zoom: number) {
+  private setCanvasSizes(canvas: HTMLCanvasElement, viewport: PDFPageViewport, quality: RenderQuality) {
     canvas.width = viewport.width * quality;
     canvas.height = viewport.height * quality;
     canvas.setAttribute('width', `${canvas.width}px`);
@@ -227,7 +206,7 @@ export class PdfjsCanvasWrapperComponent implements OnInit, OnDestroy {
     if (wrapper.children.length) {
       const canvas: HTMLCanvasElement = wrapper.children.item(0) as HTMLCanvasElement;
       if (!!canvas) {
-        this.cleanCanvas(canvas);
+        cleanCanvas(canvas);
         canvas.remove();
       }
     }
@@ -245,12 +224,27 @@ export class PdfjsCanvasWrapperComponent implements OnInit, OnDestroy {
     }
   }
 
-  /**
-   * Clean canvas, return ctx after
-   */
-  private cleanCanvas(canvas: HTMLCanvasElement): CanvasRenderingContext2D {
-    const ctx: CanvasRenderingContext2D = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width || 0, canvas.height || 0);
-    return ctx;
-  }
+}
+
+/**
+ * Clean canvas, return ctx after
+ */
+function cleanCanvas(canvas: HTMLCanvasElement): CanvasRenderingContext2D {
+  const ctx: CanvasRenderingContext2D = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width || 0, canvas.height || 0);
+  return ctx;
+}
+
+/**
+ * Compute scale for vertical fitSelected thumbnail container
+ */
+function getScaleForVerticalFit(height: number, viewport: PDFPageViewport): number {
+  return height / viewport.height;
+}
+
+/**
+ * Compute scale for horizontal fitSelected thumbnail container
+ */
+function getScaleForHorizontalFit(width: number, viewport: PDFPageViewport): number {
+  return width / viewport.width;
 }

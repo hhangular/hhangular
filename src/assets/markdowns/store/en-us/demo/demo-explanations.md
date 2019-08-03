@@ -26,7 +26,7 @@ The `1` setting of the annotation defines that this is the first version. This w
 Indeed, during development, it is likely that you will have to change the structure of the object you want to persist several times.   
 Also if you don't want to empty your browser's store every time. You will have to increment the version of the object and make the store version obsolete.
 
-Note that it doesn't matter if you deliver with a version other than `1` when the user has never persisted the object in his store.
+> Note that it doesn't matter if you deliver with a version other than `1` when the user has never persisted the object in his store.
 
 ### Initialisation 
 
@@ -77,7 +77,7 @@ If the column is already visible, it is hidden.
 The `sortChange` method is called every time the sort is changed.   
 The `Sort` object is directly defined on the `conf` object.
 
-Note that we could have done this: 
+> Note that we could have done this: 
 
 ```typescript
   sortChange($event: Sort) {

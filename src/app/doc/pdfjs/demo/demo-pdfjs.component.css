@@ -1,28 +1,40 @@
+:host {
+  flex-direction: column;
+  box-sizing: border-box;
+  display: flex;
+}
+.deck {
+  width: calc(100% - 200px);
+}
 pdfjs-view {
-  height: calc(100vh - 64px  - 64px - 6px - 100px - 40px);
+  height: calc(100vh - 64px  - 4px - 64px - 6px - 100px - 66px);
 }
 pdfjs-view.edit-mode {
-  height: calc(100vh - 64px - 64px - 6px  - 100px - 100px - 40px);
+  height: calc(100vh - 64px  - 4px - 64px - 6px  - 100px - 100px - 66px);
 }
 .thumbnails-vertical {
-  height: calc(100vh - 64px  - 64px - 6px - 100px);
+  height: calc(100vh - 64px  - 4px - 64px - 6px - 100px);
 }
 .thumbnails-vertical.edit-mode {
-  height: calc(100vh - 64px - 64px - 6px  - 100px - 100px);
+  height: calc(100vh - 64px - 4px - 64px - 6px  - 100px - 100px);
+}
+
+.page-number-input {
+  width: 50px;
 }
 
 @media (max-width: 599px) {
   pdfjs-view {
-    height: calc(100vh - 56px - 6px - 100px - 40px);
+    height: calc(100vh - 56px - 4px - 6px - 100px - 66px);
   }
   pdfjs-view.edit-mode {
-    height: calc(100vh - 56px - 6px  - 100px - 100px - 40px);
+    height: calc(100vh - 56px - 4px - 6px  - 100px - 100px - 66px);
   }
   .thumbnails-vertical {
-    height: calc(100vh - 56px - 100px);
+    height: calc(100vh - 56px - 4px - 100px);
   }
   .thumbnails-vertical.edit-mode {
-    height: calc(100vh - 56px - 100px - 100px);
+    height: calc(100vh - 56px - 4px - 100px - 100px);
   }
 }
 

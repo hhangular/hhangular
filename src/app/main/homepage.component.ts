@@ -1,15 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import {Component} from '@angular/core';
+import {faFontAwesome} from '@fortawesome/free-brands-svg-icons';
 
 @Component({
   templateUrl: './homepage.component.html',
   styleUrls: ['./homepage.component.css'],
 })
-export class HomepageComponent implements OnInit {
+export class HomepageComponent {
 
-  constructor() { }
-
-  public ngOnInit() {
-
-  }
-
+  faFontAwesome = faFontAwesome;
 }

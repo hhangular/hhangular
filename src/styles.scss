@@ -15,9 +15,19 @@ body {
   flex-grow: 1;
 }
 
+.flex-h20 {
+  width: 20px;
+}
+
+.small_screen {
+  display: none !important;
+}
 @media (max-width: 599px) {
-  .badge {
-    display: none;
+  .wide_screen {
+    display: none !important;
+  }
+  .small_screen {
+    display: initial !important;
   }
 }
 
@@ -56,9 +66,43 @@ body {
 .code-attribute-value, .code-keyword {
   color: #07a;
 }
-code:not([class]) {
-  font-size: large;
+div[markdown] code:not([class]) {
+  font-size: 1.1em;
   background-color: #ccc;
   font-weight: bold;
-  padding: 0px 5px;
+  padding: 0 5px;
 }
+
+div[markdown] blockquote {
+  margin-inline-start: 0;
+  margin-inline-end: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+div[markdown] > blockquote > p {
+  padding-block-start: 1em;
+  padding-block-end: 1em;
+  padding-inline-start: 40px;
+  padding-inline-end: 40px;
+  border-left: #0074D9 solid 10px;
+  background-color: #eee;
+}
+
+div[markdown] > blockquote > blockquote > p  {
+  padding-block-start: 1em;
+  padding-block-end: 1em;
+  padding-inline-start: 40px;
+  padding-inline-end: 40px;
+  border-left: #d97107 solid 10px;
+  background-color: #eee;
+}
+
+div[markdown] > blockquote > blockquote > blockquote > p  {
+  padding-block-start: 1em;
+  padding-block-end: 1em;
+  padding-inline-start: 40px;
+  padding-inline-end: 40px;
+  border-left: #C21F39 solid 10px;
+  background-color: #eee;
+}
+

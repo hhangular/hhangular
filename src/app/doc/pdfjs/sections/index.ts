@@ -1,5 +1,5 @@
 import {ConfigComponent} from './getstart/config/config.component';
-import {InstallComponent} from './getstart/install/install.component';
+import {InstallationComponent} from './getstart/installation/installation.component';
 import {ThumbnailDragModeComponent} from './enum/thumbnaildragmode/thumbnaildragmode.component';
 import {ThumbnailLayoutComponent} from './enum/thumbnaillayout/thumbnaillayout.component';
 import {ViewFitComponent} from './enum/viewfit/viewfit.component';
@@ -14,7 +14,7 @@ import {OverviewComponent} from './overview/overview.component';
 
 export const SECTIONS: any[] = [
   OverviewComponent,
-  InstallComponent,
+  InstallationComponent,
   ConfigComponent,
   PdfjsThumbnailsComponent,
   PdfjsViewComponent,
@@ -30,7 +30,7 @@ export const SECTIONS: any[] = [
 
 export {OverviewComponent} from './overview/overview.component';
 export {ConfigComponent} from './getstart/config/config.component';
-export {InstallComponent} from './getstart/install/install.component';
+export {InstallationComponent} from './getstart/installation/installation.component';
 export {ThumbnailDragModeComponent} from './enum/thumbnaildragmode/thumbnaildragmode.component';
 export {ThumbnailLayoutComponent} from './enum/thumbnaillayout/thumbnaillayout.component';
 export {ViewFitComponent} from './enum/viewfit/viewfit.component';

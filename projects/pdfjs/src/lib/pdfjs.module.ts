@@ -1,6 +1,6 @@
 import {CommonModule} from '@angular/common';
 import {ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Inject, Injector, ModuleWithProviders, NgModule} from '@angular/core';
-import {PdfjsConfig} from './classes/pdfjs-objects';
+import {PDF_API, PdfjsConfig} from './classes/pdfjs-objects';
 import {PdfjsCommonComponent} from './components/pdfjs-common.component';
 import {PdfjsRemoveButtonComponent} from './components/pdfjs-thumbnail/pdfjs-remove.button/pdfjs-remove-button.component';
 import {PdfjsThumbnailComponent} from './components/pdfjs-thumbnail/pdfjs-thumbnail.component';
@@ -41,7 +41,7 @@ import { PdfjsAnnotationLayerComponent } from './components/pdfjs-annotation-lay
   providers: [
     ThumbnailDragService,
     KeysService,
-    {provide: 'PdfApi', useFactory: pdfApiFactory}
+    {provide: PDF_API, useFactory: pdfApiFactory}
   ],
   entryComponents: [
     PdfjsCommonComponent, PdfjsThumbnailComponent, // dynamic component
@@ -63,11 +63,16 @@ export class PdfjsModule {
   constructor(private cfr: ComponentFactoryResolver,
               private defaultInjector: Injector,
               private appRef: ApplicationRef,
-              private config: PdfjsConfig = {workerSrc: 'assets/pdf.worker.js'},
-              @Inject('PdfApi') private API: PdfApi
+              private config: PdfjsConfig = {
+                workerSrc: 'assets/pdf.worker.js',
+                cMapUrl: 'assets/cmaps/',
+                cMapPacked: true
+              },
+              @Inject(PDF_API) private API: PdfApi
   ) {
     if (!this.API.GlobalWorkerOptions.workerSrc) {
       this.API.GlobalWorkerOptions.workerSrc = config.workerSrc;
+      this.API.GlobalCMapOptions = {cMapUrl: config.cMapUrl, cMapPacked: config.cMapPacked};
     }
     this.addPdfjsCommonComponentToDom();
   }

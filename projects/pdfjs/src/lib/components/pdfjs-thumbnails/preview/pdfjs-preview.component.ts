@@ -29,54 +29,49 @@ type InnerItem = PdfjsItem & DOMRect & { atLeft: boolean, atTop: boolean };
 })
 export class PdfjsPreviewComponent implements OnInit {
 
-  private item$: BehaviorSubject<InnerItem> = new BehaviorSubject<InnerItem>(null);
-  private _item: InnerItem = null;
-
-  @Input()
-  set item(item: InnerItem) {
-    if (!item) {
-      this._item = null;
-      this.state = 'hidden';
-    }
-    this.item$.next(item);
-  }
-
-  get item(): InnerItem {
-    return this._item;
-  }
-
   @HostBinding('@previewState')
   state = 'inactive';
-
   @Input()
   layout: ThumbnailLayout = ThumbnailLayout.HORIZONTAL;
-
   /**
    * Delay for show preview. 0 => disable preview
    */
   @Input()
   delay = 0;
-
   /**
    * Height of preview
    */
   @Input()
   height = 300;
-
   /**
    * Quality of preview
    */
   @Input()
   quality: RenderQuality = 2;
+  private item$: BehaviorSubject<InnerItem> = new BehaviorSubject<InnerItem>(null);
+  private innerItem: InnerItem = null;
 
   constructor(private elementRef: ElementRef) {
+  }
+
+  get item(): InnerItem {
+    return this.innerItem;
+  }
+
+  @Input()
+  set item(item: InnerItem) {
+    if (!item) {
+      this.innerItem = null;
+      this.state = 'hidden';
+    }
+    this.item$.next(item);
   }
 
   public ngOnInit(): void {
     this.item$.pipe(
       debounceTime(this.delay),
     ).subscribe((item: InnerItem) => {
-      this._item = item;
+      this.innerItem = item;
       const previewThumbnail: HTMLElement = this.elementRef.nativeElement;
       resetPreviewThumbnail(previewThumbnail);
       if (!!item) {
@@ -99,9 +94,9 @@ export class PdfjsPreviewComponent implements OnInit {
       const caretSize = 10;
       resetPreviewThumbnail(previewThumbnail);
       if (this.layout === ThumbnailLayout.HORIZONTAL) {
-        this.addVerticalCaret(previewThumbnail, this._item, caretSize);
+        this.addVerticalCaret(previewThumbnail, this.innerItem, caretSize);
       } else {
-        this.addHorizontalCaret(previewThumbnail, this._item, caretSize);
+        this.addHorizontalCaret(previewThumbnail, this.innerItem, caretSize);
       }
       this.state = 'visible';
     } else {
