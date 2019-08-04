@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PdfjsControl, RenderQuality, ViewFit} from '../../../../../../../projects/pdfjs/src/public-api';
+import {PdfjsControl, PdfjsGroupControl, RenderQuality, ViewFit} from '../../../../../../../projects/pdfjs/src/public-api';
 
 @Component({
   templateUrl: './pdfjsview.component.html',
@@ -7,7 +7,9 @@ import {PdfjsControl, RenderQuality, ViewFit} from '../../../../../../../project
 })
 export class PdfjsViewComponent implements OnInit {
 
+  groupControl: PdfjsGroupControl = new PdfjsGroupControl();
   conditionCtrl: PdfjsControl = new PdfjsControl();
+  guideCtrl: PdfjsControl = new PdfjsControl();
 
   fit: ViewFit = ViewFit.VERTICAL;
 
@@ -25,6 +27,8 @@ export class PdfjsViewComponent implements OnInit {
 
   ngOnInit() {
     this.conditionCtrl.load('../assets/pdfs/conditions.pdf', true);
+    this.guideCtrl.load('../assets/pdfs/guide.pdf', true);
+    this.groupControl.selectControl(this.guideCtrl);
   }
 
 }
