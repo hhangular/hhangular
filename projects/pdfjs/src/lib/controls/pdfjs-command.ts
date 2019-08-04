@@ -2,6 +2,8 @@ import {PDFPromise} from 'pdfjs-dist';
 
 export interface PdfjsCommand {
 
+  disabled: boolean;
+
   /**
    * Get number of pages
    */
