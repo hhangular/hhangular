@@ -7,10 +7,10 @@ import {Observable} from 'rxjs';
 export const PDF_API = new InjectionToken<Observable<string>>('PdfApi');
 
 export class PdfjsItemEvent {
-  public item: PdfjsItem;
-  public event: PdfjsItemEventType;
-  public from?: number;
-  public to?: number;
+  item: PdfjsItem;
+  event: PdfjsItemEventType;
+  from?: number;
+  to?: number;
 }
 export enum PdfjsItemEventType {
   INIT = 'init',
@@ -28,9 +28,19 @@ export class PdfjsItemRemoveEvent extends PdfjsItemEvent {
   public event: PdfjsItemEventType.REMOVE;
 }
 
-export class CanvasWrapperRenderEvent {
+export interface CanvasWrapperRenderEvent {
   viewport: PDFPageViewport;
   pdfPageProxy: PDFPageProxy;
+  width: number;
+  height: number;
+}
+
+export interface PreviewEvent {
+  item: PdfjsItem;
+  atTop: boolean;
+  atLeft: boolean;
+  x: number;
+  y: number;
   width: number;
   height: number;
 }

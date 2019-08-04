@@ -1,6 +1,8 @@
 ---
 ## Attributes
 
+ - **pdfjsControl*** : Set the controller of the `PDF` 
+ - **pdfjsGroupControl** : Set the `pdfjsGroupControl` in case more than one `pdfjs-thumbnails` share a ` pdfjs-view`  
  - **qualityRender** : Sets the quality of miniatures
  - **allowRemove** : Allows or may not have the option to remove a miniature  
  - **dragMode** : In the case of a `drag&drop`, make a copy or move the miniature

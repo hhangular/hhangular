@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ElementRef, HostBinding, HostListener, Input, OnDestroy, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, OnDestroy, ViewChild} from '@angular/core';
 import {PDFPageProxy, PDFPageViewport} from 'pdfjs-dist';
 import {Subscription} from 'rxjs';
 import {filter, flatMap, tap} from 'rxjs/operators';
@@ -95,11 +95,11 @@ export class PdfjsViewComponent implements OnDestroy {
     }
   }
 
-  public ngOnDestroy() {
+  ngOnDestroy() {
     this.unsubscribe();
   }
 
-  public hasPageSelected(): boolean {
+  hasPageSelected(): boolean {
     return !!this.item;
   }
 
@@ -107,7 +107,7 @@ export class PdfjsViewComponent implements OnDestroy {
    * mousewheel
    */
   @HostListener('mousewheel', ['$event'])
-  public onMouseWheel(event: WheelEvent) {
+  onMouseWheel(event: WheelEvent) {
     if (!this.mouseWheelNav) {
       return;
     }
@@ -137,14 +137,14 @@ export class PdfjsViewComponent implements OnDestroy {
    * set focus
    */
   @HostListener('click', ['$event'])
-  public onFocus(event: MouseEvent) {
+  onFocus(event: MouseEvent) {
     if (this.keysNav && this.pdfjsControl) {
       event.stopPropagation();
       this.keysService.setPdfjsControl(this.pdfjsControl);
     }
   }
 
-  onCanvasRender(obj: CanvasWrapperRenderEvent) {
+  endRenderHandler(obj: CanvasWrapperRenderEvent) {
     this.defineSizesFromCanvasSizes(obj.width, obj.height, this.quality);
     this.pdfPageProxy = obj.pdfPageProxy;
     this.viewport = obj.viewport;
@@ -156,15 +156,21 @@ export class PdfjsViewComponent implements OnDestroy {
    */
   private computeSize() {
     if (!!this.item) {
-      const view: HTMLElement = this.elementRef.nativeElement;
-      const clientRect: ClientRect = view.getBoundingClientRect();
-      this.height = clientRect.height;
-      this.width = clientRect.width;
+      this.setSizesFromClientRect();
       if (this.fit === ViewFit.HORIZONTAL) {
         this.size = this.width - 6 - 18; // 6: border, 18: scrollbar
       } else {
         this.size = this.height - 6 - 18;
       }
+    }
+  }
+
+  private setSizesFromClientRect() {
+    if (!this.height) {
+      const view: HTMLElement = this.elementRef.nativeElement;
+      const clientRect: ClientRect = view.getBoundingClientRect();
+      this.height = clientRect.height;
+      this.width = clientRect.width;
     }
   }
 

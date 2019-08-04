@@ -21,6 +21,9 @@ export class PdfjsGroupControl implements PdfjsCommand {
     this.selectedPdfjsControl = null;
     this.selectedPdfjsControl$.next(null);
   }
+  public getControl() {
+    return this.selectedPdfjsControl;
+  }
 
   public isControlSelected(pdfjsControl: PdfjsControl): boolean {
     return this.selectedPdfjsControl === pdfjsControl;

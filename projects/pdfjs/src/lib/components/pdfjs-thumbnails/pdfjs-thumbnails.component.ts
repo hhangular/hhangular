@@ -20,7 +20,7 @@ import {filter, map} from 'rxjs/operators';
 import {PdfjsControl} from '../../controls/pdfjs-control';
 import {PdfjsGroupControl} from '../../controls/pdfjs-group-control';
 import {PdfjsItem} from '../../classes/pdfjs-item';
-import {PdfjsItemEvent, PdfjsItemEventType, RenderEvent, RenderEventType, RenderQuality, ThumbnailDragMode, ThumbnailLayout} from '../../classes/pdfjs-objects';
+import {PdfjsItemEvent, PdfjsItemEventType, PreviewEvent, RenderEvent, RenderEventType, RenderQuality, ThumbnailDragMode, ThumbnailLayout} from '../../classes/pdfjs-objects';
 import {ThumbnailDragService} from '../../services/thumbnail-drag.service';
 import {PdfjsThumbnailComponent} from '../pdfjs-thumbnail/pdfjs-thumbnail.component';
 
@@ -42,7 +42,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
   vertical = false;
   itemEvent$: Subject<PdfjsItemEvent> = new Subject<PdfjsItemEvent>();
   thumbnailComponentRefs: Array<ComponentRef<PdfjsThumbnailComponent>> = [];
-  itemToPreview: PdfjsItem & DOMRect;
+  previewEvent: PreviewEvent;
   /**
    * Height of preview
    */
@@ -59,7 +59,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
   private itemToRenderCount = 0;
   private subOnPdfjsGroupCtrl: Subscription;
   private subOnPdfjsCtrl: Subscription;
-  private containerIsSelected = false;
+  private containerIsSelected = true;
   private innerQuality: RenderQuality = 1;
   private innerFitSize = 100;
   private innerPreviewDelay = 100;
@@ -235,6 +235,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
   set pdfjsGroupControl(pdfjsGroupControl: PdfjsGroupControl) {
     this.unsubOnPdfjsGroupCtrl();
     this.innerPdfjsGroupControl = pdfjsGroupControl;
+    this.containerIsSelected = !pdfjsGroupControl;
     if (!!pdfjsGroupControl) {
       this.subOnPdfjsGroupCtrl = pdfjsGroupControl.selectedPdfjsControl$.pipe(
         map((ctrl: PdfjsControl) => !!this.innerPdfjsControl && this.innerPdfjsControl.isEqual(ctrl)),
@@ -269,7 +270,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
    */
   @HostListener('dragstart', ['$event'])
   onDragStart(event: DragEvent) {
-    this.itemToPreview = null;
+    this.previewEvent = null;
     if (this.innerDragMode !== ThumbnailDragMode.NONE) {
       this.startLoading();
       const thumbnail: HTMLElement = this.thumbnailDragService.getFirstParentThumbnail(event.target as HTMLElement);
@@ -308,12 +309,12 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
    */
   @HostListener('scroll', [])
   onScroll() {
-    this.itemToPreview = null;
+    this.previewEvent = null;
   }
 
   @HostListener('mouseout', [])
   mouseOut() {
-    this.itemToPreview = null;
+    this.previewEvent = null;
   }
 
   private ctrlItemEventInitHandler() {
@@ -372,7 +373,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
   }
 
   private removeThumbnail(item: PdfjsItem) {
-    this.itemToPreview = null;
+    this.previewEvent = null;
     this.pdfjsControl.removeItem(item);
   }
 
@@ -446,9 +447,9 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
     instance.previewEnabled = !!this.innerPreviewDelay;
     instance.containerIsSelected = this.containerIsSelected;
 
-    instance.showPreview.subscribe(($event: PdfjsItem & DOMRect) => {
+    instance.showPreview.subscribe(($event: PreviewEvent) => {
       if (!this.thumbnailDragService.dataTransferInitiated()) {
-        this.itemToPreview = $event;
+        this.previewEvent = $event;
       }
     });
     instance.endRender.subscribe(($event: PdfjsItem) => {

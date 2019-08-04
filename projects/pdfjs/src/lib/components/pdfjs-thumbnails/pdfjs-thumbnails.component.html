@@ -6,7 +6,7 @@
 -->
 <ng-template #container>
 </ng-template>
-<pdfjs-preview *ngIf="!!previewDelay" [item]="itemToPreview"
+<pdfjs-preview *ngIf="!!previewDelay" [previewEvent]="previewEvent"
                [layout]="layout"
                [delay]="previewDelay"
                [quality]="previewQuality"
