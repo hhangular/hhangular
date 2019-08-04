@@ -16,6 +16,8 @@ pdfjs-canvas-wrapper {
 
 .page {
   margin: auto auto;
+  width: fit-content;
+  height: fit-content;
   border: none;
   direction: ltr;
   position: relative;
