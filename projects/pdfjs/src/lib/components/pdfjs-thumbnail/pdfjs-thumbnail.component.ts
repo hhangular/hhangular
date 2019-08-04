@@ -3,7 +3,7 @@ import {Component, ElementRef, EventEmitter, HostBinding, HostListener, Input, O
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
 import {filter, flatMap} from 'rxjs/operators';
 import {PdfjsControl} from '../../controls/pdfjs-control';
-import {RenderQuality, ThumbnailLayout, ViewFit} from '../../classes/pdfjs-objects';
+import {PreviewEvent, RenderQuality, ThumbnailLayout, ViewFit} from '../../classes/pdfjs-objects';
 import {PdfjsItem} from '../../classes/pdfjs-item';
 
 @Component({
@@ -47,7 +47,7 @@ export class PdfjsThumbnailComponent implements OnInit, OnDestroy {
    * The Thumbnail has been over
    */
   @Output()
-  showPreview: EventEmitter<PdfjsItem & DOMRect> = new EventEmitter<PdfjsItem & DOMRect>();
+  showPreview: EventEmitter<PreviewEvent> = new EventEmitter<PreviewEvent>();
   /**
    * The button remove has been clicked
    */
@@ -186,26 +186,11 @@ export class PdfjsThumbnailComponent implements OnInit, OnDestroy {
       const thumbnail: HTMLElement = this.elementRef.nativeElement;
       const rectList: DOMRectList = thumbnail.getClientRects() as DOMRectList;
       const r: DOMRect = rectList[0];
-      let atLeft = false;
-      let atTop = false;
       const left = Math.max($event.clientX - $event.offsetX, 0);
       const top = Math.max($event.clientY - $event.offsetY, 0);
-      if ((left * 2) + r.width > window.innerWidth) {
-        atLeft = true;
-      }
-      if ((top * 2) + r.height > window.innerHeight) {
-        atTop = true;
-      }
-      // fix the problem with the collapsible scrollbar, the rect doesn't include scrollbar size
-      // const width = this.layout === ThumbnailLayout.VERTICAL ? this.fitSize : r.width;
-      // const height = this.layout === ThumbnailLayout.HORIZONTAL ? this.fitSize : r.height;
-      const rect = {
-        bottom: r.bottom, height: r.height, left: r.left, right: r.right,
-        top: r.top, width: r.width, x: left, y: top,
-        atLeft, atTop,
-        toJSON: () => DOMRectReadOnly.prototype.toJSON.apply(this),
-      };
-      this.showPreview.emit(Object.assign(this.innerItem, rect));
+      const atLeft = (left * 2) + r.width > window.innerWidth;
+      const atTop = (top * 2) + r.height > window.innerHeight;
+      this.showPreview.emit({item: this.innerItem, atLeft, atTop, height: r.height, width: r.width, x: left, y: top});
     }
   }
 

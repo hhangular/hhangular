@@ -1,11 +1,9 @@
 import {animate, state, style, transition, trigger} from '@angular/animations';
 import {ChangeDetectionStrategy, Component, ElementRef, HostBinding, Input, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {debounceTime} from 'rxjs/operators';
-import {RenderQuality, ThumbnailLayout} from '../../../classes/pdfjs-objects';
+import {debounceTime, filter} from 'rxjs/operators';
+import {PreviewEvent, RenderQuality, ThumbnailLayout} from '../../../classes/pdfjs-objects';
 import {PdfjsItem} from '../../../classes/pdfjs-item';
-
-type InnerItem = PdfjsItem & DOMRect & { atLeft: boolean, atTop: boolean };
 
 @Component({
   changeDetection: ChangeDetectionStrategy.Default,
@@ -48,38 +46,32 @@ export class PdfjsPreviewComponent implements OnInit {
    */
   @Input()
   quality: RenderQuality = 2;
-  private item$: BehaviorSubject<InnerItem> = new BehaviorSubject<InnerItem>(null);
-  private innerItem: InnerItem = null;
+  item: PdfjsItem = null;
+  private previewEvent$: BehaviorSubject<PreviewEvent> = new BehaviorSubject<PreviewEvent>(null);
 
   constructor(private elementRef: ElementRef) {
   }
 
-  get item(): InnerItem {
-    return this.innerItem;
-  }
-
   @Input()
-  set item(item: InnerItem) {
-    if (!item) {
-      this.innerItem = null;
-      this.state = 'hidden';
-    }
-    this.item$.next(item);
+  set previewEvent(event: PreviewEvent) {
+    this.item = null;
+    this.resetPreviewThumbnail();
+    this.state = 'hidden';
+    this.previewEvent$.next(event);
   }
 
   public ngOnInit(): void {
-    this.item$.pipe(
+    this.previewEvent$.pipe(
       debounceTime(this.delay),
-    ).subscribe((item: InnerItem) => {
-      this.innerItem = item;
-      const previewThumbnail: HTMLElement = this.elementRef.nativeElement;
-      resetPreviewThumbnail(previewThumbnail);
-      if (!!item) {
+      filter(previewEvent => !!previewEvent)
+    ).subscribe((previewEvent: PreviewEvent) => {
+      this.item = previewEvent.item;
+      if (!!previewEvent.item) {
         const caretSize = 10;
         if (this.layout === ThumbnailLayout.HORIZONTAL) {
-          this.addVerticalCaret(previewThumbnail, item, caretSize);
+          this.addVerticalCaret(previewEvent, caretSize);
         } else {
-          this.addHorizontalCaret(previewThumbnail, item, caretSize);
+          this.addHorizontalCaret(previewEvent, caretSize);
         }
       }
     });
@@ -88,83 +80,73 @@ export class PdfjsPreviewComponent implements OnInit {
   /**
    * The thumbnail is endRender, position it and show it
    */
-  public rendered(item: PdfjsItem) {
-    const previewThumbnail: HTMLElement = this.elementRef.nativeElement;
-    if (!!item) {
-      const caretSize = 10;
-      resetPreviewThumbnail(previewThumbnail);
-      if (this.layout === ThumbnailLayout.HORIZONTAL) {
-        this.addVerticalCaret(previewThumbnail, this.innerItem, caretSize);
-      } else {
-        this.addHorizontalCaret(previewThumbnail, this.innerItem, caretSize);
-      }
-      this.state = 'visible';
-    } else {
-      this.state = 'hidden';
-    }
+  public endRenderHandler(item: PdfjsItem) {
+    this.state = !!item ? 'visible' : 'hidden';
   }
 
-  private addVerticalCaret(previewThumbnail: HTMLElement, item: PdfjsItem & DOMRect & { atLeft: boolean, atTop: boolean }, caretSize) {
-    const rect: DOMRect = (item as DOMRect);
-    const ratio = rect.width / rect.height;
+  private addVerticalCaret(previewEvent: PreviewEvent, caretSize) {
+    const previewThumbnail: HTMLElement = this.elementRef.nativeElement;
+    const ratio = previewEvent.width / previewEvent.height;
     let cls = '';
-    if (item.atTop) {
+    if (previewEvent.atTop) {
       cls = 'top';
-      previewThumbnail.style.top = `${rect.y - this.height - caretSize}px`;
+      previewThumbnail.style.top = `${previewEvent.y - this.height - caretSize}px`;
 //      previewThumbnail.style.paddingBottom = `${caretSize}px`;
     } else {
       cls = 'bottom';
-      previewThumbnail.style.top = `${rect.y + rect.height}px`;
+      previewThumbnail.style.top = `${previewEvent.y + previewEvent.height}px`;
       previewThumbnail.style.paddingTop = `${caretSize}px`;
     }
-    if (item.atLeft) {
+    if (previewEvent.atLeft) {
       cls += '-left';
-      previewThumbnail.style.left = `${rect.x + rect.width - (this.height * ratio)}px`;
+      previewThumbnail.style.left = `${previewEvent.x + previewEvent.width - (this.height * ratio)}px`;
     } else {
       cls += '-right';
-      previewThumbnail.style.left = `${rect.x}px`;
+      previewThumbnail.style.left = `${previewEvent.x}px`;
     }
     previewThumbnail.style.height = `${this.height + caretSize}px`;
     previewThumbnail.classList.add(cls);
   }
 
-  private addHorizontalCaret(previewThumbnail: HTMLElement, item: PdfjsItem & DOMRect & { atLeft: boolean, atTop: boolean }, caretSize) {
-    const rect: DOMRect = (item as DOMRect);
-    const ratio = rect.width / rect.height;
+  private addHorizontalCaret(previewEvent: PreviewEvent, caretSize) {
+    const previewThumbnail: HTMLElement = this.elementRef.nativeElement;
+    const ratio = previewEvent.width / previewEvent.height;
     let cls = '';
-    if (item.atLeft) {
+    if (previewEvent.atLeft) {
       cls = 'left';
       const previewWidth = this.height * ratio;
-      previewThumbnail.style.left = `${rect.x - (previewWidth + caretSize)}px`;
+      previewThumbnail.style.left = `${previewEvent.x - (previewWidth + caretSize)}px`;
       previewThumbnail.style.paddingRight = `${caretSize}px`;
     } else {
       cls = 'right';
-      previewThumbnail.style.left = `${rect.x + rect.width}px`;
+      previewThumbnail.style.left = `${previewEvent.x + previewEvent.width}px`;
       previewThumbnail.style.paddingLeft = `${caretSize}px`;
     }
-    if (item.atTop) {
+    if (previewEvent.atTop) {
       cls += '-top';
-      previewThumbnail.style.top = `${rect.y + rect.height - this.height}px`;
+      previewThumbnail.style.top = `${previewEvent.y + previewEvent.height - this.height}px`;
     } else {
       cls += '-bottom';
-      previewThumbnail.style.top = `${rect.y}px`;
+      previewThumbnail.style.top = `${previewEvent.y}px`;
     }
     previewThumbnail.style.height = `${this.height}px`;
     previewThumbnail.classList.add(cls);
   }
+
+  private resetPreviewThumbnail() {
+    const previewThumbnail: HTMLElement = this.elementRef.nativeElement;
+    previewThumbnail.classList.remove('right-top', 'left-top',
+      'right-bottom', 'left-bottom',
+      'top-left', 'top-right',
+      'bottom-left', 'bottom-right');
+    previewThumbnail.style.right = undefined;
+    previewThumbnail.style.left = undefined;
+    previewThumbnail.style.bottom = undefined;
+    previewThumbnail.style.top = undefined;
+    previewThumbnail.style.paddingBottom = '0px';
+    previewThumbnail.style.paddingTop = '0px';
+    previewThumbnail.style.paddingLeft = '0px';
+    previewThumbnail.style.paddingRight = '0px';
+  }
 }
 
-function resetPreviewThumbnail(previewThumbnail: HTMLElement) {
-  previewThumbnail.classList.remove('right-top', 'left-top',
-    'right-bottom', 'left-bottom',
-    'top-left', 'top-right',
-    'bottom-left', 'bottom-right');
-  previewThumbnail.style.right = undefined;
-  previewThumbnail.style.left = undefined;
-  previewThumbnail.style.bottom = undefined;
-  previewThumbnail.style.top = undefined;
-  previewThumbnail.style.paddingBottom = '0px';
-  previewThumbnail.style.paddingTop = '0px';
-  previewThumbnail.style.paddingLeft = '0px';
-  previewThumbnail.style.paddingRight = '0px';
-}
