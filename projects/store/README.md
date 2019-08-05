@@ -1,4 +1,4 @@
-# @hhangular/store [![Build Status](https://img.shields.io/travis/hhangular/hhangular/store.svg?style=for-the-badge)](https://travis-ci.org/hhangular/hhangular)
+# @hhangular/store [![Build Status](https://img.shields.io/travis/hhangular/hhangular/store.svg?style=for-the-badge&logo=travis-ci)](https://travis-ci.org/hhangular/hhangular)
 
 ## Full documentation available here : [hhangular/store](https://hhangular.hhdev.fr/en-US/store/overview)
 
