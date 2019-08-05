@@ -28,6 +28,10 @@ export class PdfjsControl implements PdfjsCommand {
     this.subscribeToRemoveItem();
   }
 
+  public get disabled(): boolean {
+    return isNaN(this.getSelectedPageIndex());
+  }
+
   public getPdfPages(): PdfPage[] {
     return this.items.map(val => {
       return {document: val.document, pdfId: val.pdfId, pageIdx: val.pageIdx, rotation: val.rotation};

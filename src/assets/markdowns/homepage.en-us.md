@@ -39,8 +39,8 @@ Plusieurs scripts npm on été ajoutés au fichier `package.json` pour aider dan
 
 ## Development server
 
- - `npm run start:fr-FR` : launches the dev server in French. Navigate to `http://localhost:4200/fr-FR`.
- - `npm run start:en-US` : launches the dev server in English. Navigate to `http://localhost:4201/en-US`.
+ - `npm run start:website:fr-FR` : launches the dev server in French. Navigate to `http://localhost:4200/fr-FR`.
+ - `npm run start:website:en-US` : launches the dev server in English. Navigate to `http://localhost:4201/en-US`.
  
 ## Build
 
@@ -48,9 +48,9 @@ The project contains an app, corresponding to the site you are currently reading
 as well as 'sub-projects' that correspond to libraries, angular modules.   
 So there are several things to 'build'.
 
- - `npm run build:fr-FR` : to build the site in French. 
+ - `npm run build:website:fr-FR` : to build the site in French. 
  The build result will be in the directory `dist/website/fr-FR`.
- - `npm run build:en-US` : to build the site in English. 
+ - `npm run build:website:en-US` : to build the site in English. 
 The build result will be in the directory `dist/website/en-US`.
  - `npm run build:pdfjs` : to build the library `@hhangular/pdfjs`. 
  The build result will be in the directory `dist/pdfjs`.
@@ -61,10 +61,9 @@ The build result will be in the directory `dist/website/en-US`.
 
 Build scripts have their version `prod`.
 
- - `npm run build:prod:fr-FR`
- - `npm run build:prod:en-US`
+ - `npm run build:website:prod:fr-FR`
+ - `npm run build:website:prod:en-US`
  - `npm run build:pdfjs:prod`
- - `npm run build:prod:fr-FR`
  - `npm run build:store:prod`
 
 ## extract i18n
@@ -94,14 +93,14 @@ And the tests coverage collected on the website [codecov](https://codecov.io)
 
 ### Scripts 
 
- - `npm run test` : launches the tests of the site, there are few ... `Karma` opens a window to track results in real time.
- - `npm run test:ci` : launches site testing, in `Headless` silent mode for the integration server. 
+ - `npm run test:website` : launches the tests of the site, there are few ... `Karma` opens a window to track results in real time.
+ - `npm run test:website:ci` : launches site testing, in `Headless` silent mode for the integration server. 
 This generates code coverage statistics in the directory `coverage/hhangular`.
  - `npm run test:pdfjs` : launches the `pdfjs` library tests, `Karma` opens a window to track the results in real time.
- - `npm run test:ci:pdfjs` : launches the `pdfjs` library tests, in `Headless` silent mode for the integration server. 
+ - `npm run test:pdfjs:ci` : launches the `pdfjs` library tests, in `Headless` silent mode for the integration server. 
 This generates code coverage statistics in the directory `coverage/pdfjs`.
  - `npm run test:store` : launches the `store` library tests, `Karma` opens a window to track the results in real time.
- - `npm run test:ci:store` : launches the `store` library tests, in `Headless` silent mode for the integration server. 
+ - `npm run test:store:ci` : launches the `store` library tests, in `Headless` silent mode for the integration server. 
 This generates code coverage statistics in the directory `coverage/store`.
   
 ## Running end-to-end tests

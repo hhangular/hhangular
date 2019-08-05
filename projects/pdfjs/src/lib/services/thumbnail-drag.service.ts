@@ -157,9 +157,7 @@ export class ThumbnailDragService {
   }
 
   public getComponentAcceptDrop(thumbnails: HTMLElement): PdfjsThumbnailsComponent {
-    return ThumbnailDragService.thumbnails.find((comp: PdfjsThumbnailsComponent) => {
-      return comp.elementRef.nativeElement === thumbnails;
-    });
+    return ThumbnailDragService.thumbnails.find(comp => comp.isNativeElementEqual(thumbnails));
   }
 
   private getFirstParentElementNamed(target: HTMLElement, nodeName: string): HTMLElement {
