@@ -38,8 +38,8 @@ Plusieurs scripts npm on été ajoutés au fichier `package.json` pour aider dan
 ## Development server
 
 
- - `npm run start:fr-FR` : lance le serveur de dev en Français. Naviguez vers `http://localhost:4200/fr-FR`.
- - `npm run start:en-US` : lance le serveur de dev en Anglais. Naviguez vers `http://localhost:4201/en-US`.
+ - `npm run start:website:fr-FR` : lance le serveur de dev en Français. Naviguez vers `http://localhost:4200/fr-FR`.
+ - `npm run start:website:en-US` : lance le serveur de dev en Anglais. Naviguez vers `http://localhost:4201/en-US`.
  
 ## Build
 
@@ -47,8 +47,8 @@ Le projet contient une application, correspondant au site que vous lisez actuell
 ainsi que des 'sous projets' qui correspondent aux librairies, modules angular.   
 Il y a donc plusieurs choses à 'builder'.
 
- - `npm run build:fr-FR` : pour builder le site en Français. Le résultat du build se trouvera dans le répertoire `dist/website/fr-FR`.
- - `npm run build:en-US` : pour builder le site en Anglais. Le résultat du build se trouvera dans le répertoire `dist/website/en-US`.
+ - `npm run build:website:fr-FR` : pour builder le site en Français. Le résultat du build se trouvera dans le répertoire `dist/website/fr-FR`.
+ - `npm run build:website:en-US` : pour builder le site en Anglais. Le résultat du build se trouvera dans le répertoire `dist/website/en-US`.
  - `npm run build:pdfjs` : pour builder la librairie `@hhangular/pdfjs`. Le résultat du build se trouvera dans le répertoire `dist/pdfjs`.
  - `npm run build:store` : pour builder la librairie `@hhangular/store`. Le résultat du build se trouvera dans le répertoire `dist/store`.
 
@@ -56,10 +56,9 @@ Il y a donc plusieurs choses à 'builder'.
 
 Les scripts de build ont leur version `prod`.
 
- - `npm run build:prod:fr-FR`
- - `npm run build:prod:en-US`
+ - `npm run build:website:prod:fr-FR`
+ - `npm run build:website:prod:en-US`
  - `npm run build:pdfjs:prod`
- - `npm run build:prod:fr-FR`
  - `npm run build:store:prod`
 
 ## extract i18n
@@ -89,14 +88,14 @@ Et la couverture de test collectée sur le site [codecov](https://codecov.io)
  
 ### Scripts 
 
- - `npm run test` : lance les tests du site, il y en a peu... `Karma` ouvre une fenêtre pour suivre les résultat en temps réel.
- - `npm run test:ci` : lance les tests du site, en mode silencieux `Headless` pour le serveur d'intégration. 
+ - `npm run test:website` : lance les tests du site, il y en a peu... `Karma` ouvre une fenêtre pour suivre les résultat en temps réel.
+ - `npm run test:website:ci` : lance les tests du site, en mode silencieux `Headless` pour le serveur d'intégration. 
 Cela génère des statistique de couverture de code dans le repertoire `coverage/hhangular`.
  - `npm run test:pdfjs` : lance les tests de la librairie `pdfjs`, `Karma` ouvre une fenêtre pour suivre les résultat en temps réel.
- - `npm run test:ci:pdfjs` : lance les tests de la librairie `pdfjs`, en mode silencieux `Headless`pour le serveur d'intégration. 
+ - `npm run test:pdfjs:ci` : lance les tests de la librairie `pdfjs`, en mode silencieux `Headless`pour le serveur d'intégration. 
 Cela génère des statistique de couverture de code dans le repertoire `coverage/pdfjs`.
  - `npm run test:store` : lance les tests de la librairie `store`, `Karma` ouvre une fenêtre pour suivre les résultat en temps réel.
- - `npm run test:ci:store` : lance les tests de la librairie `store`, en mode silencieux `Headless` pour le serveur d'intégration. 
+ - `npm run test:store:ci` : lance les tests de la librairie `store`, en mode silencieux `Headless` pour le serveur d'intégration. 
 Cela génère des statistique de couverture de code dans le repertoire `coverage/store`.
   
 ## Running end-to-end tests

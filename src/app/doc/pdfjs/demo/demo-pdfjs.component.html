@@ -1,126 +1,137 @@
-<div>
-  <pdfjs-thumbnails [pdfjsControl]="pdfjsControl" [pdfjsGroupControl]="pdfjsGroupControl"
-                    [quality]="1"
-                    [fitSize]="100"
-                    [previewDelay]="300"
-                    [previewHeight]="300"
-                    [allowDrop]="false"
-                    [allowRemove]="false"
-                    [dragMode]="ThumbnailDragMode.DUPLICATE"
-                    [layout]="ThumbnailLayout.HORIZONTAL"></pdfjs-thumbnails>
-  <div fxLayout="row" >
-    <div fxFlex="100px">
-      <pdfjs-thumbnails [pdfjsControl]="pdfjsControl2" [pdfjsGroupControl]="pdfjsGroupControl"
-                        [previewDelay]="300"
-                        [previewHeight]="300"
-                        [quality]="1"
-                        [fitSize]="100"
-                        [layout]="ThumbnailLayout.VERTICAL"
-                        [allowRemove]="true"
-                        [allowDrop]="true"
-                        [dragMode]="ThumbnailDragMode.DUPLICATE"
-                        class="thumbnails-vertical"
-                        [class.edit-mode]="editMode">
-      </pdfjs-thumbnails>
-    </div>
-    <div fxFlex>
-      <div class="button-row" style="text-align: center">
-        <button mat-icon-button [disabled]="!pdfjsGroupControl.previousIsSelectable()"
-                (click)="pdfjsGroupControl.selectPrevious()">
-          <fa-icon size="lg" [icon]="faArrowLeft"></fa-icon>
-        </button>
-        <button mat-icon-button [disabled]="true">
-          {{pdfjsGroupControl.getSelectedPageIndex()}}/{{pdfjsGroupControl.getPageNumber()}}
-        </button>
-        <button mat-icon-button [disabled]="!pdfjsGroupControl.nextIsSelectable()"
-                (click)="pdfjsGroupControl.selectNext()">
-          <fa-icon size="lg" [icon]="faArrowRight"></fa-icon>
-        </button>
-        <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="pdfjsGroupControl.rotate(-90)">
-          <fa-layers size="lg">
-            <fa-icon [icon]="faCopy"></fa-icon>
-            <fa-icon [icon]="faUndo" transform="shrink-11 right-2"></fa-icon>
-          </fa-layers>
-        </button>
-        <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="pdfjsGroupControl.rotateSelected(-90)">
-          <fa-layers size="lg">
-            <fa-icon [icon]="faFile"></fa-icon>
-            <fa-icon [icon]="faUndo" transform="shrink-9 down-1"></fa-icon>
-          </fa-layers>
-        </button>
-        <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="pdfjsGroupControl.rotateSelected(90)">
-          <fa-layers size="lg">
-            <fa-icon [icon]="faFile"></fa-icon>
-            <fa-icon [icon]="faUndo" transform="shrink-9 flip-h down-1"></fa-icon>
-          </fa-layers>
-        </button>
-        <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="pdfjsGroupControl.rotate(90)">
-          <fa-layers size="lg">
-            <fa-icon [icon]="faCopy"></fa-icon>
-            <fa-icon [icon]="faUndo" transform="shrink-11 flip-h right-2"></fa-icon>
-          </fa-layers>
-        </button>
-        <button mat-icon-button (click)="incQuality(-1)">
-          <fa-icon size="lg" [icon]="faMinus"></fa-icon>
-        </button>
-        <button mat-icon-button [disabled]="true" title="Quality">{{quality}}/5</button>
-        <button mat-icon-button (click)="incQuality(1)">
-          <fa-icon size="lg" [icon]="faPlus"></fa-icon>
-        </button>
-        <mat-checkbox [(ngModel)]="textEnable" title="Enable/disabled text layer"></mat-checkbox>
-        <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="scale = scale * 0.9">
-          <fa-icon [icon]="faSearchMinus" size="lg"></fa-icon>
-        </button>
-        <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="scale = 1">
-          <fa-icon [icon]="faExpandArrowsAlt" size="lg"></fa-icon>
-        </button>
-        <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="scale = scale * 1.1">
-          <fa-icon [icon]="faSearchPlus" size="lg"></fa-icon>
-        </button>
-        <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="pdfjsGroupControl.reload()">
-          <fa-icon [icon]="faSyncAlt" size="lg"></fa-icon>
-        </button>
-        <button mat-icon-button (click)="editMode = !editMode">
-          <fa-icon [icon]="faEdit" size="lg"></fa-icon>
-        </button>
-        <mat-menu #appMenu="matMenu">
-          <button mat-menu-item *ngFor="let pdf of pdfs" (click)="showPdf(pdf)">{{pdf.fn}}</button>
-        </mat-menu>
-        <button mat-icon-button [matMenuTriggerFor]="appMenu">
-          <fa-icon [icon]="faFilePdf" size="lg"></fa-icon>
-        </button>
-      </div>
-      <pdfjs-view [control]="pdfjsGroupControl"
-                  [textLayer]="textEnable"
-                  [fit]="ViewFit.VERTICAL"
-                  [quality]="quality"
-                  [scale]="scale"
-                  [class.edit-mode]="editMode">
-      </pdfjs-view>
-    </div>
-    <div fxFlex="100px">
-      <pdfjs-thumbnails [pdfjsControl]="pdfjsControl" [pdfjsGroupControl]="pdfjsGroupControl"
-                        [previewDelay]="300"
-                        [previewHeight]="300"
-                        [quality]="1"
-                        [fitSize]="100"
-                        [layout]="ThumbnailLayout.VERTICAL"
-                        [allowRemove]="true"
-                        [allowDrop]="true"
-                        [dragMode]="ThumbnailDragMode.DUPLICATE"
-                        class="thumbnails-vertical"
-                        [class.edit-mode]="editMode">
-      </pdfjs-thumbnails>
-    </div>
+<pdfjs-thumbnails [pdfjsControl]="pdfjsControl" [pdfjsGroupControl]="pdfjsGroupControl"
+                  [quality]="1"
+                  [fitSize]="100"
+                  [previewDelay]="300"
+                  [previewHeight]="300"
+                  [allowDrop]="false"
+                  [allowRemove]="false"
+                  [dragMode]="ThumbnailDragMode.DUPLICATE"
+                  [layout]="ThumbnailLayout.HORIZONTAL" (render)="renderHandler($event)"></pdfjs-thumbnails>
+<mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
+<div fxLayout="row">
+  <div fxFlex="100px">
+    <pdfjs-thumbnails [pdfjsControl]="pdfjsControl2" [pdfjsGroupControl]="pdfjsGroupControl"
+                      [previewDelay]="300"
+                      [previewHeight]="300"
+                      [quality]="1"
+                      [fitSize]="100"
+                      [layout]="ThumbnailLayout.VERTICAL"
+                      [allowRemove]="true"
+                      [allowDrop]="true"
+                      [dragMode]="ThumbnailDragMode.DUPLICATE"
+                      class="thumbnails-vertical"
+                      [class.edit-mode]="editMode">
+    </pdfjs-thumbnails>
   </div>
-  <pdfjs-thumbnails [pdfjsControl]="pdfjsControl1" [pdfjsGroupControl]="pdfjsGroupControl"
-                    *ngIf="editMode"
-                    [previewDelay]="300"
-                    [previewHeight]="300"
-                    [quality]="1"
-                    [fitSize]="100"
-                    [allowDrop]="true"
-                    [allowRemove]="true"
-                    [dragMode]="ThumbnailDragMode.MOVE"
-                    [layout]="ThumbnailLayout.HORIZONTAL"></pdfjs-thumbnails>
+  <div fxFlex fxLayout="column" class="deck">
+    <div class="button-row" style="text-align: center">
+      <button mat-icon-button [disabled]="!pdfjsGroupControl.previousIsSelectable()"
+              (click)="pdfjsGroupControl.selectPrevious()">
+        <fa-icon size="lg" [icon]="faArrowLeft"></fa-icon>
+      </button>
+      <mat-form-field class="page-number-input">
+        <input matInput [disabled]="isNaN(pdfjsGroupControl.getSelectedPageIndex())" type="number" min="1"
+               [max]="pdfjsGroupControl.getPageNumber()"
+               [value]="pdfjsGroupControl.getSelectedPageIndex() | numberToString"
+               (change)="changePageHandler($event)"/>
+      </mat-form-field>
+      <button mat-icon-button [disabled]="true">
+        /{{pdfjsGroupControl.getPageNumber()}}
+      </button>
+      <button mat-icon-button [disabled]="!pdfjsGroupControl.nextIsSelectable()"
+              (click)="pdfjsGroupControl.selectNext()">
+        <fa-icon size="lg" [icon]="faArrowRight"></fa-icon>
+      </button>
+      <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="pdfjsGroupControl.rotate(-90)">
+        <fa-layers size="lg">
+          <fa-icon [icon]="faCopy"></fa-icon>
+          <fa-icon [icon]="faUndo" transform="shrink-11 right-2"></fa-icon>
+        </fa-layers>
+      </button>
+      <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="pdfjsGroupControl.rotateSelected(-90)">
+        <fa-layers size="lg">
+          <fa-icon [icon]="faFile"></fa-icon>
+          <fa-icon [icon]="faUndo" transform="shrink-9 down-1"></fa-icon>
+        </fa-layers>
+      </button>
+      <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="pdfjsGroupControl.rotateSelected(90)">
+        <fa-layers size="lg">
+          <fa-icon [icon]="faFile"></fa-icon>
+          <fa-icon [icon]="faUndo" transform="shrink-9 flip-h down-1"></fa-icon>
+        </fa-layers>
+      </button>
+      <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="pdfjsGroupControl.rotate(90)">
+        <fa-layers size="lg">
+          <fa-icon [icon]="faCopy"></fa-icon>
+          <fa-icon [icon]="faUndo" transform="shrink-11 flip-h right-2"></fa-icon>
+        </fa-layers>
+      </button>
+      <button mat-icon-button (click)="incQuality(-1)">
+        <fa-icon size="lg" [icon]="faMinus"></fa-icon>
+      </button>
+      <button mat-icon-button [disabled]="true" title="Quality">{{quality}}/5</button>
+      <button mat-icon-button (click)="incQuality(1)">
+        <fa-icon size="lg" [icon]="faPlus"></fa-icon>
+      </button>
+      <mat-checkbox [(ngModel)]="textEnable" title="Enable/disabled text layer"></mat-checkbox>
+      <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="scale = scale * 0.9">
+        <fa-icon [icon]="faSearchMinus" size="lg"></fa-icon>
+      </button>
+      <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="fit = ViewFit.VERTICAL">
+        <fa-icon [icon]="faArrowsAltV" size="lg"></fa-icon>
+      </button>
+      <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="fit = ViewFit.HORIZONTAL">
+        <fa-icon [icon]="faArrowsAltH" size="lg"></fa-icon>
+      </button>
+      <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="scale = 1">
+        <fa-icon [icon]="faExpandArrowsAlt" size="lg"></fa-icon>
+      </button>
+      <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="scale = scale * 1.1">
+        <fa-icon [icon]="faSearchPlus" size="lg"></fa-icon>
+      </button>
+      <button mat-icon-button [disabled]="pdfjsGroupControl.disabled" (click)="pdfjsGroupControl.reload()">
+        <fa-icon [icon]="faSyncAlt" size="lg"></fa-icon>
+      </button>
+      <button mat-icon-button (click)="editMode = !editMode">
+        <fa-icon [icon]="faEdit" size="lg"></fa-icon>
+      </button>
+      <mat-menu #appMenu="matMenu">
+        <button mat-menu-item *ngFor="let pdf of pdfs" (click)="showPdf(pdf)">{{pdf.fn}}</button>
+      </mat-menu>
+      <button mat-icon-button [matMenuTriggerFor]="appMenu">
+        <fa-icon [icon]="faFilePdf" size="lg"></fa-icon>
+      </button>
+    </div>
+    <pdfjs-view fxFlex [control]="pdfjsGroupControl"
+                [textLayer]="textEnable"
+                [fit]="fit"
+                [quality]="quality"
+                [scale]="scale"
+                [class.edit-mode]="editMode">
+    </pdfjs-view>
+  </div>
+  <div fxFlex="100px">
+    <pdfjs-thumbnails [pdfjsControl]="pdfjsControl" [pdfjsGroupControl]="pdfjsGroupControl"
+                      [previewDelay]="300"
+                      [previewHeight]="300"
+                      [quality]="1"
+                      [fitSize]="100"
+                      [layout]="ThumbnailLayout.VERTICAL"
+                      [allowRemove]="true"
+                      [allowDrop]="true"
+                      [dragMode]="ThumbnailDragMode.DUPLICATE"
+                      class="thumbnails-vertical"
+                      [class.edit-mode]="editMode">
+    </pdfjs-thumbnails>
+  </div>
 </div>
+<pdfjs-thumbnails [pdfjsControl]="pdfjsControl1" [pdfjsGroupControl]="pdfjsGroupControl"
+                  *ngIf="editMode"
+                  [previewDelay]="300"
+                  [previewHeight]="300"
+                  [quality]="1"
+                  [fitSize]="100"
+                  [allowDrop]="true"
+                  [allowRemove]="true"
+                  [dragMode]="ThumbnailDragMode.MOVE"
+                  [layout]="ThumbnailLayout.HORIZONTAL"></pdfjs-thumbnails>

@@ -26,8 +26,9 @@ function defineProperty(storeService: LocalStoreService | SessionStoreService, v
   const innerValue = value;
   const ident = StoreService.getId(uid, target, key, id);
   Object.defineProperty(target, key, {
+    configurable: true,
     set: (val: any) => {
-      innerValue.data = storeService.loadCfg({...val, id: ident, version: version});
+      innerValue.data = storeService.loadCfg({...val, id: ident, version});
     },
     get: () => {
       return innerValue.data;

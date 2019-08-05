@@ -29,7 +29,7 @@ describe('StoreService', () => {
     expect(stored.foo).toEqual(6);
   });
 
-  it('Update primitive value on deep 1', () => {
+  it('Update primitive value on deep 2', () => {
     const res = service.loadCfg({version: 1, id: 'test', foo: {bar: 5}});
     res.foo.bar = 6;
     const stored = JSON.parse(localStorage.getItem('test'));

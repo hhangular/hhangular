@@ -25,7 +25,7 @@ describe('PdfjsRemoveButtonComponent', () => {
   });
 
   it('should raise removeItem event when clicked', (done: DoneFn) => {
-    const item = new PdfjsItem({} as PDFDocumentProxy, '', {} as PdfSource, 0, 0);
+    const item = new PdfjsItem({ pdfId: 'TEST', document: {} as PdfSource, pageIdx: 0, rotation: 0, documentProxy: {} as PDFDocumentProxy});
     component.item = item;
     component.removeItem.subscribe(pdfjsItem => {
       expect(pdfjsItem).toBe(item);

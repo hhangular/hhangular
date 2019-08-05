@@ -14,7 +14,7 @@
   <mat-radio-button [value]="5">5</mat-radio-button>
 </mat-radio-group>
 <br><br>
-Render {{renderEndEvent?.pages || 0}} pages in {{renderEndEvent?.time || 0  | date:'ss'}} seconds and {{renderEndEvent?.time || 0  | date:'SSS'}} millisecond<br>
+Render {{renderEndEvent?.pages || 0}} pages in {{endTime || 0  | date:'ss'}} seconds and {{endTime || 0  | date:'SSS'}} millisecond<br>
 <div markdown i18n-src="@@PDFJS_THUMBNAILS_QUALITY_RENDER_END_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/quality_render_end.md"></div>
 
 <!-- ALLOW_REMOVE -->
@@ -96,10 +96,11 @@ Render {{renderEndEvent?.pages || 0}} pages in {{renderEndEvent?.time || 0  | da
 <!-- PREVIEW -->
 <div markdown i18n-src="@@PDFJS_THUMBNAILS_RENDER_BEGIN_MD" src="assets/markdowns/pdfjs/fr-fr/thumbnails/render_begin.md"></div>
 <br>
-<pdfjs-thumbnails [pdfjsControl]="conditionCtrl6" (render)="renderHandler($event)"></pdfjs-thumbnails>
+<pdfjs-thumbnails [pdfjsControl]="guideCtrl2" (render)="renderHandler($event)"></pdfjs-thumbnails>
+<mat-progress-bar mode="determinate" [value]="progress"></mat-progress-bar>
 <div markdown [data]="consoleLog | language : 'json'"></div>
 <mat-toolbar>
-  <button mat-button (click)="conditionCtrl6.reload()">Reload</button>
+  <button mat-button (click)="guideCtrl2.reload()">Reload</button>
   <button mat-button (click)="consoleLog = ''">Clear console</button>
 </mat-toolbar>
 <br>

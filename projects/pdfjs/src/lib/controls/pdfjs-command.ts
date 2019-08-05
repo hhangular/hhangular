@@ -2,6 +2,8 @@ import {PDFPromise} from 'pdfjs-dist';
 
 export interface PdfjsCommand {
 
+  disabled: boolean;
+
   /**
    * Get number of pages
    */
@@ -26,6 +28,11 @@ export interface PdfjsCommand {
    * Has pdf previous page
    */
   previousIsSelectable(): boolean;
+
+  /**
+   * Select the item number index
+   */
+  selectPageIndex(index: number): number;
 
   /**
    * Select the item number index

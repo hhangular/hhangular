@@ -21,6 +21,9 @@ export class PdfjsGroupControl implements PdfjsCommand {
     this.selectedPdfjsControl = null;
     this.selectedPdfjsControl$.next(null);
   }
+  public getControl() {
+    return this.selectedPdfjsControl;
+  }
 
   public isControlSelected(pdfjsControl: PdfjsControl): boolean {
     return this.selectedPdfjsControl === pdfjsControl;
@@ -77,6 +80,13 @@ export class PdfjsGroupControl implements PdfjsCommand {
   public selectItemIndex(index: number): number {
     if (!!this.selectedPdfjsControl) {
       return this.selectedPdfjsControl.selectItemIndex(index);
+    }
+    return NaN;
+  }
+
+  public selectPageIndex(index: number): number {
+    if (!!this.selectedPdfjsControl) {
+      return this.selectedPdfjsControl.selectPageIndex(index);
     }
     return NaN;
   }

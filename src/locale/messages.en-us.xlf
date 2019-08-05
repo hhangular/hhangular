@@ -88,6 +88,54 @@
         <target>assets/markdowns/pdfjs/en-us/thumbnails/render_end.md</target>
       </trans-unit>
       <!-- VIEW -->
+      <trans-unit id="PDFJS_VIEW_INTRO_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/view/intro.md</source>
+        <target>assets/markdowns/pdfjs/en-us/view/intro.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_VIEW_ABSTRACT_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/view/abstract.md</source>
+        <target>assets/markdowns/pdfjs/en-us/view/abstract.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_VIEW_DIR_N_SCALE_BEGIN_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/view/dir_n_scale_begin.md</source>
+        <target>assets/markdowns/pdfjs/en-us/view/dir_n_scale_begin.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_VIEW_DIR_N_SCALE_END_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/view/dir_n_scale_end.md</source>
+        <target>assets/markdowns/pdfjs/en-us/view/dir_n_scale_end.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_VIEW_QUALITY_BEGIN_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/view/quality_begin.md</source>
+        <target>assets/markdowns/pdfjs/en-us/view/quality_begin.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_VIEW_QUALITY_END_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/view/quality_end.md</source>
+        <target>assets/markdowns/pdfjs/en-us/view/quality_end.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_VIEW_TEXT_LAYOUT_BEGIN_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/view/text_layer_begin.md</source>
+        <target>assets/markdowns/pdfjs/en-us/view/text_layer_begin.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_VIEW_TEXT_LAYOUT_END_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/view/text_layer_end.md</source>
+        <target>assets/markdowns/pdfjs/en-us/view/text_layer_end.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_VIEW_KEYS_NAV_BEGIN_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/view/keys_nav_begin.md</source>
+        <target>assets/markdowns/pdfjs/en-us/view/keys_nav_begin.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_VIEW_KEYS_NAV_END_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/view/keys_nav_end.md</source>
+        <target>assets/markdowns/pdfjs/en-us/view/keys_nav_end.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_VIEW_MOUSE_WHEEL_NAV_BEGIN_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/view/mouse_wheel_nav_begin.md</source>
+        <target>assets/markdowns/pdfjs/en-us/view/mouse_wheel_nav_begin.md</target>
+      </trans-unit>
+      <trans-unit id="PDFJS_VIEW_MOUSE_WHEEL_NAV_END_MD" datatype="html">
+        <source>assets/markdowns/pdfjs/fr-fr/view/mouse_wheel_nav_end.md</source>
+        <target>assets/markdowns/pdfjs/en-us/view/mouse_wheel_nav_end.md</target>
+      </trans-unit>
 
 
       <!-- ========== -->

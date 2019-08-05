@@ -1,5 +1,5 @@
   <div #page class="page" [class.hidden]="!hasPageSelected()">
-    <pdfjs-canvas-wrapper [fit]="fit" (endRender)="onCanvasRender($event)"
+    <pdfjs-canvas-wrapper [fit]="fit" (endRender)="endRenderHandler($event)"
                           [item]="item" [quality]="quality"
                           [multiCanvas]="true"
                           [scale]="scale" [size]="size"></pdfjs-canvas-wrapper>

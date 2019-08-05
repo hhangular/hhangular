@@ -1,6 +1,15 @@
-<ng-template #container></ng-template>
-<pdfjs-preview *ngIf="!!previewDelay" [item]="itemToPreview"
+<!--
+<pdfjs-thumbnail *ngFor="let item of items" [item]="item" [quality]="quality" [removable]="allowRemove" [fitSize]="fitSize"
+                 [draggable]="dragMode !== ThumbnailDragMode.NONE" [layout]="layout"
+                 (showPreview)="voidMethod()" (startRender)="voidMethod()" (endRender)="voidMethod()" (removeButtonClick)="voidMethod()" (selectItem)="voidMethod()"
+                 [pdfjsControl]="pdfjsControl" [pdfjsGroupControl]="pdfjsGroupControl"></pdfjs-thumbnail>
+-->
+<ng-template #container>
+</ng-template>
+<pdfjs-preview *ngIf="!!previewDelay" [previewEvent]="previewEvent"
                [layout]="layout"
                [delay]="previewDelay"
                [quality]="previewQuality"
                [height]="previewHeight"></pdfjs-preview>
+
+
