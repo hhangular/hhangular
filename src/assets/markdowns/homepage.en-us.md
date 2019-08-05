@@ -39,8 +39,8 @@ Plusieurs scripts npm on été ajoutés au fichier `package.json` pour aider dan
 
 ## Development server
 
- - `npm run start:website:fr-FR` : launches the dev server in French. Navigate to `http://localhost:4200/fr-FR`.
- - `npm run start:website:en-US` : launches the dev server in English. Navigate to `http://localhost:4201/en-US`.
+ - `npm run start:website:fr-fr` : launches the dev server in French. Navigate to `http://localhost:4200/fr-fr`.
+ - `npm run start:website:en-us` : launches the dev server in English. Navigate to `http://localhost:4201/en-us`.
  
 ## Build
 
@@ -48,10 +48,10 @@ The project contains an app, corresponding to the site you are currently reading
 as well as 'sub-projects' that correspond to libraries, angular modules.   
 So there are several things to 'build'.
 
- - `npm run build:website:fr-FR` : to build the site in French. 
- The build result will be in the directory `dist/website/fr-FR`.
- - `npm run build:website:en-US` : to build the site in English. 
-The build result will be in the directory `dist/website/en-US`.
+ - `npm run build:website:fr-fr` : to build the site in French. 
+ The build result will be in the directory `dist/website/fr-fr`.
+ - `npm run build:website:en-us` : to build the site in English. 
+The build result will be in the directory `dist/website/en-us`.
  - `npm run build:pdfjs` : to build the library `@hhangular/pdfjs`. 
  The build result will be in the directory `dist/pdfjs`.
  - `npm run build:store` : to build the library `@hhangular/store`. 
@@ -61,8 +61,8 @@ The build result will be in the directory `dist/website/en-US`.
 
 Build scripts have their version `prod`.
 
- - `npm run build:website:prod:fr-FR`
- - `npm run build:website:prod:en-US`
+ - `npm run build:website:prod:fr-fr`
+ - `npm run build:website:prod:en-us`
  - `npm run build:pdfjs:prod`
  - `npm run build:store:prod`
 

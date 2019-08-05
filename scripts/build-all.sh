@@ -12,7 +12,7 @@ do
   npm run build:${dir}:prod
 done
 
-for loc in fr-FR en-US
+for loc in fr-fr en-us
 do
   echo ==================================================================================================
   echo Build website ${loc}
