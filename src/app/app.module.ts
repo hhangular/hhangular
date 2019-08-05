@@ -17,6 +17,7 @@ import {CoreModule} from './core/core.module';
     NavBarComponent,
   ],
   imports: [
+    BrowserModule,
     BrowserAnimationsModule,
     CommonModule,
     HttpClientModule,
