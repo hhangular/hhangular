@@ -74,7 +74,7 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
     private cfr: ComponentFactoryResolver,
     private defaultInjector: Injector,
     private appRef: ApplicationRef,
-    public elementRef: ElementRef,
+    private elementRef: ElementRef,
     private thumbnailDragService: ThumbnailDragService,
   ) {
   }
@@ -317,6 +317,10 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
     this.previewEvent = null;
   }
 
+  isNativeElementEqual(element: HTMLElement) {
+    return this.elementRef.nativeElement === element;
+  }
+
   private ctrlItemEventInitHandler() {
     this.items = [];
     this.container.clear();
@@ -389,6 +393,8 @@ export class PdfjsThumbnailsComponent implements OnInit, OnDestroy {
       if (!!this.items.length) {
         this.progressLoading($event.pageIdx);
         this.itemEvent$.next({event: PdfjsItemEventType.ADD, item: this.items.shift()});
+      } else if (this.itemToRenderCount) {
+        this.progressLoading($event.pageIdx);
       } else if (!this.itemToRenderCount) {
         this.render.emit({
           type: RenderEventType.END,
