@@ -60,7 +60,7 @@
     "hammerjs": "2.0.8",
     "ngx-markdown": "8.1.0",
     "pdfjs-dist": "2.1.266",
-    "prismjs": "1.16.0",
+    "prismjs": "1.17.1",
     "rxjs": "6.4.0",
     "tslib": "1.10.0",
     "zone.js": "0.10.1"
