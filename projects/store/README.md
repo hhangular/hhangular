@@ -1,3 +1,7 @@
+# @hhangular/store [![Build Status](https://img.shields.io/travis/hhangular/hhangular/store.svg?style=for-the-badge)](https://travis-ci.org/hhangular/hhangular)
+
+## Full documentation available here : [hhangular/store](https://hhangular.hhdev.fr/en-US/store/overview)
+
 # Overview
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.x.
 

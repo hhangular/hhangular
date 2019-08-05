@@ -45,6 +45,9 @@ export class PdfjsThumbnailsComponent implements OnInit {
 
   renderEndEvent: RenderEvent;
 
+  startTime = 0;
+  endTime = 0;
+
   ngOnInit() {
     this.guideCtrl1.load('../assets/pdfs/guide.pdf', true);
     this.guideCtrl2.load('../assets/pdfs/guide.pdf', true);
@@ -56,8 +59,11 @@ export class PdfjsThumbnailsComponent implements OnInit {
   }
 
   renderEvent($event: RenderEvent) {
-    if ($event.type === 'END') {
+    if ($event.type === 'START') {
+      this.startTime = $event.time;
+    } else if ($event.type === 'END') {
       this.renderEndEvent = $event;
+      this.endTime = $event.time - this.startTime;
     }
   }
 
