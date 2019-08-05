@@ -15,8 +15,8 @@ export class LocaleSelectorComponent {
 
   @Input()
   locales: Locale[] = [
-    {path: '/en-US/', label: 'English US', devPort: 4201},
-    {path: '/fr-FR/', label: 'Français', devPort: 4200}
+    {path: '/en-us/', label: 'English US', devPort: 4201},
+    {path: '/fr-fr/', label: 'Français', devPort: 4200}
   ];
 
   constructor(
