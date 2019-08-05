@@ -7,10 +7,10 @@ describe('LocaleToLanguagePipe', () => {
   });
   it('Extract fr', () => {
     const pipe = new LocaleToLanguagePipe();
-    expect(pipe.transform('/fr-FR/')).toBe('fr');
+    expect(pipe.transform('/fr-fr/')).toBe('fr');
   });
   it('Extract en', () => {
     const pipe = new LocaleToLanguagePipe();
-    expect(pipe.transform('/en-US/')).toBe('en');
+    expect(pipe.transform('/en-us/')).toBe('en');
   });
 });

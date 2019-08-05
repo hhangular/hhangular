@@ -120,7 +120,6 @@ export class PdfjsCanvasWrapperComponent implements OnInit, OnDestroy {
     let pdfPageProxy: PDFPageProxy;
     return item.getPage().then((pageProxy: PDFPageProxy) => {
       pdfPageProxy = pageProxy;
-      // @ts-ignore
       viewport = pageProxy.getViewport({scale: 1, rotation: item.rotation, dontFlip: false});
       const scaleForFit = getScaleForFit(size, viewport); // method.call is useless here, cause getScale has no scope
       viewport = this.factorViewport(viewport, zoom * scaleForFit); // pdfPageProxy.getViewport(zoomSelected * scaleForFit, item.rotation);
