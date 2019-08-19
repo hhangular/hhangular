@@ -16,6 +16,7 @@ import {
   MatRadioModule,
   MatSidenavModule,
   MatSliderModule,
+  MatSortModule,
   MatTableModule,
   MatTabsModule,
   MatToolbarModule,
@@ -53,6 +54,7 @@ const MODULES: any[] = [
   DragDropModule,
   MatChipsModule,
   LayoutModule,
+  MatSortModule
 ];
 
 @NgModule({

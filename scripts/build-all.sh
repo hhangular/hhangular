@@ -39,3 +39,10 @@ echo ===========================================================================
 echo Copy .nojekyll to website root
 echo ==================================================================================================
 cp resources/.nojekyll dist/website/.nojekyll
+
+echo ==================================================================================================
+echo Copy sitemap to website root
+echo ==================================================================================================
+cp resources/sitemap.xml dist/website/sitemap.xml
+cp resources/sitemap-fr-fr.xml dist/website/sitemap-fr-fr.xml
+cp resources/sitemap-en-us.xml dist/website/sitemap-en-us.xml

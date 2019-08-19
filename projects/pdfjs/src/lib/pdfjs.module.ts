@@ -1,4 +1,4 @@
-import {CommonModule} from '@angular/common';
+import {CommonModule, DOCUMENT} from '@angular/common';
 import {ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Inject, Injector, ModuleWithProviders, NgModule} from '@angular/core';
 import {PDF_API, PdfjsConfig} from './classes/pdfjs-objects';
 import {PdfjsCommonComponent} from './components/pdfjs-common.component';
@@ -11,9 +11,9 @@ import {KeysService} from './services/keys.service';
 import {ThumbnailDragService} from './services/thumbnail-drag.service';
 import {PdfApi} from './classes/pdfapi';
 import {pdfApiFactory} from './classes/pdfapi-factory';
-import { PdfjsCanvasWrapperComponent } from './components/pdfjs-canvas-wrapper/pdfjs-canvas-wrapper.component';
-import { PdfjsTextLayerComponent } from './components/pdfjs-text-layer/pdfjs-text-layer.component';
-import { PdfjsAnnotationLayerComponent } from './components/pdfjs-annotation-layer/pdfjs-annotation-layer.component';
+import {PdfjsCanvasWrapperComponent} from './components/pdfjs-canvas-wrapper/pdfjs-canvas-wrapper.component';
+import {PdfjsTextLayerComponent} from './components/pdfjs-text-layer/pdfjs-text-layer.component';
+import {PdfjsAnnotationLayerComponent} from './components/pdfjs-annotation-layer/pdfjs-annotation-layer.component';
 
 @NgModule({
   imports: [
@@ -60,7 +60,8 @@ export class PdfjsModule {
   /**
    * Constructor
    */
-  constructor(private cfr: ComponentFactoryResolver,
+  constructor(@Inject(DOCUMENT) private document: Document,
+              private cfr: ComponentFactoryResolver,
               private defaultInjector: Injector,
               private appRef: ApplicationRef,
               private config: PdfjsConfig = {
@@ -81,12 +82,12 @@ export class PdfjsModule {
    * add PdfjsCommonComponent to dom
    */
   private addPdfjsCommonComponentToDom() {
-    if (!document.body.querySelector('pdfjs-common')) {
+    if (!!this.document && !this.document.body.querySelector('pdfjs-common')) {
       const componentFactory = this.cfr.resolveComponentFactory(PdfjsCommonComponent);
       const componentRef: ComponentRef<PdfjsCommonComponent> = componentFactory.create(this.defaultInjector);
       this.appRef.attachView(componentRef.hostView);
       const componentElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-      document.body.appendChild(componentElement);
+      this.document.body.appendChild(componentElement);
     }
   }
 }
