@@ -1,6 +1,6 @@
-# @hhangular/pdfjs [![Build Status](https://img.shields.io/travis/hhangular/hhangular/pdfjs.svg?style=for-the-badge)](https://travis-ci.org/hhangular/hhangular) 
+# @hhangular/pdfjs [![Build Status](https://img.shields.io/travis/hhangular/hhangular/pdfjs.svg?style=for-the-badge&logo=travis-ci)](https://travis-ci.org/hhangular/hhangular) 
 
-## Full documentation available here : [hhangular/pdfjs](https://hhangular.hhdev.fr/en-US/pdfjs/overview)
+## Full documentation available here : [hhangular/pdfjs](https://hhangular.hhdev.fr/en-us/pdfjs/overview)
 
 This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.0.
 

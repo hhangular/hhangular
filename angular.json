@@ -40,14 +40,14 @@
           },
           "configurations": {
             "en-us": {
-              "outputPath": "dist/website/en-US/",
+              "outputPath": "dist/website/en-us/",
               "i18nFile": "src/locale/messages.en-us.xlf",
               "i18nFormat": "xlf",
-              "i18nLocale": "en-US",
+              "i18nLocale": "en-us",
               "i18nMissingTranslation": "warning"
             },
             "production": {
-              "outputPath": "dist/website/fr-FR",
+              "outputPath": "dist/website/fr-fr",
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
