@@ -138,7 +138,7 @@ export class PdfjsThumbnailComponent implements OnInit, OnDestroy {
      */
     this.subscription = this.pdfjsControl$.pipe(
       filter(pdfjsControl => !!pdfjsControl),
-      flatMap(pdfjsControl => combineLatest(this.item$, pdfjsControl.selectedItem$, this.containerIsSelected$)),
+      flatMap(pdfjsControl => combineLatest([this.item$, pdfjsControl.selectedItem$, this.containerIsSelected$])),
     ).subscribe(([item, selected, containerIsSelected]) => {
       this.innerItem = item;
       this.selected = containerIsSelected && PdfjsItem.areEqual(item, selected);
