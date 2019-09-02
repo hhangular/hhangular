@@ -1,28 +1,38 @@
-import {Component, HostListener} from '@angular/core';
+import {Inject, Injectable} from '@angular/core';
+import {DOCUMENT} from '@angular/common';
+import {ThumbnailDragService} from './thumbnail-drag.service';
+import {KeysService} from './keys.service';
+import {PdfjsThumbnailsComponent} from '../components/pdfjs-thumbnails/pdfjs-thumbnails.component';
 import {ThumbnailDragMode, ThumbnailLayout, ThumbnailOver, ThumbnailOverValues} from '../classes/pdfjs-objects';
-import {KeysService} from '../services/keys.service';
-import {ThumbnailDragService} from '../services/thumbnail-drag.service';
-import {PdfjsThumbnailsComponent} from './pdfjs-thumbnails/pdfjs-thumbnails.component';
 
-@Component({
-  selector: 'pdfjs-common',
-  template: ``,
-})
-export class PdfjsCommonComponent {
+@Injectable()
+export class EventDocumentService {
   private static DEBUG_OVER = false;
+  private static DONE = false;
 
-  constructor(
-    private thumbnailDragService: ThumbnailDragService,
-    private keysService: KeysService,
-  ) {}
+  constructor(@Inject(DOCUMENT) private document: Document,
+              private thumbnailDragService: ThumbnailDragService,
+              private keysService: KeysService,
+  ) {
+  }
 
-  @HostListener('document:click', [])
-  public onClickInDocument() {
+  public addEventListeners() {
+    if (!EventDocumentService.DONE) {
+      EventDocumentService.DONE = true;
+      document.addEventListener('click', () => this.onClickInDocument(), {once: true, passive: true});
+      document.addEventListener('keydown', (event: KeyboardEvent) => this.onKeyDownInDocument(event), {once: true, passive: true});
+//      window.addEventListener('scroll', () => this.onScrollInDocument(), true);
+      document.addEventListener('dragover', (event: DragEvent) => this.onDragOverInDocument(event), {once: true, passive: true});
+      document.addEventListener('dragenter', (event: DragEvent) => this.onDragOverInDocument(event), {once: true, passive: true});
+      document.addEventListener('drop', (event: DragEvent) => this.onDropInDocument(event), {once: true, passive: true});
+    }
+  }
+
+  private onClickInDocument() {
     this.keysService.clearPdfjsControl();
   }
 
-  @HostListener('document:keydown', ['$event'])
-  public onKeyDown(event: KeyboardEvent) {
+  private onKeyDownInDocument(event: KeyboardEvent) {
     if (!KeysService.isEnabled()) {
       return;
     }
@@ -46,17 +56,14 @@ export class PdfjsCommonComponent {
     }
   }
 
-  @HostListener('document:scroll', [])
-  public onScroll() {
+  private onScrollInDocument() {
     console.log('scroll');
   }
 
   /**
    * On drag in the document
    */
-  @HostListener('document:dragover', ['$event'])
-  @HostListener('document:dragenter', ['$event'])
-  public onDragOverInDocument(event: DragEvent) {
+  private onDragOverInDocument(event: DragEvent) {
     if (event.preventDefault) {
       event.preventDefault(); // Necessary. Allows us to drop.
     }
@@ -76,8 +83,7 @@ export class PdfjsCommonComponent {
   /**
    * Drop thumbnail in any element
    */
-  @HostListener('document:drop', ['$event'])
-  public onDropInDocument(event: DragEvent) {
+  private onDropInDocument(event: DragEvent) {
     this.thumbnailDragService.stopMoving();
   }
 
@@ -184,7 +190,7 @@ export class PdfjsCommonComponent {
    * Add css class for debug the moving of thumbnail over an other
    */
   private debugThumbnailOver(thumbnail: HTMLElement, overAt: ThumbnailOver) {
-    if (PdfjsCommonComponent.DEBUG_OVER) {
+    if (EventDocumentService.DEBUG_OVER) {
       this.removeDebugBorder(thumbnail.previousElementSibling);
       // tslint:disable-next-line:no-unused-expression
       thumbnail.previousElementSibling && this.removeDebugBorder(thumbnail.previousElementSibling.previousElementSibling);

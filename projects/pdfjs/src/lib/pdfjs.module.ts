@@ -1,7 +1,6 @@
 import {CommonModule, DOCUMENT} from '@angular/common';
-import {ApplicationRef, ComponentFactoryResolver, ComponentRef, EmbeddedViewRef, Inject, Injector, ModuleWithProviders, NgModule} from '@angular/core';
+import {ApplicationRef, ComponentFactoryResolver, Inject, Injector, ModuleWithProviders, NgModule} from '@angular/core';
 import {PDF_API, PdfjsConfig} from './classes/pdfjs-objects';
-import {PdfjsCommonComponent} from './components/pdfjs-common.component';
 import {PdfjsRemoveButtonComponent} from './components/pdfjs-thumbnail/pdfjs-remove.button/pdfjs-remove-button.component';
 import {PdfjsThumbnailComponent} from './components/pdfjs-thumbnail/pdfjs-thumbnail.component';
 import {PdfjsThumbnailsComponent} from './components/pdfjs-thumbnails/pdfjs-thumbnails.component';
@@ -14,13 +13,13 @@ import {pdfApiFactory} from './classes/pdfapi-factory';
 import {PdfjsCanvasWrapperComponent} from './components/pdfjs-canvas-wrapper/pdfjs-canvas-wrapper.component';
 import {PdfjsTextLayerComponent} from './components/pdfjs-text-layer/pdfjs-text-layer.component';
 import {PdfjsAnnotationLayerComponent} from './components/pdfjs-annotation-layer/pdfjs-annotation-layer.component';
+import {EventDocumentService} from './services/event-document.service';
 
 @NgModule({
   imports: [
     CommonModule,
   ],
   exports: [
-    PdfjsCommonComponent,
     PdfjsThumbnailsComponent,
     PdfjsThumbnailComponent,
     PdfjsRemoveButtonComponent,
@@ -28,7 +27,6 @@ import {PdfjsAnnotationLayerComponent} from './components/pdfjs-annotation-layer
     PdfjsPreviewComponent,
   ],
   declarations: [
-    PdfjsCommonComponent,
     PdfjsThumbnailsComponent,
     PdfjsThumbnailComponent,
     PdfjsRemoveButtonComponent,
@@ -44,7 +42,7 @@ import {PdfjsAnnotationLayerComponent} from './components/pdfjs-annotation-layer
     {provide: PDF_API, useFactory: pdfApiFactory}
   ],
   entryComponents: [
-    PdfjsCommonComponent, PdfjsThumbnailComponent, // dynamic component
+    PdfjsThumbnailComponent, // dynamic component
   ]
 })
 export class PdfjsModule {
@@ -52,6 +50,7 @@ export class PdfjsModule {
     return {
       ngModule: PdfjsModule,
       providers: [
+        EventDocumentService,
         {provide: PdfjsConfig, useValue: config},
       ],
     };
@@ -69,25 +68,13 @@ export class PdfjsModule {
                 cMapUrl: 'assets/cmaps/',
                 cMapPacked: true
               },
-              @Inject(PDF_API) private API: PdfApi
+              @Inject(PDF_API) private API: PdfApi,
+              private eventDocumentService: EventDocumentService,
   ) {
     if (!this.API.GlobalWorkerOptions.workerSrc) {
       this.API.GlobalWorkerOptions.workerSrc = config.workerSrc;
       this.API.GlobalCMapOptions = {cMapUrl: config.cMapUrl, cMapPacked: config.cMapPacked};
     }
-    this.addPdfjsCommonComponentToDom();
-  }
-
-  /**
-   * add PdfjsCommonComponent to dom
-   */
-  private addPdfjsCommonComponentToDom() {
-    if (!!this.document && !this.document.body.querySelector('pdfjs-common')) {
-      const componentFactory = this.cfr.resolveComponentFactory(PdfjsCommonComponent);
-      const componentRef: ComponentRef<PdfjsCommonComponent> = componentFactory.create(this.defaultInjector);
-      this.appRef.attachView(componentRef.hostView);
-      const componentElement = (componentRef.hostView as EmbeddedViewRef<any>).rootNodes[0] as HTMLElement;
-      this.document.body.appendChild(componentElement);
-    }
+    this.eventDocumentService.addEventListeners();
   }
 }

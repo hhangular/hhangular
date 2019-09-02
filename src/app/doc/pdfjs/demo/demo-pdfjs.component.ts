@@ -1,7 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PdfjsControl} from '../../../../../projects/pdfjs/src/lib/controls/pdfjs-control';
-import {RenderEvent, RenderEventType, RenderQuality, ThumbnailDragMode, ThumbnailLayout, ViewFit} from '../../../../../projects/pdfjs/src/lib/classes/pdfjs-objects';
-import {PdfjsGroupControl} from '../../../../../projects/pdfjs/src/lib/controls/pdfjs-group-control';
+import {PdfjsControl, PdfjsGroupControl, RenderEvent, RenderEventType, RenderQuality, ThumbnailDragMode, ThumbnailLayout, ViewFit} from '@hhangular/pdfjs';
 import {
   faArrowLeft,
   faArrowRight,
@@ -42,7 +40,7 @@ export class DemoPdfjsComponent implements OnInit {
   faMinus = faMinus;
   quality: RenderQuality = 2;
   textEnable = false;
-  pdfs: {fn: string, url: string}[] = [
+  pdfs: { fn: string, url: string }[] = [
     {fn: 'condition.pdf', url: '../assets/pdfs/conditions.pdf'},
     {fn: 'guide.pdf', url: '../assets/pdfs/guide.pdf'},
     {fn: 'UnicodeStandard.pdf', url: '../assets/pdfs/UnicodeStandard.pdf'}

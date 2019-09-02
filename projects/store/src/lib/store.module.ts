@@ -7,7 +7,7 @@ import {CommonModule} from '@angular/common';
 @NgModule({
   imports: [CommonModule],
   providers: [
-    {provide: USER_ID, useValue: new BehaviorSubject('')}
+    {provide: USER_ID, useFactory: defaultUserIdFactory}
   ]
 })
 export class StoreModule {
@@ -16,4 +16,7 @@ export class StoreModule {
   ) {
     userId$.subscribe(u => StoreService.userId$.next(u));
   }
+}
+export function defaultUserIdFactory() {
+  return new BehaviorSubject('');
 }

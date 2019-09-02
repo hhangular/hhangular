@@ -23,8 +23,8 @@ import {
   MatTreeModule
 } from '@angular/material';
 import {FontAwesomeModule} from '@fortawesome/angular-fontawesome';
-import {PdfjsModule} from '../../../projects/pdfjs/src/lib/pdfjs.module';
-import {StoreModule} from '../../../projects/store/src/public-api';
+import {PdfjsModule} from '@hhangular/pdfjs';
+import {StoreModule} from '@hhangular/store';
 import {MarkdownModule} from 'ngx-markdown';
 import {HttpClient} from '@angular/common/http';
 import {DragDropModule} from '@angular/cdk/drag-drop';

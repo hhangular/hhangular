@@ -22,7 +22,7 @@ before_script:
   - npm install
   - bash scripts/test-lib.sh $TRAVIS_BRANCH
 script:
-  - bash scripts/build-all.sh
+  - bash scripts/build-all.sh $TRAVIS_BRANCH
 deploy:
   - provider: script
     script: bash scripts/deploy-on-npm.sh $TRAVIS_BRANCH
