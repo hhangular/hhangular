@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {PdfjsControl, PdfjsGroupControl, RenderQuality, ViewFit} from '../../../../../../../projects/pdfjs/src/public-api';
+import {PdfjsControl, PdfjsGroupControl, RenderQuality, ViewFit} from '@hhangular/pdfjs';
 
 @Component({
   templateUrl: './pdfjsview.component.html',

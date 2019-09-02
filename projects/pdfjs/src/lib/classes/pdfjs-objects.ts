@@ -22,10 +22,19 @@ export enum PdfjsItemEventType {
 
 export class PdfjsItemAddEvent extends PdfjsItemEvent {
   public event: PdfjsItemEventType.ADD;
+  constructor(data: {item: PdfjsItem, to: number}) {
+    super();
+    this.item = data.item;
+    this.to = data.to;
+  }
 }
 
 export class PdfjsItemRemoveEvent extends PdfjsItemEvent {
   public event: PdfjsItemEventType.REMOVE;
+  constructor(data: {item: PdfjsItem}) {
+    super();
+    this.item = data.item;
+  }
 }
 
 export interface CanvasWrapperRenderEvent {

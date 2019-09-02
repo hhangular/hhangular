@@ -1,19 +1,22 @@
 #!/bin/bash
 
 echo ==================================================================================================
-echo Build all lib in projects directory
+echo Build or install all libs in projects directory
 echo ==================================================================================================
-for dir in projects/*/
-do
+for dir in projects/*/; do
   dir="${dir%/}"
   dir="${dir##*/}"
-  echo Build lib : ${dir}
-  echo ===========
-  npm run build:${dir}:prod
+  if [[ $1 == ${dir} ]]; then
+    echo Build lib : @hhangular/${dir}
+    echo ===========
+    npm run build:${dir}:prod
+  else
+    echo Install lib : @hhangular/${dir}
+    npm install --no-save @hhangular/${dir}
+  fi
 done
 
-for loc in fr-fr en-us
-do
+for loc in fr-fr en-us; do
   echo ==================================================================================================
   echo Build website ${loc}
   echo ==================================================================================================
