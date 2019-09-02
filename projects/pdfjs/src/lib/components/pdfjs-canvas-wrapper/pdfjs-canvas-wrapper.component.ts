@@ -4,7 +4,7 @@ import {PdfApi} from '../../classes/pdfapi';
 import {PdfjsItem} from '../../classes/pdfjs-item';
 import {PDFPageProxy, PDFPageViewport, PDFPromise, PDFRenderTask} from 'pdfjs-dist';
 import {BehaviorSubject, combineLatest, Subscription} from 'rxjs';
-import {debounce, debounceTime, filter} from 'rxjs/operators';
+import {debounceTime, filter} from 'rxjs/operators';
 import {DOCUMENT} from '@angular/common';
 
 type GetScaleForFit = (size: number, viewport: PDFPageViewport) => number;
@@ -67,7 +67,7 @@ export class PdfjsCanvasWrapperComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.subRender = combineLatest(this.fit$, this.item$, this.size$, this.quality$, this.scale$)
+    this.subRender = combineLatest([this.fit$, this.item$, this.size$, this.quality$, this.scale$])
       .pipe(
         filter((arr: any[]) => arr.every(val => !!val)),
         debounceTime(50)

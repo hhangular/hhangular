@@ -1,4 +1,4 @@
-import {ChangeDetectionStrategy, Component, ElementRef, HostListener, Input, OnDestroy, ViewChild} from '@angular/core';
+import {ChangeDetectionStrategy, Component, ElementRef, EventEmitter, HostListener, Input, OnDestroy, Output, ViewChild} from '@angular/core';
 import {PDFPageProxy, PDFPageViewport} from 'pdfjs-dist';
 import {Subscription} from 'rxjs';
 import {filter, flatMap, tap} from 'rxjs/operators';
@@ -17,7 +17,11 @@ import {PdfjsItem} from '../../classes/pdfjs-item';
 export class PdfjsViewComponent implements OnDestroy {
 
   size = 100;
-  item: PdfjsItem = null;
+  item: PdfjsItem;
+  @Output()
+  startRender = new EventEmitter<PdfjsItem>();
+  @Output()
+  endRender = new EventEmitter<PdfjsItem>();
   @Input()
   mouseWheelNav = true;
   @Input()
@@ -36,7 +40,6 @@ export class PdfjsViewComponent implements OnDestroy {
   viewport: PDFPageViewport;
   @ViewChild('page', {static: true})
   private pageRef: ElementRef;
-  private timeStart = 0;
   private subscription: Subscription;
   private canvasWidth: number;
   private canvasHeight: number;
@@ -56,7 +59,7 @@ export class PdfjsViewComponent implements OnDestroy {
    */
   @Input()
   set control(control: PdfjsControl | PdfjsGroupControl) {
-    this.item = null;
+    this.item = undefined;
     this.keysService.clearPdfjsControl();
     if (control instanceof PdfjsControl) {
       this.setPdfjsControl(control);
@@ -144,11 +147,17 @@ export class PdfjsViewComponent implements OnDestroy {
     }
   }
 
+  startRenderHandler() {
+    this.startRender.emit(this.item);
+  }
+
   endRenderHandler(obj: CanvasWrapperRenderEvent) {
     this.defineSizesFromCanvasSizes(obj.width, obj.height, this.quality);
     this.pdfPageProxy = obj.pdfPageProxy;
     this.viewport = obj.viewport;
-//    this.logRenderTime();
+    if (!!this.item) {
+      this.endRender.emit(this.item);
+    }
   }
 
   /**
@@ -204,18 +213,11 @@ export class PdfjsViewComponent implements OnDestroy {
   }
 
   private setItem(item: PdfjsItem) {
-    this.item = null;
+    this.item = undefined;
     if (!!item) {
       this.item = new PdfjsItem({...item});
     }
     this.computeSize();
-  }
-
-  private logRenderTime() {
-    const time = new Date().getTime() - this.timeStart;
-    const s = Math.trunc(time / 1000);
-    const ms = time - s * 1000;
-    console.log(`Render page ${this.item.pageIdx}  in ${s}s ${ms}ms`);
   }
 
   private unsubscribe() {

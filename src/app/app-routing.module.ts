@@ -3,7 +3,7 @@ import {NgModule} from '@angular/core';
 import {NavigationEnd, Router, RouterModule, Routes} from '@angular/router';
 import {HomepageComponent} from './main/homepage.component';
 import {filter} from 'rxjs/operators';
-import {LocalStored} from '../../projects/store/src/public-api';
+import {LocalStored} from '@hhangular/store';
 import {SharedModule} from './shared/shared.module';
 import {RedirectComponent} from './shared';
 
