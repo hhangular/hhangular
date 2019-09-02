@@ -55,7 +55,7 @@
     "@fortawesome/free-brands-svg-icons": "5.10.2",
     "@fortawesome/free-regular-svg-icons": "5.10.2",
     "@fortawesome/free-solid-svg-icons": "5.10.2",
-    "@hhangular/store": "^1.0.12",
+    "@hhangular/store": "1.0.12",
     "@types/pdfjs-dist": "2.1.0",
     "core-js": "3.2.1",
     "hammerjs": "2.0.8",
