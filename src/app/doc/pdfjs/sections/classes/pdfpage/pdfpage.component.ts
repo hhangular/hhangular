@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {PdfjsControl} from '../../../../../../../projects/pdfjs/src/lib/controls/pdfjs-control';
+import {PdfjsControl} from '@hhangular/pdfjs';
 
 @Component({
   templateUrl: './pdfpage.component.html',

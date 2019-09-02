@@ -2,7 +2,7 @@ import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatSort, MatTableDataSource, PageEvent, Sort, SortDirection} from '@angular/material';
 import {faColumns} from '@fortawesome/free-solid-svg-icons';
 import {faCheckSquare, faSquare} from '@fortawesome/free-regular-svg-icons';
-import {LocalStored} from '../../../../../projects/store/src/public-api';
+import {LocalStored} from '@hhangular/store';
 import {PeriodicElementService} from './periodic-element.service';
 
 @Component({

@@ -5,8 +5,8 @@ import {
   RenderQuality,
   ThumbnailDragMode,
   ThumbnailLayout
-} from '../../../../../../../projects/pdfjs/src/public-api';
-import {LocalStored} from '../../../../../../../projects/store/src/public-api';
+} from '@hhangular/pdfjs';
+import {LocalStored} from '@hhangular/store';
 
 @Component({
   templateUrl: './pdfjsthumbnails.component.html',

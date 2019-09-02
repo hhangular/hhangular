@@ -15,7 +15,6 @@ describe('PdfjsViewComponent', () => {
   const source: PdfSource = 'base/test/assets/conditions.pdf';
   const workerSrc = 'base/test/assets/pdf.worker.js';
   let API: PdfApi;
-  let pdfjsControl: PdfjsControl;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
@@ -30,31 +29,103 @@ describe('PdfjsViewComponent', () => {
       providers: [
         KeysService,
         {provide: PDF_API, useFactory: pdfApiFactory}
-      ]}).compileComponents();
+      ]
+    }).compileComponents();
   }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(PdfjsViewComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
 
   beforeEach(inject([PDF_API], (svc) => {
     API = svc;
     API.GlobalWorkerOptions.workerSrc = workerSrc;
   }));
 
-  beforeEach(() => {
-    pdfjsControl = new PdfjsControl();
-    pdfjsControl.load(source, true);
-  });
+  beforeEach(async(() => {
+    fixture = TestBed.createComponent(PdfjsViewComponent);
+    component = fixture.componentInstance;
+  }));
+
+  /*
+    beforeEach(() => {
+      fixture = TestBed.createComponent(PdfjsViewComponent);
+      component = fixture.componentInstance;
+      fixture.detectChanges();
+    });
+  */
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
-  it('inject item', () => {
-    component.control = pdfjsControl;
-    expect(component).toBeDefined();
+  it('not init', () => {
+    expect(component.control).toBeUndefined();
+    expect(component.item).toBeUndefined();
   });
+
+  it('inject pdfjsControl', async(() => {
+    const pdfjsControl: PdfjsControl = new PdfjsControl();
+    pdfjsControl.load(source, false);
+    component.control = pdfjsControl;
+    fixture.detectChanges();
+    expect(component.item).toBeUndefined();
+    expect(component.hasPageSelected()).toBeFalsy();
+  }));
+
+  /*
+it('inject pdfjsControl with autoSelect', async((done) => {
+  const pdfjsControl: PdfjsControl = new PdfjsControl();
+  pdfjsControl.selectedIndex$.subscribe(() => {
+    expect(component.item).toBeDefined();
+    expect(component.hasPageSelected()).toBeTruthy();
+    done();
+  });
+  pdfjsControl.load(source, true);
+  component.control = pdfjsControl;
+        const pdfjsControl: PdfjsControl = new PdfjsControl();
+        component.endRender.subscribe(() => {
+          console.log('=============', component.item, pdfjsControl.getItemByIndex(0));
+          expect(component.item).toBe(pdfjsControl.getItemByIndex(0));
+          expect(component.hasPageSelected()).toBeTruthy();
+          done();
+        });
+        pdfjsControl.load(source, true);
+        component.control = pdfjsControl;
+        fixture.detectChanges();
+        flush();
+  }));
+  */
+
+  /*
+    it('test startRender', () => {
+      spyOn(component.startRender, 'emit');
+      const pdfjsControl: PdfjsControl = new PdfjsControl();
+      pdfjsControl.load(source, true);
+      component.control = pdfjsControl;
+      expect(component.startRender.emit).toHaveBeenCalled();
+    });
+  */
+
+  /*
+    it('test endRender', fakeAsync(() => {
+      const spied = spyOn(component.endRender, 'emit');
+      expect(spied).not.toHaveBeenCalled();
+      const pdfjsControl: PdfjsControl = new PdfjsControl();
+      pdfjsControl.load(source, true);
+      component.control = pdfjsControl;
+      fixture.detectChanges();
+      flush();
+      expect(spied).toHaveBeenCalled();
+    }));
+  */
+
+  /*
+    it('test size', fakeAsync(() => {
+      const pdfjsControl: PdfjsControl = new PdfjsControl();
+      pdfjsControl.load(source, true);
+      component.control = pdfjsControl;
+
+      fixture.detectChanges();
+      flush();
+
+      expect(component.size).toBe(100);
+    }));
+  */
 });
