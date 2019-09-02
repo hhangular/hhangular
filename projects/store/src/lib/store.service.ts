@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {filter, share} from 'rxjs/operators';
+import {FakeStorage} from './fake-storage';
 
 export abstract class StoreService {
 
@@ -125,7 +126,11 @@ export abstract class StoreService {
 export class LocalStoreService extends StoreService {
 
   getStorage() {
-    return localStorage;
+    if (typeof window === 'undefined') {
+      return new FakeStorage();
+    } else {
+      return localStorage;
+    }
   }
 }
 
@@ -133,6 +138,10 @@ export class LocalStoreService extends StoreService {
 export class SessionStoreService extends StoreService {
 
   getStorage() {
-    return sessionStorage;
+    if (typeof window === 'undefined') {
+      return new FakeStorage();
+    } else {
+      return sessionStorage;
+    }
   }
 }
