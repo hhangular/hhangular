@@ -18,8 +18,8 @@ export class RedirectComponent implements OnInit {
   }
 
   ngOnInit() {
-    const base: string = document.location.href;
-    const referrer: string = document.referrer;
+    const base: string = document.location.href; // https:/hhangular.hhdev.fr/en-us/
+    const referrer: string = document.referrer; // https:/hhangular.hhdev.fr/en-us/pdfjs/overview
     const route: string = referrer.replace(base, '');
     this.router.navigate([route]).catch(e => {
       console.log(`Unknown route '${route}' redirection to '${this.currentRoute.route}'`);
