@@ -173,11 +173,9 @@ export class ThumbnailDragService {
 
   private isBeforeThumbnailOver(layout: ThumbnailLayout, thumbnailOver: HTMLElement, event: DragEvent) {
     if (layout === ThumbnailLayout.HORIZONTAL) {
-      const median: number = getHMedian(thumbnailOver.getClientRects()[0]);
-      return event.clientX < median;
+      return event.clientX < getHMedian(thumbnailOver.getClientRects()[0]);
     } else {
-      const median: number = getVMedian(thumbnailOver.getClientRects()[0]);
-      return event.clientY < median;
+      return event.clientY < getVMedian(thumbnailOver.getClientRects()[0]);
     }
   }
 
