@@ -57,11 +57,11 @@ export class PdfjsControl implements PdfjsCommand {
   }
 
   public addItem(item: PdfjsItem, idx?: number): void {
-    this.addItemEvent.next({item, event: PdfjsItemEventType.ADD, to: idx});
+    this.addItemEvent.next(new PdfjsItemAddEvent({item, to: idx}));
   }
 
   public removeItem(item: PdfjsItem): void {
-    this.removeItemEvent.next({item, event: PdfjsItemEventType.REMOVE});
+    this.removeItemEvent.next(new PdfjsItemRemoveEvent({item}));
   }
 
   public load(source: PdfSource, autoSelect = false): PDFPromise<number> {
