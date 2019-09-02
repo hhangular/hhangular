@@ -1,6 +1,6 @@
 {
   "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
-  "dest": "../../dist/pdfjs",
+  "dest": "../../node_modules/@hhangular/pdfjs",
   "lib": {
     "entryFile": "src/public-api.ts"
   }
