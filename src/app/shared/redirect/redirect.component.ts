@@ -1,5 +1,5 @@
 import {Component, Inject, OnInit} from '@angular/core';
-import {Router} from '@angular/router';
+import {ActivatedRoute, Router} from '@angular/router';
 import {LocalStored} from '@hhangular/store';
 import {DOCUMENT} from '@angular/common';
 
@@ -13,19 +13,26 @@ export class RedirectComponent implements OnInit {
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
   }
 
   ngOnInit() {
-    const base: string = document.location.origin; // https:/hhangular.hhdev.fr
-    const referrer: string = document.referrer; // https:/hhangular.hhdev.fr/en-us/pdfjs/overview
+    this.navigate(this.getExpectedRoute(document.location.origin, document.referrer)).then(); // 'https:/hhangular.hhdev.fr', 'https:/hhangular.hhdev.fr/en-us/pdfjs/overview'
+  }
+
+  public getExpectedRoute(base: string, referrer: string): string {
     const re: RegExp = new RegExp(`^${base}/\\w\\w-\\w\\w/`);
-    const route: string = referrer.replace(re, ''); // pdfjs/overview
-    this.router.navigate([route]).catch(e => {
-      console.log(`Unknown route '${route}' redirection to '${this.currentRoute.route}'`);
-      this.router.navigate([this.currentRoute.route]).then();
-    });
+    return referrer.replace(re, ''); // pdfjs/overview
+  }
+
+  public navigate(route: string): Promise<boolean | void> {
+    return this.router.navigate([route])
+      .catch(e => {
+        console.log(`Unknown route '${route}' redirection to '${this.currentRoute.route}'`, this.route.data);
+        this.router.navigate([this.currentRoute.route]).then();
+      });
   }
 
 }
