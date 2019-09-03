@@ -19,15 +19,20 @@ export class RedirectComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log('In redirect.component.ts : ngOnInit() : ', document.location, document.referrer);
     this.navigate(this.getExpectedRoute(document.location.origin, document.referrer)).then(); // 'https:/hhangular.hhdev.fr', 'https:/hhangular.hhdev.fr/en-us/pdfjs/overview'
   }
 
   public getExpectedRoute(base: string, referrer: string): string {
+    console.log('In redirect.component.ts : getExpectedRoute(base, referrer) : arguments', base, referrer);
     const re: RegExp = new RegExp(`^${base}/\\w\\w-\\w\\w/`);
-    return referrer.replace(re, ''); // pdfjs/overview
+    const route = referrer.replace(re, ''); // pdfjs/overview
+    console.log('In redirect.component.ts : getExpectedRoute(base, referrer) : route', route);
+    return route;
   }
 
   public navigate(route: string): Promise<boolean | void> {
+    console.log('In redirect.component.ts : navigate(route) : arguments', route);
     return this.router.navigate([route])
       .catch(e => {
         console.log(`Unknown route '${route}' redirection to '${this.currentRoute.route}'`, this.route.data);

@@ -8,12 +8,15 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="icon" type="image/x-icon" href="favicon.ico">
   <script>
-    const referrer = document.referrer; // https:/hhangular.hhdev.fr/en-us/pdfjs/overview
-    if (referrer.includes('/fr-fr/')) {
-      document.location.href = `${document.location.origin}/fr-fr/index.html`;
-    } else {
-      document.location.href = `${document.location.origin}/en-us/index.html`;
-    }
+      const referrer = document.referrer; // https:/hhangular.hhdev.fr/en-us/pdfjs/overview
+      console.log('In 404.html : referrer', referrer);
+      if (referrer.includes('/fr-fr/')) {
+          console.log('In 404.html : referrer includes \'/fr-fr/\'');
+          document.location.href = `${document.location.origin}/fr-fr/index.html`;
+      } else {
+          console.log('In 404.html : referrer not includes \'/fr-fr/\'');
+          document.location.href = `${document.location.origin}/en-us/index.html`;
+      }
   </script>
 </head>
 <body>
