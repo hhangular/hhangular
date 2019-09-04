@@ -126,7 +126,7 @@ export abstract class StoreService {
 export class LocalStoreService extends StoreService {
 
   getStorage() {
-    if (typeof window === 'undefined') {
+    if (typeof window === 'undefined' || !window.localStorage) {
       return new FakeStorage();
     } else {
       return localStorage;
@@ -138,7 +138,7 @@ export class LocalStoreService extends StoreService {
 export class SessionStoreService extends StoreService {
 
   getStorage() {
-    if (typeof window === 'undefined') {
+    if (typeof window === 'undefined' || !window.sessionStorage) {
       return new FakeStorage();
     } else {
       return sessionStorage;
