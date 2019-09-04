@@ -57,7 +57,7 @@ deploy:
     app: hhangular
     skip_cleanup: true
     run:
-      - "build:ssr"
+      - "npm run build:ssr"
     on:
       branch: ssr
   - provider: pages
