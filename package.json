@@ -16,7 +16,8 @@
     "component"
   ],
   "engines": {
-    "node": "10.x"
+    "node": "10.x",
+    "npm": "6.x"
   },
   "scripts": {
     "ng": "ng",
@@ -47,7 +48,8 @@
     "build:server:en-us": "ng run hhangular:server --outputPath dist/server/en-us --configuration=production --i18n-file src/locale/messages.en-us.xlf --i18n-format xlf --i18n-locale en-us",
     "build:servers": "npm run build:server:fr-fr && npm run build:server:en-us",
     "build:client-and-server-bundles": "npm run build:websites:prod && npm run build:servers",
-    "webpack:server": "webpack --config webpack.server.config.js --progress --colors"
+    "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
+    "heroku-postbuild": "npm run build:ssr"
   },
   "dependencies": {
     "@angular/animations": "8.2.4",
