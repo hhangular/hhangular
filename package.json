@@ -23,6 +23,7 @@
     "build:website:en-us": "ng build --outputPath dist/website/en-us/ --i18n-file src/locale/messages.en-us.xlf --i18n-format xlf --i18n-locale en-us --base-href /en-us/",
     "build:website:prod:fr-fr": "ng build --outputPath dist/website/fr-fr/ --prod --base-href /fr-fr/",
     "build:website:prod:en-us": "ng build --outputPath dist/website/en-us/ --prod --i18n-file src/locale/messages.en-us.xlf --i18n-format xlf --i18n-locale en-us --base-href /en-us/",
+    "build:websites:prod": "npm run build:website:prod:fr-fr && npm run build:website:prod:en-us",
     "test:website": "ng test hhangular",
     "test:website:ci": "ng test hhangular --no-watch --no-progress --code-coverage --browsers=ChromeHeadless",
     "build:pdfjs": "ng build pdfjs --watch",
@@ -36,7 +37,14 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "e2e:ci": "ng e2e --protractor-config=e2e/protractor-ci.conf.js",
-    "extract-i18n": "ng xi18n --i18n-locale fr-fr --output-path dist/locale"
+    "extract-i18n": "ng xi18n --i18n-locale fr-fr --output-path dist/locale",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
+    "serve:ssr": "node dist/server.js",
+    "build:server:fr-fr": "ng run hhangular:server --outputPath dist/server/fr-fr --configuration=production",
+    "build:server:en-us": "ng run hhangular:server --outputPath dist/server/en-us --configuration=production --i18n-file src/locale/messages.en-us.xlf --i18n-format xlf --i18n-locale en-us",
+    "build:servers": "npm run build:server:fr-fr && npm run build:server:en-us",
+    "build:client-and-server-bundles": "npm run build:websites:prod && npm run build:servers",
+    "webpack:server": "webpack --config webpack.server.config.js --progress --colors"
   },
   "dependencies": {
     "@angular/animations": "8.2.4",
@@ -50,6 +58,9 @@
     "@angular/platform-browser": "8.2.4",
     "@angular/platform-browser-dynamic": "8.2.4",
     "@angular/router": "8.2.4",
+    "@angular/platform-server": "8.2.4",
+    "@nguniversal/express-engine": "8.1.1",
+    "@nguniversal/module-map-ngfactory-loader": "8.1.1",
     "@fortawesome/angular-fontawesome": "0.5.0",
     "@fortawesome/fontawesome-svg-core": "1.2.22",
     "@fortawesome/free-brands-svg-icons": "5.10.2",
@@ -88,6 +99,8 @@
     "ts-node": "8.3.0",
     "tsickle": "0.37.0",
     "tslint": "5.19.0",
-    "typescript": "3.5.3"
+    "typescript": "3.5.3",
+    "ts-loader": "^4.2.0",
+    "webpack-cli": "^3.3.6"
   }
 }
