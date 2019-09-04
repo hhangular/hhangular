@@ -15,6 +15,9 @@
     "angular",
     "component"
   ],
+  "engines": {
+    "node": "10.x"
+  },
   "scripts": {
     "ng": "ng",
     "start:website:fr-fr": "ng serve --verbose --base-href /fr-fr/",
