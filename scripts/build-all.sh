@@ -3,8 +3,7 @@
 echo ==================================================================================================
 echo Build or install all libs in projects directory
 echo ==================================================================================================
-for dir in projects/*/
-do
+for dir in projects/*/; do
   dir="${dir%/}"
   dir="${dir##*/}"
 #  if [[ $1 == ${dir} ]]; then
@@ -13,12 +12,11 @@ do
     npm run build:${dir}:prod
 #  else
 #    echo Install lib : @hhangular/${dir}
-#    npm install @hhangular/${dir}
+#    npm install --no-save @hhangular/${dir}
 #  fi
 done
 
-for loc in fr-fr en-us
-do
+for loc in fr-fr en-us; do
   echo ==================================================================================================
   echo Build website ${loc}
   echo ==================================================================================================

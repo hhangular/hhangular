@@ -17,6 +17,8 @@ cache:
   directories:
     - "node_modules"
 before_script:
+  - echo Branch $TRAVIS_BRANCH
+  - git checkout $TRAVIS_BRANCH
   - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
   - npm install
   - bash scripts/test-lib.sh $TRAVIS_BRANCH
