@@ -1,6 +1,6 @@
 {
   "name": "@hhangular/hhangular",
-  "version": "1.0.62",
+  "version": "1.0.71",
   "author": "Achache francois",
   "license": "MIT",
   "description": "components for angular 8x by hhfrancois",
@@ -61,7 +61,7 @@
     "ngx-markdown": "8.1.0",
     "pdfjs-dist": "2.1.266",
     "prismjs": "1.17.1",
-    "rxjs": "6.5.2",
+    "rxjs": "6.5.3",
     "tslib": "1.10.0",
     "zone.js": "0.9.1"
   },

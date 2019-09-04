@@ -33,11 +33,16 @@ export class AppRoutingModule {
   constructor(
     private router: Router
   ) {
+    this.surveyAndSaveLastSuccessRoute();
+  }
+
+  surveyAndSaveLastSuccessRoute() {
     this.router.events.pipe(
       filter((event: any) => {
         return !!event.urlAfterRedirects && !event.state;
       })
     ).subscribe((event: NavigationEnd) => {
+      console.log('In app-routing.ts : surveyAndSaveLastSuccessRoute() save : ', event.urlAfterRedirects);
       this.currentRoute.route = event.urlAfterRedirects;
     });
   }

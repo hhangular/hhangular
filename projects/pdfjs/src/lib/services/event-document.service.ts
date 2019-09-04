@@ -17,7 +17,7 @@ export class EventDocumentService {
   }
 
   public addEventListeners() {
-    if (!EventDocumentService.DONE) {
+    if (!!document && !EventDocumentService.DONE) {
       EventDocumentService.DONE = true;
       document.addEventListener('click', () => this.onClickInDocument(), {once: true, passive: true});
       document.addEventListener('keydown', (event: KeyboardEvent) => this.onKeyDownInDocument(event), {once: true, passive: true});
