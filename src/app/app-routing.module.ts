@@ -8,6 +8,7 @@ import {SharedModule} from './shared/shared.module';
 import {RedirectComponent} from './shared';
 
 const routes: Routes = [
+  {path: '', redirectTo: '/main', pathMatch: 'full'},
   {path: 'main', component: HomepageComponent},
   {path: 'pdfjs', loadChildren: './doc/pdfjs/doc-pdfjs.module#DocPdfjsModule'},
   {path: 'store', loadChildren: './doc/store/doc-store.module#DocStoreModule'},

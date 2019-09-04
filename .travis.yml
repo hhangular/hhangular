@@ -3,7 +3,6 @@ node_js:
   - "10"
 branches:
   only:
-    - website
     - store
     - pdfjs
     - /^renovate.*$/
@@ -23,7 +22,7 @@ before_script:
   - npm install
   - bash scripts/test-lib.sh $TRAVIS_BRANCH
 script:
-  - bash scripts/build-all.sh $TRAVIS_BRANCH
+  - bash scripts/build-lib.sh $TRAVIS_BRANCH
 deploy:
   - provider: script
     script: bash scripts/deploy-on-npm.sh $TRAVIS_BRANCH
@@ -39,24 +38,3 @@ deploy:
       branch:
         - pdfjs
         - store
-        - website
-  - provider: releases
-    user: "$GITHUB_USER"
-    api_key: "$GITHUB_TOKEN"
-    file_glob: true
-    file: dist/*
-    skip_cleanup: true
-    on:
-      branch:
-        - pdfjs
-        - store
-        - website
-  - provider: pages
-    skip-cleanup: true
-    github-token: "$GITHUB_TOKEN"
-    local-dir: "dist/website"
-    on:
-      branch:
-        - pdfjs
-        - store
-        - website
