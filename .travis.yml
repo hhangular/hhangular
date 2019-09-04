@@ -3,6 +3,7 @@ node_js:
   - "10"
 branches:
   only:
+    - ssr
     - website
     - store
     - pdfjs
@@ -51,6 +52,14 @@ deploy:
         - pdfjs
         - store
         - website
+  - provider: heroku
+    api_key: $HEKOKU_API_KEY
+    app: hhangular
+    skip_cleanup: true
+    run:
+      - "build:ssr"
+    on:
+      branch: ssr
   - provider: pages
     skip-cleanup: true
     github-token: "$GITHUB_TOKEN"
