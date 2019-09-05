@@ -110,7 +110,6 @@
     "tslint": "5.19.0",
     "typescript": "3.5.3",
     "ts-loader": "^4.2.0",
-    "webpack-cli": "^3.3.6",
-    "gzip-all": "^1.0.0"
+    "webpack-cli": "^3.3.6"
   }
 }
