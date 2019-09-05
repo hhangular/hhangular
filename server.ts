@@ -16,7 +16,7 @@ import {provideModuleMap} from '@nguniversal/module-map-ngfactory-loader';
 enableProdMode();
 
 const app = express();
-app.use(compression())
+app.use(compression());
 const PORT = process.env.PORT || 80;
 const DIST_FOLDER = join(process.cwd(), 'dist');
 const routes = [
@@ -38,6 +38,7 @@ app.set('view engine', 'html');
 app.set('views', join(DIST_FOLDER, 'website'));
 
 app.get('*.*', express.static(join(DIST_FOLDER, 'website')));
+// Handle routes
 routes.forEach((route) => {
   app.get(route.path, (req, res) => {
     res.render(route.view, {
