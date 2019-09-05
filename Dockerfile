@@ -4,9 +4,9 @@ FROM node:10
 EXPOSE 80
 
 COPY /dist /dist
-COPY /resources/sitemap.xml /dist
-COPY /resources/sitemap-en-us.xml /dist
-COPY /resources/sitemap-fr-fr.xml /dist
+COPY /resources/sitemap.xml /dist/website
+COPY /resources/sitemap-en-us.xml /dist/website
+COPY /resources/sitemap-fr-fr.xml /dist/website
 
 CMD [ "node", "dist/server.js" ]
 
