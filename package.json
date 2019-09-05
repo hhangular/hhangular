@@ -42,7 +42,7 @@
     "e2e": "ng e2e",
     "e2e:ci": "ng e2e --protractor-config=e2e/protractor-ci.conf.js",
     "extract-i18n": "ng xi18n --i18n-locale fr-fr --output-path dist/locale",
-    "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
+    "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server && node sitemap.copy.js",
     "serve:ssr": "node dist/server.js",
     "build:server:fr-fr": "ng run hhangular:server --outputPath dist/server/fr-fr --configuration=production",
     "build:server:en-us": "ng run hhangular:server --outputPath dist/server/en-us --configuration=production --i18n-file src/locale/messages.en-us.xlf --i18n-format xlf --i18n-locale en-us",
