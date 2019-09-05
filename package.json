@@ -43,7 +43,7 @@
     "e2e:ci": "ng e2e --protractor-config=e2e/protractor-ci.conf.js",
     "extract-i18n": "ng xi18n --i18n-locale fr-fr --output-path dist/locale",
     "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
-    "copy:resources": "node sitemap.copy.js",
+    "copy:static": "node static.copy.js",
     "js:gzip": "node gzip.js",
     "serve:ssr": "node dist/server.js",
     "build:server:fr-fr": "ng run hhangular:server --outputPath dist/server/fr-fr --configuration=production",
@@ -51,7 +51,7 @@
     "build:servers": "npm run build:server:fr-fr && npm run build:server:en-us",
     "build:client-and-server-bundles": "npm run build:websites:prod && npm run build:servers",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
-    "heroku-postbuild": "npm install @hhangular/pdfjs && npm install @hhangular/store && npm run build:ssr && npm run copy:resources && npm run js:gzip"
+    "heroku-postbuild": "npm install @hhangular/pdfjs && npm install @hhangular/store && npm run build:ssr && npm run copy:static && npm run js:gzip"
   },
   "dependencies": {
     "@angular/animations": "8.2.4",
