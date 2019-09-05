@@ -5,6 +5,7 @@ import 'reflect-metadata';
 import {enableProdMode} from '@angular/core';
 
 import * as express from 'express';
+import compression from 'compression';
 import {join} from 'path';
 // Express Engine
 import {ngExpressEngine} from '@nguniversal/express-engine';
@@ -15,6 +16,7 @@ import {provideModuleMap} from '@nguniversal/module-map-ngfactory-loader';
 enableProdMode();
 
 const app = express();
+app.use(compression())
 const PORT = process.env.PORT || 80;
 const DIST_FOLDER = join(process.cwd(), 'dist');
 const routes = [
