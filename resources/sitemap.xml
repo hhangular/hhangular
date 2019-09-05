@@ -1,14 +1,14 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <sitemap>
     <loc>
-      https://hhangular.hhdev.fr/sitemap-fr-fr.xml
+      https://hhangular.herokuapp.com/sitemap-fr-fr.xml
     </loc>
-    <lastmod>2019-08-18T23:00:38.753+02:00</lastmod>
+    <lastmod>2019-09-05T23:00:38.753+02:00</lastmod>
   </sitemap>
   <sitemap>
     <loc>
-      https://hhangular.hhdev.fr/sitemap-en-us.xml
+      https://hhangular.herokuapp.com/sitemap-en-us.xml
     </loc>
-    <lastmod>2019-08-18T23:00:38.753+02:00</lastmod>
+    <lastmod>2019-09-05T23:00:38.753+02:00</lastmod>
   </sitemap>
 </sitemapindex>
