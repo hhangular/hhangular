@@ -38,7 +38,7 @@ export class LocaleSelectorComponent {
       return;
     }
     if (document.location.href.indexOf('http://localhost:') === 0) { // only for dev environment
-      document.location.href = document.location.href.replace(`:${document.location.port}/${this.baseHref}/`, `:${locale.devPort}/${locale.path}/`);
+      document.location.href = document.location.href.replace(`:${document.location.port}${this.baseHref}`, `:${locale.devPort}${locale.path}`);
     } else {
       document.location.href = document.location.href.replace(`${this.baseHref}`, `${locale.path}`);
     }
