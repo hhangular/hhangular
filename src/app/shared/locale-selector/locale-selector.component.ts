@@ -34,13 +34,18 @@ export class LocaleSelectorComponent {
   }
 
   switchLocaleTo(locale: Locale) {
+    console.log('locale.path === this.baseHref', locale.path === this.baseHref);
     if (locale.path === this.baseHref) {
       return;
     }
+    console.log('document.location.href.indexOf(\'http://localhost:\') === 0', document.location.href.indexOf('http://localhost:') === 0);
     if (document.location.href.indexOf('http://localhost:') === 0) { // only for dev environment
       document.location.href = document.location.href.replace(`:${document.location.port}/${this.baseHref}/`, `:${locale.devPort}/${locale.path}/`);
     } else {
-      document.location.href = document.location.href.replace(`/${this.baseHref}/`, `/${locale.path}/`);
+      console.log('document.location.href', document.location.href, this.baseHref, locale.path);
+      const href = document.location.href.replace(`/${this.baseHref}/`, `/${locale.path}/`);
+      console.log('href', href);
+      document.location.href = href;
     }
   }
 }
