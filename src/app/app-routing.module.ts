@@ -43,7 +43,6 @@ export class AppRoutingModule {
         return !!event.urlAfterRedirects && !event.state;
       })
     ).subscribe((event: NavigationEnd) => {
-      console.log('In app-routing.ts : surveyAndSaveLastSuccessRoute() save : ', event.urlAfterRedirects);
       this.currentRoute.route = event.urlAfterRedirects;
     });
   }
