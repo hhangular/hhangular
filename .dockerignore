@@ -1,0 +1,22 @@
+.git
+.idea
+coverage
+dist
+e2e
+node_modules
+projects
+scripts
+.dockerignore
+.editorconfig
+.gitignore
+.travis.yml
+Dockerfile
+hhangular.iml
+LICENSE
+Procfile
+README.md
+renovate.json
+
+# To prevent storing dev/temporary container data
+*.csv
+/tmp/*

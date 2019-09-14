@@ -49,10 +49,9 @@
     "build:servers": "npm run build:server:fr-fr && npm run build:server:en-us",
     "build:client-and-server-bundles": "npm run build:websites:prod && npm run build:servers",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
-    "heroku-postbuild": "npm install @hhangular/pdfjs && npm install @hhangular/store && npm run build:ssr && npm run copy:static",
-    "docker:prepare": "npm install @hhangular/pdfjs && npm install @hhangular/store && npm run build:ssr && npm run copy:static",
-    "docker:build": "docker build -t hhangular .",
-    "docker:run": "docker run -d --rm -p80:80 --name hhangular hhangular"
+    "heroku-postbuild": "npm run build:ssr && npm run copy:static",
+    "docker:build": "docker build -t h2dev/hhangular .",
+    "docker:run": "docker run -d --rm -p80:80 --name hhangular h2dev/hhangular"
   },
   "dependencies": {
     "@angular/animations": "8.2.4",
