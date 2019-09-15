@@ -3,6 +3,7 @@ node_js:
   - "10"
 branches:
   only:
+    - website
     - store
     - pdfjs
     - /^renovate.*$/
@@ -15,11 +16,13 @@ addons:
 cache:
   directories:
     - "node_modules"
-before_script:
+before_install:
   - echo Branch $TRAVIS_BRANCH
   - git checkout $TRAVIS_BRANCH
   - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/.npmrc
+install:
   - npm install
+before_script:
   - bash scripts/test-lib.sh $TRAVIS_BRANCH
 script:
   - bash scripts/build-lib.sh $TRAVIS_BRANCH
@@ -38,3 +41,15 @@ deploy:
       branch:
         - pdfjs
         - store
+  - provider: script
+    script: bash scripts/release-website.sh
+    on:
+      branch:
+        - website
+  - provider: releases
+    user: "$GITHUB_USER"
+    api_key: "$GITHUB_TOKEN"
+    file_glob: true
+    on:
+      branch:
+        - website
