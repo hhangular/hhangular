@@ -2,8 +2,7 @@
 echo ==================================================================================================
 echo Increase version of website and commit
 echo ==================================================================================================
-npm version patch
-git commit -m "[ci skip]" package.json
+npm version patch -m "[ci skip]"
 
 echo ==================================================================================================
 echo Push in current branch $TRAVIS_BRANCH
