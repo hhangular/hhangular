@@ -1,82 +1,82 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/main</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/main</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/pdfjs/overview</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/pdfjs/overview</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/pdfjs/installation</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/pdfjs/installation</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/pdfjs/configuration</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/pdfjs/configuration</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/pdfjs/pdfjsthumbnails</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/pdfjs/pdfjsthumbnails</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/pdfjs/pdfjsview</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/pdfjs/pdfjsview</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/pdfjs/pdfjscommand</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/pdfjs/pdfjscommand</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/pdfjs/pdfjscontrol</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/pdfjs/pdfjscontrol</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/pdfjs/pdfjsgroupcontrol</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/pdfjs/pdfjsgroupcontrol</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/pdfjs/pdfpage</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/pdfjs/pdfpage</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/pdfjs/demo</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/pdfjs/demo</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/store/overview</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/store/overview</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/store/installation</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/store/installation</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/store/decorators</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/store/decorators</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/store/version-mngmt</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/store/version-mngmt</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/store/id-mngmt</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/store/id-mngmt</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/store/user-mngmt</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/store/user-mngmt</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/store/limitations</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/store/limitations</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
   <url>
-    <loc>http://hhangular.hhdev.fr/fr-fr/store/demo</loc>
+    <loc>https://hhangular.hhdev.fr/fr-fr/store/demo</loc>
     <lastmod>2019-09-08T23:00:38.753+02:00</lastmod>
   </url>
 </urlset>
