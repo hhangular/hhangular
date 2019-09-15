@@ -8,6 +8,7 @@ import {SharedModule} from './shared/shared.module';
 import {RedirectComponent} from './shared';
 
 const routes: Routes = [
+  {path: '', redirectTo: '/main', pathMatch: 'full'},
   {path: 'main', component: HomepageComponent},
   {path: 'pdfjs', loadChildren: './doc/pdfjs/doc-pdfjs.module#DocPdfjsModule'},
   {path: 'store', loadChildren: './doc/store/doc-store.module#DocStoreModule'},
@@ -42,7 +43,6 @@ export class AppRoutingModule {
         return !!event.urlAfterRedirects && !event.state;
       })
     ).subscribe((event: NavigationEnd) => {
-      console.log('In app-routing.ts : surveyAndSaveLastSuccessRoute() save : ', event.urlAfterRedirects);
       this.currentRoute.route = event.urlAfterRedirects;
     });
   }

@@ -1,6 +1,6 @@
 {
   "name": "@hhangular/pdfjs",
-  "version": "2.0.36",
+  "version": "2.0.38",
   "author": "Achache francois",
   "license": "MIT",
   "description": "pdfjs for angular 8x by hhfrancois",
@@ -19,9 +19,9 @@
     "pdf"
   ],
   "peerDependencies": {
-    "@angular/common": "8.2.4",
-    "@angular/core": "8.2.4",
-    "@types/pdfjs-dist": "2.1.0",
-    "pdfjs-dist": "2.1.266"
+    "@angular/common": "^8.x",
+    "@angular/core": "^8.x",
+    "@types/pdfjs-dist": "^2.x",
+    "pdfjs-dist": "^2.x"
   }
 }

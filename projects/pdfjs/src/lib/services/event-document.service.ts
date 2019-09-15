@@ -17,14 +17,14 @@ export class EventDocumentService {
   }
 
   public addEventListeners() {
-    if (!!document && !EventDocumentService.DONE) {
+    if (!!this.document && !EventDocumentService.DONE) {
       EventDocumentService.DONE = true;
-      document.addEventListener('click', () => this.onClickInDocument(), {once: true, passive: true});
-      document.addEventListener('keydown', (event: KeyboardEvent) => this.onKeyDownInDocument(event), {once: true, passive: true});
+      this.document.addEventListener('click', () => this.onClickInDocument(), {once: true, passive: true});
+      this.document.addEventListener('keydown', (event: KeyboardEvent) => this.onKeyDownInDocument(event), {once: true, passive: true});
 //      window.addEventListener('scroll', () => this.onScrollInDocument(), true);
-      document.addEventListener('dragover', (event: DragEvent) => this.onDragOverInDocument(event), {once: true, passive: true});
-      document.addEventListener('dragenter', (event: DragEvent) => this.onDragOverInDocument(event), {once: true, passive: true});
-      document.addEventListener('drop', (event: DragEvent) => this.onDropInDocument(event), {once: true, passive: true});
+      this.document.addEventListener('dragover', (event: DragEvent) => this.onDragOverInDocument(event), {once: true, passive: true});
+      this.document.addEventListener('dragenter', (event: DragEvent) => this.onDragOverInDocument(event), {once: true, passive: true});
+      this.document.addEventListener('drop', (event: DragEvent) => this.onDropInDocument(event), {once: true, passive: true});
     }
   }
 
