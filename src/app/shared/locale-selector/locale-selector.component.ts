@@ -37,10 +37,10 @@ export class LocaleSelectorComponent {
     if (locale.path === this.baseHref) {
       return;
     }
-    let origin = document.location.origin;
-    if (origin.indexOf('localhost:') !== -1) { // only for dev environment
-      origin = `http://localhost:${locale.devPort}`;
+    if (document.location.href.indexOf('http://localhost:') === 0) { // only for dev environment
+      document.location.href = document.location.href.replace(`:${document.location.port}${this.baseHref}`, `:${locale.devPort}${locale.path}`);
+    } else {
+      document.location.href = document.location.href.replace(`${this.baseHref}`, `${locale.path}`);
     }
-    document.location.href = `${origin}${locale.path}`;
   }
 }

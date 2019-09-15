@@ -17,7 +17,7 @@ import {CoreModule} from './core/core.module';
     NavBarComponent,
   ],
   imports: [
-    BrowserModule,
+    BrowserModule.withServerTransition({ appId: 'hhangular' }),
     BrowserAnimationsModule,
     CommonModule,
     HttpClientModule,

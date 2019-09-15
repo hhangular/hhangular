@@ -1,6 +1,6 @@
 {
   "name": "@hhangular/store",
-  "version": "1.0.15",
+  "version": "1.0.16",
   "author": "Achache francois",
   "license": "MIT",
   "description": "store access for angular 8x by hhfrancois",
@@ -16,7 +16,7 @@
     "service"
   ],
   "peerDependencies": {
-    "@angular/common": "8.2.4",
-    "@angular/core": "8.2.4"
+    "@angular/common": "^8.x",
+    "@angular/core": "^8.x"
   }
 }
