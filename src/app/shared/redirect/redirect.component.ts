@@ -20,7 +20,11 @@ export class RedirectComponent implements OnInit {
   ngOnInit() {
     if (!!this.document) {
       try {
-        this.navigate(this.getExpectedRoute(this.document.location.origin, this.document.referrer)).then(); // 'https:/hhangular.hhdev.fr', 'https:/hhangular.hhdev.fr/en-us/pdfjs/overview'
+        if (this.document.referrer.startsWith(this.document.location.origin)) {
+          this.navigate(this.getExpectedRoute(this.document.location.origin, this.document.referrer)).then(); // 'https:/hhangular.hhdev.fr', 'https:/hhangular.hhdev.fr/en-us/pdfjs/overview'
+        } else {
+          this.navigateToMain();
+        }
       } catch (e) {
         this.navigateToMain();
       }
