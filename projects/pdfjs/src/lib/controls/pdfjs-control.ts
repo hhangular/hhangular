@@ -215,6 +215,7 @@ export class PdfjsControl implements PdfjsCommand {
         this.items.push(clone);
         this.itemEvent$.next({item: clone, event: PdfjsItemEventType.ADD});
       }
+    } else if (idx === pos) {
     } else {
       if (pos !== -1) {
         this.items.splice(pos, 1);
