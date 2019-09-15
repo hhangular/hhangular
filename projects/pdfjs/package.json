@@ -21,7 +21,7 @@
   "peerDependencies": {
     "@angular/common": "8.2.6",
     "@angular/core": "8.2.6",
-    "@types/pdfjs-dist": "2.1.0",
+    "@types/pdfjs-dist": "2.1.1",
     "pdfjs-dist": "2.1.266"
   }
 }
