@@ -108,7 +108,7 @@
     "protractor": "5.4.2",
     "ts-node": "8.3.0",
     "tsickle": "0.37.0",
-    "tslint": "5.19.0",
+    "tslint": "5.20.0",
     "typescript": "3.5.3",
     "ts-loader": "4.5.0",
     "webpack-cli": "3.3.7"
