@@ -3,7 +3,7 @@ const fs = require('fs');
 const data = require('./resources/sitemap');
 const lastmod = new Date().toLocaleDateString();
 
-if(data.entries.length) {
+if(data.entries && data.entries.length) {
   generateSitemapIndex();
   data.entries.forEach((entry) => {
     generateSitemap(`/${entry}`, `sitemap-${entry}.xml`)
@@ -20,13 +20,8 @@ function generateSitemapIndex() {
     sitemap.ele('loc').txt(`${data.root}/sitemap-${entry}.xml`);
     sitemap.ele('lastmod').txt(lastmod);
   })
-  fs.writeFile(`${data.dist}/sitemap.xml`, sitemapIndex.end({pretty: true}).toString(), function (err){
-    if (err) throw err;
-    console.log(`sitemap index : ${data.dist}/sitemap.xml has been generated`);
-  });
+  writeXml(`${data.dist}/sitemap.xml`, sitemapIndex);
 }
-
-
 
 function generateSitemap(entry, filename) {
   const sitemap = builder.create('urlset')
@@ -38,8 +33,12 @@ function generateSitemap(entry, filename) {
     url.ele('loc').txt(`${data.root}${entry}${route}`);
     url.ele('lastmod').txt(lastmod);
   });
-  fs.writeFile(`${data.dist}/${filename}`, sitemap.end({pretty: true}).toString(), function (err){
+  writeXml(`${data.dist}/${filename}`, sitemap);
+}
+
+function writeXml(path, doc) {
+  fs.writeFile(path, doc.end({pretty: true}).toString(), function (err){
     if (err) throw err;
-    console.log(`sitemap : ${data.dist}/${filename} has been generated`);
+    console.log(`file : ${path} has been generated`);
   });
 }
