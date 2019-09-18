@@ -113,6 +113,6 @@
     "tslint": "5.20.0",
     "typescript": "3.5.3",
     "webpack-cli": "3.3.9",
-    "xmlbuilder": "^13.0.2"
+    "xmlbuilder": "13.0.2"
   }
 }
