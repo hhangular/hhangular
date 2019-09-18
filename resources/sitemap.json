@@ -1,0 +1,27 @@
+{
+  "root": "https://hhangular.hhdev.fr",
+  "dist": "dist/website",
+  "entries": ["en-us", "fr-fr"],
+  "routes" : [
+    "",
+    "/main",
+    "/pdfjs/overview",
+    "/pdfjs/installation",
+    "/pdfjs/configuration",
+    "/pdfjs/pdfjsthumbnails",
+    "/pdfjs/pdfjsview",
+    "/pdfjs/pdfjscommand",
+    "/pdfjs/pdfjscontrol",
+    "/pdfjs/pdfjsgroupcontrol",
+    "/pdfjs/pdfpage",
+    "/pdfjs/demo",
+    "/store/overview",
+    "/store/installation",
+    "/store/decorators",
+    "/store/version-mngmt",
+    "/store/id-mngmt",
+    "/store/user-mngmt",
+    "/store/limitations",
+    "/store/demo"
+  ]
+}
