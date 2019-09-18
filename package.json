@@ -43,13 +43,14 @@
     "extract-i18n": "ng xi18n --i18n-locale fr-fr --output-path dist/locale",
     "build:ssr": "npm run build:client-and-server-bundles && npm run webpack:server",
     "copy:static": "node static.copy.js",
+    "build:sitemap": "node sitemap.build.js",
     "serve:ssr": "node dist/server.js",
     "build:server:fr-fr": "ng run hhangular:server --outputPath dist/server/fr-fr",
     "build:server:en-us": "ng run hhangular:server --outputPath dist/server/en-us --i18n-file src/locale/messages.en-us.xlf --i18n-format xlf --i18n-locale en-us",
     "build:servers": "npm run build:server:fr-fr && npm run build:server:en-us",
     "build:client-and-server-bundles": "npm run build:websites:prod && npm run build:servers",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
-    "heroku-postbuild": "npm run build:ssr && npm run copy:static",
+    "heroku-postbuild": "npm run build:ssr && npm run copy:static && npm run build:sitemap",
     "docker:build": "docker build -t h2dev/hhangular .",
     "docker:run": "docker run -d --rm -p80:80 --name hhangular h2dev/hhangular"
   },
@@ -106,11 +107,12 @@
     "karma-jasmine-html-reporter": "1.4.2",
     "ng-packagr": "5.5.1",
     "protractor": "5.4.2",
+    "ts-loader": "4.5.0",
     "ts-node": "8.4.1",
     "tsickle": "0.37.0",
     "tslint": "5.20.0",
     "typescript": "3.5.3",
-    "ts-loader": "4.5.0",
-    "webpack-cli": "3.3.9"
+    "webpack-cli": "3.3.9",
+    "xmlbuilder": "^13.0.2"
   }
 }
