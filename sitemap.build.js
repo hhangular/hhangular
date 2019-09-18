@@ -32,7 +32,7 @@ function generateSitemap(entry, filename) {
   const sitemap = builder.create('urlset')
     .att('xmlns', 'http://www.sitemaps.org/schemas/sitemap/0.9')
     .att('xmlns:xsi', 'http://www.w3.org/2001/XMLSchema-instance')
-    .att('xmlns:schemaLocation', 'http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd');
+    .att('xsi:schemaLocation', 'http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd');
   data.routes.forEach((route) => {
     const url = sitemap.ele('url');
     url.ele('loc').txt(`${data.root}${entry}${route}`);
