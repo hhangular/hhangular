@@ -6,9 +6,9 @@ They are mainly developed and maintained by [hhfrancois](https://github.com/hhfr
 
 This project and bookstores were generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.x.
 
-ou can read how here: [Setup](https://angular.io/guide/setup-local) and [Create library](https://angular.io/guide/creating-libraries).
+You can read how here: [Setup](https://angular.io/guide/setup-local) and [Create library](https://angular.io/guide/creating-libraries).
 
-The project, and bookstores are open-source under MIT licenses.
+The project, and libraries are open-source under MIT licenses.
 
 Additional modules/libraries are:
  - [@hhangular/pdfjs](pdfjs) : an angular implementation of the very good PDF viewing library without plugin of `Mozilla` [pdf.js](https://mozilla.github.io/pdf.js/). 
@@ -35,12 +35,12 @@ After fork the project into your account, make a PRs by explaining as best as po
  
 Several npm scripts have been added to the `package.json` file to help with development.
 
-Plusieurs scripts npm on été ajoutés au fichier `package.json` pour aider dans le développement.
-
 ## Development server
 
  - `npm run start:website:fr-fr` : launches the dev server in French. Navigate to `http://localhost:4200/fr-fr`.
  - `npm run start:website:en-us` : launches the dev server in English. Navigate to `http://localhost:4201/en-us`.
+ - `npm run watch:store` : compile on the fly the library `@hhangular/store`.
+ - `npm run watch:pdfjs` : compile on the fly the library `@hhangular/pdfjs`.
  
 ## Build
 
@@ -65,6 +65,27 @@ Build scripts have their version `prod`.
  - `npm run build:website:prod:en-us`
  - `npm run build:pdfjs:prod`
  - `npm run build:store:prod`
+
+## Build universal ssr (server side rendering)
+
+Angular Universal has been set up on the project to enable server-side rendering
+
+ - `npm run build:ssr` : Launches the server build scripts and builds the ssr version
+ - `npm run serve:ssr` : Launch the server to serve the ssr pages
+
+## Sitemap
+
+The sitemap is dynamically generated at build in the destination directory of the site `dist/website`
+
+It consists of 3 files, an index file and two url files (1 for each locale)
+
+ - `npm run build:sitemap` : Build sitemap files
+
+## Autre
+
+The resources directory contains some files that must be included in the build.
+
+ - `npm run copy:static` : Copy files
 
 ## extract i18n
 
