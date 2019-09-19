@@ -40,6 +40,8 @@ Plusieurs scripts npm on été ajoutés au fichier `package.json` pour aider dan
 
  - `npm run start:website:fr-fr` : lance le serveur de dev en Français. Naviguez vers `http://localhost:4200/fr-fr`.
  - `npm run start:website:en-us` : lance le serveur de dev en Anglais. Naviguez vers `http://localhost:4201/en-us`.
+ - `npm run watch:store` : compile à la volé la librairie `@hhangular/store`.
+ - `npm run watch:pdfjs` : compile à la volé la librairie `@hhangular/pdfjs`.
  
 ## Build
 
@@ -60,6 +62,27 @@ Les scripts de build ont leur version `prod`.
  - `npm run build:website:prod:en-us`
  - `npm run build:pdfjs:prod`
  - `npm run build:store:prod`
+
+## Build universal ssr (server side rendering)
+
+Angular Universal a été mis en place sur le projet pour permettre le rendu coté serveur
+
+ - `npm run build:ssr` : Lance les scripts de build du serveur, puis construit la version ssr
+ - `npm run serve:ssr` : Lance le serveur pour servir les pages ssr
+
+## Sitemap
+
+Le sitemap est généré dynamiquement au build dans le repertoire de destination du site `dist/website`
+
+Il est constitué de 3 fichiers, un fichier d'index et deux fichiers d'url (1 pour chaque locale)
+
+ - `npm run build:sitemap` : Construit les fichiers de sitemap
+
+## Autre
+
+Le repertoire resources contient certains fichiers qui doivent être inclut dans le build. 
+
+ - `npm run copy:static` : Copie les fichiers
 
 ## extract i18n
 
