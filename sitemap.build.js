@@ -1,7 +1,7 @@
 const builder = require('xmlbuilder');
 const fs = require('fs');
 const data = require('./resources/sitemap');
-const lastmod = new Date().toLocaleDateString();
+const lastmod = formatDate(new Date());
 
 if(data.entries && data.entries.length) {
   generateSitemapIndex();
@@ -41,4 +41,11 @@ function writeXml(path, doc) {
     if (err) throw err;
     console.log(`file : ${path} has been generated`);
   });
+}
+
+function formatDate(date) { // 2000-08-03
+  let formatted = `${date.getFullYear()}-`;
+  formatted += `0${date.getMonth() + 1}-`.substr(-3);
+  formatted += `0${date.getDate()}`.substr(-2);
+  return formatted;
 }
