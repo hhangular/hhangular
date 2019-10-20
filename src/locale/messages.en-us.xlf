@@ -189,6 +189,14 @@
         <source>assets/markdowns/store/fr-fr/demo/demo-explanations.md</source>
         <target>assets/markdowns/store/en-us/demo/demo-explanations.md</target>
       </trans-unit>
+
+      <!-- ========== -->
+      <!--    STORE   -->
+      <!-- ========== -->
+      <trans-unit id="STAR_RATING_OVERVIEW_MD" datatype="html">
+        <source>assets/markdowns/star-rating/fr-fr/overview.md</source>
+        <target>assets/markdowns/star-rating/fr-fr/overview.md</target>
+      </trans-unit>
     </body>
   </file>
 </xliff>

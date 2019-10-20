@@ -30,6 +30,9 @@ import {HttpClient} from '@angular/common/http';
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {LayoutModule} from '@angular/cdk/layout';
 import {SHARED_COMPONENTS} from './index';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import {StarRatingModule} from '../../../projects/star-rating/src/lib/star-rating.module';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 const MODULES: any[] = [
   FlexLayoutModule,
@@ -54,7 +57,9 @@ const MODULES: any[] = [
   DragDropModule,
   MatChipsModule,
   LayoutModule,
-  MatSortModule
+  MatSortModule,
+  MatProgressBarModule,
+  MatSlideToggleModule
 ];
 
 @NgModule({
@@ -74,6 +79,7 @@ const MODULES: any[] = [
     MarkdownModule,
     PdfjsModule,
     StoreModule,
+    StarRatingModule,
     SHARED_COMPONENTS,
   ],
   declarations: [

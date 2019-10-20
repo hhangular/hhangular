@@ -1,0 +1,9 @@
+.cursor {
+  cursor: pointer;
+}
+:host.disabled > p {
+  opacity: 0.5;
+}
+:host.disabled .cursor {
+  cursor: default;
+}

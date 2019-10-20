@@ -1,0 +1,22 @@
+{
+  "name": "@hhangular/star-rating",
+  "version": "1.0.1",
+  "author": "Achache francois",
+  "license": "MIT",
+  "description": "A star rating for angular 8x by hhfrancois",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hhangular/hhangular.git"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "keywords": [
+    "angular",
+    "star-rating"
+  ],
+  "peerDependencies": {
+    "@angular/common": "^8.x",
+    "@angular/core": "^8.x"
+  }
+}

@@ -30,6 +30,12 @@
       ],
       "store/*": [
         "dist/store/*"
+      ],
+      "star-rating": [
+        "dist/star-rating"
+      ],
+      "star-rating/*": [
+        "dist/star-rating/*"
       ]
     }
   }
