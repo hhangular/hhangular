@@ -3,13 +3,11 @@ import {Component, EventEmitter, HostBinding, Input, OnInit, Output} from '@angu
 @Component({
   selector: 'h2-star-rating',
   template: `
-      <p>
-          <ng-container *ngFor="let v of starValues; index as idx">
-              <h2-star-empty class="cursor" [size]="size" *ngIf="value <= idx" (click)="clickOnStar($event, idx + 1)"></h2-star-empty>
-              <h2-star-half class="cursor" [size]="size" *ngIf="idx + 0.5 === value" (click)="clickOnStar($event, idx + 1)"></h2-star-half>
-              <h2-star-fully class="cursor" [size]="size" *ngIf="idx + 0.5 < value" (click)="clickOnStar($event, idx + 1)"></h2-star-fully>
-          </ng-container>
-      </p>
+      <ng-container *ngFor="let v of starValues; index as idx">
+          <h2-star-empty class="cursor" [size]="size" *ngIf="value <= idx" (click)="clickOnStar($event, idx + 1)"></h2-star-empty>
+          <h2-star-half class="cursor" [size]="size" *ngIf="idx + 0.5 === value" (click)="clickOnStar($event, idx + 1)"></h2-star-half>
+          <h2-star-fully class="cursor" [size]="size" *ngIf="idx + 0.5 < value" (click)="clickOnStar($event, idx + 1)"></h2-star-fully>
+      </ng-container>
   `,
   styleUrls: ['star-rating.component.scss']
 })
