@@ -1,9 +1,9 @@
-.cursor {
+:host {
+  display: block;
+}
+:host:not(.disabled) * {
   cursor: pointer;
 }
-:host.disabled > p {
+:host.disabled {
   opacity: 0.5;
-}
-:host.disabled .cursor {
-  cursor: default;
 }
