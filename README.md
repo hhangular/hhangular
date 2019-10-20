@@ -4,13 +4,14 @@ This project contains several additional modules for [Angular](https://angular.i
 
 They are mainly developed and maintained by [hhfrancois](https://github.com/hhfrancois).
 
-This project and bookstores were generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.x.
+This project and librairies were generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.x.
 
 You can read how here: [Setup](https://angular.io/guide/setup-local) and [Create library](https://angular.io/guide/creating-libraries).
 
 The project, and libraries are open-source under MIT licenses.
 
 Additional modules/libraries are:
+
  - [@hhangular/pdfjs](pdfjs) : an angular implementation of the very good PDF viewing library without plugin of `Mozilla` [pdf.js](https://mozilla.github.io/pdf.js/). 
  - [@hhangular/store](store) : a library to save component configuration in the browser's `store`.
 

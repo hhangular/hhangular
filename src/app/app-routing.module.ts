@@ -12,6 +12,7 @@ const routes: Routes = [
   {path: 'main', component: HomepageComponent},
   {path: 'pdfjs', loadChildren: './doc/pdfjs/doc-pdfjs.module#DocPdfjsModule'},
   {path: 'store', loadChildren: './doc/store/doc-store.module#DocStoreModule'},
+  {path: 'star-rating', loadChildren: './doc/star-rating/doc-star-rating.module#DocStarRatingModule'},
   {path: '**', component: RedirectComponent},
 ];
 

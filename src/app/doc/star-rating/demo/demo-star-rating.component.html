@@ -1,0 +1,71 @@
+<div fxFlex>
+  <div>
+    <markdown>
+```html
+&lt;h2-star-rating [value]="{{sliderValue.value}}" [stars]="{{sliderStar.value}}" [size]="{{sizes[sliderSize.value]}}" [ngClass]="{{getLabelColor(sliderColor.value)}}"  [disabled]="{{slideDisabled.checked}}"&gt;&lt;/h2-star-rating&gt;
+```
+    </markdown>
+    <br>
+    <div>
+      <h2-star-rating #item1 [value]="sliderValue.value" [stars]="sliderStar.value" [size]="sizes[sliderSize.value]" [ngClass]="getLabelColor(sliderColor.value)" [disabled]="slideDisabled.checked"></h2-star-rating>
+      <label>Result : {{item1.value}}</label>
+    </div>
+    <br>
+    <mat-divider></mat-divider>
+    <br>
+    <div fxLayout="column">
+      <label>Nombre d'étoiles <span class="result">{{sliderStar.value}}</span></label><br>
+      <div fxLayout="row" fxFlex>
+        1 <mat-slider tickInterval="1" thumbLabel="true" fxFlex #sliderStar [value]="5" min="1" max="20" step="1"></mat-slider> 20
+      </div>
+    </div>
+    <div fxLayout="column">
+      <label>Valeur initiale <span class="result">{{sliderValue.value}}</span></label><br>
+      <div fxLayout="row" fxFlex>
+        0 <mat-slider tickInterval="1" thumbLabel="true" fxFlex #sliderValue [value]="2.5" min="0" [max]="sliderStar.value" step="0.1"></mat-slider> {{sliderStar.value}}
+      </div>
+    </div>
+    <div fxLayout="column">
+      <label>Taille <span class="result">{{getLabelSize(sliderSize.value)}}</span></label><br>
+      <div fxLayout="row" fxFlex>
+        xs <mat-slider tickInterval="1" thumbLabel="true" [displayWith]="getLabelSize" fxFlex #sliderSize value="2" min="0" [max]="sizes.length - 1" step="1"></mat-slider> 10x
+      </div>
+    </div>
+    <div fxLayout="column">
+      <label>Couleur <span [ngClass]="getLabelColor(sliderColor.value)">{{getLabelColor(sliderColor.value)}}</span></label><br>
+      <div fxLayout="row" fxFlex>
+        &nbsp;&nbsp; <mat-slider tickInterval="1" thumbLabel="true" [displayWith]="getLabelColor" fxFlex #sliderColor value="2" min="0" [max]="colors.length - 1" step="1"></mat-slider> &nbsp;&nbsp;
+      </div>
+    </div>
+    <div fxLayout="column">
+      <label>Disabled <span class="result">{{slideDisabled.checked}}</span></label><br>
+      <div fxLayout="row" fxFlex>
+        <mat-slide-toggle #slideDisabled>Disabled</mat-slide-toggle>
+      </div>
+    </div>
+  </div>
+  <mat-divider></mat-divider>
+  <br>
+  <markdown>
+```css
+.pink &#123;
+color: deeppink;
+&#125;
+.blue &#123;
+color: #0074D9;
+&#125;
+.green &#123;
+color: #008800;
+&#125;
+.red &#123;
+color: #C21F39;
+&#125;
+.orange &#123;
+color: darkorange;
+&#125;
+.yellow &#123;
+color: yellow;
+&#125;
+```
+  </markdown>
+</div>

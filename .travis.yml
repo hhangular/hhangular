@@ -34,6 +34,7 @@ deploy:
       branch:
         - pdfjs
         - store
+        - star-rating
   - provider: script
     script: bash scripts/push-on-master.sh
     skip_cleanup: true
@@ -41,6 +42,7 @@ deploy:
       branch:
         - pdfjs
         - store
+        - star-rating
   - provider: script
     script: bash scripts/release-website.sh
     on:

@@ -1,0 +1,50 @@
+svg {
+  display: inline-block;
+  font-size: inherit;
+  height: 1em;
+  overflow: visible;
+  fill: currentColor;
+  width: 1.25em;
+  vertical-align: -0.125em;
+}
+:host.star-xs > svg {
+  font-size: 0.75em;
+}
+:host.star-sm > svg {
+  font-size: 0.875em;
+}
+:host.star-1x > svg {
+  font-size: 1em;
+}
+:host.star-lg > svg {
+  font-size: 1.3333333333em;
+  line-height: 0.75em;
+  vertical-align: -0.225em;
+}
+:host.star-2x > svg {
+  font-size: 2em;
+}
+:host.star-3x > svg {
+  font-size: 3em;
+}
+:host.star-4x > svg {
+  font-size: 4em;
+}
+:host.star-5x > svg {
+  font-size: 5em;
+}
+:host.star-6x > svg {
+  font-size: 6em;
+}
+:host.star-7x > svg {
+  font-size: 7em;
+}
+:host.star-8x > svg {
+  font-size: 8em;
+}
+:host.star-9x > svg {
+  font-size: 9em;
+}
+:host.star-10x > svg {
+  font-size: 10em;
+}

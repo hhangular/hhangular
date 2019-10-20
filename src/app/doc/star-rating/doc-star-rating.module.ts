@@ -1,28 +1,28 @@
 import {NgModule} from '@angular/core';
 import {CommonModule} from '@angular/common';
 import {FormsModule} from '@angular/forms';
-import {DocPdfjsRoutingModule} from './doc-pdfjs-routing.module';
-import {DocPdfjsComponent} from './doc-pdfjs.component';
 import {SharedModule} from '../../shared/shared.module';
 import {SidenavComponent} from './sidenav/sidenav.component';
+import {DocStarRatingRoutingModule} from './doc-star-rating-routing.module';
 import {SECTIONS} from './sections';
-import {DemoPdfjsComponent} from './demo/demo-pdfjs.component';
+import {DocStarRatingComponent} from './doc-star-rating.component';
+import {DemoStarRatingComponent} from './demo/demo-star-rating.component';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     SharedModule,
-    DocPdfjsRoutingModule,
+    DocStarRatingRoutingModule,
   ],
   exports: [],
   declarations: [
-    DocPdfjsComponent,
-    DemoPdfjsComponent,
+    DocStarRatingComponent,
+    DemoStarRatingComponent,
     SECTIONS,
     SidenavComponent,
   ],
   providers: []
 })
-export class DocPdfjsModule {
+export class DocStarRatingModule {
 }
