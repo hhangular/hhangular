@@ -14,6 +14,7 @@ Additional modules/libraries are:
 
  - [@hhangular/pdfjs](pdfjs) : an angular implementation of the very good PDF viewing library without plugin of `Mozilla` [pdf.js](https://mozilla.github.io/pdf.js/). 
  - [@hhangular/store](store) : a library to save component configuration in the browser's `store`.
+ - [@hhangular/star-rating](store) : a module with component `star-rating`.
 
 [Npm](https://docs.npmjs.com) obliges, many third-party librairies are used, impossible to quote them all.   
 All are thanked implicitly and more specifically [Angular](https://angular.io), [FontAwesome](https://fontawesome.com/), [Mozilla Pdf.js](https://mozilla.github.io/pdf.js/).
@@ -42,6 +43,7 @@ Several npm scripts have been added to the `package.json` file to help with deve
  - `npm run start:website:en-us` : launches the dev server in English. Navigate to `http://localhost:4201/en-us`.
  - `npm run watch:store` : compile on the fly the library `@hhangular/store`.
  - `npm run watch:pdfjs` : compile on the fly the library `@hhangular/pdfjs`.
+ - `npm run watch:star-rating` : compile on the fly the library `@hhangular/star-rating`.
  
 ## Build
 
@@ -66,6 +68,7 @@ Build scripts have their version `prod`.
  - `npm run build:website:prod:en-us`
  - `npm run build:pdfjs:prod`
  - `npm run build:store:prod`
+ - `npm run build:star-rating:prod`
 
 ## Build universal ssr (server side rendering)
 
@@ -112,6 +115,7 @@ Tests are launched on the integration server [Travis-ci](https://travis-ci.org/h
 And the tests coverage collected on the website [codecov](https://codecov.io)
  - [pdfjs](https://codecov.io/gh/hhangular/hhangular/branch/pdfjs)
  - [store](https://codecov.io/gh/hhangular/hhangular/branch/store)
+ - [star-rating](https://codecov.io/gh/hhangular/hhangular/branch/star-rating)
 
 ### Scripts 
 
@@ -124,6 +128,9 @@ This generates code coverage statistics in the directory `coverage/pdfjs`.
  - `npm run test:store` : launches the `store` library tests, `Karma` opens a window to track the results in real time.
  - `npm run test:store:ci` : launches the `store` library tests, in `Headless` silent mode for the integration server. 
 This generates code coverage statistics in the directory `coverage/store`.
+ - `npm run test:star-rating` : launches the `star-rating` library tests, `Karma` opens a window to track the results in real time.  
+ - `npm run test:star-rating:ci` : launches the `star-rating` library tests, in `Headless` silent mode for the integration server.   
+This generates code coverage statistics in the directory `coverage/star-rating`.
   
 ## Running end-to-end tests
 

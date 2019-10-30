@@ -2,6 +2,13 @@
   <a mat-list-item routerLink="overview" [routerLinkActive]="['active']">
     <fa-icon [icon]="faStar"></fa-icon>&nbsp;Overview
   </a>
+  <mat-list-item disabled="true">
+    <fa-icon [icon]="faFlagCheckered"></fa-icon>&nbsp;Getting started
+  </mat-list-item>
+  <a mat-list-item routerLink="installation" [routerLinkActive]="['active']">
+    &nbsp;&nbsp;&nbsp;<fa-icon [icon]="faDownload"></fa-icon>&nbsp;Installation
+  </a>
+  <mat-divider></mat-divider>
   <mat-divider></mat-divider>
   <a mat-list-item routerLink="demo" [routerLinkActive]="['active']">
     <fa-icon [icon]="faDesktop"></fa-icon>&nbsp;Demo
