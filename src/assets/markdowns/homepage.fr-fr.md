@@ -13,6 +13,7 @@ Le projet, et les librairies sont open-sources sous licences MIT.
 Les modules/librairies additionnels sont :
  - [@hhangular/pdfjs](pdfjs) : une implementation angular de la très bonne librairie de visualisation de PDF sans plugin de `Mozilla` [pdf.js](https://mozilla.github.io/pdf.js/). 
  - [@hhangular/store](store) : une librairie permettant de sauvegarder la configuration des composants dans le `store` du navigateur.
+ - [@hhangular/star-rating](store) : un module incluant le composant `star-rating`.
 
 [Npm](https://docs.npmjs.com) oblige, beaucoup de librairies tierces sont utilisées, impossible de les citer toutes.   
 Toutes sont remerciés implicitement et plus particulièrement [Angular](https://angular.io), [FontAwesome](https://fontawesome.com/), [Mozilla Pdf.js](https://mozilla.github.io/pdf.js/).
@@ -49,10 +50,16 @@ Le projet contient une application, correspondant au site que vous lisez actuell
 ainsi que des 'sous projets' qui correspondent aux librairies, modules angular.   
 Il y a donc plusieurs choses à 'builder'.
 
- - `npm run build:website:fr-fr` : pour builder le site en Français. Le résultat du build se trouvera dans le répertoire `dist/website/fr-fr`.
- - `npm run build:website:en-us` : pour builder le site en Anglais. Le résultat du build se trouvera dans le répertoire `dist/website/en-us`.
- - `npm run build:pdfjs` : pour builder la librairie `@hhangular/pdfjs`. Le résultat du build se trouvera dans le répertoire `dist/pdfjs`.
- - `npm run build:store` : pour builder la librairie `@hhangular/store`. Le résultat du build se trouvera dans le répertoire `dist/store`.
+ - `npm run build:website:fr-fr` : pour builder le site en Français. 
+ Le résultat du build se trouvera dans le répertoire `dist/website/fr-fr`.
+ - `npm run build:website:en-us` : pour builder le site en Anglais. 
+ Le résultat du build se trouvera dans le répertoire `dist/website/en-us`.
+ - `npm run build:pdfjs` : pour builder la librairie `@hhangular/pdfjs`. 
+ Le résultat du build se trouvera dans le répertoire `dist/pdfjs`.
+ - `npm run build:store` : pour builder la librairie `@hhangular/store`. 
+ Le résultat du build se trouvera dans le répertoire `dist/store`.
+ - `npm run build:star-rating` : pour builder la librairie `@hhangular/star-rating`. 
+ Le résultat du build se trouvera dans le répertoire `dist/star-rating`.
 
 ## Build prod
 
@@ -62,6 +69,7 @@ Les scripts de build ont leur version `prod`.
  - `npm run build:website:prod:en-us`
  - `npm run build:pdfjs:prod`
  - `npm run build:store:prod`
+ - `npm run build:star-rating:prod`
 
 ## Build universal ssr (server side rendering)
 
@@ -108,7 +116,8 @@ Les tests sont lancés sur le serveur d'intégration [Travis-ci](https://travis-
 Et la couverture de test collectée sur le site [codecov](https://codecov.io)
  - [pdfjs](https://codecov.io/gh/hhangular/hhangular/branch/pdfjs)
  - [store](https://codecov.io/gh/hhangular/hhangular/branch/store)
- 
+ - [star-rating](https://codecov.io/gh/hhangular/hhangular/branch/star-rating)
+
 ### Scripts 
 
  - `npm run test:website` : lance les tests du site, il y en a peu... `Karma` ouvre une fenêtre pour suivre les résultat en temps réel.
@@ -120,6 +129,9 @@ Cela génère des statistique de couverture de code dans le repertoire `coverage
  - `npm run test:store` : lance les tests de la librairie `store`, `Karma` ouvre une fenêtre pour suivre les résultat en temps réel.
  - `npm run test:store:ci` : lance les tests de la librairie `store`, en mode silencieux `Headless` pour le serveur d'intégration. 
 Cela génère des statistique de couverture de code dans le repertoire `coverage/store`.
+ - `npm run test:star-rating` : lance les tests de la librairie `star-rating`, `Karma` ouvre une fenêtre pour suivre les résultat en temps réel. 
+ - `npm run test:star-rating:ci` : lance les tests de la librairie `star-rating`, en mode silencieux `Headless` pour le serveur d'intégration.   
+Cela génère des statistique de couverture de code dans le repertoire `coverage/star-rating`.
   
 ## Running end-to-end tests
 
