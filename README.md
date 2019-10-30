@@ -59,6 +59,8 @@ The build result will be in the directory `dist/website/en-us`.
  The build result will be in the directory `dist/pdfjs`.
  - `npm run build:store` : to build the library `@hhangular/store`. 
  The build result will be in the directory `dist/store`.
+ - `npm run build:star-rating` : to build the library `@hhangular/star-rating`. 
+ The build result will be in the directory `dist/star-rating`.
 
 ## Build prod
 
