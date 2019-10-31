@@ -117,7 +117,7 @@
     "tsickle": "0.37.0",
     "tslint": "5.20.0",
     "typescript": "3.5.3",
-    "webpack-cli": "3.3.9",
+    "webpack-cli": "3.3.10",
     "xmlbuilder": "13.0.2"
   }
 }
