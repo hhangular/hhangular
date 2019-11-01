@@ -1,13 +1,6 @@
 language: node_js
 node_js:
   - "10"
-branches:
-  only:
-    - website
-    - store
-    - pdfjs
-    - star-rating
-    - /^renovate.*$/
 addons:
   apt:
     sources:
