@@ -56,7 +56,8 @@
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
     "heroku-postbuild": "npm run build:ssr && npm run copy:static && npm run build:sitemap",
     "docker:build": "docker build -t h2dev/hhangular .",
-    "docker:run": "docker run -d --rm -p80:80 --name hhangular h2dev/hhangular"
+    "docker:run": "docker run -d --rm -p80:80 --name hhangular h2dev/hhangular",
+    "docker:clean": "docker kill $(docker ps -a -q) && docker rm $(docker ps -a -q) && docker rmi $(docker images -q) --force"
   },
   "dependencies": {
     "@angular/animations": "8.2.7",
