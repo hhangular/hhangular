@@ -16,7 +16,7 @@
     "service"
   ],
   "peerDependencies": {
-    "@angular/common": "^8.x",
-    "@angular/core": "^8.x"
+    "@angular/common": "8.2.13",
+    "@angular/core": "8.2.13"
   }
 }

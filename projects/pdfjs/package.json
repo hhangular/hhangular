@@ -19,9 +19,9 @@
     "pdf"
   ],
   "peerDependencies": {
-    "@angular/common": "^8.x",
-    "@angular/core": "^8.x",
-    "@types/pdfjs-dist": "^2.x",
-    "pdfjs-dist": "^2.x"
+    "@angular/common": "8.2.13",
+    "@angular/core": "8.2.13",
+    "@types/pdfjs-dist": "2.1.2",
+    "pdfjs-dist": "2.2.228"
   }
 }
