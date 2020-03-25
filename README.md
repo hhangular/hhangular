@@ -1,6 +1,6 @@
 ## HHANGULAR
 
-This project contains several additional modules for [Angular](https://angular.io)
+This project contains several additional modules for [Angular](https://angular.io) 
 
 They are mainly developed and maintained by [hhfrancois](https://github.com/hhfrancois).
 
