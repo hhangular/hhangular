@@ -16,7 +16,7 @@
     "star-rating"
   ],
   "peerDependencies": {
-    "@angular/common": "8.2.13",
-    "@angular/core": "8.2.13"
+    "@angular/common": "8.2.14",
+    "@angular/core": "8.2.14"
   }
 }
