@@ -86,7 +86,7 @@
     "core-js": "3.3.6",
     "hammerjs": "2.0.8",
     "ngx-markdown": "8.2.1",
-    "pdfjs-dist": "2.2.228",
+    "pdfjs-dist": "4.2.67",
     "prismjs": "1.17.1",
     "rxjs": "6.5.3",
     "tslib": "1.10.0",
