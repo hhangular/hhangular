@@ -22,6 +22,6 @@
     "@angular/common": "8.2.13",
     "@angular/core": "8.2.13",
     "@types/pdfjs-dist": "2.1.2",
-    "pdfjs-dist": "2.2.228"
+    "pdfjs-dist": "4.2.67"
   }
 }
